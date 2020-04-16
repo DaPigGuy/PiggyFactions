@@ -1,0 +1,77 @@
+name: PiggyFactions
+main: DaPigGuy\PiggyFactions\PiggyFactions
+version: 1.0.0
+api: 3.2.0
+author: DaPigGuy
+softdepend: [PiggyCustomEnchants]
+website: "https://github.com/DaPigGuy/PiggyFactions"
+permissions:
+  piggyfactions:
+    default: op
+    description: "Allow usage of all PiggyFactions features"
+    children:
+      piggyfactions.command:
+        default: op
+        description: "Allow usage of all PiggyFactions commands"
+        children:
+          piggyfactions.command.faction:
+            default: op
+            description: "Allow usage of all /f subcommands"
+            children:
+              piggyfactions.command.faction.use:
+                default: true
+                description: "Allow usage of /f"
+              piggyfactions.command.faction.chat:
+                default: true
+                description: "Allow usage of /f chat"
+              piggyfactions.command.faction.claim:
+                default: true
+                description: "Allow usage of /f claim"
+              piggyfactions.command.faction.create:
+                default: true
+                description: "Allow usage of /f create"
+              piggyfactions.command.faction.description:
+                default: true
+                description: "Allow usage of /f description"
+              piggyfactions.command.faction.home:
+                default: true
+                description: "Allow usage of /f home"
+              piggyfactions.command.faction.info:
+                default: true
+                description: "Allow usage of /f info"
+              piggyfactions.command.faction.invite:
+                default: true
+                description: "Allow usage of /f invite"
+              piggyfactions.command.faction.join:
+                default: true
+                description: "Allow usage of /f join"
+              piggyfactions.command.faction.kick:
+                default: true
+                description: "Allow usage of /f kick"
+              piggyfactions.command.faction.leader:
+                default: true
+                description: "Allow usage of /f leader"
+              piggyfactions.command.faction.leave:
+                default: true
+                description: "Allow usage of /f leave"
+              piggyfactions.command.faction.map:
+                default: true
+                description: "Allow usage of /f map"
+              piggyfactions.command.faction.motd:
+                default: true
+                description: "Allow usage of /f motd"
+              piggyfactions.command.faction.name:
+                default: true
+                description: "Allow usage of /f name"
+              piggyfactions.command.faction.permission:
+                default: true
+                description: "Allow usage of /f permission"
+              piggyfactions.command.faction.promote:
+                default: true
+                description: "Allow usage of /f promote"
+              piggyfactions.command.faction.seechunk:
+                default: true
+                description: "Allow usage of /f seechunk"
+              piggyfactions.command.faction.sethome:
+                default: true
+                description: "Allow usage of /f sethome"

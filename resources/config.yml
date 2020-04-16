@@ -1,0 +1,17 @@
+database:
+  type: mysql
+  sqlite:
+    file: "factions.sqlite"
+  mysql:
+    host: localhost
+    username: root
+    password:
+    schema: "dapigguy"
+  worker-limit: 1
+#economy:
+  #provider: economyapi
+factions:
+  power:
+    default: 20
+  claims:
+    cost: 1

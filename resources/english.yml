@@ -1,0 +1,57 @@
+chat:
+  faction: "{BOLD}{GOLD}FACTION {RESET}{PLAYER}: {MESSAGE}"
+commands:
+  invalid-player: "{RED}Player {PLAYER} not found."
+  invalid-faction: "{RED}Faction {FACTION} not found."
+  member-not-found: "{RED}Member {PLAYER} not found."
+  not-in-faction: "{RED}You are not in a faction."
+  already-in-faction: "{RED}You are already in a faction."
+  not-leader: "{RED}You are not the faction leader!"
+  no-permission: "{RED}You are not permitted to do this."
+  chat:
+    already-in-chat: "{RED}You are already in this chat!"
+    toggled: "{GREEN}You are now in the {CHAT} chat."
+  claim:
+    already-claimed: "{RED}This chunk is already claimed."
+    no-power: "{RED}Your faction has an insufficient amount of power."
+    success: "{GREEN}This chunk has been claimed."
+  create:
+    name-taken: "{RED}A faction with the name {NAME} already exists."
+    success: "{GREEN}Faction {NAME} has been created."
+  description:
+    success: "{GREEN}Faction description has been set to {DESCRIPTION}"
+  disband:
+    success: "{YELLOW}Your faction has been disbanded!"
+  home:
+    not-set: "{RED}Faction home is not set."
+  info:
+    message: "{GOLD}____________.[{DARK_GREEN}Faction {FACTION}{GOLD}].____________\n{GOLD}Description: {YELLOW}{DESCRIPTION}\n{GOLD}Power: {YELLOW}{POWER}\n{GOLD}Leader: {YELLOW}{LEADER}\n{GOLD}Officers: {YELLOW}{OFFICERS}\n{GOLD}Members: {YELLOW}{MEMBERS}\n{GOLD}Online: {YELLOW}{ONLINECOUNT}"
+  invite:
+    already-in-faction: "{RED}{PLAYER} is already in a faction."
+    already-sent: "{RED}An invite has already been sent to {PLAYER}."
+    success: "{GREEN}Invite has been sent to {PLAYER}."
+    invited: "{GREEN}You have been invited to join {FACTION}. Run /f join {FACTION} to join."
+  join:
+    no-invite: "{RED}You do not have an invite from {FACTION}."
+    joined: "{GREEN}{PLAYER} has joined the faction!"
+  kick:
+    cant-kick-leader: "{RED}You can not kick the leader!"
+    announcement: "{YELLOW}{PLAYER} was kicked from the faction."
+    kicked: "{RED}You were kicked from the faction."
+  leader:
+    offline: "{RED}Player must be online for leadership transfer."
+    recipient: "{GREEN}You are now the leader of your faction."
+    success: "{GREEN}Faction has been transferred to {PLAYER}."
+  leave:
+    is-leader: "{RED}You are the leader of your faction."
+    success: "{YELLOW}You have left your faction."
+  motd:
+    success: "{GREEN}Faction MOTD has been set to {MOTD}"
+  name:
+    success: "{GREEN}Faction has been renamed to {FACTION}."
+  permission:
+    role-not-found: "{RED}Role not found."
+    permission-not-found: "{RED}Permission not found."
+    success: "{GREEN}Permission {PERMISSION} has been {TOGGLED} for role {ROLE}."
+  sethome:
+    success: "{GREEN}Faction home has been set."
