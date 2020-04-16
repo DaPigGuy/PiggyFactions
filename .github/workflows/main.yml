@@ -14,6 +14,10 @@ jobs:
           echo Making directory...
           mkdir vendor
           echo Directory made.
+      - name: wget PiggyCustomEnchants
+        uses: wei/wget@v1
+        with:
+          args: -O vendor/PiggyCustomEnchants.phar https://poggit.pmmp.io/r/82514/PiggyCustomEnchants_dev-439.phar
       - name: wget virions, libasynql
         uses: wei/wget@v1
         with:

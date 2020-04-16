@@ -88,8 +88,8 @@ class MapSubCommand extends FactionSubCommand
                 } elseif (!$contains && $overflown) {
                     $row .= self::MAP_KEY_OVERFLOW;
                 } else {
-                    if (!$contains) $fList[$characters{$characterIndex++}] = $faction;
-                    $fchar = array_search($faction, $fList);
+                    if (!$contains) $factions[$characters{$characterIndex++}] = $faction;
+                    $fchar = array_search($faction, $factions);
                     $row .= $this->getColorFor($player, $faction) . $fchar;
                 }
             }
