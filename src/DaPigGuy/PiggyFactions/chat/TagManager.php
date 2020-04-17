@@ -54,7 +54,7 @@ class TagManager
 	public function getPlayerRankName(Player $player, string $noRank):string
 	{
 		$faction = $this->getPlayerFactionClass($player);
-		if(!$faction instanceof Faction)
+		if(!$faction instanceof FactionsPlayer)
 			return $noRank;
 		return $faction->getRole() ?? $noRank;
 	}
@@ -62,7 +62,7 @@ class TagManager
 	public function getPlayerRankSymbol(Player $player, array $rankMap, string $noRank):string
 	{
 		$factionsPlayer = $this->getPlayerFactionClass($player);
-		if(!$factionsPlayer instanceof Faction)
+		if(!$factionsPlayer instanceof FactionsPlayer)
 			return $noRank;
 		$role = $factionsPlayer->getRole();
 		if($role === null) return $noRank;
@@ -74,7 +74,7 @@ class TagManager
 
 	protected function getFactionClass(Player $player):?Faction
 	{
-		$factionsPlayer = PlayerManager::getInstance()->getPlayer($player->getUniqueId());
+		$factionsPlayer = $this->getPlayerFactionClass($player);
 		if(!$factionsPlayer instanceof FactionsPlayer OR !(($faction = $factionsPlayer->getFaction()) instanceof Faction))
 			return null;
 		return $faction;

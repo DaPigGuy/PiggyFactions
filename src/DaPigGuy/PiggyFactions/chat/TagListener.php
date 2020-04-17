@@ -10,10 +10,15 @@ use pocketmine\Player;
 
 class TagListener implements Listener
 {
+	/** @var TagManager */
 	private $tagManager;
+	/** @var array */
 	private $rankMap = [];
+	/** @var string */
 	private $noFaction = '';
+	/** @var string */
 	private $noPower = '';
+	/** @var string */
 	private $noRank = '';
 
 	public function __construct(TagManager $tagManager, PiggyFactions $plugin, array $config)
