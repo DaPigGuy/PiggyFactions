@@ -51,8 +51,8 @@ class PiggyFactions extends PluginBase
 
     /** @var TagListener */
     private $tagListener;
-	/** @var TagManager */
-	private $tagManager;
+    /** @var TagManager */
+    private $tagManager;
 
     /**
      * @throws MissingProviderDependencyException
@@ -81,7 +81,7 @@ class PiggyFactions extends PluginBase
         $this->chatManager = new ChatManager($this);
 
         $this->tagManager = new TagManager($this);
-        $this->tagListener = new TagListener($this->tagManager,$this,$this->getConfig()->get('tags',[]));
+        $this->tagListener = new TagListener($this->tagManager, $this, $this->getConfig()->get('tags', []));
 
         $this->checkSoftDependencies();
 
