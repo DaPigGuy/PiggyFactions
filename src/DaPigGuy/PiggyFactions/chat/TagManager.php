@@ -74,7 +74,7 @@ class TagManager
     protected function getFactionClass(Player $player): ?Faction
     {
         $factionsPlayer = $this->getPlayerFactionClass($player);
-        if (!$factionsPlayer instanceof FactionsPlayer or !(($faction = $factionsPlayer->getFaction()) instanceof Faction))
+        if (!$factionsPlayer instanceof FactionsPlayer || !(($faction = $factionsPlayer->getFaction()) instanceof Faction))
             return null;
         return $faction;
     }

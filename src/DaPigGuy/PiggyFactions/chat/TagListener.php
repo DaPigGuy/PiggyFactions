@@ -43,7 +43,7 @@ class TagListener implements Listener
     protected function getTag(Player $player, string $tag): ?string
     {
         $tags = explode('.', $tag, 2);
-        if ($tags[0] !== 'piggyfacs' or count($tags) < 2)
+        if ($tags[0] !== 'piggyfacs' || count($tags) < 2)
             return null;
 
         switch ($tags[1]) {
