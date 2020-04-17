@@ -81,6 +81,7 @@ class FactionsPlayer
     public function setPower(float $power): void
     {
         $this->power = $power;
+        if ($this->power > ($max = PiggyFactions::getInstance()->getConfig()->getNested("factions.power.max", 10))) $this->power = $max;
         $this->update();
     }
 

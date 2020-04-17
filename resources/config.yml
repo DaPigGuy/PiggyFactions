@@ -12,7 +12,8 @@ database:
   #provider: economyapi
 factions:
   power:
-    default: 20
+    default: 0
+    max: 10
     per:
       death: -2
       hour: 2
