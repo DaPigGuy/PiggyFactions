@@ -33,6 +33,7 @@ class Faction
     const RELATION_NONE = "none";
 
     const PERMISSIONS = [
+        "ally",
         "claim",
         "demote",
         "description",
