@@ -1,10 +1,10 @@
 <?php
+
 declare(strict_types=1);
 
 namespace DaPigGuy\PiggyFactions\chat;
 
 use CortexPE\HRKChat\event\PlaceholderResolveEvent;
-use DaPigGuy\PiggyFactions\PiggyFactions;
 use pocketmine\event\Listener;
 use pocketmine\Player;
 
@@ -21,9 +21,8 @@ class TagListener implements Listener
     /** @var string */
     private $noRank = '';
 
-    public function __construct(TagManager $tagManager, PiggyFactions $plugin, array $config)
+    public function __construct(TagManager $tagManager, array $config)
     {
-        $plugin->getServer()->getPluginManager()->registerEvents($this, $plugin);
         $this->tagManager = $tagManager;
 
         if (isset($config['rankmap'])) $this->rankMap = $config['rankmap'];

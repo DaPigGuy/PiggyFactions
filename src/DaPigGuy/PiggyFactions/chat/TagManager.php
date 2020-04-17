@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace DaPigGuy\PiggyFactions\chat;
@@ -17,6 +18,7 @@ class TagManager
     public function __construct(PiggyFactions $plugin)
     {
         $this->plugin = $plugin;
+        $plugin->getServer()->getPluginManager()->registerEvents(new TagListener($this, $plugin->getConfig()->get("tags", [])), $plugin);
     }
 
     public function getFactionName(Player $player, string $noFactions): string
@@ -66,10 +68,7 @@ class TagManager
             return $noRank;
         $role = $factionsPlayer->getRole();
         if ($role === null) return $noRank;
-        foreach ($rankMap as $name => $symbol) {
-            if ($role === $name) return $symbol;
-        }
-        return $noRank;
+        return $rankMap[$role] ?? $noRank;
     }
 
     protected function getFactionClass(Player $player): ?Faction
