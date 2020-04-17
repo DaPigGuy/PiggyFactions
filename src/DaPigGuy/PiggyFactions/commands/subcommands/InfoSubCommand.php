@@ -11,7 +11,7 @@ use pocketmine\Player;
 
 class InfoSubCommand extends FactionSubCommand
 {
-    public function onNormalRun(Player $sender, ?Faction $faction, string $aliasUsed, array $args): void
+    public function onNormalRun(Player $sender, ?Faction $faction, FactionsPlayer $member, string $aliasUsed, array $args): void
     {
         LanguageManager::getInstance()->sendMessage($sender, "commands.info.message", [
             "{DESCRIPTION}" => $faction->getDescription(),

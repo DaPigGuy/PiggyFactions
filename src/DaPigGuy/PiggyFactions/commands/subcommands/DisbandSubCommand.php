@@ -6,13 +6,14 @@ namespace DaPigGuy\PiggyFactions\commands\subcommands;
 
 use DaPigGuy\PiggyFactions\factions\Faction;
 use DaPigGuy\PiggyFactions\language\LanguageManager;
+use DaPigGuy\PiggyFactions\players\FactionsPlayer;
 use pocketmine\Player;
 
 class DisbandSubCommand extends FactionSubCommand
 {
-    public function onNormalRun(Player $sender, ?Faction $faction, string $aliasUsed, array $args): void
+    public function onNormalRun(Player $sender, ?Faction $faction, FactionsPlayer $member, string $aliasUsed, array $args): void
     {
-        if ($faction->getMember($sender->getName())->getRole() !== Faction::ROLE_LEADER) {
+        if ($member->getRole() !== Faction::ROLE_LEADER) {
             LanguageManager::getInstance()->sendMessage($sender, "commands.not-leader");
             return;
         }

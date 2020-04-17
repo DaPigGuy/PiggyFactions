@@ -8,6 +8,7 @@ use CortexPE\Commando\args\TextArgument;
 use CortexPE\Commando\exception\ArgumentOrderException;
 use DaPigGuy\PiggyFactions\factions\Faction;
 use DaPigGuy\PiggyFactions\language\LanguageManager;
+use DaPigGuy\PiggyFactions\players\FactionsPlayer;
 use pocketmine\Player;
 
 class CreateSubCommand extends FactionSubCommand
@@ -15,7 +16,7 @@ class CreateSubCommand extends FactionSubCommand
     /** @var bool */
     protected $requiresFaction = false;
 
-    public function onNormalRun(Player $sender, ?Faction $faction, string $aliasUsed, array $args): void
+    public function onNormalRun(Player $sender, ?Faction $faction, FactionsPlayer $member, string $aliasUsed, array $args): void
     {
         if ($faction !== null) {
             LanguageManager::getInstance()->sendMessage($sender, "commands.already-in-faction");

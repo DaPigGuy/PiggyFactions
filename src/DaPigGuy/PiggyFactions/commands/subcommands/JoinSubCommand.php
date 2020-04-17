@@ -8,20 +8,16 @@ use CortexPE\Commando\args\TextArgument;
 use CortexPE\Commando\exception\ArgumentOrderException;
 use DaPigGuy\PiggyFactions\factions\Faction;
 use DaPigGuy\PiggyFactions\language\LanguageManager;
+use DaPigGuy\PiggyFactions\players\FactionsPlayer;
 use pocketmine\Player;
-use pocketmine\utils\TextFormat;
 
 class JoinSubCommand extends FactionSubCommand
 {
     /** @var bool */
     protected $requiresFaction = false;
 
-    public function onNormalRun(Player $sender, ?Faction $faction, string $aliasUsed, array $args): void
+    public function onNormalRun(Player $sender, ?Faction $faction, FactionsPlayer $member, string $aliasUsed, array $args): void
     {
-        if (!$sender instanceof Player) {
-            $sender->sendMessage(TextFormat::RED . "Please use this command in-game.");
-            return;
-        }
         $targetFaction = $this->plugin->getFactionsManager()->getFactionByName($args["faction"]);
         if ($targetFaction === null) {
             LanguageManager::getInstance()->sendMessage($sender, "commands.invalid-faction", ["{FACTION}" => $args["faction"]]);

@@ -8,19 +8,16 @@ use CortexPE\Commando\args\TextArgument;
 use CortexPE\Commando\exception\ArgumentOrderException;
 use DaPigGuy\PiggyFactions\factions\Faction;
 use DaPigGuy\PiggyFactions\language\LanguageManager;
+use DaPigGuy\PiggyFactions\players\FactionsPlayer;
 use pocketmine\Player;
 
 class KickSubCommand extends FactionSubCommand
 {
-    public function onNormalRun(Player $sender, ?Faction $faction, string $aliasUsed, array $args): void
+    public function onNormalRun(Player $sender, ?Faction $faction, FactionsPlayer $member, string $aliasUsed, array $args): void
     {
         $target = $faction->getMember($args["name"]);
         if ($target === null) {
             LanguageManager::getInstance()->sendMessage($sender, "commands.member-not-found", ["{PLAYER}" => $args["name"]]);
-            return;
-        }
-        if (!$faction->hasPermission($faction->getMember($sender->getName()), $this->getName())) {
-            LanguageManager::getInstance()->sendMessage($sender, "commands.no-permission");
             return;
         }
         if ($target->getRole() === Faction::ROLE_LEADER) {
