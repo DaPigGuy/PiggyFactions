@@ -45,7 +45,7 @@ abstract class FactionSubCommand extends BaseSubCommand
                 return;
             }
             if (in_array($this->getName(), Faction::PERMISSIONS)) {
-                if (!$faction->getPermission($member->getRole(), $this->getName())) {
+                if (!$faction->hasPermission($member, $this->getName())) {
                     LanguageManager::getInstance()->sendMessage($sender, "commands.no-permission");
                     return;
                 }
