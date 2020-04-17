@@ -27,6 +27,11 @@ class Faction
         self::ROLE_LEADER => 4
     ];
 
+    const RELATION_ALLY = "ally";
+    const RELATION_TRUCE = "truce";
+    const RELATION_ENEMY = "enemy";
+    const RELATION_NONE = "none";
+
     const PERMISSIONS = [
         "claim",
         "demote",
@@ -67,9 +72,14 @@ class Faction
     private $home;
 
     /** @var array */
+    private $relations;
+    /** @var array */
+    private $relationWish;
+
+    /** @var array */
     private $invitedPlayers;
 
-    public function __construct(int $id, string $name, UUID $leader, ?string $description, ?string $motd, array $members, array $permissions, ?Position $home)
+    public function __construct(int $id, string $name, UUID $leader, ?string $description, ?string $motd, array $members, array $permissions, ?Position $home, array $relations)
     {
         $this->id = $id;
         $this->name = $name;
@@ -81,6 +91,7 @@ class Faction
         }, $members);
         $this->permissions = $permissions;
         $this->home = $home;
+        $this->relations = $relations;
     }
 
     public function getId(): int
@@ -241,6 +252,59 @@ class Faction
         $this->update();
     }
 
+    public function getRelationWish(Faction $faction): string
+    {
+        return $this->relationWish[$faction->getId()] ?? self::RELATION_NONE;
+    }
+
+    public function setRelationWish(Faction $faction, string $relation): void
+    {
+        $this->relationWish[$faction->getId()] = $relation;
+    }
+
+    public function revokeRelationWish(Faction $faction): void
+    {
+        unset($this->relationWish[$faction->getId()]);
+    }
+
+    public function getRelation(Faction $faction): string
+    {
+        return $this->relations[$faction->getId()] ?? self::RELATION_NONE;
+    }
+
+    public function setRelation(Faction $faction, string $relation): void
+    {
+        $this->relations[$faction->getId()] = $relation;
+        $this->update();
+    }
+
+    public function revokeRelation(Faction $faction): void
+    {
+        $relation = $this->getRelation($faction);
+        unset($this->relations[$faction->getId()]);
+        switch ($relation) {
+            case self::RELATION_ALLY:
+            case self::RELATION_TRUCE:
+                if ($faction->getRelation($this) !== self::RELATION_NONE) $faction->revokeRelation($faction);
+                break;
+        }
+        $this->update();
+    }
+
+    /**
+     * @return Faction[]
+     */
+    public function getAllies(): array
+    {
+        $allies = [];
+        foreach ($this->relations as $id => $relation) {
+            if ($relation === self::RELATION_ALLY) {
+                $allies[] = FactionsManager::getInstance()->getFaction($id);
+            }
+        }
+        return $allies;
+    }
+
     public function disband(): void
     {
         foreach ($this->getMembers() as $member) {
@@ -250,7 +314,12 @@ class Faction
         foreach (ClaimsManager::getInstance()->getFactionClaims($this) as $claim) {
             ClaimsManager::getInstance()->deleteClaim($claim->getId());
         }
-        //TODO: Remove relationships
+        foreach ($this->relations as $id => $relation) {
+            if ($relation === self::RELATION_ALLY || $relation === self::RELATION_TRUCE) {
+                $faction = FactionsManager::getInstance()->getFaction($id);
+                $faction->revokeRelation($this);
+            }
+        }
         FactionsManager::getInstance()->deleteFaction($this->getId());
     }
 
@@ -271,7 +340,8 @@ class Faction
                 "y" => $this->home->y,
                 "z" => $this->home->z,
                 "level" => $this->home->level->getFolderName()
-            ])
+            ]),
+            "relations" => json_encode($this->relations)
         ]);
     }
 }

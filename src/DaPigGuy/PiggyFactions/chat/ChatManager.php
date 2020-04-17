@@ -11,7 +11,7 @@ class ChatManager
 {
     const ALL_CHAT = "all";
     const FACTION_CHAT = "faction";
-    const ALLY_CHAT = "ally"; //TODO: Add allying
+    const ALLY_CHAT = "ally";
 
     /** @var ChatManager */
     private static $instance;

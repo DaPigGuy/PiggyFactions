@@ -33,7 +33,7 @@ class FactionsManager
                     $row["home"] = new Position($decodedHome["x"], $decodedHome["y"], $decodedHome["z"], $this->plugin->getServer()->getLevelByName($decodedHome["level"]));
                 }
 
-                $this->factions[$row["id"]] = new Faction($row["id"], $row["name"], UUID::fromString($row["leader"]), $row["description"], $row["motd"], json_decode($row["members"], true), json_decode($row["permissions"], true), $row["home"]);
+                $this->factions[$row["id"]] = new Faction($row["id"], $row["name"], UUID::fromString($row["leader"]), $row["description"], $row["motd"], json_decode($row["members"], true), json_decode($row["permissions"], true), $row["home"], json_decode($row["relations"], true) ?? []);
             }
             $this->plugin->getLogger()->debug("Loaded " . count($rows) . " factions");
         });
@@ -60,7 +60,7 @@ class FactionsManager
     public function createFaction(string $name, Player $leader): void
     {
         $this->plugin->getDatabase()->executeInsert("piggyfactions.factions.create", ["name" => $name, "leader" => $leader->getUniqueId()->toString(), "members" => json_encode([$leader->getUniqueId()->toString()]), "permissions" => json_encode(Faction::DEFAULT_PERMISSIONS)], function (int $id) use ($name, $leader): void {
-            $this->factions[$id] = new Faction($id, $name, $leader->getUniqueId(), null, null, [$leader->getUniqueId()->toString()], Faction::DEFAULT_PERMISSIONS, null);
+            $this->factions[$id] = new Faction($id, $name, $leader->getUniqueId(), null, null, [$leader->getUniqueId()->toString()], Faction::DEFAULT_PERMISSIONS, null, []);
             $this->plugin->getPlayerManager()->getPlayer($leader->getUniqueId())->setFaction($this->factions[$id]);
             $this->plugin->getPlayerManager()->getPlayer($leader->getUniqueId())->setRole(Faction::ROLE_LEADER);
         });

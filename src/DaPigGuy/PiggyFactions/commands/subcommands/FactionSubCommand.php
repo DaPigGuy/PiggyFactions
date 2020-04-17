@@ -55,10 +55,7 @@ abstract class FactionSubCommand extends BaseSubCommand
         $this->onNormalRun($sender, $faction, $member, $aliasUsed, $args);
     }
 
-    public function onNormalRun(Player $sender, ?Faction $faction, FactionsPlayer $member, string $aliasUsed, array $args): void
-    {
-
-    }
+    abstract public function onNormalRun(Player $sender, ?Faction $faction, FactionsPlayer $member, string $aliasUsed, array $args): void;
 
     public function onFormRun(Player $sender, ?Faction $faction, FactionsPlayer $member, string $aliasUsed, array $args): void
     {

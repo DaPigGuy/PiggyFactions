@@ -1,4 +1,5 @@
 chat:
+  ally: "{BOLD}{GOLD}ALLY {RESET}{PLAYER}: {MESSAGE}"
   faction: "{BOLD}{GOLD}FACTION {RESET}{PLAYER}: {MESSAGE}"
 commands:
   invalid-player: "{RED}Player {PLAYER} not found."
@@ -8,9 +9,16 @@ commands:
   already-in-faction: "{RED}You are already in a faction."
   not-leader: "{RED}You are not the faction leader!"
   no-permission: "{RED}You are not permitted to do this."
+  ally:
+    self: "{RED}You can not ally with yourself."
+    already-allied: "{RED}You are already allied!"
+    request: "{GREEN}{FACTION} has sent an ally request. Do /f ally {FACTION} to accept."
+    allied: "{GREEN}Your faction is now allied with {ALLY}"
+    success: "{GREEN}An ally request has been sent to {FACTION}."
   chat:
     already-in-chat: "{RED}You are already in this chat!"
     toggled: "{GREEN}You are now in the {CHAT} chat."
+    toggled-off: "{RED}You are no longer in the {CHAT} chat."
   claim:
     already-claimed: "{RED}This chunk is already claimed."
     no-power: "{RED}Your faction has an insufficient amount of power."

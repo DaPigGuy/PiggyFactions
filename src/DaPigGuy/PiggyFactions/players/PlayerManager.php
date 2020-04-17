@@ -48,7 +48,7 @@ class PlayerManager
             "role" => null,
             "power" => PiggyFactions::getInstance()->getConfig()->getNested("factions.power.default", 20)
         ]);
-        $this->players[$player->getUniqueId()->toString()] = new FactionsPlayer($player->getUniqueId(), $player->getName(), null, null,  PiggyFactions::getInstance()->getConfig()->getNested("factions.power.default", 20));
+        $this->players[$player->getUniqueId()->toString()] = new FactionsPlayer($player->getUniqueId(), $player->getName(), null, null, PiggyFactions::getInstance()->getConfig()->getNested("factions.power.default", 20));
         return $this->players[$player->getUniqueId()->toString()];
     }
 
@@ -60,5 +60,15 @@ class PlayerManager
     public function getPlayerFaction(UUID $uuid): ?Faction
     {
         return $this->getPlayer($uuid)->getFaction();
+    }
+
+    public function areAlliedOrTruced(Player $a, Player $b): bool
+    {
+        $factionA = $this->getPlayerFaction($a->getUniqueId());
+        $factionB = $this->getPlayerFaction($b->getUniqueId());
+        if ($factionA === null || $factionB === null) return false;
+        if ($factionA->getRelation($factionB) === Faction::RELATION_ALLY || $factionA->getRelation($factionB) === Faction::RELATION_TRUCE) return true;
+        if ($factionA->getId() === $factionB->getId()) return true;
+        return false;
     }
 }

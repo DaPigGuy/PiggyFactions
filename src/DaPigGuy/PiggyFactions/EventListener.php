@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace DaPigGuy\PiggyFactions;
 
 use DaPigGuy\PiggyFactions\chat\ChatManager;
+use DaPigGuy\PiggyFactions\factions\Faction;
 use DaPigGuy\PiggyFactions\language\LanguageManager;
 use DaPigGuy\PiggyFactions\players\PlayerManager;
 use pocketmine\event\entity\EntityDamageByEntityEvent;
@@ -35,6 +36,16 @@ class EventListener implements Listener
         $faction = PlayerManager::getInstance()->getPlayerFaction($player->getUniqueId());
         if ($faction !== null) {
             switch (ChatManager::getInstance()->getCurrentChat($player)) {
+                case ChatManager::ALLY_CHAT:
+                    $event->setRecipients(array_merge($faction->getOnlineMembers(), ...array_map(function (Faction $ally): array {
+                        return $ally->getOnlineMembers();
+                    }, $faction->getAllies())));
+                    $event->setFormat(LanguageManager::getInstance()->getMessage(LanguageManager::DEFAULT_LANGUAGE, "chat.ally", [
+                        "{PLAYER}" => $player->getDisplayName(),
+                        "{FACTION}" => $faction->getName(),
+                        "{MESSAGE}" => $event->getMessage()
+                    ]));
+                    break;
                 case ChatManager::FACTION_CHAT:
                     $event->setRecipients($faction->getOnlineMembers());
                     $event->setFormat(LanguageManager::getInstance()->getMessage(LanguageManager::DEFAULT_LANGUAGE, "chat.faction", [
@@ -52,9 +63,7 @@ class EventListener implements Listener
         $entity = $event->getEntity();
         $damager = $event->getDamager();
         if ($entity instanceof Player && $damager instanceof Player) {
-            $entityFaction = $this->plugin->getPlayerManager()->getPlayerFaction($entity->getUniqueId());
-            $damagerFaction = $this->plugin->getPlayerManager()->getPlayerFaction($damager->getUniqueId());
-            if ($entityFaction !== null && $entityFaction === $damagerFaction) $event->setCancelled();
+            if (PlayerManager::getInstance()->areAlliedOrTruced($entity, $damager)) $event->setCancelled();
         }
     }
 

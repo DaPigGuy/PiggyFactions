@@ -25,6 +25,6 @@ class ChatSubCommand extends FactionSubCommand
     public function onNormalRun(Player $sender, ?Faction $faction, FactionsPlayer $member, string $aliasUsed, array $args): void
     {
         ChatManager::getInstance()->setCurrentChat($sender, ChatManager::getInstance()->getCurrentChat($sender) === $this->chat ? ChatManager::ALL_CHAT : $this->chat);
-        LanguageManager::getInstance()->sendMessage($sender, "commands.chat.toggled", ["{CHAT}" => $this->chat, "{TOGGLED}" => ChatManager::getInstance()->getCurrentChat($sender) === $this->chat ? "enabled" : "disabled"]);
+        LanguageManager::getInstance()->sendMessage($sender, "commands.chat.toggled" . (ChatManager::getInstance()->getCurrentChat($sender) === $this->chat ? "" : "-off"), ["{CHAT}" => $this->chat]);
     }
 }

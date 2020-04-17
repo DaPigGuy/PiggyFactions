@@ -89,11 +89,7 @@ class PiggyFactions extends PluginBase
     {
         if ($this->getServer()->getPluginManager()->getPlugin("PiggyCustomEnchants") !== null) {
             AllyChecks::addCheck($this, function (Player $player, Entity $entity): bool {
-                if ($entity instanceof Player) {
-                    $playerFaction = $this->playerManager->getPlayerFaction($player->getUniqueId());
-                    $entityFaction = $this->playerManager->getPlayerFaction($entity->getUniqueId());
-                    if ($playerFaction === $entityFaction && $playerFaction !== null) return true;
-                }
+                if ($entity instanceof Player) return $this->playerManager->areAlliedOrTruced($player, $entity);
                 return false;
             });
         }

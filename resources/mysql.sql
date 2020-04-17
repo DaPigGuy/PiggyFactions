@@ -6,15 +6,15 @@
 -- # { init
 CREATE TABLE IF NOT EXISTS factions
 (
-    id            INTEGER PRIMARY KEY AUTO_INCREMENT,
-    name          VARCHAR(16) UNIQUE,
-    leader        VARCHAR(36),
-    description   TEXT,
-    motd          TEXT,
-    members       JSON,
-    permissions   JSON,
-    home          JSON,
-    relationships JSON
+    id          INTEGER PRIMARY KEY AUTO_INCREMENT,
+    name        VARCHAR(16) UNIQUE,
+    leader      VARCHAR(36),
+    description TEXT,
+    motd        TEXT,
+    members     JSON,
+    permissions JSON,
+    home        JSON,
+    relations   JSON
 );
 -- # }
 
@@ -48,6 +48,7 @@ WHERE id = :id;
 -- #    :members string
 -- #    :permissions string
 -- #    :home ?string
+-- #    :relations string
 UPDATE factions
 SET name=:name,
     leader=:leader,
@@ -55,7 +56,8 @@ SET name=:name,
     motd=:motd,
     members=:members,
     permissions=:permissions,
-    home=:home
+    home=:home,
+    relations=:relations
 WHERE id = :id;
 -- # }
 

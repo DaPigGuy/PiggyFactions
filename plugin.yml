@@ -21,6 +21,12 @@ permissions:
               piggyfactions.command.faction.use:
                 default: true
                 description: "Allow usage of /f"
+              piggyfactions.command.faction.ally:
+                default: true
+                description: "Allow usage of /f ally"
+              piggyfactions.command.faction.allychat:
+                default: true
+                description: "Allow usage of /f allychat"
               piggyfactions.command.faction.chat:
                 default: true
                 description: "Allow usage of /f chat"
