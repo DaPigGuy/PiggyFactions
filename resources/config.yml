@@ -19,3 +19,12 @@ factions:
       hour: 2
   claims:
     cost: 1
+tags:
+  rankmap:
+    leader: "^"
+    officer: "*"
+    member: "+"
+    recruit: "-"
+  nofaction: ""
+  nopower: 0
+  norank: "|"

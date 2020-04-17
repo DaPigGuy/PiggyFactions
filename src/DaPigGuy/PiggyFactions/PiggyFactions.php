@@ -12,6 +12,8 @@ use DaPigGuy\libPiggyEconomy\libPiggyEconomy;
 use DaPigGuy\libPiggyEconomy\providers\EconomyProvider;
 use DaPigGuy\PiggyCustomEnchants\utils\AllyChecks;
 use DaPigGuy\PiggyFactions\chat\ChatManager;
+use DaPigGuy\PiggyFactions\chat\TagListener;
+use DaPigGuy\PiggyFactions\chat\TagManager;
 use DaPigGuy\PiggyFactions\claims\ClaimsManager;
 use DaPigGuy\PiggyFactions\commands\FactionCommand;
 use DaPigGuy\PiggyFactions\factions\FactionsManager;
@@ -47,6 +49,11 @@ class PiggyFactions extends PluginBase
     /** @var ChatManager */
     private $chatManager;
 
+    /** @var TagListener */
+    private $tagListener;
+	/** @var TagManager */
+	private $tagManager;
+
     /**
      * @throws MissingProviderDependencyException
      * @throws UnknownProviderException
@@ -72,6 +79,9 @@ class PiggyFactions extends PluginBase
 
         $this->languageManager = new LanguageManager($this);
         $this->chatManager = new ChatManager($this);
+
+        $this->tagManager = new TagManager($this);
+        $this->tagListener = new TagListener($this->tagManager,$this,$this->getConfig()->get('tags',[]));
 
         $this->checkSoftDependencies();
 
