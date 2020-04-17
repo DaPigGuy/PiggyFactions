@@ -22,6 +22,10 @@ jobs:
         uses: wei/wget@v1
         with:
           args: -O vendor/HRKChat.phar https://poggit.pmmp.io/r/80529/HRKChat_dev-31.phar
+      - name: wget Hierarchy
+        uses: wei/wget@v1
+        with:
+          args: -O vendor/Hierarchy.phar https://poggit.pmmp.io/r/81611/Hierarchy_dev-81.phar
       - name: wget virions, libasynql
         uses: wei/wget@v1
         with:

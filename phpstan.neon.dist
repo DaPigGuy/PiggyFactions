@@ -7,6 +7,7 @@ parameters:
   autoload_directories:
     - /source/src
     - phar:///source/vendor/PiggyCustomEnchants.phar/src/
+    - phar:///source/vendor/Hierarchy.phar/src/
     - phar:///source/vendor/HRKChat.phar/src/
     - phar:///source/vendor/Commando.phar/src/
     - phar:///source/vendor/FormAPI.phar/src/
