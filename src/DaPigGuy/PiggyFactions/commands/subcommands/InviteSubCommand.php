@@ -6,30 +6,20 @@ namespace DaPigGuy\PiggyFactions\commands\subcommands;
 
 use CortexPE\Commando\args\TextArgument;
 use CortexPE\Commando\exception\ArgumentOrderException;
+use DaPigGuy\PiggyFactions\factions\Faction;
 use DaPigGuy\PiggyFactions\language\LanguageManager;
-use pocketmine\command\CommandSender;
 use pocketmine\Player;
-use pocketmine\utils\TextFormat;
 
 class InviteSubCommand extends FactionSubCommand
 {
-    public function onRun(CommandSender $sender, string $aliasUsed, array $args): void
+    public function onNormalRun(Player $sender, ?Faction $faction, string $aliasUsed, array $args): void
     {
-        if (!$sender instanceof Player) {
-            $sender->sendMessage(TextFormat::RED . "Please use this command in-game.");
-            return;
-        }
         $target = $this->plugin->getServer()->getPlayer($args["name"]);
         if (!$target instanceof Player) {
             LanguageManager::getInstance()->sendMessage($sender, "commands.invalid-player", ["{PLAYER}" => $args["name"]]);
             return;
         }
-        $faction = $this->plugin->getPlayerManager()->getPlayerFaction($sender->getUniqueId());
         $targetFaction = $this->plugin->getPlayerManager()->getPlayerFaction($target->getUniqueId());
-        if ($faction === null) {
-            LanguageManager::getInstance()->sendMessage($sender, "commands.not-in-faction");
-            return;
-        }
         if (!$faction->hasPermission($faction->getMember($sender->getName()), $this->getName())) {
             LanguageManager::getInstance()->sendMessage($sender, "commands.no-permission");
             return;

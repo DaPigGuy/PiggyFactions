@@ -30,6 +30,9 @@ permissions:
               piggyfactions.command.faction.create:
                 default: true
                 description: "Allow usage of /f create"
+              piggyfactions.command.faction.demote:
+                default: true
+                description: "Allow usage of /f demote"
               piggyfactions.command.faction.description:
                 default: true
                 description: "Allow usage of /f description"

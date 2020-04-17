@@ -9,23 +9,12 @@ use CortexPE\Commando\args\RawStringArgument;
 use CortexPE\Commando\exception\ArgumentOrderException;
 use DaPigGuy\PiggyFactions\factions\Faction;
 use DaPigGuy\PiggyFactions\language\LanguageManager;
-use pocketmine\command\CommandSender;
 use pocketmine\Player;
-use pocketmine\utils\TextFormat;
 
 class PermissionSubCommand extends FactionSubCommand
 {
-    public function onRun(CommandSender $sender, string $aliasUsed, array $args): void
+    public function onNormalRun(Player $sender, ?Faction $faction, string $aliasUsed, array $args): void
     {
-        if (!$sender instanceof Player) {
-            $sender->sendMessage(TextFormat::RED . "Please use this command in-game.");
-            return;
-        }
-        $faction = $this->plugin->getPlayerManager()->getPlayerFaction($sender->getUniqueId());
-        if ($faction === null) {
-            LanguageManager::getInstance()->sendMessage($sender, "commands.not-in-faction");
-            return;
-        }
         if ($faction->getMember($sender->getName())->getRole() !== Faction::ROLE_LEADER) {
             LanguageManager::getInstance()->sendMessage($sender, "commands.not-leader");
             return;

@@ -7,7 +7,6 @@ namespace DaPigGuy\PiggyFactions\commands\subcommands;
 use DaPigGuy\PiggyFactions\claims\ClaimsManager;
 use DaPigGuy\PiggyFactions\factions\Faction;
 use DaPigGuy\PiggyFactions\players\PlayerManager;
-use pocketmine\command\CommandSender;
 use pocketmine\Player;
 use pocketmine\utils\TextFormat;
 
@@ -33,12 +32,11 @@ class MapSubCommand extends FactionSubCommand
     const W = 'W';
     const NW = '\\';
 
-    public function onRun(CommandSender $sender, string $aliasUsed, array $args): void
+    /** @var bool */
+    protected $requiresFaction = false;
+
+    public function onNormalRun(Player $sender, ?Faction $faction, string $aliasUsed, array $args): void
     {
-        if (!$sender instanceof Player) {
-            $sender->sendMessage(TextFormat::RED . "Please use this command in-game.");
-            return;
-        }
         $sender->sendMessage(implode(TextFormat::EOL, $this->getMap($sender, self::MAP_WIDTH, self::MAP_HEIGHT, $sender->getYaw())));
     }
 
