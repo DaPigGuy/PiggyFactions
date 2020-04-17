@@ -18,6 +18,11 @@ commands:
   create:
     name-taken: "{RED}A faction with the name {NAME} already exists."
     success: "{GREEN}Faction {NAME} has been created."
+  demote:
+    cant-demote-higher: "{RED}You can not demote members of higher rank."
+    already-lowest: "{RED}{PLAYER} is already at the lowest rank."
+    success: "{GREEN}{PLAYER} has been demoted to {ROLE}."
+    demoted: "{RED}You have been demoted to {ROLE}."
   description:
     success: "{GREEN}Faction description has been set to {DESCRIPTION}"
   disband:
@@ -53,5 +58,11 @@ commands:
     role-not-found: "{RED}Role not found."
     permission-not-found: "{RED}Permission not found."
     success: "{GREEN}Permission {PERMISSION} has been {TOGGLED} for role {ROLE}."
+  promote:
+    cant-promote-higher: "{RED}You can not promote past your rank."
+    already-maxed: "{RED}{PLAYER} is already at the max rank."
+    success: "{GREEN}{PLAYER} has been promoted to {ROLE}."
+    promoted: "{GREEN}You were promoted to {ROLE}"
   sethome:
     success: "{GREEN}Faction home has been set."
+motd: "{GOLD}____________.[{DARK_GREEN}{FACTION} MOTD{GOLD}].____________\n{WHITE}{MOTD}"

@@ -23,7 +23,7 @@ class ShowChunksTask extends Task
     public function onRun(int $currentTick): void
     {
         foreach ($this->plugin->getServer()->getOnlinePlayers() as $p) {
-            if (PlayerManager::getInstance()->getPlayer($p->getUniqueId())->canSeeChunks()) {
+            if (($member = PlayerManager::getInstance()->getPlayer($p->getUniqueId())) !== null && $member->canSeeChunks()) {
                 $chunk = $p->getLevel()->getChunkAtPosition($p);
 
                 $minX = (float)$chunk->getX() * 16;
@@ -34,7 +34,7 @@ class ShowChunksTask extends Task
                 for ($x = $minX; $x <= $maxX; $x += 0.5) {
                     for ($z = $minZ; $z <= $maxZ; $z += 0.5) {
                         if ($x === $minX || $x === $maxX || $z === $minZ || $z === $maxZ) {
-                            $p->getLevel()->addParticle(new RedstoneParticle(new Vector3($x, $p->y + 2, $z)), [$p]);
+                            $p->getLevel()->addParticle(new RedstoneParticle(new Vector3($x, $p->y + 1.5, $z)), [$p]);
                         }
                     }
                 }

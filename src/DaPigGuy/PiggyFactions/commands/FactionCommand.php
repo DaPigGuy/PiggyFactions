@@ -10,6 +10,7 @@ use DaPigGuy\PiggyFactions\chat\ChatManager;
 use DaPigGuy\PiggyFactions\commands\subcommands\ChatSubCommand;
 use DaPigGuy\PiggyFactions\commands\subcommands\ClaimSubCommand;
 use DaPigGuy\PiggyFactions\commands\subcommands\CreateSubCommand;
+use DaPigGuy\PiggyFactions\commands\subcommands\DemoteSubCommand;
 use DaPigGuy\PiggyFactions\commands\subcommands\DescriptionSubCommand;
 use DaPigGuy\PiggyFactions\commands\subcommands\DisbandSubCommand;
 use DaPigGuy\PiggyFactions\commands\subcommands\HomeSubCommand;
@@ -56,6 +57,7 @@ class FactionCommand extends BaseCommand
         $this->registerSubCommand(new ClaimSubCommand($this->plugin, "claim", "Claim a chunk"));
         $this->registerSubCommand(new CreateSubCommand($this->plugin, "create", "Create a faction"));
         $this->registerSubCommand(new DescriptionSubCommand($this->plugin, "description", "Set faction description", ["desc"]));
+        $this->registerSubCommand(new DemoteSubCommand($this->plugin, "demote", "Demote a faction member"));
         $this->registerSubCommand(new DisbandSubCommand($this->plugin, "disband", "Disband your faction"));
         $this->registerSubCommand(new HomeSubCommand($this->plugin, "home", "Teleport to faction home"));
         $this->registerSubCommand(new InfoSubCommand($this->plugin, "info", "Display faction info"));

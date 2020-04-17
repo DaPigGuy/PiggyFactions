@@ -62,7 +62,9 @@ class EventListener implements Listener
         $player = $event->getPlayer();
         if (($member = $this->plugin->getPlayerManager()->getPlayer($player->getUniqueId())) === null) $member = $this->plugin->getPlayerManager()->createPlayer($player);
         if ($member->getUsername() !== $player->getName()) $member->setUsername($member->getUsername());
-        //TODO: Send faction MOTD
+        if (($faction = $member->getFaction()) !== null) {
+            if (($motd = $faction->getMotd()) !== null) LanguageManager::getInstance()->sendMessage($player, "motd", ["{MOTD}" => $motd]);
+        }
     }
 
     public function onDataPacketReceive(DataPacketReceiveEvent $event): void

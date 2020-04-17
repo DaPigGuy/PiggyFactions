@@ -8,8 +8,6 @@ use DaPigGuy\PiggyFactions\claims\ClaimsManager;
 use DaPigGuy\PiggyFactions\factions\Faction;
 use DaPigGuy\PiggyFactions\players\PlayerManager;
 use pocketmine\command\CommandSender;
-use pocketmine\level\format\Chunk;
-use pocketmine\math\Vector3;
 use pocketmine\Player;
 use pocketmine\utils\TextFormat;
 
