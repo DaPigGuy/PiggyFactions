@@ -10,6 +10,7 @@ use DaPigGuy\PiggyFactions\players\PlayerManager;
 use pocketmine\event\entity\EntityDamageByEntityEvent;
 use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerChatEvent;
+use pocketmine\event\player\PlayerDeathEvent;
 use pocketmine\event\player\PlayerJoinEvent;
 use pocketmine\event\server\DataPacketReceiveEvent;
 use pocketmine\network\mcpe\protocol\LoginPacket;
@@ -57,10 +58,18 @@ class EventListener implements Listener
         }
     }
 
+    public function onDeath(PlayerDeathEvent $event): void
+    {
+        $player = $event->getPlayer();
+        $member = PlayerManager::getInstance()->getPlayer($player->getUniqueId());
+        $member->setPower($member->getPower() + $this->plugin->getConfig()->getNested("factions.power.per.death", -2));
+        LanguageManager::getInstance()->sendMessage($player, "death.power", ["{POWER}" => $member->getPower()]);
+    }
+
     public function onJoin(PlayerJoinEvent $event): void
     {
         $player = $event->getPlayer();
-        if (($member = $this->plugin->getPlayerManager()->getPlayer($player->getUniqueId())) === null) $member = $this->plugin->getPlayerManager()->createPlayer($player);
+        if (($member = PlayerManager::getInstance()->getPlayer($player->getUniqueId())) === null) $member = PlayerManager::getInstance()->createPlayer($player);
         if ($member->getUsername() !== $player->getName()) $member->setUsername($member->getUsername());
         if (($faction = $member->getFaction()) !== null) {
             if (($motd = $faction->getMotd()) !== null) LanguageManager::getInstance()->sendMessage($player, "motd", ["{MOTD}" => $motd]);

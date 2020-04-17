@@ -13,5 +13,8 @@ database:
 factions:
   power:
     default: 20
+    per:
+      death: -2
+      hour: 2
   claims:
     cost: 1

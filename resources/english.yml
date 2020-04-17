@@ -65,4 +65,6 @@ commands:
     promoted: "{GREEN}You were promoted to {ROLE}"
   sethome:
     success: "{GREEN}Faction home has been set."
+death:
+  power: "{RED}Your power is now {POWER}."
 motd: "{GOLD}____________.[{DARK_GREEN}{FACTION} MOTD{GOLD}].____________\n{WHITE}{MOTD}"
