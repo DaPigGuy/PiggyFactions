@@ -70,7 +70,7 @@ CREATE TABLE IF NOT EXISTS players
     username VARCHAR(16) UNIQUE,
     faction  INTEGER,
     role     TEXT,
-    power    INTEGER
+    power    FLOAT
 );
 -- # }
 
@@ -84,7 +84,7 @@ FROM players;
 -- #    :username string
 -- #    :faction ?int
 -- #    :role ?string
--- #    :power int
+-- #    :power float
 INSERT INTO players (uuid, username, faction, role, power)
 VALUES (:uuid, :username, :faction, :role, :power);
 -- # }
@@ -94,7 +94,7 @@ VALUES (:uuid, :username, :faction, :role, :power);
 -- #    :username string
 -- #    :faction ?int
 -- #    :role ?string
--- #    :power int
+-- #    :power float
 UPDATE players
 SET username=:username,
     faction=:faction,

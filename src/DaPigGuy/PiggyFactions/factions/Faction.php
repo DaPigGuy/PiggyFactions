@@ -29,11 +29,13 @@ class Faction
 
     const PERMISSIONS = [
         "claim",
+        "demote",
         "description",
         "invite",
         "kick",
         "motd",
         "name",
+        "promote",
         "sethome"
     ];
     const DEFAULT_PERMISSIONS = [
@@ -130,7 +132,7 @@ class Faction
         $this->update();
     }
 
-    public function getPower(): int
+    public function getPower(): float
     {
         $power = 0;
         foreach ($this->getMembers() as $member) {

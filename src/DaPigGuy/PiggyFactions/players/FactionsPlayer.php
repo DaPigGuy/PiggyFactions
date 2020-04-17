@@ -19,13 +19,13 @@ class FactionsPlayer
     private $faction;
     /** @var ?string */
     private $role;
-    /** @var int */
+    /** @var float */
     private $power;
 
     /** @var bool */
     private $canSeeChunks = false;
 
-    public function __construct(UUID $uuid, string $username, ?int $faction, ?string $role, int $power)
+    public function __construct(UUID $uuid, string $username, ?int $faction, ?string $role, float $power)
     {
 
         $this->uuid = $uuid;
@@ -73,12 +73,12 @@ class FactionsPlayer
         $this->update();
     }
 
-    public function getPower(): int
+    public function getPower(): float
     {
         return $this->power;
     }
 
-    public function setPower(int $power): void
+    public function setPower(float $power): void
     {
         $this->power = $power;
         $this->update();
