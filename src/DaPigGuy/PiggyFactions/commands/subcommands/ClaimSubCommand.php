@@ -16,7 +16,7 @@ class ClaimSubCommand extends FactionSubCommand
 {
     public function onNormalRun(Player $sender, ?Faction $faction, FactionsPlayer $member, string $aliasUsed, array $args): void
     {
-        if ($args["type"] ?? null === "auto") {
+        if (($args["type"] ?? null) === "auto") {
             $member->setAutoClaiming(!$member->isAutoClaiming());
             LanguageManager::getInstance()->sendMessage($sender, "commands.claim.auto.toggled" . ($member->isAutoClaiming() ? "" : "-off"));
             return;
