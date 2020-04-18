@@ -42,6 +42,12 @@ class Claim
         return FactionsManager::getInstance()->getFaction($this->faction);
     }
 
+    public function setFaction(Faction $faction): void
+    {
+        $this->faction = $faction->getId();
+        PiggyFactions::getInstance()->getDatabase()->executeChange("piggyfactions.claims.update", ["id" => $this->id, "faction" => $this->faction]);
+    }
+
     public function getLevel(): ?Level
     {
         return PiggyFactions::getInstance()->getServer()->getLevelByName($this->level);
@@ -52,5 +58,12 @@ class Claim
         $level = PiggyFactions::getInstance()->getServer()->getLevelByName($this->level);
         if ($level === null) return null;
         return $level->getChunk($this->chunkX, $this->chunkZ);
+    }
+
+    public function canBeOverClaimed(): bool
+    {
+        $faction = $this->getFaction();
+        if ($faction === null) return false;
+        return $faction->getPower() / PiggyFactions::getInstance()->getConfig()->getNested("factions.claim.cost", 1) < count(ClaimsManager::getInstance()->getFactionClaims($faction));
     }
 }

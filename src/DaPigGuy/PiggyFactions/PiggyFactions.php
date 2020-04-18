@@ -18,6 +18,7 @@ use DaPigGuy\PiggyFactions\commands\FactionCommand;
 use DaPigGuy\PiggyFactions\factions\FactionsManager;
 use DaPigGuy\PiggyFactions\language\LanguageManager;
 use DaPigGuy\PiggyFactions\players\PlayerManager;
+use DaPigGuy\PiggyFactions\task\AutoClaimTask;
 use DaPigGuy\PiggyFactions\task\ShowChunksTask;
 use DaPigGuy\PiggyFactions\task\UpdatePowerTask;
 use pocketmine\entity\Entity;
@@ -85,6 +86,7 @@ class PiggyFactions extends PluginBase
 
         $this->getServer()->getPluginManager()->registerEvents(new EventListener($this), $this);
 
+        $this->getScheduler()->scheduleRepeatingTask(new AutoClaimTask($this), 10);
         $this->getScheduler()->scheduleRepeatingTask(new ShowChunksTask($this), 10);
         $this->getScheduler()->scheduleRepeatingTask(new UpdatePowerTask($this), UpdatePowerTask::INTERVAL);
         //TODO: Poggit Update Checks

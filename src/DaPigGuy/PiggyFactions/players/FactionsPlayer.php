@@ -24,6 +24,8 @@ class FactionsPlayer
 
     /** @var bool */
     private $canSeeChunks = false;
+    /** @var bool */
+    private $isAutoClaiming = false;
 
     public function __construct(UUID $uuid, string $username, ?int $faction, ?string $role, float $power)
     {
@@ -94,6 +96,16 @@ class FactionsPlayer
     public function setCanSeeChunks(bool $value): void
     {
         $this->canSeeChunks = $value;
+    }
+
+    public function isAutoClaiming(): bool
+    {
+        return $this->isAutoClaiming;
+    }
+
+    public function setAutoClaiming(bool $value): void
+    {
+        $this->isAutoClaiming = $value;
     }
 
     public function update(): void

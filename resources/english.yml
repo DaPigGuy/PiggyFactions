@@ -23,6 +23,9 @@ commands:
     already-claimed: "{RED}This chunk is already claimed."
     no-power: "{RED}Your faction has an insufficient amount of power."
     success: "{GREEN}This chunk has been claimed."
+    auto:
+      toggled: "{GREEN}You are now auto-claiming."
+      toggled-off: "{RED}You are no longer auto-claiming."
   create:
     name-taken: "{RED}A faction with the name {NAME} already exists."
     success: "{GREEN}Faction {NAME} has been created."

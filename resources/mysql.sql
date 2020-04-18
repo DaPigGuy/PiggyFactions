@@ -134,6 +134,14 @@ INSERT INTO claims (chunkX, chunkZ, level, faction)
 VALUES (:chunkX, :chunkZ, :level, :faction);
 -- # }
 
+-- # { update
+-- #    :id int
+-- #    :faction int
+UPDATE claims
+SET faction=:faction
+WHERE id = :id;
+-- # }
+
 -- # { delete
 -- #    :id int
 DELETE
