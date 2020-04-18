@@ -15,7 +15,7 @@ class InfoSubCommand extends FactionSubCommand
     {
         LanguageManager::getInstance()->sendMessage($sender, "commands.info.message", [
             "{DESCRIPTION}" => $faction->getDescription(),
-            "{POWER}" => $faction->getPower(),
+            "{POWER}" => round($faction->getPower(), 2, PHP_ROUND_HALF_DOWN),
             "{LEADER}" => $faction->getMemberByUUID($faction->getLeader())->getUsername(),
             "{OFFICERS}" => implode(", ", array_map(function (FactionsPlayer $member): string {
                 return $member->getUsername();

@@ -28,6 +28,7 @@ use DaPigGuy\PiggyFactions\commands\subcommands\PermissionSubCommand;
 use DaPigGuy\PiggyFactions\commands\subcommands\PromoteSubCommand;
 use DaPigGuy\PiggyFactions\commands\subcommands\SeeChunkSubCommand;
 use DaPigGuy\PiggyFactions\commands\subcommands\SetHomeSubCommand;
+use DaPigGuy\PiggyFactions\commands\subcommands\UnallySubCommand;
 use DaPigGuy\PiggyFactions\PiggyFactions;
 use pocketmine\command\CommandSender;
 
@@ -76,5 +77,6 @@ class FactionCommand extends BaseCommand
         $this->registerSubCommand(new PromoteSubCommand($this->plugin, "promote", "Promote a faction member"));
         $this->registerSubCommand(new SeeChunkSubCommand($this->plugin, "seechunk", "Toggle chunk visualizer", ["sc"]));
         $this->registerSubCommand(new SetHomeSubCommand($this->plugin, "sethome", "Set faction home"));
+        $this->registerSubCommand(new UnallySubCommand($this->plugin, "unally", "End faction alliance"));
     }
 }

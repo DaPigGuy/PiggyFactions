@@ -42,7 +42,8 @@ class Faction
         "motd",
         "name",
         "promote",
-        "sethome"
+        "sethome",
+        "unally"
     ];
     const DEFAULT_PERMISSIONS = [
         self::ROLE_OFFICER => [

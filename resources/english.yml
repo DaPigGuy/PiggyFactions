@@ -73,6 +73,9 @@ commands:
     promoted: "{GREEN}You were promoted to {ROLE}"
   sethome:
     success: "{GREEN}Faction home has been set."
+  unally:
+    not-allied: "{RED}You are not allied with {FACTION}."
+    unallied: "{RED}Your faction is no longer allied with {FACTION}."
 death:
   power: "{RED}Your power is now {POWER}."
 motd: "{GOLD}____________.[{DARK_GREEN}{FACTION} MOTD{GOLD}].____________\n{WHITE}{MOTD}"

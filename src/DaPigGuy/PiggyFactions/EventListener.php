@@ -72,7 +72,7 @@ class EventListener implements Listener
         $player = $event->getPlayer();
         $member = PlayerManager::getInstance()->getPlayer($player->getUniqueId());
         $member->setPower($member->getPower() + $this->plugin->getConfig()->getNested("factions.power.per.death", -2));
-        LanguageManager::getInstance()->sendMessage($player, "death.power", ["{POWER}" => $member->getPower()]);
+        LanguageManager::getInstance()->sendMessage($player, "death.power", ["{POWER}" => round($member->getPower(), 2, PHP_ROUND_HALF_DOWN)]);
     }
 
     public function onJoin(PlayerJoinEvent $event): void
