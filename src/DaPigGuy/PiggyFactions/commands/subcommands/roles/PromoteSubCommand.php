@@ -2,10 +2,11 @@
 
 declare(strict_types=1);
 
-namespace DaPigGuy\PiggyFactions\commands\subcommands;
+namespace DaPigGuy\PiggyFactions\commands\subcommands\roles;
 
 use CortexPE\Commando\args\TextArgument;
 use CortexPE\Commando\exception\ArgumentOrderException;
+use DaPigGuy\PiggyFactions\commands\subcommands\FactionSubCommand;
 use DaPigGuy\PiggyFactions\factions\Faction;
 use DaPigGuy\PiggyFactions\language\LanguageManager;
 use DaPigGuy\PiggyFactions\players\FactionsPlayer;

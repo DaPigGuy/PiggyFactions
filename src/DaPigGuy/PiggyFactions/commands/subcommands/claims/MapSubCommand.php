@@ -2,9 +2,10 @@
 
 declare(strict_types=1);
 
-namespace DaPigGuy\PiggyFactions\commands\subcommands;
+namespace DaPigGuy\PiggyFactions\commands\subcommands\claims;
 
 use DaPigGuy\PiggyFactions\claims\ClaimsManager;
+use DaPigGuy\PiggyFactions\commands\subcommands\FactionSubCommand;
 use DaPigGuy\PiggyFactions\factions\Faction;
 use DaPigGuy\PiggyFactions\players\FactionsPlayer;
 use DaPigGuy\PiggyFactions\players\PlayerManager;
