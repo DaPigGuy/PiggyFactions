@@ -84,3 +84,9 @@ permissions:
               piggyfactions.command.faction.sethome:
                 default: true
                 description: "Allow usage of /f sethome"
+              piggyfactions.command.faction.unally:
+                default: true
+                description: "Allow usage of /f unally"
+              piggyfactions.command.faction.unclaim:
+                default: true
+                description: "Allow usage of /f unclaim"

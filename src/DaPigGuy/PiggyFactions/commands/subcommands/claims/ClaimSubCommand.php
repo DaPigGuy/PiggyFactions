@@ -24,6 +24,10 @@ class ClaimSubCommand extends FactionSubCommand
             return;
         }
 
+        if (in_array($sender->getLevel()->getFolderName(), $this->plugin->getConfig()->getNested("factions.claims.blacklisted-worlds"))) {
+            LanguageManager::getInstance()->sendMessage($sender, "commands.claim.blacklisted-world");
+            return;
+        }
         $claim = ClaimsManager::getInstance()->getClaim($sender->getLevel(), $sender->getLevel()->getChunkAtPosition($sender));
         if ($claim !== null) {
             if ($claim->canBeOverClaimed() && $claim->getFaction() !== $faction) {

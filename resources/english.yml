@@ -20,6 +20,7 @@ commands:
     toggled: "{GREEN}You are now in the {CHAT} chat."
     toggled-off: "{RED}You are no longer in the {CHAT} chat."
   claim:
+    blacklisted-world: "{RED}Claiming is not allowed in this world."
     already-claimed: "{RED}This chunk is already claimed."
     no-power: "{RED}Your faction has an insufficient amount of power."
     success: "{GREEN}This chunk has been claimed."
@@ -28,6 +29,7 @@ commands:
       toggled-off: "{RED}You are no longer auto-claiming."
   create:
     name-taken: "{RED}A faction with the name {NAME} already exists."
+    name-blacklisted: "{RED}The name {NAME} is blacklisted."
     success: "{GREEN}Faction {NAME} has been created."
   demote:
     cant-demote-higher: "{RED}You can not demote members of higher rank."
@@ -79,6 +81,12 @@ commands:
   unally:
     not-allied: "{RED}You are not allied with {FACTION}."
     unallied: "{RED}Your faction is no longer allied with {FACTION}."
+  unclaim:
+    not-claimed: "{RED}This chunk is not claimed."
+    other-faction: "{RED}This chunk is claimed by another faction."
+    success: "{GREEN}This chunk has been unclaimed."
+    all:
+      success: "{GREEN}All {FACTION} claims have been unclaimed."
 death:
   power: "{RED}Your power is now {POWER}."
 motd: "{GOLD}____________.[{DARK_GREEN}{FACTION} MOTD{GOLD}].____________\n{WHITE}{MOTD}"

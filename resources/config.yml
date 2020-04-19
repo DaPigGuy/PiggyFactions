@@ -5,12 +5,17 @@ database:
   mysql:
     host: localhost
     username: root
-    password:
-    schema: "dapigguy"
+    password: ""
+    schema: "piggyfactions"
   worker-limit: 1
-#economy:
-  #provider: economyapi
+economy:
+  provider: economyapi
 factions:
+  blacklisted-names:
+    - staff
+    - owner
+    - admin
+    - mojang
   power:
     default: 0
     min: 0
@@ -19,6 +24,7 @@ factions:
       death: -2
       hour: 2
   claims:
+    blacklisted-worlds: []
     cost: 1
 tags:
   rankmap:

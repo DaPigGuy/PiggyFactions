@@ -11,6 +11,7 @@ use DaPigGuy\PiggyFactions\commands\subcommands\ChatSubCommand;
 use DaPigGuy\PiggyFactions\commands\subcommands\claims\ClaimSubCommand;
 use DaPigGuy\PiggyFactions\commands\subcommands\claims\MapSubCommand;
 use DaPigGuy\PiggyFactions\commands\subcommands\claims\SeeChunkSubCommand;
+use DaPigGuy\PiggyFactions\commands\subcommands\claims\UnclaimSubCommand;
 use DaPigGuy\PiggyFactions\commands\subcommands\homes\HomeSubCommand;
 use DaPigGuy\PiggyFactions\commands\subcommands\homes\SetHomeSubCommand;
 use DaPigGuy\PiggyFactions\commands\subcommands\InfoSubCommand;
@@ -78,5 +79,6 @@ class FactionCommand extends BaseCommand
         $this->registerSubCommand(new SeeChunkSubCommand($this->plugin, "seechunk", "Toggle chunk visualizer", ["sc"]));
         $this->registerSubCommand(new SetHomeSubCommand($this->plugin, "sethome", "Set faction home"));
         $this->registerSubCommand(new UnallySubCommand($this->plugin, "unally", "End faction alliance"));
+        $this->registerSubCommand(new UnclaimSubCommand($this->plugin, "unclaim", "Unclaim a chunk"));
     }
 }
