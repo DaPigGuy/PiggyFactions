@@ -15,7 +15,8 @@ PiggyFactions is an open-sourced factions plugin for [PocketMine-MP](https://git
 ## Features
 | Feature | PiggyFactions | FactionsPro |
 | --- | --- | --- |
-| Built in PiggyCE Integration | ✔ | ❌ |
+| PiggyCE Integration | ✔ | ❌ |
+| Hierarchy/HRKChat Integration | ✔ | ❌ |
 | Saves Players by UUID | ✔ | ❌ |
 | Per Faction Permissions | ✔ | ❌ |
 | SQLite3 Support | ✔ | ✔ |
@@ -23,6 +24,8 @@ PiggyFactions is an open-sourced factions plugin for [PocketMine-MP](https://git
 | Async Queries | ✔ | ❌ |
 | Command Autocomplete | ✔ | ❌ |
 | Multi-Language Support | ✔ | ❌ |
+| /f claim auto | ✔ | ❌ |
+| /f map | ✔ | ❌ |
 
 ## Installation & Setup
 1. Install the plugin from Poggit.
@@ -49,7 +52,7 @@ PiggyFactions is an open-sourced factions plugin for [PocketMine-MP](https://git
 
 ## Additional Information
 * We do not support any spoons. Anything to do with spoons (Issues or PRs) will be ignored.
-* We are using the following virions: [Commando](https://github.com/CortexPE/Commando), [libFormAPI](https://github.com/jojoe77777/FormAPI), and [libPiggyEconomy](https://github.com/DaPigGuy/libPiggyEconomy).
+* We are using the following virions: [Commando](https://github.com/CortexPE/Commando), [libasynql](https://github.com/poggit/libasynql), [libFormAPI](https://github.com/jojoe77777/FormAPI), and [libPiggyEconomy](https://github.com/DaPigGuy/libPiggyEconomy).
     * **Unless you know what you are doing, use the pre-compiled phar from [Poggit-CI](https://poggit.pmmp.io/ci/DaPigGuy/PiggyFactions/~) and not GitHub.**
     * If you wish to run it via source, check out [DEVirion](https://github.com/poggit/devirion).
 

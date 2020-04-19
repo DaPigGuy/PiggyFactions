@@ -7,6 +7,7 @@ namespace DaPigGuy\PiggyFactions\commands\subcommands\roles;
 use CortexPE\Commando\args\TextArgument;
 use CortexPE\Commando\exception\ArgumentOrderException;
 use DaPigGuy\PiggyFactions\commands\subcommands\FactionSubCommand;
+use DaPigGuy\PiggyFactions\event\relation\role\FactionRoleChangeEvent;
 use DaPigGuy\PiggyFactions\factions\Faction;
 use DaPigGuy\PiggyFactions\language\LanguageManager;
 use DaPigGuy\PiggyFactions\players\FactionsPlayer;
@@ -30,7 +31,10 @@ class PromoteSubCommand extends FactionSubCommand
             LanguageManager::getInstance()->sendMessage($sender, "commands.promote.cant-promote-higher", ["{PLAYER}" => $targetMember->getUsername()]);
             return;
         }
-        $targetMember->setRole(($role = array_keys(Faction::ROLES)[Faction::ROLES[$currentRole]]));
+        $ev = new FactionRoleChangeEvent($faction, $targetMember, $currentRole, ($role = array_keys(Faction::ROLES)[Faction::ROLES[$currentRole]]));
+        $ev->call();
+        if ($ev->isCancelled()) return;
+        $targetMember->setRole($role);
         LanguageManager::getInstance()->sendMessage($sender, "commands.promote.success", ["{PLAYER}" => $targetMember->getUsername(), "{ROLE}" => $role]);
         if (($player = $this->plugin->getServer()->getPlayerByUUID($targetMember->getUuid())) !== null) LanguageManager::getInstance()->sendMessage($player, "commands.promote.promoted", ["{ROLE}" => $role]);
     }

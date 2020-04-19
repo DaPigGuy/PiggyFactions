@@ -7,6 +7,7 @@ namespace DaPigGuy\PiggyFactions\commands\subcommands\management;
 use CortexPE\Commando\args\TextArgument;
 use CortexPE\Commando\exception\ArgumentOrderException;
 use DaPigGuy\PiggyFactions\commands\subcommands\FactionSubCommand;
+use DaPigGuy\PiggyFactions\event\management\FactionKickEvent;
 use DaPigGuy\PiggyFactions\factions\Faction;
 use DaPigGuy\PiggyFactions\language\LanguageManager;
 use DaPigGuy\PiggyFactions\players\FactionsPlayer;
@@ -25,6 +26,10 @@ class KickSubCommand extends FactionSubCommand
             LanguageManager::getInstance()->sendMessage($sender, "commands.kick.cant-kick-leader");
             return;
         }
+        $ev = new FactionKickEvent($faction, $target, $member);
+        $ev->call();
+        if ($ev->isCancelled()) return;
+
         $faction->removeMember($target->getUuid());
         foreach ($faction->getOnlineMembers() as $online) {
             LanguageManager::getInstance()->sendMessage($online, "commands.kick.announcement", ["{PLAYER}" => $target->getUsername()]);

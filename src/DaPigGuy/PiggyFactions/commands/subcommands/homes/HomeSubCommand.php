@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace DaPigGuy\PiggyFactions\commands\subcommands\homes;
 
 use DaPigGuy\PiggyFactions\commands\subcommands\FactionSubCommand;
+use DaPigGuy\PiggyFactions\event\home\FactionHomeTeleportEvent;
 use DaPigGuy\PiggyFactions\factions\Faction;
 use DaPigGuy\PiggyFactions\language\LanguageManager;
 use DaPigGuy\PiggyFactions\players\FactionsPlayer;
@@ -18,6 +19,9 @@ class HomeSubCommand extends FactionSubCommand
             LanguageManager::getInstance()->sendMessage($sender, "commands.home.not-set");
             return;
         }
+        $ev = new FactionHomeTeleportEvent($faction, $sender);
+        $ev->call();
+        if ($ev->isCancelled()) return;
         $sender->teleport($home);
     }
 }

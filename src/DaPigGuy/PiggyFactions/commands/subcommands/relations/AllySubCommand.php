@@ -7,6 +7,8 @@ namespace DaPigGuy\PiggyFactions\commands\subcommands\relations;
 use CortexPE\Commando\args\TextArgument;
 use CortexPE\Commando\exception\ArgumentOrderException;
 use DaPigGuy\PiggyFactions\commands\subcommands\FactionSubCommand;
+use DaPigGuy\PiggyFactions\event\relation\FactionRelationEvent;
+use DaPigGuy\PiggyFactions\event\relation\FactionRelationWishEvent;
 use DaPigGuy\PiggyFactions\factions\Faction;
 use DaPigGuy\PiggyFactions\factions\FactionsManager;
 use DaPigGuy\PiggyFactions\language\LanguageManager;
@@ -31,6 +33,10 @@ class AllySubCommand extends FactionSubCommand
             return;
         }
         if ($targetFaction->getRelationWish($faction) === Faction::RELATION_ALLY) {
+            $ev = new FactionRelationEvent([$faction, $targetFaction], Faction::RELATION_ALLY);
+            $ev->call();
+            if ($ev->isCancelled()) return;
+
             $targetFaction->revokeRelationWish($faction);
             $faction->setRelation($targetFaction, Faction::RELATION_ALLY);
             $targetFaction->setRelation($faction, Faction::RELATION_ALLY);
@@ -42,6 +48,10 @@ class AllySubCommand extends FactionSubCommand
             }
             return;
         }
+        $ev = new FactionRelationWishEvent($faction, $targetFaction, Faction::RELATION_ALLY);
+        $ev->call();
+        if ($ev->isCancelled()) return;
+
         $faction->setRelationWish($targetFaction, Faction::RELATION_ALLY);
         LanguageManager::getInstance()->sendMessage($sender, "commands.ally.success", ["{FACTION}" => $targetFaction->getName()]);
         foreach ($targetFaction->getOnlineMembers() as $p) {

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace DaPigGuy\PiggyFactions;
 
 use DaPigGuy\PiggyFactions\chat\ChatManager;
+use DaPigGuy\PiggyFactions\event\member\PowerChangeEvent;
 use DaPigGuy\PiggyFactions\factions\Faction;
 use DaPigGuy\PiggyFactions\language\LanguageManager;
 use DaPigGuy\PiggyFactions\players\PlayerManager;
@@ -71,7 +72,11 @@ class EventListener implements Listener
     {
         $player = $event->getPlayer();
         $member = PlayerManager::getInstance()->getPlayer($player->getUniqueId());
-        $member->setPower($member->getPower() + $this->plugin->getConfig()->getNested("factions.power.per.death", -2));
+
+        $ev = new PowerChangeEvent($member, PowerChangeEvent::CAUSE_DEATH, $member->getPower() + $this->plugin->getConfig()->getNested("factions.power.per.death", -2));
+        $ev->call();
+        if ($ev->isCancelled()) return;
+        $member->setPower($ev->getPower());
         LanguageManager::getInstance()->sendMessage($player, "death.power", ["{POWER}" => round($member->getPower(), 2, PHP_ROUND_HALF_DOWN)]);
     }
 

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace DaPigGuy\PiggyFactions\commands\subcommands;
 
+use DaPigGuy\PiggyFactions\event\member\FactionLeaveEvent;
 use DaPigGuy\PiggyFactions\factions\Faction;
 use DaPigGuy\PiggyFactions\language\LanguageManager;
 use DaPigGuy\PiggyFactions\players\FactionsPlayer;
@@ -17,6 +18,10 @@ class LeaveSubCommand extends FactionSubCommand
             LanguageManager::getInstance()->sendMessage($sender, "commands.leave.is-leader");
             return;
         }
+        $ev = new FactionLeaveEvent($faction, $member);
+        $ev->call();
+        if ($ev->isCancelled()) return;
+
         $faction->removeMember($sender->getUniqueId());
         LanguageManager::getInstance()->sendMessage($sender, "commands.leave.success");
     }

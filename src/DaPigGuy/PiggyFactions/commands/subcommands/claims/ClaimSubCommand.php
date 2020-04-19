@@ -8,6 +8,7 @@ use CortexPE\Commando\args\RawStringArgument;
 use CortexPE\Commando\exception\ArgumentOrderException;
 use DaPigGuy\PiggyFactions\claims\ClaimsManager;
 use DaPigGuy\PiggyFactions\commands\subcommands\FactionSubCommand;
+use DaPigGuy\PiggyFactions\event\claims\ClaimChunkEvent;
 use DaPigGuy\PiggyFactions\factions\Faction;
 use DaPigGuy\PiggyFactions\language\LanguageManager;
 use DaPigGuy\PiggyFactions\players\FactionsPlayer;
@@ -37,6 +38,10 @@ class ClaimSubCommand extends FactionSubCommand
             LanguageManager::getInstance()->sendMessage($sender, "commands.claim.no-power");
             return;
         }
+        $ev = new ClaimChunkEvent($faction, $sender->getLevel()->getChunkAtPosition($sender));
+        $ev->call();
+        if ($ev->isCancelled()) return;
+
         ClaimsManager::getInstance()->createClaim($faction, $sender->getLevel(), $sender->getLevel()->getChunkAtPosition($sender));
         LanguageManager::getInstance()->sendMessage($sender, "commands.claim.success");
     }

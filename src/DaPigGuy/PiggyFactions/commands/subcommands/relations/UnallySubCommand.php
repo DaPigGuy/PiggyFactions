@@ -7,6 +7,7 @@ namespace DaPigGuy\PiggyFactions\commands\subcommands\relations;
 use CortexPE\Commando\args\TextArgument;
 use CortexPE\Commando\exception\ArgumentOrderException;
 use DaPigGuy\PiggyFactions\commands\subcommands\FactionSubCommand;
+use DaPigGuy\PiggyFactions\event\relation\FactionRelationEvent;
 use DaPigGuy\PiggyFactions\factions\Faction;
 use DaPigGuy\PiggyFactions\factions\FactionsManager;
 use DaPigGuy\PiggyFactions\language\LanguageManager;
@@ -26,6 +27,10 @@ class UnallySubCommand extends FactionSubCommand
             LanguageManager::getInstance()->sendMessage($sender, "commands.unally.not-allied", ["{FACTION}" => $targetFaction->getName()]);
             return;
         }
+        $ev = new FactionRelationEvent([$faction, $targetFaction], Faction::RELATION_NONE);
+        $ev->call();
+        if ($ev->isCancelled()) return;
+
         $faction->setRelation($targetFaction, Faction::RELATION_NONE);
         $targetFaction->setRelation($faction, Faction::RELATION_NONE);
         foreach ($faction->getOnlineMembers() as $p) {

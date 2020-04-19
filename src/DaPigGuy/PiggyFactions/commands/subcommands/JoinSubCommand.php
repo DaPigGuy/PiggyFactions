@@ -6,6 +6,7 @@ namespace DaPigGuy\PiggyFactions\commands\subcommands;
 
 use CortexPE\Commando\args\TextArgument;
 use CortexPE\Commando\exception\ArgumentOrderException;
+use DaPigGuy\PiggyFactions\event\member\FactionJoinEvent;
 use DaPigGuy\PiggyFactions\factions\Faction;
 use DaPigGuy\PiggyFactions\language\LanguageManager;
 use DaPigGuy\PiggyFactions\players\FactionsPlayer;
@@ -31,6 +32,10 @@ class JoinSubCommand extends FactionSubCommand
             LanguageManager::getInstance()->sendMessage($sender, "commands.already-in-faction");
             return;
         }
+        $ev = new FactionJoinEvent($targetFaction, $member);
+        $ev->call();
+        if ($ev->isCancelled()) return;
+
         $targetFaction->revokeInvite($sender);
         $targetFaction->addMember($sender);
     }

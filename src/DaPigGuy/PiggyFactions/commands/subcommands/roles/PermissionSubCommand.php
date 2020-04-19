@@ -8,6 +8,7 @@ use CortexPE\Commando\args\BooleanArgument;
 use CortexPE\Commando\args\RawStringArgument;
 use CortexPE\Commando\exception\ArgumentOrderException;
 use DaPigGuy\PiggyFactions\commands\subcommands\FactionSubCommand;
+use DaPigGuy\PiggyFactions\event\relation\role\FactionPermissionChangeEvent;
 use DaPigGuy\PiggyFactions\factions\Faction;
 use DaPigGuy\PiggyFactions\language\LanguageManager;
 use DaPigGuy\PiggyFactions\players\FactionsPlayer;
@@ -29,9 +30,13 @@ class PermissionSubCommand extends FactionSubCommand
             LanguageManager::getInstance()->sendMessage($sender, "commands.permission.role-not-found");
             return;
         }
-        $value = $args["value"] ?? !$faction->getPermission($args["role"], $args["permission"]);
-        $faction->setPermission($args["role"], $args["permission"], $value);
-        LanguageManager::getInstance()->sendMessage($sender, "commands.permission.success", ["{PERMISSION}" => $args["permission"], "{ROLE}" => $args["role"], "{TOGGLED}" => $value ? "enabled" : "disabled"]);
+
+        $ev = new FactionPermissionChangeEvent($faction, $args["role"], $args["permission"], $args["value"] ?? !$faction->getPermission($args["role"], $args["permission"]));
+        $ev->call();
+        if ($ev->isCancelled()) return;
+
+        $faction->setPermission($args["role"], $args["permission"], $ev->getValue());
+        LanguageManager::getInstance()->sendMessage($sender, "commands.permission.success", ["{PERMISSION}" => $args["permission"], "{ROLE}" => $args["role"], "{TOGGLED}" => $ev->getValue() ? "enabled" : "disabled"]);
     }
 
     /**

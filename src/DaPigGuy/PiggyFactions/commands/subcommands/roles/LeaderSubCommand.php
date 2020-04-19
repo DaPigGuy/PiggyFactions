@@ -7,6 +7,7 @@ namespace DaPigGuy\PiggyFactions\commands\subcommands\roles;
 use CortexPE\Commando\args\TextArgument;
 use CortexPE\Commando\exception\ArgumentOrderException;
 use DaPigGuy\PiggyFactions\commands\subcommands\FactionSubCommand;
+use DaPigGuy\PiggyFactions\event\role\FactionLeadershipTransferEvent;
 use DaPigGuy\PiggyFactions\factions\Faction;
 use DaPigGuy\PiggyFactions\language\LanguageManager;
 use DaPigGuy\PiggyFactions\players\FactionsPlayer;
@@ -30,6 +31,10 @@ class LeaderSubCommand extends FactionSubCommand
             LanguageManager::getInstance()->sendMessage($sender, "commands.leader.offline");
             return;
         }
+        $ev = new FactionLeadershipTransferEvent($faction, $member, $targetMember);
+        $ev->call();
+        if ($ev->isCancelled()) return;
+
         $faction->setLeader($targetMember->getUuid());
         $faction->getMember($sender->getName())->setRole(Faction::ROLE_MEMBER);
         $targetMember->setRole(Faction::ROLE_LEADER);

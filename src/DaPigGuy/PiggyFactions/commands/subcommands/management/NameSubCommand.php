@@ -7,6 +7,7 @@ namespace DaPigGuy\PiggyFactions\commands\subcommands\management;
 use CortexPE\Commando\args\TextArgument;
 use CortexPE\Commando\exception\ArgumentOrderException;
 use DaPigGuy\PiggyFactions\commands\subcommands\FactionSubCommand;
+use DaPigGuy\PiggyFactions\event\management\FactionRenameEvent;
 use DaPigGuy\PiggyFactions\factions\Faction;
 use DaPigGuy\PiggyFactions\language\LanguageManager;
 use DaPigGuy\PiggyFactions\players\FactionsPlayer;
@@ -20,7 +21,11 @@ class NameSubCommand extends FactionSubCommand
             LanguageManager::getInstance()->sendMessage($sender, "commands.create.name-taken", ["{NAME}" => $args["name"]]);
             return;
         }
-        $faction->setName($args["name"]);
+        $ev = new FactionRenameEvent($faction, $args["name"]);
+        $ev->call();
+        if ($ev->isCancelled()) return;
+
+        $faction->setName($ev->getName());
         LanguageManager::getInstance()->sendMessage($sender, "commands.name.success");
     }
 

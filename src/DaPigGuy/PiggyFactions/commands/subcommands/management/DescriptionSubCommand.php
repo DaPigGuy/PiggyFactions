@@ -7,6 +7,7 @@ namespace DaPigGuy\PiggyFactions\commands\subcommands\management;
 use CortexPE\Commando\args\TextArgument;
 use CortexPE\Commando\exception\ArgumentOrderException;
 use DaPigGuy\PiggyFactions\commands\subcommands\FactionSubCommand;
+use DaPigGuy\PiggyFactions\event\management\FactionDescriptionChangeEvent;
 use DaPigGuy\PiggyFactions\factions\Faction;
 use DaPigGuy\PiggyFactions\language\LanguageManager;
 use DaPigGuy\PiggyFactions\players\FactionsPlayer;
@@ -16,8 +17,12 @@ class DescriptionSubCommand extends FactionSubCommand
 {
     public function onNormalRun(Player $sender, ?Faction $faction, FactionsPlayer $member, string $aliasUsed, array $args): void
     {
-        $faction->setDescription($args["description"]);
-        LanguageManager::getInstance()->sendMessage($sender, "commands.description.success", ["{DESCRIPTION}" => $args["description"]]);
+        $ev = new FactionDescriptionChangeEvent($faction, $args["description"]);
+        $ev->call();
+        if ($ev->isCancelled()) return;
+
+        $faction->setDescription($ev->getDescription());
+        LanguageManager::getInstance()->sendMessage($sender, "commands.description.success", ["{DESCRIPTION}" => $ev->getDescription()]);
     }
 
     /**

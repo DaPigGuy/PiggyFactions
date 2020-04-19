@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace DaPigGuy\PiggyFactions\task;
 
+use DaPigGuy\PiggyFactions\event\member\PowerChangeEvent;
 use DaPigGuy\PiggyFactions\PiggyFactions;
 use DaPigGuy\PiggyFactions\players\PlayerManager;
 use pocketmine\scheduler\Task;
@@ -24,7 +25,10 @@ class UpdatePowerTask extends Task
     {
         foreach ($this->plugin->getServer()->getOnlinePlayers() as $p) {
             $member = PlayerManager::getInstance()->getPlayer($p->getUniqueId());
-            $member->setPower($member->getPower() + $this->plugin->getConfig()->getNested("factions.power.per.hour", 2) / (72000 / self::INTERVAL));
+            $ev = new PowerChangeEvent($member, PowerChangeEvent::CAUSE_TIME, $member->getPower() + $this->plugin->getConfig()->getNested("factions.power.per.hour", 2) / (72000 / self::INTERVAL));
+            $ev->call();
+            if ($ev->isCancelled()) return;
+            $member->setPower($ev->getPower());
         }
     }
 }

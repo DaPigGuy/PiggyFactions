@@ -7,6 +7,7 @@ namespace DaPigGuy\PiggyFactions\commands\subcommands\management;
 use CortexPE\Commando\args\TextArgument;
 use CortexPE\Commando\exception\ArgumentOrderException;
 use DaPigGuy\PiggyFactions\commands\subcommands\FactionSubCommand;
+use DaPigGuy\PiggyFactions\event\management\FactionInviteEvent;
 use DaPigGuy\PiggyFactions\factions\Faction;
 use DaPigGuy\PiggyFactions\language\LanguageManager;
 use DaPigGuy\PiggyFactions\players\FactionsPlayer;
@@ -30,6 +31,10 @@ class InviteSubCommand extends FactionSubCommand
             LanguageManager::getInstance()->sendMessage($sender, "commands.invite.already-sent", ["{PLAYER}" => $target->getName()]);
             return;
         }
+        $ev = new FactionInviteEvent($faction, $member, $target);
+        $ev->call();
+        if ($ev->isCancelled()) return;
+
         $faction->invitePlayer($target);
         LanguageManager::getInstance()->sendMessage($sender, "commands.invite.success", ["{PLAYER}" => $target->getName()]);
         LanguageManager::getInstance()->sendMessage($target, "commands.invite.invited", ["{FACTION}" => $faction->getName()]);

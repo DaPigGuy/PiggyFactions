@@ -7,6 +7,7 @@ namespace DaPigGuy\PiggyFactions\commands\subcommands\management;
 use CortexPE\Commando\args\TextArgument;
 use CortexPE\Commando\exception\ArgumentOrderException;
 use DaPigGuy\PiggyFactions\commands\subcommands\FactionSubCommand;
+use DaPigGuy\PiggyFactions\event\management\FactionCreateEvent;
 use DaPigGuy\PiggyFactions\factions\Faction;
 use DaPigGuy\PiggyFactions\language\LanguageManager;
 use DaPigGuy\PiggyFactions\players\FactionsPlayer;
@@ -27,6 +28,10 @@ class CreateSubCommand extends FactionSubCommand
             LanguageManager::getInstance()->sendMessage($sender, "commands.create.name-taken", ["{NAME}" => $args["name"]]);
             return;
         }
+        $ev = new FactionCreateEvent($sender, $args["name"]);
+        $ev->call();
+        if ($ev->isCancelled()) return;
+
         $this->plugin->getFactionsManager()->createFaction($args["name"], $sender);
         LanguageManager::getInstance()->sendMessage($sender, "commands.create.success", ["{NAME}" => $args["name"]]);
     }
