@@ -63,7 +63,7 @@ class PiggyFactions extends PluginBase
         $this->saveDefaultConfig();
 
         $this->database = libasynql::create($this, $this->getConfig()->get("database"), [
-            // "sqlite" => "sqlite.sql", //TODO: SQLite3 support
+            "sqlite" => "sqlite.sql",
             "mysql" => "mysql.sql"
         ]);
 
@@ -89,7 +89,7 @@ class PiggyFactions extends PluginBase
         $this->getScheduler()->scheduleRepeatingTask(new AutoClaimTask($this), 10);
         $this->getScheduler()->scheduleRepeatingTask(new ShowChunksTask($this), 10);
         $this->getScheduler()->scheduleRepeatingTask(new UpdatePowerTask($this), UpdatePowerTask::INTERVAL);
-        //TODO: Poggit Update Checks
+        //$this->getServer()->getAsyncPool()->submitTask(new CheckUpdatesTask($this->getDescription()->getVersion(), $this->getDescription()->getCompatibleApis()[0])); //TODO: Uncomment before Poggit release
     }
 
     private function checkSoftDependencies(): void
