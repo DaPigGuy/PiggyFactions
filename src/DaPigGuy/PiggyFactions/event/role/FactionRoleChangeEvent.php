@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace DaPigGuy\PiggyFactions\event\relation\role;
+namespace DaPigGuy\PiggyFactions\event\role;
 
 use DaPigGuy\PiggyFactions\event\FactionMemberEvent;
 use DaPigGuy\PiggyFactions\factions\Faction;

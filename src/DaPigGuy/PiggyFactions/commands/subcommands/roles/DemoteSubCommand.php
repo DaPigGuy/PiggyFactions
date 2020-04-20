@@ -7,7 +7,7 @@ namespace DaPigGuy\PiggyFactions\commands\subcommands\roles;
 use CortexPE\Commando\args\TextArgument;
 use CortexPE\Commando\exception\ArgumentOrderException;
 use DaPigGuy\PiggyFactions\commands\subcommands\FactionSubCommand;
-use DaPigGuy\PiggyFactions\event\relation\role\FactionRoleChangeEvent;
+use DaPigGuy\PiggyFactions\event\role\FactionRoleChangeEvent;
 use DaPigGuy\PiggyFactions\factions\Faction;
 use DaPigGuy\PiggyFactions\language\LanguageManager;
 use DaPigGuy\PiggyFactions\players\FactionsPlayer;

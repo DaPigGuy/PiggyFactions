@@ -8,7 +8,7 @@ use CortexPE\Commando\args\BooleanArgument;
 use CortexPE\Commando\args\RawStringArgument;
 use CortexPE\Commando\exception\ArgumentOrderException;
 use DaPigGuy\PiggyFactions\commands\subcommands\FactionSubCommand;
-use DaPigGuy\PiggyFactions\event\relation\role\FactionPermissionChangeEvent;
+use DaPigGuy\PiggyFactions\event\role\FactionPermissionChangeEvent;
 use DaPigGuy\PiggyFactions\factions\Faction;
 use DaPigGuy\PiggyFactions\language\LanguageManager;
 use DaPigGuy\PiggyFactions\players\FactionsPlayer;
