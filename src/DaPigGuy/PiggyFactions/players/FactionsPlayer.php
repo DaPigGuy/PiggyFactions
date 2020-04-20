@@ -27,6 +27,9 @@ class FactionsPlayer
     /** @var bool */
     private $isAutoClaiming = false;
 
+    /** @var bool */
+    private $adminMode = false;
+
     public function __construct(UUID $uuid, string $username, ?int $faction, ?string $role, float $power)
     {
 
@@ -117,5 +120,15 @@ class FactionsPlayer
             "role" => $this->role,
             "power" => $this->power
         ]);
+    }
+
+    public function isInAdminMode(): bool
+    {
+        return $this->adminMode;
+    }
+
+    public function setInAdminMode(bool $value): void
+    {
+        $this->adminMode = $value;
     }
 }

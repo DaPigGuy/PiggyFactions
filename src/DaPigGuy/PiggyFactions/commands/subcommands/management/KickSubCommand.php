@@ -22,8 +22,8 @@ class KickSubCommand extends FactionSubCommand
             LanguageManager::getInstance()->sendMessage($sender, "commands.member-not-found", ["{PLAYER}" => $args["name"]]);
             return;
         }
-        if ($target->getRole() === Faction::ROLE_LEADER) {
-            LanguageManager::getInstance()->sendMessage($sender, "commands.kick.cant-kick-leader");
+        if (Faction::ROLES[$target->getRole()] >= Faction::ROLES[$member->getRole()] && !$member->isInAdminMode()) {
+            LanguageManager::getInstance()->sendMessage($sender, "commands.kick.cant-kick-higher", ["{PLAYER}" => $target->getUsername()]);
             return;
         }
         $ev = new FactionKickEvent($faction, $target, $member);

@@ -36,7 +36,7 @@ class UnclaimSubCommand extends FactionSubCommand
             LanguageManager::getInstance()->sendMessage($sender, "commands.unclaim.not-claimed");
             return;
         }
-        if ($claim->getFaction() !== $faction) {
+        if ($claim->getFaction() !== $faction && !$member->isInAdminMode()) {
             LanguageManager::getInstance()->sendMessage($sender, "commands.unclaim.other-faction");
             return;
         }

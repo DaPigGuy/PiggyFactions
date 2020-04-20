@@ -229,7 +229,7 @@ class Faction
 
     public function hasPermission(FactionsPlayer $member, string $permission): bool
     {
-        if ($member->getRole() === Faction::ROLE_LEADER) return true;
+        if ($member->getRole() === Faction::ROLE_LEADER || $member->isInAdminMode()) return true;
         return $this->getPermission($member->getRole(), $permission);
     }
 

@@ -24,7 +24,7 @@ class JoinSubCommand extends FactionSubCommand
             LanguageManager::getInstance()->sendMessage($sender, "commands.invalid-faction", ["{FACTION}" => $args["faction"]]);
             return;
         }
-        if (!$targetFaction->hasInvite($sender)) {
+        if (!$targetFaction->hasInvite($sender) && !$member->isInAdminMode()) {
             LanguageManager::getInstance()->sendMessage($sender, "commands.join.no-invite", ["{FACTION}" => $targetFaction->getName()]);
             return;
         }

@@ -21,6 +21,9 @@ permissions:
               piggyfactions.command.faction.use:
                 default: true
                 description: "Allow usage of /f"
+              piggyfactions.command.faction.admin:
+                default: op
+                description: "Allow usage of /f admin"
               piggyfactions.command.faction.ally:
                 default: true
                 description: "Allow usage of /f ally"

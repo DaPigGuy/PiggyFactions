@@ -7,6 +7,7 @@ namespace DaPigGuy\PiggyFactions\commands;
 use CortexPE\Commando\BaseCommand;
 use CortexPE\Commando\exception\SubCommandCollision;
 use DaPigGuy\PiggyFactions\chat\ChatManager;
+use DaPigGuy\PiggyFactions\commands\subcommands\admin\AdminSubCommand;
 use DaPigGuy\PiggyFactions\commands\subcommands\ChatSubCommand;
 use DaPigGuy\PiggyFactions\commands\subcommands\claims\ClaimSubCommand;
 use DaPigGuy\PiggyFactions\commands\subcommands\claims\MapSubCommand;
@@ -56,6 +57,7 @@ class FactionCommand extends BaseCommand
     protected function prepare(): void
     {
         $this->setPermission("piggyfactions.command.faction.use");
+        $this->registerSubCommand(new AdminSubCommand($this->plugin, "admin", "Toggle admin mode"));
         $this->registerSubCommand(new AllySubCommand($this->plugin, "ally", "Ally with other factions"));
         $this->registerSubCommand(new ChatSubCommand($this->plugin, ChatManager::ALLY_CHAT, "allychat", "Toggle ally chat", ["ac"]));
         $this->registerSubCommand(new ChatSubCommand($this->plugin, ChatManager::FACTION_CHAT, "chat", "Toggle faction chat", ["c"]));

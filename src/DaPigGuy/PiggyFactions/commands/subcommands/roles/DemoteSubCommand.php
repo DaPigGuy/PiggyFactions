@@ -23,7 +23,7 @@ class DemoteSubCommand extends FactionSubCommand
             LanguageManager::getInstance()->sendMessage($sender, "commands.member-not-found", ["{PLAYER}" => $args["name"]]);
             return;
         }
-        if (Faction::ROLES[$targetMember->getRole()] >= Faction::ROLES[$member->getRole()]) {
+        if (Faction::ROLES[$targetMember->getRole()] >= Faction::ROLES[$member->getRole()] && !$member->isInAdminMode()) {
             LanguageManager::getInstance()->sendMessage($sender, "commands.demote.cant-demote-higher", ["{PLAYER}" => $targetMember->getUsername()]);
             return;
         }
