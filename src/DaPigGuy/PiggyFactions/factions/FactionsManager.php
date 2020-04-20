@@ -52,7 +52,7 @@ class FactionsManager
     public function getFactionByName(string $name): ?Faction
     {
         foreach ($this->factions as $faction) {
-            if ($faction->getName() === $name) return $faction;
+            if (strtolower($faction->getName()) === strtolower($name)) return $faction;
         }
         return null;
     }

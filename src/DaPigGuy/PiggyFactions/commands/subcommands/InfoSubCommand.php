@@ -14,6 +14,9 @@ use pocketmine\Player;
 
 class InfoSubCommand extends FactionSubCommand
 {
+    /** @var bool */
+    public $requiresFaction = false;
+
     public function onNormalRun(Player $sender, ?Faction $faction, FactionsPlayer $member, string $aliasUsed, array $args): void
     {
         if (isset($args["faction"])) {
@@ -22,6 +25,10 @@ class InfoSubCommand extends FactionSubCommand
                 LanguageManager::getInstance()->sendMessage($sender, "commands.invalid-faction", ["{FACTION}" => $args["faction"]]);
                 return;
             }
+        }
+        if ($faction === null) {
+            $this->sendUsage();
+            return;
         }
 
         $memberNamesByRole = [];

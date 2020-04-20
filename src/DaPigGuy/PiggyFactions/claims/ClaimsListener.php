@@ -12,6 +12,7 @@ use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerInteractEvent;
 use pocketmine\level\Position;
 use pocketmine\Player;
+use pocketmine\tile\Container;
 
 class ClaimsListener implements Listener
 {
@@ -38,17 +39,16 @@ class ClaimsListener implements Listener
 
     public function onInteract(PlayerInteractEvent $event): void
     {
-        if (!$this->canAffectArea($event->getPlayer(), $event->getBlock())) $event->setCancelled();
+        $tile = $event->getBlock()->getLevel()->getTile($event->getBlock());
+        if (!$this->canAffectArea($event->getPlayer(), $event->getBlock(), $tile instanceof Container ? "container" : "interact")) $event->setCancelled();
     }
 
-    public function canAffectArea(Player $player, Position $position): bool
+    public function canAffectArea(Player $player, Position $position, string $type = "build"): bool
     {
-        $faction = PlayerManager::getInstance()->getPlayerFaction($player->getUniqueId());
+        $member = PlayerManager::getInstance()->getPlayer($player->getUniqueId());
         $claim = $this->manager->getClaim($position->getLevel(), $position->getLevel()->getChunkAtPosition($position));
-        if ($claim !== null && $faction !== null) {
-            if ($faction->getId() !== $claim->getFaction()->getId()) {
-                return false;
-            }
+        if ($claim !== null) {
+            return $claim->getFaction()->hasPermission($member, $type);
         }
         return true;
     }

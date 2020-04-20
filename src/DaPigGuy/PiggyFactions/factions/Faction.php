@@ -32,12 +32,22 @@ class Faction
     const RELATION_ENEMY = "enemy";
     const RELATION_NONE = "none";
 
+    const RELATIONS = [
+        self::RELATION_ALLY,
+        self::RELATION_TRUCE,
+        self::RELATION_NONE,
+        self::RELATION_ENEMY
+    ];
+
     const PERMISSIONS = [
         "ally",
+        "build",
         "claim",
+        "containers",
         "demote",
         "description",
         "invite",
+        "interact",
         "kick",
         "motd",
         "name",
@@ -48,12 +58,26 @@ class Faction
     ];
     const DEFAULT_PERMISSIONS = [
         self::ROLE_OFFICER => [
+            "build" => true,
             "claim" => true,
+            "containers" => true,
             "description" => true,
             "invite" => true,
+            "interact" => true,
             "kick" => true,
             "motd" => true,
             "sethome" => true
+        ],
+        self::ROLE_MEMBER => [
+            "build" => true,
+            "containers" => true,
+            "interact" => true
+        ],
+        self::ROLE_RECRUIT => [
+            "interact" => true
+        ],
+        self::RELATION_ALLY => [
+            "interact" => true
         ]
     ];
 
@@ -229,13 +253,15 @@ class Faction
 
     public function hasPermission(FactionsPlayer $member, string $permission): bool
     {
-        if ($member->getRole() === Faction::ROLE_LEADER || $member->isInAdminMode()) return true;
-        return $this->getPermission($member->getRole(), $permission);
+        $role = $member->getRole();
+        if (($faction = $member->getFaction()) !== $this) $role = $faction === null ? self::RELATION_NONE : $faction->getRelation($this);
+        if ($role === Faction::ROLE_LEADER || $member->isInAdminMode()) return true;
+        return $this->getPermission($role, $permission);
     }
 
     public function getPermission(string $role, string $permission): bool
     {
-        return $this->permissions[$role][$permission] ?? false;
+        return $this->permissions[$role][$permission] ?? self::DEFAULT_PERMISSIONS[$role][$permission] ?? false;
     }
 
     public function setPermission(string $role, string $permission, bool $value): void

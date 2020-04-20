@@ -26,7 +26,7 @@ class PermissionSubCommand extends FactionSubCommand
             LanguageManager::getInstance()->sendMessage($sender, "commands.permission.permission-not-found");
             return;
         }
-        if (!isset(Faction::ROLES[$args["role"]])) {
+        if (!isset(Faction::ROLES[$args["role"]]) && !in_array($args["role"], Faction::RELATIONS)) {
             LanguageManager::getInstance()->sendMessage($sender, "commands.permission.role-not-found");
             return;
         }

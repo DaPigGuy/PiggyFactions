@@ -22,7 +22,7 @@ class KickSubCommand extends FactionSubCommand
             LanguageManager::getInstance()->sendMessage($sender, "commands.member-not-found", ["{PLAYER}" => $args["name"]]);
             return;
         }
-        if (Faction::ROLES[$target->getRole()] >= Faction::ROLES[$member->getRole()] && !$member->isInAdminMode()) {
+        if (Faction::ROLES[$target->getRole()] >= Faction::ROLES[$member->getRole()] && $target->getRole() !== Faction::ROLE_LEADER && !$member->isInAdminMode()) {
             LanguageManager::getInstance()->sendMessage($sender, "commands.kick.cant-kick-higher", ["{PLAYER}" => $target->getUsername()]);
             return;
         }
