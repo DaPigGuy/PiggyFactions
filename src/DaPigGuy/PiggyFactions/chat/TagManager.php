@@ -79,7 +79,7 @@ class TagManager
 
     public function getFactionSizeTotal(?FactionsPlayer $member): ?string
     {
-        return ($faction = $this->getFaction($member)) ? null : (string)count($faction->getMembers());
+        return ($faction = $this->getFaction($member)) === null ? null : (string)count($faction->getMembers());
     }
 
     public function getFactionSizeOnline(?FactionsPlayer $member): ?string
