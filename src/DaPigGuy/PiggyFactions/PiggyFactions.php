@@ -141,4 +141,9 @@ class PiggyFactions extends PluginBase
     {
         return $this->chatManager;
     }
+
+    public function getTagManager(): TagManager
+    {
+        return $this->tagManager;
+    }
 }

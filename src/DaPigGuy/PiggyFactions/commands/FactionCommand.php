@@ -31,6 +31,7 @@ use DaPigGuy\PiggyFactions\commands\subcommands\roles\DemoteSubCommand;
 use DaPigGuy\PiggyFactions\commands\subcommands\roles\LeaderSubCommand;
 use DaPigGuy\PiggyFactions\commands\subcommands\roles\PermissionSubCommand;
 use DaPigGuy\PiggyFactions\commands\subcommands\roles\PromoteSubCommand;
+use DaPigGuy\PiggyFactions\commands\subcommands\TopSubCommand;
 use DaPigGuy\PiggyFactions\PiggyFactions;
 use pocketmine\command\CommandSender;
 
@@ -67,7 +68,7 @@ class FactionCommand extends BaseCommand
         $this->registerSubCommand(new DemoteSubCommand($this->plugin, "demote", "Demote a faction member"));
         $this->registerSubCommand(new DisbandSubCommand($this->plugin, "disband", "Disband your faction"));
         $this->registerSubCommand(new HomeSubCommand($this->plugin, "home", "Teleport to faction home"));
-        $this->registerSubCommand(new InfoSubCommand($this->plugin, "info", "Display faction info"));
+        $this->registerSubCommand(new InfoSubCommand($this->plugin, "info", "Display faction info", ["who"]));
         $this->registerSubCommand(new InviteSubCommand($this->plugin, "invite", "Invite a player to your faction"));
         $this->registerSubCommand(new JoinSubCommand($this->plugin, "join", "Join a faction"));
         $this->registerSubCommand(new KickSubCommand($this->plugin, "kick", "Kick a member from your faction"));
@@ -76,10 +77,11 @@ class FactionCommand extends BaseCommand
         $this->registerSubCommand(new MapSubCommand($this->plugin, "map", "View map of area"));
         $this->registerSubCommand(new MotdSubCommand($this->plugin, "motd", "Set faction MOTD"));
         $this->registerSubCommand(new NameSubCommand($this->plugin, "name", "Rename your faction"));
-        $this->registerSubCommand(new PermissionSubCommand($this->plugin, "permission", "Set faction role permissions", ["perm"]));
+        $this->registerSubCommand(new PermissionSubCommand($this->plugin, "permission", "Set faction role permissions", ["perms"]));
         $this->registerSubCommand(new PromoteSubCommand($this->plugin, "promote", "Promote a faction member"));
         $this->registerSubCommand(new SeeChunkSubCommand($this->plugin, "seechunk", "Toggle chunk visualizer", ["sc"]));
         $this->registerSubCommand(new SetHomeSubCommand($this->plugin, "sethome", "Set faction home"));
+        $this->registerSubCommand(new TopSubCommand($this->plugin, "top", "Display top factions", ["list"]));
         $this->registerSubCommand(new UnallySubCommand($this->plugin, "unally", "End faction alliance"));
         $this->registerSubCommand(new UnclaimSubCommand($this->plugin, "unclaim", "Unclaim a chunk"));
     }

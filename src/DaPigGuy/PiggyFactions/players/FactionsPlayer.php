@@ -111,6 +111,16 @@ class FactionsPlayer
         $this->isAutoClaiming = $value;
     }
 
+    public function isInAdminMode(): bool
+    {
+        return $this->adminMode;
+    }
+
+    public function setInAdminMode(bool $value): void
+    {
+        $this->adminMode = $value;
+    }
+
     public function update(): void
     {
         PiggyFactions::getInstance()->getDatabase()->executeChange("piggyfactions.players.update", [
@@ -120,15 +130,5 @@ class FactionsPlayer
             "role" => $this->role,
             "power" => $this->power
         ]);
-    }
-
-    public function isInAdminMode(): bool
-    {
-        return $this->adminMode;
-    }
-
-    public function setInAdminMode(bool $value): void
-    {
-        $this->adminMode = $value;
     }
 }

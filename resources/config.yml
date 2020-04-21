@@ -27,11 +27,11 @@ factions:
     blacklisted-worlds: []
     cost: 1
 tags:
-  rankmap:
+  rank-map:
     leader: "^"
     officer: "*"
     member: "+"
     recruit: "-"
-  nofaction: ""
-  nopower: 0
-  norank: ""
+  no-faction: ""
+  no-power: 0
+  no-rank: ""

@@ -57,6 +57,14 @@ class FactionsManager
         return null;
     }
 
+    /**
+     * @return Faction[]
+     */
+    public function getFactions(): array
+    {
+        return $this->factions;
+    }
+
     public function createFaction(string $name, Player $leader): void
     {
         $this->plugin->getDatabase()->executeInsert("piggyfactions.factions.create", ["name" => $name, "leader" => $leader->getUniqueId()->toString(), "members" => json_encode([$leader->getUniqueId()->toString()]), "permissions" => json_encode(Faction::DEFAULT_PERMISSIONS)], function (int $id) use ($name, $leader): void {

@@ -7,8 +7,8 @@ namespace DaPigGuy\PiggyFactions\commands\subcommands\claims;
 use DaPigGuy\PiggyFactions\claims\ClaimsManager;
 use DaPigGuy\PiggyFactions\commands\subcommands\FactionSubCommand;
 use DaPigGuy\PiggyFactions\factions\Faction;
+use DaPigGuy\PiggyFactions\language\LanguageManager;
 use DaPigGuy\PiggyFactions\players\FactionsPlayer;
-use DaPigGuy\PiggyFactions\players\PlayerManager;
 use pocketmine\Player;
 use pocketmine\utils\TextFormat;
 
@@ -79,7 +79,7 @@ class MapSubCommand extends FactionSubCommand
 
                 if (!$overflown && $characterIndex >= strlen(self::MAP_KEY_CHARS)) $overflown = true;
                 $chunk = $player->getLevel()->getChunk($topLeft->getX() + $dx, $topLeft->getZ() + $dz);
-                $faction = ($claim = ClaimsManager::getInstance()->getClaim($player->getLevel(), $chunk)) === null ? null : $claim->getFaction();
+                $faction = $chunk === null || ($claim = ClaimsManager::getInstance()->getClaim($player->getLevel(), $chunk)) === null ? null : $claim->getFaction();
                 $contains = in_array($faction, $factions, true);
                 if ($faction === null) {
                     $row .= self::MAP_KEY_WILDERNESS;
@@ -88,7 +88,7 @@ class MapSubCommand extends FactionSubCommand
                 } else {
                     if (!$contains) $factions[$characters{$characterIndex++}] = $faction;
                     $fchar = array_search($faction, $factions);
-                    $row .= $this->getColorFor($player, $faction) . $fchar;
+                    $row .= LanguageManager::getInstance()->getColorFor($player, $faction) . $fchar;
                 }
             }
 
@@ -102,20 +102,13 @@ class MapSubCommand extends FactionSubCommand
         }
         $factionsRow = "";
         foreach ($factions as $char => $faction) {
-            $factionsRow .= $this->getColorFor($player, $faction) . $char . ": " . $faction->getName() . " ";
+            $factionsRow .= LanguageManager::getInstance()->getColorFor($player, $faction) . $char . ": " . $faction->getName() . " ";
         }
         if ($overflown) $factionsRow .= self::MAP_OVERFLOW_MESSAGE;
         $factionsRow = trim($factionsRow);
         $map[] = $factionsRow;
 
         return $map;
-    }
-
-    public function getColorFor(Player $player, Faction $faction): string
-    {
-        $playerFaction = PlayerManager::getInstance()->getPlayerFaction($player->getUniqueId());
-        if ($playerFaction === $faction) return TextFormat::GREEN;
-        return TextFormat::LIGHT_PURPLE;
     }
 
     public function getASCIICompass(float $degrees, string $colorActive, string $colorDefault): array

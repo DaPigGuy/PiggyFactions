@@ -46,7 +46,7 @@ commands:
   home:
     not-set: "{RED}Faction home is not set."
   info:
-    message: "{GOLD}____________.[{DARK_GREEN}Faction {FACTION}{GOLD}].____________\n{GOLD}Description: {YELLOW}{DESCRIPTION}\n{GOLD}Power: {YELLOW}{POWER}\n{GOLD}Leader: {YELLOW}{LEADER}\n{GOLD}Officers: {YELLOW}{OFFICERS}\n{GOLD}Members: {YELLOW}{MEMBERS}\n{GOLD}Recruits: {YELLOW}{RECRUITS}\n{GOLD}Online: {YELLOW}{ONLINECOUNT}"
+    message: "{GOLD}__.[{DARK_GREEN}Faction {FACTION}{GOLD}].__\n{GOLD}Description: {YELLOW}{DESCRIPTION}\n{GOLD}Power: {YELLOW}{POWER}/{TOTALPOWER}\n{GOLD}Online: {YELLOW}{ONLINECOUNT}/{TOTALPLAYERS}\n{GOLD}Leader: {YELLOW}{LEADER}\n{GOLD}Allies: {DARK_PURPLE}{ALLIES}\n{GOLD}Enemies: {RED}{ENEMIES}\n{GOLD}Members: {YELLOW}{PLAYERS}"
   invite:
     already-in-faction: "{RED}{PLAYER} is already in a faction."
     already-sent: "{RED}An invite has already been sent to {PLAYER}."
@@ -81,6 +81,13 @@ commands:
     promoted: "{GREEN}You were promoted to {ROLE}"
   sethome:
     success: "{GREEN}Faction home has been set."
+  top:
+    header: "{GOLD}____________.[{DARK_GREEN}Top Factions by {CATEGORY} ({PAGE}/{TOTALPAGES}){GOLD}].____________"
+    line:
+      overall: "{GOLD}#{RANK} {RELATIONCOLOR}{FACTION}{GOLD} -{YELLOW} {ONLINE}/{MEMBERS}, {POWER}/{TOTALPOWER}"
+      online: "{GOLD}#{RANK} {RELATIONCOLOR}{FACTION}{GOLD} -{YELLOW} {ONLINE}"
+      members: "{GOLD}#{RANK} {RELATIONCOLOR}{FACTION}{GOLD} -{YELLOW} {MEMBERS}"
+      power: "{GOLD}#{RANK} {RELATIONCOLOR}{FACTION}{GOLD} -{YELLOW} {POWER}/{TOTALPOWER}"
   unally:
     not-allied: "{RED}You are not allied with {FACTION}."
     unallied: "{RED}Your faction is no longer allied with {FACTION}."
@@ -93,3 +100,8 @@ commands:
 death:
   power: "{RED}Your power is now {POWER}."
 motd: "{GOLD}____________.[{DARK_GREEN}{FACTION} MOTD{GOLD}].____________\n{WHITE}{MOTD}"
+territory-titles:
+  wilderness-title: "{DARK_GREEN}Wilderness"
+  wilderness-subtitle: ""
+  faction-title: "{RELATION}{FACTION}"
+  faction-subtitle: "{ITALIC}{DESCRIPTION}"

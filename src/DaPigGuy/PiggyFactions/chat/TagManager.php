@@ -15,75 +15,85 @@ class TagManager
     /** @var PiggyFactions */
     private $plugin;
 
+    /** @var array */
+    private $rankMap = [];
+
+    /** @var string */
+    private $noFaction = "";
+    /** @var string */
+    private $noPower = "";
+    /** @var string */
+    private $noRank = "";
+
     public function __construct(PiggyFactions $plugin)
     {
         $this->plugin = $plugin;
-        $plugin->getServer()->getPluginManager()->registerEvents(new TagListener($this, $plugin->getConfig()->get("tags", [])), $plugin);
+
+        $config = $plugin->getConfig()->get("tags", []);
+        if (isset($config["rank-map"])) $this->rankMap = $config["rank-map"];
+        if (isset($config["no-faction"])) $this->noFaction = $config["no-faction"];
+        if (isset($config["no-power"])) $this->noPower = $config["no-power"];
+        if (isset($config["no-rank"])) $this->noRank = $config["no-rank"];
+
+        $plugin->getServer()->getPluginManager()->registerEvents(new TagListener($this), $plugin);
     }
 
-    public function getFactionName(Player $player, string $noFactions): string
+    public function getHRKTag(Player $player, string $tag): ?string
     {
-        $faction = $this->getFactionClass($player);
-        if (!$faction instanceof Faction)
-            return $noFactions;
-        return $faction->getName();
+        $tags = explode('.', $tag, 2);
+        if ($tags[0] !== 'piggyfacs' || count($tags) < 2) return null;
+
+        $member = PlayerManager::getInstance()->getPlayer($player->getUniqueId());
+        switch ($tags[1]) {
+            case "name":
+                return $this->getFactionName($member) ?? $this->noFaction;
+            case "power":
+                return $this->getFactionPower($member) ?? $this->noPower;
+            case "rank.name":
+                return $this->getPlayerRankName($member) ?? $this->noRank;
+            case "rank.symbol":
+                return $this->getPlayerRankSymbol($member) ?? $this->noRank;
+            case "members.all":
+                return $this->getFactionSizeTotal($member) ?? $this->noPower;
+            case "members.online":
+                return $this->getFactionSizeOnline($member) ?? $this->noPower;
+            default:
+                return null;
+        }
     }
 
-    public function getFactionPower(Player $player, string $noPower): string
+    public function getFaction(?FactionsPlayer $member): ?Faction
     {
-        $faction = $this->getFactionClass($player);
-        if (!$faction instanceof Faction)
-            return $noPower;
-        return $faction->getName();
+        return $member === null ? null : $member->getFaction();
     }
 
-    public function getFactionSizeTotal(Player $player, string $noPower): string
+    public function getFactionName(?FactionsPlayer $member): ?string
     {
-        $faction = $this->getFactionClass($player);
-        if (!$faction instanceof Faction)
-            return $noPower;
-        return (string)count($faction->getMembers());
+        return ($faction = $this->getFaction($member)) === null ? null : $faction->getName();
     }
 
-    public function getFactionSizeOnline(Player $player, string $noPower): string
+    public function getFactionPower(?FactionsPlayer $member): ?string
     {
-        $faction = $this->getFactionClass($player);
-        if (!$faction instanceof Faction)
-            return $noPower;
-        return (string)count($faction->getOnlineMembers());
+        return ($faction = $this->getFaction($member)) === null ? null : (string)$faction->getPower();
     }
 
-    public function getPlayerRankName(Player $player, string $noRank): string
+    public function getFactionSizeTotal(?FactionsPlayer $member): ?string
     {
-        $faction = $this->getPlayerFactionClass($player);
-        if (!$faction instanceof FactionsPlayer)
-            return $noRank;
-        return $faction->getRole() ?? $noRank;
+        return ($faction = $this->getFaction($member)) ? null : (string)count($faction->getMembers());
     }
 
-    public function getPlayerRankSymbol(Player $player, array $rankMap, string $noRank): string
+    public function getFactionSizeOnline(?FactionsPlayer $member): ?string
     {
-        $factionsPlayer = $this->getPlayerFactionClass($player);
-        if (!$factionsPlayer instanceof FactionsPlayer)
-            return $noRank;
-        $role = $factionsPlayer->getRole();
-        if ($role === null) return $noRank;
-        return $rankMap[$role] ?? $noRank;
+        return ($faction = $this->getFaction($member)) === null ? null : (string)count($faction->getMembers());
     }
 
-    protected function getFactionClass(Player $player): ?Faction
+    public function getPlayerRankName(?FactionsPlayer $member): ?string
     {
-        $factionsPlayer = $this->getPlayerFactionClass($player);
-        if (!$factionsPlayer instanceof FactionsPlayer || !(($faction = $factionsPlayer->getFaction()) instanceof Faction))
-            return null;
-        return $faction;
+        return ($faction = $this->getFaction($member)) === null ? null : (string)$member->getRole();
     }
 
-    protected function getPlayerFactionClass(Player $player): ?FactionsPlayer
+    public function getPlayerRankSymbol(?FactionsPlayer $member): ?string
     {
-        $factionsPlayer = PlayerManager::getInstance()->getPlayer($player->getUniqueId());
-        if (!$factionsPlayer instanceof FactionsPlayer)
-            return null;
-        return $factionsPlayer;
+        return ($faction = $this->getFaction($member)) === null ? null : ($this->rankMap[$member->getRole()] ?? null);
     }
 }

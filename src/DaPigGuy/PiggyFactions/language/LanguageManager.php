@@ -6,6 +6,7 @@ namespace DaPigGuy\PiggyFactions\language;
 
 use DaPigGuy\PiggyFactions\factions\Faction;
 use DaPigGuy\PiggyFactions\PiggyFactions;
+use DaPigGuy\PiggyFactions\players\PlayerManager;
 use pocketmine\command\CommandSender;
 use pocketmine\Player;
 use pocketmine\utils\Config;
@@ -66,6 +67,17 @@ class LanguageManager
             }
         }
         $commandSender->sendMessage($message);
+    }
+
+    public function getColorFor(Player $player, Faction $faction): string
+    {
+        $playerFaction = PlayerManager::getInstance()->getPlayerFaction($player->getUniqueId());
+        if ($playerFaction === null) return TextFormat::WHITE;
+        if ($playerFaction === $faction) return TextFormat::GREEN;
+        if (($relation = $playerFaction->getRelation($faction)) === Faction::RELATION_ALLY) return TextFormat::DARK_PURPLE;
+        if ($relation === Faction::RELATION_TRUCE) return TextFormat::LIGHT_PURPLE;
+        if ($relation === Faction::RELATION_ENEMY) return TextFormat::RED;
+        return TextFormat::WHITE;
     }
 
     public function translateColorTags(string $message): string

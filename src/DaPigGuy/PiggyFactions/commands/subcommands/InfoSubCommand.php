@@ -31,19 +31,27 @@ class InfoSubCommand extends FactionSubCommand
             return;
         }
 
+        $memberNamesWithRole = [];
         $memberNamesByRole = [];
         foreach ($faction->getMembers() as $m) {
             $memberNamesByRole[$m->getRole()][] = $m->getUsername();
+            if (!$m->getUuid()->equals($faction->getLeader())) $memberNamesWithRole[] = $this->plugin->getTagManager()->getPlayerRankSymbol($m) . $m->getUsername();
         }
 
         LanguageManager::getInstance()->sendMessage($sender, "commands.info.message", [
             "{FACTION}" => $faction->getName(),
             "{DESCRIPTION}" => $faction->getDescription(),
             "{POWER}" => round($faction->getPower(), 2, PHP_ROUND_HALF_DOWN),
+            "{TOTALPOWER}" => count($faction->getMembers()) * $this->plugin->getConfig()->getNested("factions.power.max"),
             "{LEADER}" => $faction->getMemberByUUID($faction->getLeader())->getUsername(),
+            "{ALLIES}" => implode(",", array_map(function (Faction $f): string {
+                return $f->getName();
+            }, $faction->getAllies())),
             "{OFFICERS}" => implode(",", $memberNamesByRole[Faction::ROLE_OFFICER] ?? []),
             "{MEMBERS}" => implode(",", $memberNamesByRole[Faction::ROLE_MEMBER] ?? []),
             "{RECRUITS}" => implode(",", $memberNamesByRole[Faction::ROLE_RECRUIT] ?? []),
+            "{PLAYERS}" => implode(",", $memberNamesWithRole),
+            "{TOTALPLAYERS}" => count($faction->getMembers()),
             "{ONLINECOUNT}" => count($faction->getOnlineMembers())
         ]);
     }
