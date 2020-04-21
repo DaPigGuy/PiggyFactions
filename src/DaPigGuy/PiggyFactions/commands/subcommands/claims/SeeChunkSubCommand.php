@@ -7,7 +7,6 @@ namespace DaPigGuy\PiggyFactions\commands\subcommands\claims;
 use DaPigGuy\PiggyFactions\commands\subcommands\FactionSubCommand;
 use DaPigGuy\PiggyFactions\factions\Faction;
 use DaPigGuy\PiggyFactions\players\FactionsPlayer;
-use DaPigGuy\PiggyFactions\players\PlayerManager;
 use pocketmine\Player;
 
 class SeeChunkSubCommand extends FactionSubCommand
@@ -17,6 +16,6 @@ class SeeChunkSubCommand extends FactionSubCommand
 
     public function onNormalRun(Player $sender, ?Faction $faction, FactionsPlayer $member, string $aliasUsed, array $args): void
     {
-        PlayerManager::getInstance()->getPlayer($sender->getUniqueId())->setCanSeeChunks(!PlayerManager::getInstance()->getPlayer($sender->getUniqueId())->canSeeChunks());
+        $member->setCanSeeChunks(!$member->canSeeChunks());
     }
 }

@@ -67,7 +67,7 @@ class PlayerManager
         $factionA = $this->getPlayerFaction($a->getUniqueId());
         $factionB = $this->getPlayerFaction($b->getUniqueId());
         if ($factionA === null || $factionB === null) return false;
-        if ($factionA->getRelation($factionB) === Faction::RELATION_ALLY || $factionA->getRelation($factionB) === Faction::RELATION_TRUCE) return true;
+        if ($factionA->isAllied($factionB) || $factionA->isTruced($factionB)) return true;
         if ($factionA->getId() === $factionB->getId()) return true;
         return false;
     }

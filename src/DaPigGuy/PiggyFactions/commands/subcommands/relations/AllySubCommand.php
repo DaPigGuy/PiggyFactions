@@ -28,7 +28,7 @@ class AllySubCommand extends FactionSubCommand
             LanguageManager::getInstance()->sendMessage($sender, "commands.ally.self");
             return;
         }
-        if ($targetFaction->getRelation($faction) === Faction::RELATION_ALLY) {
+        if ($targetFaction->isAllied($faction)) {
             LanguageManager::getInstance()->sendMessage($sender, "already-allied");
             return;
         }

@@ -23,7 +23,7 @@ class UnallySubCommand extends FactionSubCommand
             LanguageManager::getInstance()->sendMessage($sender, "commands.invalid-faction", ["{FACTION}" => $args["faction"]]);
             return;
         }
-        if ($targetFaction->getRelation($faction) !== Faction::RELATION_ALLY) {
+        if (!$targetFaction->isAllied($faction)) {
             LanguageManager::getInstance()->sendMessage($sender, "commands.unally.not-allied", ["{FACTION}" => $targetFaction->getName()]);
             return;
         }

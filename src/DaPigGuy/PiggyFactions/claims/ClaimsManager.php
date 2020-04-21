@@ -29,7 +29,7 @@ class ClaimsManager
         $plugin->getDatabase()->executeGeneric("piggyfactions.claims.init");
         $plugin->getDatabase()->executeSelect("piggyfactions.claims.load", [], function (array $rows): void {
             foreach ($rows as $row) {
-                $this->claims[$row["id"]] = new Claim($row["id"], $row["faction"], $row["chunkX"], $row["chunkZ"], $row["level"]);
+                $this->claims[$row["chunkX"] . ":" . $row["chunkZ"] . ":" . $row["level"]] = new Claim($row["id"], $row["faction"], $row["chunkX"], $row["chunkZ"], $row["level"]);
             }
             $this->plugin->getLogger()->debug("Loaded " . count($rows) . " claims");
         });
@@ -42,12 +42,7 @@ class ClaimsManager
 
     public function getClaim(Level $level, Chunk $chunk): ?Claim
     {
-        foreach ($this->claims as $claim) {
-            if ($level === $claim->getLevel() && $claim->getChunk() === $chunk) {
-                return $claim;
-            }
-        }
-        return null;
+        return $this->claims[$chunk->getX() . ":" . $chunk->getZ() . ":" . $level->getFolderName()] ?? null;
     }
 
     /**

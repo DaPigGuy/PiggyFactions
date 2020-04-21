@@ -334,6 +334,21 @@ class Faction
         return $allies;
     }
 
+    public function isAllied(Faction $faction): bool
+    {
+        return $this->relations[$faction->getId()] === self::RELATION_ALLY;
+    }
+
+    public function isTruced(Faction $faction): bool
+    {
+        return $this->relations[$faction->getId()] === self::RELATION_TRUCE;
+    }
+
+    public function isEnemy(Faction $faction): bool
+    {
+        return $this->relations[$faction->getId()] === self::RELATION_ENEMY;
+    }
+
     public function disband(): void
     {
         foreach ($this->getMembers() as $member) {

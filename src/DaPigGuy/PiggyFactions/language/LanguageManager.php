@@ -73,10 +73,10 @@ class LanguageManager
     {
         $playerFaction = PlayerManager::getInstance()->getPlayerFaction($player->getUniqueId());
         if ($playerFaction === null) return TextFormat::WHITE;
-        if ($playerFaction === $faction) return TextFormat::GREEN;
-        if (($relation = $playerFaction->getRelation($faction)) === Faction::RELATION_ALLY) return TextFormat::DARK_PURPLE;
-        if ($relation === Faction::RELATION_TRUCE) return TextFormat::LIGHT_PURPLE;
-        if ($relation === Faction::RELATION_ENEMY) return TextFormat::RED;
+        if ($playerFaction->getId() === $faction->getId()) return TextFormat::GREEN;
+        if ($playerFaction->isAllied($faction)) return TextFormat::DARK_PURPLE;
+        if ($playerFaction->isTruced($faction)) return TextFormat::LIGHT_PURPLE;
+        if ($playerFaction->isEnemy($faction)) return TextFormat::RED;
         return TextFormat::WHITE;
     }
 
