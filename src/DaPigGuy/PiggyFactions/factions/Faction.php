@@ -46,6 +46,7 @@ class Faction
         "containers",
         "demote",
         "description",
+        "enemy",
         "invite",
         "interact",
         "kick",
@@ -334,19 +335,33 @@ class Faction
         return $allies;
     }
 
+    /**
+     * @return Faction[]
+     */
+    public function getEnemies(): array
+    {
+        $allies = [];
+        foreach ($this->relations as $id => $relation) {
+            if ($relation === self::RELATION_ENEMY) {
+                $allies[] = FactionsManager::getInstance()->getFaction($id);
+            }
+        }
+        return $allies;
+    }
+
     public function isAllied(Faction $faction): bool
     {
-        return $this->relations[$faction->getId()] === self::RELATION_ALLY;
+        return ($this->relations[$faction->getId()] ?? self::RELATION_NONE) === self::RELATION_ALLY;
     }
 
     public function isTruced(Faction $faction): bool
     {
-        return $this->relations[$faction->getId()] === self::RELATION_TRUCE;
+        return ($this->relations[$faction->getId()] ?? self::RELATION_NONE) === self::RELATION_TRUCE;
     }
 
     public function isEnemy(Faction $faction): bool
     {
-        return $this->relations[$faction->getId()] === self::RELATION_ENEMY;
+        return ($this->relations[$faction->getId()] ?? self::RELATION_NONE) === self::RELATION_ENEMY;
     }
 
     public function disband(): void

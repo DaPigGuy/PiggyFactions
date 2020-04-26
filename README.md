@@ -24,8 +24,6 @@ PiggyFactions is an open-sourced factions plugin for [PocketMine-MP](https://git
 | Async Queries | ✔ | ❌ |
 | Command Autocomplete | ✔ | ❌ |
 | Multi-Language Support | ✔ | ❌ |
-| /f claim auto | ✔ | ❌ |
-| /f map | ✔ | ❌ |
 
 ## Installation & Setup
 1. Install the plugin from Poggit.

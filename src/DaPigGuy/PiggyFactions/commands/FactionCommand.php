@@ -26,6 +26,8 @@ use DaPigGuy\PiggyFactions\commands\subcommands\management\KickSubCommand;
 use DaPigGuy\PiggyFactions\commands\subcommands\management\MotdSubCommand;
 use DaPigGuy\PiggyFactions\commands\subcommands\management\NameSubCommand;
 use DaPigGuy\PiggyFactions\commands\subcommands\relations\AllySubCommand;
+use DaPigGuy\PiggyFactions\commands\subcommands\relations\EnemySubCommand;
+use DaPigGuy\PiggyFactions\commands\subcommands\relations\TruceSubCommand;
 use DaPigGuy\PiggyFactions\commands\subcommands\relations\UnallySubCommand;
 use DaPigGuy\PiggyFactions\commands\subcommands\roles\DemoteSubCommand;
 use DaPigGuy\PiggyFactions\commands\subcommands\roles\LeaderSubCommand;
@@ -67,6 +69,7 @@ class FactionCommand extends BaseCommand
         $this->registerSubCommand(new DescriptionSubCommand($this->plugin, "description", "Set faction description", ["desc"]));
         $this->registerSubCommand(new DemoteSubCommand($this->plugin, "demote", "Demote a faction member"));
         $this->registerSubCommand(new DisbandSubCommand($this->plugin, "disband", "Disband your faction"));
+        $this->registerSubCommand(new EnemySubCommand($this->plugin, "enemy", "Mark faction as an enemy"));
         $this->registerSubCommand(new HomeSubCommand($this->plugin, "home", "Teleport to faction home"));
         $this->registerSubCommand(new InfoSubCommand($this->plugin, "info", "Display faction info", ["who"]));
         $this->registerSubCommand(new InviteSubCommand($this->plugin, "invite", "Invite a player to your faction"));
@@ -82,6 +85,7 @@ class FactionCommand extends BaseCommand
         $this->registerSubCommand(new SeeChunkSubCommand($this->plugin, "seechunk", "Toggle chunk visualizer", ["sc"]));
         $this->registerSubCommand(new SetHomeSubCommand($this->plugin, "sethome", "Set faction home"));
         $this->registerSubCommand(new TopSubCommand($this->plugin, "top", "Display top factions", ["list"]));
+        $this->registerSubCommand(new TruceSubCommand($this->plugin, "truce", "Truce with other factions"));
         $this->registerSubCommand(new UnallySubCommand($this->plugin, "unally", "End faction alliance"));
         $this->registerSubCommand(new UnclaimSubCommand($this->plugin, "unclaim", "Unclaim a chunk"));
     }

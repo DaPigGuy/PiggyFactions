@@ -43,6 +43,10 @@ commands:
     success: "{GREEN}Faction description has been set to {DESCRIPTION}"
   disband:
     success: "{YELLOW}Your faction has been disbanded!"
+  enemy:
+    self: "{RED}You can not mark yourself as an enemy."
+    already-enemy: "{RED}{FACTION} is already an enemy!"
+    success: "{GREEN}{FACTION} has been marked as an enemy."
   home:
     not-set: "{RED}Faction home is not set."
   info:
@@ -88,6 +92,12 @@ commands:
       online: "{GOLD}#{RANK} {RELATIONCOLOR}{FACTION}{GOLD} -{YELLOW} {ONLINE}"
       members: "{GOLD}#{RANK} {RELATIONCOLOR}{FACTION}{GOLD} -{YELLOW} {MEMBERS}"
       power: "{GOLD}#{RANK} {RELATIONCOLOR}{FACTION}{GOLD} -{YELLOW} {POWER}/{TOTALPOWER}"
+  truce:
+    self: "{RED}You can not truce with yourself."
+    already-truced: "{RED}You are already truced!"
+    request: "{GREEN}{FACTION} has sent a truce request. Do /f truce {FACTION} to accept."
+    truced: "{GREEN}Your faction is now truced with {TRUCED}"
+    success: "{GREEN}A truce request has been sent to {FACTION}."
   unally:
     not-allied: "{RED}You are not allied with {FACTION}."
     unallied: "{RED}Your faction is no longer allied with {FACTION}."

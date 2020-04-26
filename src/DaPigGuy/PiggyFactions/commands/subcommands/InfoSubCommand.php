@@ -47,6 +47,9 @@ class InfoSubCommand extends FactionSubCommand
             "{ALLIES}" => implode(",", array_map(function (Faction $f): string {
                 return $f->getName();
             }, $faction->getAllies())),
+            "{ENEMIES}" => implode(",", array_map(function (Faction $f): string {
+                return $f->getName();
+            }, $faction->getEnemies())),
             "{OFFICERS}" => implode(",", $memberNamesByRole[Faction::ROLE_OFFICER] ?? []),
             "{MEMBERS}" => implode(",", $memberNamesByRole[Faction::ROLE_MEMBER] ?? []),
             "{RECRUITS}" => implode(",", $memberNamesByRole[Faction::ROLE_RECRUIT] ?? []),

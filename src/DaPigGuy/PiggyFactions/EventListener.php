@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace DaPigGuy\PiggyFactions;
 
 use DaPigGuy\PiggyFactions\chat\ChatManager;
+use DaPigGuy\PiggyFactions\claims\ClaimsManager;
 use DaPigGuy\PiggyFactions\event\member\PowerChangeEvent;
 use DaPigGuy\PiggyFactions\factions\Faction;
 use DaPigGuy\PiggyFactions\language\LanguageManager;
@@ -64,7 +65,21 @@ class EventListener implements Listener
         $entity = $event->getEntity();
         $damager = $event->getDamager();
         if ($entity instanceof Player && $damager instanceof Player) {
-            if (PlayerManager::getInstance()->areAlliedOrTruced($entity, $damager)) $event->setCancelled();
+            if (PlayerManager::getInstance()->areAlliedOrTruced($entity, $damager)) {
+                $event->setCancelled();
+                return;
+            }
+            $entityFaction = PlayerManager::getInstance()->getPlayerFaction($entity->getUniqueId());
+            $damagerFaction = PlayerManager::getInstance()->getPlayerFaction($damager->getUniqueId());
+            $claim = ClaimsManager::getInstance()->getClaim($entity->getLevel(), $entity->getLevel()->getChunkAtPosition($entity));
+            if ($claim !== null) {
+                if ($claim->getFaction() === $entityFaction) {
+                    if ($damagerFaction === null || !$damagerFaction->isEnemy($entityFaction)) {
+                        $event->setCancelled();
+                        return;
+                    }
+                }
+            }
         }
     }
 
