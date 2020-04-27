@@ -72,12 +72,19 @@ class LanguageManager
     public function getColorFor(Player $player, Faction $faction): string
     {
         $playerFaction = PlayerManager::getInstance()->getPlayerFaction($player->getUniqueId());
-        if ($playerFaction === null) return TextFormat::WHITE;
-        if ($playerFaction->getId() === $faction->getId()) return TextFormat::GREEN;
-        if ($playerFaction->isAllied($faction)) return TextFormat::DARK_PURPLE;
-        if ($playerFaction->isTruced($faction)) return TextFormat::LIGHT_PURPLE;
-        if ($playerFaction->isEnemy($faction)) return TextFormat::RED;
-        return TextFormat::WHITE;
+        $relation = "neutral";
+        if ($playerFaction === null) {
+            $relation = "neutral";
+        } elseif ($playerFaction->getId() === $faction->getId()) {
+            $relation = "member";
+        } elseif ($playerFaction->isAllied($faction)) {
+            $relation = "ally";
+        } else if ($playerFaction->isTruced($faction)) {
+            $relation = "truce";
+        } elseif ($playerFaction->isEnemy($faction)) {
+            $relation = "enemy";
+        }
+        return $this->translateColorTags($this->plugin->getConfig()->getNested("symbols.colors.relations." . $relation, ""));
     }
 
     public function translateColorTags(string $message): string

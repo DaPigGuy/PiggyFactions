@@ -15,6 +15,7 @@ use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerChatEvent;
 use pocketmine\event\player\PlayerDeathEvent;
 use pocketmine\event\player\PlayerJoinEvent;
+use pocketmine\event\player\PlayerRespawnEvent;
 use pocketmine\event\server\DataPacketReceiveEvent;
 use pocketmine\network\mcpe\protocol\LoginPacket;
 use pocketmine\Player;
@@ -69,15 +70,32 @@ class EventListener implements Listener
                 $event->setCancelled();
                 return;
             }
+
             $entityFaction = PlayerManager::getInstance()->getPlayerFaction($entity->getUniqueId());
             $damagerFaction = PlayerManager::getInstance()->getPlayerFaction($damager->getUniqueId());
+            if (($entityFaction === null || $damagerFaction === null) && !$this->plugin->getConfig()->getNested("factions.pvp.factionless", true)) {
+                $event->setCancelled();
+                if ($damagerFaction === null) {
+                    LanguageManager::getInstance()->sendMessage($damager, "pvp.attacker-factionless");
+                } else {
+                    LanguageManager::getInstance()->sendMessage($damager, "pvp.target-factionless");
+                }
+                return;
+            }
+            if ($entityFaction === null && $damagerFaction === null && !$this->plugin->getConfig()->getNested("factions.pvp.between-factionless", true)) {
+                $event->setCancelled();
+                return;
+            }
+
             $claim = ClaimsManager::getInstance()->getClaim($entity->getLevel(), $entity->getLevel()->getChunkAtPosition($entity));
             if ($claim !== null) {
                 if ($claim->getFaction() === $entityFaction) {
                     if ($damagerFaction === null || !$damagerFaction->isEnemy($entityFaction)) {
                         $event->setCancelled();
+                        LanguageManager::getInstance()->sendMessage($damager, "pvp.cant-attack-in-territory", ["{PLAYER}" => $entity->getDisplayName()]);
                         return;
                     }
+                    $event->setModifier(-$this->plugin->getConfig()->getNested("factions.claims.shield-factor", 0.1), 56789);
                 }
             }
         }
@@ -102,6 +120,16 @@ class EventListener implements Listener
         if ($member->getUsername() !== $player->getName()) $member->setUsername($member->getUsername());
         if (($faction = $member->getFaction()) !== null) {
             if (($motd = $faction->getMotd()) !== null) LanguageManager::getInstance()->sendMessage($player, "motd", ["{MOTD}" => $motd]);
+        }
+    }
+
+    public function onRespawn(PlayerRespawnEvent $event): void
+    {
+
+        $player = $event->getPlayer();
+        $faction = PlayerManager::getInstance()->getPlayerFaction($player->getUniqueId());
+        if ($this->plugin->getConfig()->getNested("factions.homes.teleport-on-death") && $faction !== null && $faction->getHome() !== null) {
+            $event->setRespawnPosition($faction->getHome());
         }
     }
 

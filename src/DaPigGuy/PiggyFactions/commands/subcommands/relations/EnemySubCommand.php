@@ -28,7 +28,7 @@ class EnemySubCommand extends FactionSubCommand
             return;
         }
         if ($faction->isEnemy($targetFaction)) {
-            LanguageManager::getInstance()->sendMessage($sender, "already-enemy", ["{FACTION}" => $faction->getName()]);
+            LanguageManager::getInstance()->sendMessage($sender, "commands.enemy.already-enemy", ["{FACTION}" => $faction->getName()]);
             return;
         }
         $ev = new FactionRelationEvent([$faction, $targetFaction], Faction::RELATION_ENEMY);

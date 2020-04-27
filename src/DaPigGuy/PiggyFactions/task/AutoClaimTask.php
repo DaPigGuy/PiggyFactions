@@ -23,15 +23,17 @@ class AutoClaimTask extends Task
     {
         foreach ($this->plugin->getServer()->getOnlinePlayers() as $p) {
             if (($member = PlayerManager::getInstance()->getPlayer($p->getUniqueId())) !== null && ($faction = $member->getFaction()) !== null && $member->isAutoClaiming()) {
-                if (floor($faction->getPower() / $this->plugin->getConfig()->getNested("factions.claim.cost", 1)) > count(ClaimsManager::getInstance()->getFactionClaims($faction))) {
-                    $chunk = $p->getLevel()->getChunkAtPosition($p);
-                    $claim = $this->plugin->getClaimsManager()->getClaim($p->getLevel(), $chunk);
-                    if ($claim === null) {
-                        $this->plugin->getClaimsManager()->createClaim($faction, $p->getLevel(), $chunk);
-                        return;
-                    }
-                    if ($claim->canBeOverClaimed()) {
-                        $claim->setFaction($faction);
+                if (floor($faction->getPower() / $this->plugin->getConfig()->getNested("factions.claim.cost", 1)) > ($total = count(ClaimsManager::getInstance()->getFactionClaims($faction)))) {
+                    if ($total < ($max = $this->plugin->getConfig()->getNested("factions.claims.max", -1)) || $max === -1) {
+                        $chunk = $p->getLevel()->getChunkAtPosition($p);
+                        $claim = $this->plugin->getClaimsManager()->getClaim($p->getLevel(), $chunk);
+                        if ($claim === null) {
+                            $this->plugin->getClaimsManager()->createClaim($faction, $p->getLevel(), $chunk);
+                            return;
+                        }
+                        if ($this->plugin->getConfig()->getNested("factions.claim.overclaim", true) && $claim->canBeOverClaimed()) {
+                            $claim->setFaction($faction);
+                        }
                     }
                 }
             }

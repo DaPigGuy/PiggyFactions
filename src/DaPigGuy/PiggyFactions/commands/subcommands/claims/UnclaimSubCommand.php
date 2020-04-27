@@ -25,7 +25,7 @@ class UnclaimSubCommand extends FactionSubCommand
             if ($ev->isCancelled()) return;
 
             foreach (ClaimsManager::getInstance()->getFactionClaims($faction) as $claim) {
-                ClaimsManager::getInstance()->deleteClaim($claim->getId());
+                ClaimsManager::getInstance()->deleteClaim($claim);
             }
             LanguageManager::getInstance()->sendMessage($sender, "commands.unclaim.all.success");
             return;
@@ -45,7 +45,7 @@ class UnclaimSubCommand extends FactionSubCommand
         $ev->call();
         if ($ev->isCancelled()) return;
 
-        ClaimsManager::getInstance()->deleteClaim($claim->getId());
+        ClaimsManager::getInstance()->deleteClaim($claim);
         LanguageManager::getInstance()->sendMessage($sender, "commands.unclaim.success");
     }
 

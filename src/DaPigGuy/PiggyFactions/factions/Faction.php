@@ -371,7 +371,7 @@ class Faction
             $member->setRole(null);
         }
         foreach (ClaimsManager::getInstance()->getFactionClaims($this) as $claim) {
-            ClaimsManager::getInstance()->deleteClaim($claim->getId());
+            ClaimsManager::getInstance()->deleteClaim($claim);
         }
         foreach ($this->relations as $id => $relation) {
             if ($relation === self::RELATION_ALLY || $relation === self::RELATION_TRUCE) {

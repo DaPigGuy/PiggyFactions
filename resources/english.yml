@@ -24,6 +24,7 @@ commands:
     toggled-off: "{RED}You are no longer in the {CHAT} chat."
   claim:
     blacklisted-world: "{RED}Claiming is not allowed in this world."
+    max-claimed: "{RED}You can not claim any more land."
     already-claimed: "{RED}This chunk is already claimed."
     no-power: "{RED}Your faction has an insufficient amount of power."
     success: "{GREEN}This chunk has been claimed."
@@ -84,6 +85,7 @@ commands:
     success: "{GREEN}{PLAYER} has been promoted to {ROLE}."
     promoted: "{GREEN}You were promoted to {ROLE}"
   sethome:
+    not-within-territory: "{RED}Faction home must be within faction territory."
     success: "{GREEN}Faction home has been set."
   top:
     header: "{GOLD}____________.[{DARK_GREEN}Top Factions by {CATEGORY} ({PAGE}/{TOTALPAGES}){GOLD}].____________"
@@ -110,6 +112,10 @@ commands:
 death:
   power: "{RED}Your power is now {POWER}."
 motd: "{GOLD}____________.[{DARK_GREEN}{FACTION} MOTD{GOLD}].____________\n{WHITE}{MOTD}"
+pvp:
+  attacker-factionless: "{RED}You can not hurt other players until you have joined a faction."
+  target-factionless: "{RED}You can not hurt players who are not currently in a faction."
+  cant-attack-in-territory: "{RED}You can not hurt {PLAYER} in their own territory unless you declare them as enemy."
 territory-titles:
   wilderness-title: "{DARK_GREEN}Wilderness"
   wilderness-subtitle: ""

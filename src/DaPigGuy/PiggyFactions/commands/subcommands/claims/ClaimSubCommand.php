@@ -28,9 +28,17 @@ class ClaimSubCommand extends FactionSubCommand
             LanguageManager::getInstance()->sendMessage($sender, "commands.claim.blacklisted-world");
             return;
         }
+        if ($faction->getPower() / $this->plugin->getConfig()->getNested("factions.claim.cost", 1) < count(ClaimsManager::getInstance()->getFactionClaims($faction)) + 1) {
+            LanguageManager::getInstance()->sendMessage($sender, "commands.claim.no-power");
+            return;
+        }
+        if (count(ClaimsManager::getInstance()->getFactionClaims($faction)) >= ($max = $this->plugin->getConfig()->getNested("factions.claims.max", -1)) && $max !== -1) {
+            LanguageManager::getInstance()->sendMessage($sender, "commands.claim.max-claimed");
+            return;
+        }
         $claim = ClaimsManager::getInstance()->getClaim($sender->getLevel(), $sender->getLevel()->getChunkAtPosition($sender));
         if ($claim !== null) {
-            if ($claim->canBeOverClaimed() && $claim->getFaction() !== $faction) {
+            if ($this->plugin->getConfig()->getNested("factions.claim.overclaim", true) && $claim->canBeOverClaimed() && $claim->getFaction() !== $faction) {
                 LanguageManager::getInstance()->sendMessage($sender, "commands.claim.over-claimed");
                 $claim->setFaction($faction);
                 return;
@@ -38,10 +46,7 @@ class ClaimSubCommand extends FactionSubCommand
             LanguageManager::getInstance()->sendMessage($sender, "commands.claim.already-claimed");
             return;
         }
-        if ($faction->getPower() / $this->plugin->getConfig()->getNested("factions.claim.cost", 1) < count(ClaimsManager::getInstance()->getFactionClaims($faction)) + 1) {
-            LanguageManager::getInstance()->sendMessage($sender, "commands.claim.no-power");
-            return;
-        }
+
         $ev = new ClaimChunkEvent($faction, $sender->getLevel()->getChunkAtPosition($sender));
         $ev->call();
         if ($ev->isCancelled()) return;

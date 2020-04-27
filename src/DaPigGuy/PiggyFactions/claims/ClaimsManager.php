@@ -64,13 +64,13 @@ class ClaimsManager
             "level" => $level->getFolderName()
         ];
         $this->plugin->getDatabase()->executeInsert("piggyfactions.claims.create", $args, function (int $id) use ($args): void {
-            $this->claims[$id] = new Claim($id, ...array_values($args));
+            $this->claims[$args["chunkX"] . ":" . $args["chunkZ"] . ":" . $args["level"]] = new Claim($id, ...array_values($args));
         });
     }
 
-    public function deleteClaim(int $id): void
+    public function deleteClaim(Claim $claim): void
     {
-        unset($this->claims[$id]);
-        $this->plugin->getDatabase()->executeGeneric("piggyfactions.claims.delete", ["id" => $id]);
+        unset($this->claims[$claim->getChunk()->getX() . ":" . $claim->getChunk()->getZ() . ":" . $claim->getLevel()->getFolderName()]);
+        $this->plugin->getDatabase()->executeGeneric("piggyfactions.claims.delete", ["id" => $claim->getId()]);
     }
 }
