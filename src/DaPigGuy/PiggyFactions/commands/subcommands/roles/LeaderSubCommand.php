@@ -11,13 +11,14 @@ use DaPigGuy\PiggyFactions\event\role\FactionLeadershipTransferEvent;
 use DaPigGuy\PiggyFactions\factions\Faction;
 use DaPigGuy\PiggyFactions\language\LanguageManager;
 use DaPigGuy\PiggyFactions\players\FactionsPlayer;
+use DaPigGuy\PiggyFactions\utils\Roles;
 use pocketmine\Player;
 
 class LeaderSubCommand extends FactionSubCommand
 {
     public function onNormalRun(Player $sender, ?Faction $faction, FactionsPlayer $member, string $aliasUsed, array $args): void
     {
-        if ($member->getRole() !== Faction::ROLE_LEADER && !$member->isInAdminMode()) {
+        if ($member->getRole() !== Roles::LEADER && !$member->isInAdminMode()) {
             LanguageManager::getInstance()->sendMessage($sender, "commands.not-leader");
             return;
         }
@@ -31,9 +32,9 @@ class LeaderSubCommand extends FactionSubCommand
         $ev->call();
         if ($ev->isCancelled()) return;
 
-        $faction->getMemberByUUID($faction->getLeader())->setRole(Faction::ROLE_MEMBER);
+        $faction->getMemberByUUID($faction->getLeader())->setRole(Roles::MEMBER);
         $faction->setLeader($targetMember->getUuid());
-        $targetMember->setRole(Faction::ROLE_LEADER);
+        $targetMember->setRole(Roles::LEADER);
         if (($player = $this->plugin->getServer()->getPlayerByUUID($targetMember->getUuid())) instanceof Player) LanguageManager::getInstance()->sendMessage($player, "commands.leader.recipient");
         LanguageManager::getInstance()->sendMessage($sender, "commands.leader.success", ["{PLAYER}" => $targetMember->getUsername()]);
     }

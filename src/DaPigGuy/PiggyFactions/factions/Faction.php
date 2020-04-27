@@ -6,39 +6,19 @@ namespace DaPigGuy\PiggyFactions\factions;
 
 use DaPigGuy\PiggyFactions\claims\ClaimsManager;
 use DaPigGuy\PiggyFactions\language\LanguageManager;
+use DaPigGuy\PiggyFactions\permissions\FactionPermission;
+use DaPigGuy\PiggyFactions\permissions\PermissionFactory;
 use DaPigGuy\PiggyFactions\PiggyFactions;
 use DaPigGuy\PiggyFactions\players\FactionsPlayer;
 use DaPigGuy\PiggyFactions\players\PlayerManager;
+use DaPigGuy\PiggyFactions\utils\Relations;
+use DaPigGuy\PiggyFactions\utils\Roles;
 use pocketmine\level\Position;
 use pocketmine\Player;
 use pocketmine\utils\UUID;
 
 class Faction
 {
-    const ROLE_LEADER = "leader";
-    const ROLE_OFFICER = "officer";
-    const ROLE_MEMBER = "member";
-    const ROLE_RECRUIT = "recruit";
-
-    const ROLES = [
-        self::ROLE_RECRUIT => 1,
-        self::ROLE_MEMBER => 2,
-        self::ROLE_OFFICER => 3,
-        self::ROLE_LEADER => 4
-    ];
-
-    const RELATION_ALLY = "ally";
-    const RELATION_TRUCE = "truce";
-    const RELATION_ENEMY = "enemy";
-    const RELATION_NONE = "none";
-
-    const RELATIONS = [
-        self::RELATION_ALLY,
-        self::RELATION_TRUCE,
-        self::RELATION_NONE,
-        self::RELATION_ENEMY
-    ];
-
     const PERMISSIONS = [
         "ally",
         "build",
@@ -222,7 +202,7 @@ class Faction
     {
         $this->members[] = $member->getUniqueId();
         PlayerManager::getInstance()->getPlayer($member->getUniqueId())->setFaction($this);
-        PlayerManager::getInstance()->getPlayer($member->getUniqueId())->setRole(self::ROLE_RECRUIT);
+        PlayerManager::getInstance()->getPlayer($member->getUniqueId())->setRole(Roles::RECRUIT);
         foreach ($this->getOnlineMembers() as $online) {
             LanguageManager::getInstance()->sendMessage($online, "commands.join.joined", ["{PLAYER}" => $member->getName()]);
         }
@@ -255,8 +235,8 @@ class Faction
     public function hasPermission(FactionsPlayer $member, string $permission): bool
     {
         $role = $member->getRole();
-        if (($faction = $member->getFaction()) !== $this) $role = $faction === null ? self::RELATION_NONE : $faction->getRelation($this);
-        if ($role === Faction::ROLE_LEADER || $member->isInAdminMode()) return true;
+        if (($faction = $member->getFaction()) !== $this) $role = $faction === null ? Relations::NONE : $faction->getRelation($this);
+        if ($role === Roles::LEADER || $member->isInAdminMode()) return true;
         return $this->getPermission($role, $permission);
     }
 
@@ -284,7 +264,7 @@ class Faction
 
     public function getRelationWish(Faction $faction): string
     {
-        return $this->relationWish[$faction->getId()] ?? self::RELATION_NONE;
+        return $this->relationWish[$faction->getId()] ?? Relations::NONE;
     }
 
     public function setRelationWish(Faction $faction, string $relation): void
@@ -299,7 +279,7 @@ class Faction
 
     public function getRelation(Faction $faction): string
     {
-        return $this->relations[$faction->getId()] ?? self::RELATION_NONE;
+        return $this->relations[$faction->getId()] ?? Relations::NONE;
     }
 
     public function setRelation(Faction $faction, string $relation): void
@@ -313,9 +293,9 @@ class Faction
         $relation = $this->getRelation($faction);
         unset($this->relations[$faction->getId()]);
         switch ($relation) {
-            case self::RELATION_ALLY:
-            case self::RELATION_TRUCE:
-                if ($faction->getRelation($this) !== self::RELATION_NONE) $faction->revokeRelation($faction);
+            case Relations::ALLY:
+            case Relations::TRUCE:
+                if ($faction->getRelation($this) !== Relations::NONE) $faction->revokeRelation($faction);
                 break;
         }
         $this->update();
@@ -328,7 +308,7 @@ class Faction
     {
         $allies = [];
         foreach ($this->relations as $id => $relation) {
-            if ($relation === self::RELATION_ALLY) {
+            if ($relation === Relations::ALLY) {
                 $allies[] = FactionsManager::getInstance()->getFaction($id);
             }
         }
@@ -342,7 +322,7 @@ class Faction
     {
         $allies = [];
         foreach ($this->relations as $id => $relation) {
-            if ($relation === self::RELATION_ENEMY) {
+            if ($relation === Relations::ENEMY) {
                 $allies[] = FactionsManager::getInstance()->getFaction($id);
             }
         }
@@ -351,17 +331,17 @@ class Faction
 
     public function isAllied(Faction $faction): bool
     {
-        return ($this->relations[$faction->getId()] ?? self::RELATION_NONE) === self::RELATION_ALLY;
+        return ($this->relations[$faction->getId()] ?? Relations::NONE) === Relations::ALLY;
     }
 
     public function isTruced(Faction $faction): bool
     {
-        return ($this->relations[$faction->getId()] ?? self::RELATION_NONE) === self::RELATION_TRUCE;
+        return ($this->relations[$faction->getId()] ?? Relations::NONE) === Relations::TRUCE;
     }
 
     public function isEnemy(Faction $faction): bool
     {
-        return ($this->relations[$faction->getId()] ?? self::RELATION_NONE) === self::RELATION_ENEMY;
+        return ($this->relations[$faction->getId()] ?? Relations::NONE) === Relations::ENEMY;
     }
 
     public function disband(): void
@@ -374,7 +354,7 @@ class Faction
             ClaimsManager::getInstance()->deleteClaim($claim);
         }
         foreach ($this->relations as $id => $relation) {
-            if ($relation === self::RELATION_ALLY || $relation === self::RELATION_TRUCE) {
+            if ($relation === Relations::ALLY || $relation === Relations::TRUCE) {
                 $faction = FactionsManager::getInstance()->getFaction($id);
                 $faction->revokeRelation($this);
             }

@@ -11,6 +11,7 @@ use DaPigGuy\PiggyFactions\event\role\FactionRoleChangeEvent;
 use DaPigGuy\PiggyFactions\factions\Faction;
 use DaPigGuy\PiggyFactions\language\LanguageManager;
 use DaPigGuy\PiggyFactions\players\FactionsPlayer;
+use DaPigGuy\PiggyFactions\utils\Roles;
 use pocketmine\Player;
 
 class PromoteSubCommand extends FactionSubCommand
@@ -23,15 +24,15 @@ class PromoteSubCommand extends FactionSubCommand
             return;
         }
         $currentRole = $targetMember->getRole();
-        if ($currentRole === Faction::ROLE_OFFICER) {
+        if ($currentRole === Roles::OFFICER) {
             LanguageManager::getInstance()->sendMessage($sender, "commands.promote.already-maxed", ["{PLAYER}" => $targetMember->getUsername()]);
             return;
         }
-        if (Faction::ROLES[$currentRole] + 1 >= Faction::ROLES[$member->getRole()] && !$member->isInAdminMode()) {
+        if (Roles::ALL[$currentRole] + 1 >= Roles::ALL[$member->getRole()] && !$member->isInAdminMode()) {
             LanguageManager::getInstance()->sendMessage($sender, "commands.promote.cant-promote-higher", ["{PLAYER}" => $targetMember->getUsername()]);
             return;
         }
-        $ev = new FactionRoleChangeEvent($faction, $targetMember, $currentRole, ($role = array_keys(Faction::ROLES)[Faction::ROLES[$currentRole]]));
+        $ev = new FactionRoleChangeEvent($faction, $targetMember, $currentRole, ($role = array_keys(Roles::ALL)[Roles::ALL[$currentRole]]));
         $ev->call();
         if ($ev->isCancelled()) return;
         $targetMember->setRole($role);

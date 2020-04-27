@@ -10,6 +10,7 @@ use DaPigGuy\PiggyFactions\factions\Faction;
 use DaPigGuy\PiggyFactions\factions\FactionsManager;
 use DaPigGuy\PiggyFactions\language\LanguageManager;
 use DaPigGuy\PiggyFactions\players\FactionsPlayer;
+use DaPigGuy\PiggyFactions\utils\Roles;
 use pocketmine\Player;
 
 class InfoSubCommand extends FactionSubCommand
@@ -50,9 +51,9 @@ class InfoSubCommand extends FactionSubCommand
             "{ENEMIES}" => implode(",", array_map(function (Faction $f): string {
                 return $f->getName();
             }, $faction->getEnemies())),
-            "{OFFICERS}" => implode(",", $memberNamesByRole[Faction::ROLE_OFFICER] ?? []),
-            "{MEMBERS}" => implode(",", $memberNamesByRole[Faction::ROLE_MEMBER] ?? []),
-            "{RECRUITS}" => implode(",", $memberNamesByRole[Faction::ROLE_RECRUIT] ?? []),
+            "{OFFICERS}" => implode(",", $memberNamesByRole[Roles::OFFICER] ?? []),
+            "{MEMBERS}" => implode(",", $memberNamesByRole[Roles::MEMBER] ?? []),
+            "{RECRUITS}" => implode(",", $memberNamesByRole[Roles::RECRUIT] ?? []),
             "{PLAYERS}" => implode(",", $memberNamesWithRole),
             "{TOTALPLAYERS}" => count($faction->getMembers()),
             "{ONLINECOUNT}" => count($faction->getOnlineMembers())

@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace DaPigGuy\PiggyFactions\factions;
 
+use DaPigGuy\PiggyFactions\permissions\PermissionFactory;
 use DaPigGuy\PiggyFactions\PiggyFactions;
+use DaPigGuy\PiggyFactions\utils\Roles;
 use pocketmine\level\Position;
 use pocketmine\Player;
 use pocketmine\utils\UUID;
@@ -70,7 +72,7 @@ class FactionsManager
         $this->plugin->getDatabase()->executeInsert("piggyfactions.factions.create", ["name" => $name, "leader" => $leader->getUniqueId()->toString(), "members" => json_encode([$leader->getUniqueId()->toString()]), "permissions" => json_encode(Faction::DEFAULT_PERMISSIONS)], function (int $id) use ($name, $leader): void {
             $this->factions[$id] = new Faction($id, $name, $leader->getUniqueId(), null, null, [$leader->getUniqueId()->toString()], Faction::DEFAULT_PERMISSIONS, null, []);
             $this->plugin->getPlayerManager()->getPlayer($leader->getUniqueId())->setFaction($this->factions[$id]);
-            $this->plugin->getPlayerManager()->getPlayer($leader->getUniqueId())->setRole(Faction::ROLE_LEADER);
+            $this->plugin->getPlayerManager()->getPlayer($leader->getUniqueId())->setRole(Roles::LEADER);
         });
     }
 

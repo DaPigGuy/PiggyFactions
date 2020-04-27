@@ -12,6 +12,7 @@ use DaPigGuy\PiggyFactions\factions\Faction;
 use DaPigGuy\PiggyFactions\factions\FactionsManager;
 use DaPigGuy\PiggyFactions\language\LanguageManager;
 use DaPigGuy\PiggyFactions\players\FactionsPlayer;
+use DaPigGuy\PiggyFactions\utils\Relations;
 use pocketmine\Player;
 
 class EnemySubCommand extends FactionSubCommand
@@ -31,11 +32,11 @@ class EnemySubCommand extends FactionSubCommand
             LanguageManager::getInstance()->sendMessage($sender, "commands.enemy.already-enemy", ["{FACTION}" => $faction->getName()]);
             return;
         }
-        $ev = new FactionRelationEvent([$faction, $targetFaction], Faction::RELATION_ENEMY);
+        $ev = new FactionRelationEvent([$faction, $targetFaction], Relations::ENEMY);
         $ev->call();
         if ($ev->isCancelled()) return;
 
-        $faction->setRelation($targetFaction, Faction::RELATION_ENEMY);
+        $faction->setRelation($targetFaction, Relations::ENEMY);
         foreach ($faction->getOnlineMembers() as $p) {
             LanguageManager::getInstance()->sendMessage($p, "commands.enemy.success", ["{FACTION}" => $faction->getName()]);
         }

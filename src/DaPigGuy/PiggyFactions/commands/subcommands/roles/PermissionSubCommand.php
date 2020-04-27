@@ -11,14 +11,17 @@ use DaPigGuy\PiggyFactions\commands\subcommands\FactionSubCommand;
 use DaPigGuy\PiggyFactions\event\role\FactionPermissionChangeEvent;
 use DaPigGuy\PiggyFactions\factions\Faction;
 use DaPigGuy\PiggyFactions\language\LanguageManager;
+use DaPigGuy\PiggyFactions\permissions\PermissionFactory;
 use DaPigGuy\PiggyFactions\players\FactionsPlayer;
+use DaPigGuy\PiggyFactions\utils\Relations;
+use DaPigGuy\PiggyFactions\utils\Roles;
 use pocketmine\Player;
 
 class PermissionSubCommand extends FactionSubCommand
 {
     public function onNormalRun(Player $sender, ?Faction $faction, FactionsPlayer $member, string $aliasUsed, array $args): void
     {
-        if ($member->getRole() !== Faction::ROLE_LEADER && !$member->isInAdminMode()) {
+        if ($member->getRole() !== Roles::LEADER && !$member->isInAdminMode()) {
             LanguageManager::getInstance()->sendMessage($sender, "commands.not-leader");
             return;
         }
@@ -26,7 +29,7 @@ class PermissionSubCommand extends FactionSubCommand
             LanguageManager::getInstance()->sendMessage($sender, "commands.permission.permission-not-found");
             return;
         }
-        if (!isset(Faction::ROLES[$args["role"]]) && !in_array($args["role"], Faction::RELATIONS)) {
+        if (!isset(Roles::ALL[$args["role"]]) && !in_array($args["role"], Relations::ALL)) {
             LanguageManager::getInstance()->sendMessage($sender, "commands.permission.role-not-found");
             return;
         }

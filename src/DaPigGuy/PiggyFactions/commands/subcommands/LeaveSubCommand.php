@@ -8,13 +8,14 @@ use DaPigGuy\PiggyFactions\event\member\FactionLeaveEvent;
 use DaPigGuy\PiggyFactions\factions\Faction;
 use DaPigGuy\PiggyFactions\language\LanguageManager;
 use DaPigGuy\PiggyFactions\players\FactionsPlayer;
+use DaPigGuy\PiggyFactions\utils\Roles;
 use pocketmine\Player;
 
 class LeaveSubCommand extends FactionSubCommand
 {
     public function onNormalRun(Player $sender, ?Faction $faction, FactionsPlayer $member, string $aliasUsed, array $args): void
     {
-        if ($member->getRole() === Faction::ROLE_LEADER) {
+        if ($member->getRole() === Roles::LEADER) {
             LanguageManager::getInstance()->sendMessage($sender, "commands.leave.is-leader");
             return;
         }

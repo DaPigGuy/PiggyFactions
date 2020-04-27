@@ -11,6 +11,7 @@ use DaPigGuy\PiggyFactions\event\role\FactionRoleChangeEvent;
 use DaPigGuy\PiggyFactions\factions\Faction;
 use DaPigGuy\PiggyFactions\language\LanguageManager;
 use DaPigGuy\PiggyFactions\players\FactionsPlayer;
+use DaPigGuy\PiggyFactions\utils\Roles;
 use pocketmine\Player;
 
 class DemoteSubCommand extends FactionSubCommand
@@ -23,16 +24,16 @@ class DemoteSubCommand extends FactionSubCommand
             LanguageManager::getInstance()->sendMessage($sender, "commands.member-not-found", ["{PLAYER}" => $args["name"]]);
             return;
         }
-        if (Faction::ROLES[$targetMember->getRole()] >= Faction::ROLES[$member->getRole()] && !$member->isInAdminMode()) {
+        if (Roles::ALL[$targetMember->getRole()] >= Roles::ALL[$member->getRole()] && !$member->isInAdminMode()) {
             LanguageManager::getInstance()->sendMessage($sender, "commands.demote.cant-demote-higher", ["{PLAYER}" => $targetMember->getUsername()]);
             return;
         }
         $currentRole = $targetMember->getRole();
-        if ($currentRole === Faction::ROLE_RECRUIT) {
+        if ($currentRole === Roles::RECRUIT) {
             LanguageManager::getInstance()->sendMessage($sender, "commands.demote.already-lowest", ["{PLAYER}" => $targetMember->getUsername()]);
             return;
         }
-        $ev = new FactionRoleChangeEvent($faction, $targetMember, $currentRole, ($role = array_keys(Faction::ROLES)[Faction::ROLES[$currentRole] - 2]));
+        $ev = new FactionRoleChangeEvent($faction, $targetMember, $currentRole, ($role = array_keys(Roles::ALL)[Roles::ALL[$currentRole] - 2]));
         $ev->call();
         if ($ev->isCancelled()) return;
         $targetMember->setRole($role);

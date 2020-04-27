@@ -11,6 +11,7 @@ use DaPigGuy\PiggyFactions\event\management\FactionKickEvent;
 use DaPigGuy\PiggyFactions\factions\Faction;
 use DaPigGuy\PiggyFactions\language\LanguageManager;
 use DaPigGuy\PiggyFactions\players\FactionsPlayer;
+use DaPigGuy\PiggyFactions\utils\Roles;
 use pocketmine\Player;
 
 class KickSubCommand extends FactionSubCommand
@@ -22,7 +23,7 @@ class KickSubCommand extends FactionSubCommand
             LanguageManager::getInstance()->sendMessage($sender, "commands.member-not-found", ["{PLAYER}" => $args["name"]]);
             return;
         }
-        if (Faction::ROLES[$target->getRole()] >= Faction::ROLES[$member->getRole()] && $target->getRole() !== Faction::ROLE_LEADER && !$member->isInAdminMode()) {
+        if (Roles::ALL[$target->getRole()] >= Roles::ALL[$member->getRole()] && $target->getRole() !== Roles::LEADER && !$member->isInAdminMode()) {
             LanguageManager::getInstance()->sendMessage($sender, "commands.kick.cant-kick-higher", ["{PLAYER}" => $target->getUsername()]);
             return;
         }
