@@ -7,6 +7,7 @@ namespace DaPigGuy\PiggyFactions\commands\subcommands;
 use CortexPE\Commando\BaseSubCommand;
 use DaPigGuy\PiggyFactions\factions\Faction;
 use DaPigGuy\PiggyFactions\language\LanguageManager;
+use DaPigGuy\PiggyFactions\permissions\PermissionFactory;
 use DaPigGuy\PiggyFactions\PiggyFactions;
 use DaPigGuy\PiggyFactions\players\FactionsPlayer;
 use DaPigGuy\PiggyFactions\players\PlayerManager;
@@ -44,7 +45,7 @@ abstract class FactionSubCommand extends BaseSubCommand
                 LanguageManager::getInstance()->sendMessage($sender, "commands.not-in-faction");
                 return;
             }
-            if (in_array($this->getName(), Faction::PERMISSIONS)) {
+            if (PermissionFactory::getPermission($this->getName()) !== null) {
                 if (!$faction->hasPermission($member, $this->getName())) {
                     LanguageManager::getInstance()->sendMessage($sender, "commands.no-permission");
                     return;

@@ -17,6 +17,7 @@ use DaPigGuy\PiggyFactions\claims\ClaimsManager;
 use DaPigGuy\PiggyFactions\commands\FactionCommand;
 use DaPigGuy\PiggyFactions\factions\FactionsManager;
 use DaPigGuy\PiggyFactions\language\LanguageManager;
+use DaPigGuy\PiggyFactions\permissions\PermissionFactory;
 use DaPigGuy\PiggyFactions\players\PlayerManager;
 use DaPigGuy\PiggyFactions\task\AutoClaimTask;
 use DaPigGuy\PiggyFactions\task\ShowChunksTask;
@@ -69,6 +70,8 @@ class PiggyFactions extends PluginBase
 
         libPiggyEconomy::init();
         $this->economyProvider = libPiggyEconomy::getProvider($this->getConfig()->get("economy"));
+
+        PermissionFactory::init();
 
         $this->factionsManager = new FactionsManager($this);
         $this->claimsManager = new ClaimsManager($this);

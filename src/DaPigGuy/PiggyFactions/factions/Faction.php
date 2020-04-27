@@ -19,49 +19,6 @@ use pocketmine\utils\UUID;
 
 class Faction
 {
-    const PERMISSIONS = [
-        "ally",
-        "build",
-        "claim",
-        "containers",
-        "demote",
-        "description",
-        "enemy",
-        "invite",
-        "interact",
-        "kick",
-        "motd",
-        "name",
-        "promote",
-        "sethome",
-        "unally",
-        "unclaim"
-    ];
-    const DEFAULT_PERMISSIONS = [
-        self::ROLE_OFFICER => [
-            "build" => true,
-            "claim" => true,
-            "containers" => true,
-            "description" => true,
-            "invite" => true,
-            "interact" => true,
-            "kick" => true,
-            "motd" => true,
-            "sethome" => true
-        ],
-        self::ROLE_MEMBER => [
-            "build" => true,
-            "containers" => true,
-            "interact" => true
-        ],
-        self::ROLE_RECRUIT => [
-            "interact" => true
-        ],
-        self::RELATION_ALLY => [
-            "interact" => true
-        ]
-    ];
-
     /** @var int */
     private $id;
     /** @var string */
@@ -74,7 +31,7 @@ class Faction
     private $motd;
     /** @var UUID[] */
     private $members;
-    /** @var array */
+    /** @var FactionPermission[] */
     private $permissions;
     /** @var ?Position */
     private $home;
@@ -97,7 +54,11 @@ class Faction
         $this->members = array_map(function (string $uuid): UUID {
             return UUID::fromString($uuid);
         }, $members);
-        $this->permissions = $permissions;
+        foreach (PermissionFactory::getPermissions() as $name => $permission) {
+            $permission = clone $permission;
+            if (isset($permissions[$name])) $permission->setHolders($permissions[$name]);
+            $this->permissions[$name] = $permission;
+        }
         $this->home = $home;
         $this->relations = $relations;
     }
@@ -242,12 +203,16 @@ class Faction
 
     public function getPermission(string $role, string $permission): bool
     {
-        return $this->permissions[$role][$permission] ?? self::DEFAULT_PERMISSIONS[$role][$permission] ?? false;
+        return in_array($role, $this->permissions[$permission]->getHolders());
     }
 
     public function setPermission(string $role, string $permission, bool $value): void
     {
-        $this->permissions[$role][$permission] = $value;
+        if ($value) {
+            $this->permissions[$permission]->addHolder($role);
+        } else {
+            $this->permissions[$permission]->removeHolder($role);
+        }
         $this->update();
     }
 

@@ -25,7 +25,7 @@ class PermissionSubCommand extends FactionSubCommand
             LanguageManager::getInstance()->sendMessage($sender, "commands.not-leader");
             return;
         }
-        if (!in_array($args["permission"], Faction::PERMISSIONS)) {
+        if (PermissionFactory::getPermission($args["permission"]) === null) {
             LanguageManager::getInstance()->sendMessage($sender, "commands.permission.permission-not-found");
             return;
         }
