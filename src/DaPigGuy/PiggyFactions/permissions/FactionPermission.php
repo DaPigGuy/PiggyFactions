@@ -61,7 +61,7 @@ class FactionPermission implements \JsonSerializable
         unset($this->holders[array_search($holder, $this->holders)]);
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return $this->holders;
     }
