@@ -32,7 +32,7 @@ class LeaderSubCommand extends FactionSubCommand
         $ev->call();
         if ($ev->isCancelled()) return;
 
-        if ($leader = $faction->getLeader() !== null) $leader->setRole(Roles::MEMBER);
+        if (($leader = $faction->getLeader()) !== null) $leader->setRole(Roles::MEMBER);
         $targetMember->setRole(Roles::LEADER);
         if (($player = $this->plugin->getServer()->getPlayerByUUID($targetMember->getUuid())) instanceof Player) LanguageManager::getInstance()->sendMessage($player, "commands.leader.recipient");
         LanguageManager::getInstance()->sendMessage($sender, "commands.leader.success", ["{PLAYER}" => $targetMember->getUsername()]);
