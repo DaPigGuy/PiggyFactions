@@ -8,6 +8,7 @@ use CortexPE\Commando\args\IntegerArgument;
 use CortexPE\Commando\args\RawStringArgument;
 use DaPigGuy\PiggyFactions\factions\Faction;
 use DaPigGuy\PiggyFactions\factions\FactionsManager;
+use DaPigGuy\PiggyFactions\flags\Flag;
 use DaPigGuy\PiggyFactions\language\LanguageManager;
 use DaPigGuy\PiggyFactions\players\FactionsPlayer;
 use pocketmine\command\CommandSender;
@@ -37,7 +38,9 @@ class TopSubCommand extends FactionSubCommand
             return;
         }
 
-        $factions = FactionsManager::getInstance()->getFactions();
+        $factions = array_filter(FactionsManager::getInstance()->getFactions(), function (Faction $faction): bool {
+            return !$faction->getFlag(Flag::SAFEZONE) && !$faction->getFlag(Flag::WARZONE);
+        });
         usort($factions, $types[$type]);
 
         $language = $sender instanceof Player ? LanguageManager::getInstance()->getPlayerLanguage($sender) : LanguageManager::DEFAULT_LANGUAGE;

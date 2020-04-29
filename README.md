@@ -32,12 +32,68 @@ PiggyFactions is an open-sourced factions plugin for [PocketMine-MP](https://git
 ## Commands
 | Command | Description | Permissions | Aliases |
 | --- | --- | --- | --- |
-<!-- TODO -->
+| `/f` | PiggyFactions main command | `piggyfactions.command.faction.use` |
+| `/f admin` | Toggle admin mode | `piggyfactions.command.faction.admin` |
+| `/f ally <faction>` | Ally with other factions | `piggyfactions.command.faction.ally` |
+| `/f allychat` | Toggle ally chat | `piggyfactions.command.faction.allychat` | `/f ac` |
+| `/f chat` | Toggle faction chat | `piggyfactions.command.faction.chat` | `/f c` |
+| `/f claim [auto]` | Claim a chunk | `piggyfactions.command.faction.claim` |
+| `/f create <name>` | Create a faction | `piggyfactions.command.faction.create` |
+| `/f description <description>` | Set faction description | `piggyfactions.command.faction.description` | `/f desc` |
+| `/f demote <player>` | Demote a faction member | `piggyfactions.command.faction.demote` |
+| `/f disband` | Disband your faction | `piggyfactions.command.faction.disband` |
+| `/f enemy <faction>` | Mark faction as an enemy | `piggyfactions.command.faction.enemy` |
+| `/f flag <flag>` | Manage faction flags | `piggyfactions.command.faction.flag` |
+| `/f home` | Teleport to faction home | `piggyfactions.command.faction.home` |
+| `/f info [faction]` | Display faction info | `piggyfactions.command.faction.info` |
+| `/f invite <player>` | Invite a player to your faction | `piggyfactions.command.faction.invite` |
+| `/f join <faction>` | Join a faction | `piggyfactions.command.faction.join` |
+| `/f kick <player>` | Kick a member from your faction | `piggyfactions.command.faction.kick` |
+| `/f leader <player>` | Transfer leadership of your faction | `piggyfactions.command.faction.leader` |
+| `/f leave` | Leave your faction | `piggyfactions.command.faction.leave` |
+| `/f map` | View map of area | `piggyfactions.command.faction.map` |
+| `/f motd <motd>` | Set faction MOTD | `piggyfactions.command.faction.motd` |
+| `/f name <name>` | Rename your faction | `piggyfactions.command.faction.name` |
+| `/f permission <role> <permission> [value]` | Set faction role permissions | `piggyfactions.command.faction.permission` | `/f perms`
+| `/f promote <player>` | Promote a faction member | `piggyfactions.command.faction.promote` |
+| `/f seechunk` | Toggle chunk visualizer | `piggyfactions.command.faction.seechunk` | `/f sc` |
+| `/f sethome` | Set faction home | `piggyfactions.command.faction.sethome` |
+| `/f top [page]` | Display top factions | `piggyfactions.command.faction.top` |
+| `/f truce <faction>` | Truce with other factions | `piggyfactions.command.faction.truce` |
+| `/f unally <faction>` | End faction alliance | `piggyfactions.command.faction.unally` |
+| `/f unclaim [all]` | Unclaim a chunk | `piggyfactions.command.faction.unclaim` |
 
 ## Permissions
 | Permissions | Description | Default |
 | --- | --- | --- |
-<!-- TODO -->
+| `piggyfactions` | Allow usage of all PiggyFactions features | `op` |
+| `piggyfactions.command` | Allow usage of all PiggyFactions commands | `op`|
+| `piggyfactions.command.faction` | Allow usage of /f subcommands | `op` |
+| `piggyfactions.command.faction.use` | Allow usage of /f | `true` |
+| `piggyfactions.command.faction.admin` | Allow usage of /f admin | `op` |
+| `piggyfactions.command.faction.ally` | Allow usage of /f ally | `true` |
+| `piggyfactions.command.faction.allychat` | Allow usage of /f allychat | `true` |
+| `piggyfactions.command.faction.chat` | Allow usage of /f chat | `true` |
+| `piggyfactions.command.faction.claim` | Allow usage of /f claim | `true` |
+| `piggyfactions.command.faction.create` | Allow usage of /f create | `true` |
+| `piggyfactions.command.faction.demote` | Allow usage of /f demote | `true` |
+| `piggyfactions.command.faction.description` | Allow usage of /f description | `true` |
+| `piggyfactions.command.faction.home` | Allow usage of /f home | `true` |
+| `piggyfactions.command.faction.info` | Allow usage of /f info | `true` |
+| `piggyfactions.command.faction.invite` | Allow usage of /f invite | `true` |
+| `piggyfactions.command.faction.join` | Allow usage of /f join | `true` |
+| `piggyfactions.command.faction.kick` | Allow usage of /f kick | `true` |
+| `piggyfactions.command.faction.leader` | Allow usage of /f leader | `true` |
+| `piggyfactions.command.faction.leave` | Allow usage of /f leave | `true` |
+| `piggyfactions.command.faction.map` | Allow usage of /f map | `true` |
+| `piggyfactions.command.faction.motd` | Allow usage of /f motd | `true` |
+| `piggyfactions.command.faction.name` | Allow usage of /f name | `true` |
+| `piggyfactions.command.faction.permission` | Allow usage of /f permission | `true` |
+| `piggyfactions.command.faction.promote` | Allow usage of /f promote | `true` |
+| `piggyfactions.command.faction.seechunk` | Allow usage of /f seechunk | `true` |
+| `piggyfactions.command.faction.sethome` | Allow usage of /f sethome | `true` |
+| `piggyfactions.command.faction.unally` | Allow usage of /f unally | `true` |
+| `piggyfactions.command.faction.unclaim` | Allow usage of /f unclaim | `true` |
 
 ## Issue Reporting
 * If you experience an unexpected non-crash behavior with PiggyFactions, click [here](https://github.com/DaPigGuy/PiggyFactions/issues/new?assignees=DaPigGuy&labels=bug&template=bug_report.md&title=).
