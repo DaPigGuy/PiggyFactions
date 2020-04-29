@@ -9,9 +9,8 @@ use DaPigGuy\PiggyFactions\flags\FlagFactory;
 use DaPigGuy\PiggyFactions\permissions\FactionPermission;
 use DaPigGuy\PiggyFactions\permissions\PermissionFactory;
 use DaPigGuy\PiggyFactions\PiggyFactions;
-use DaPigGuy\PiggyFactions\utils\Roles;
+use DaPigGuy\PiggyFactions\players\PlayerManager;
 use pocketmine\level\Position;
-use pocketmine\Player;
 use pocketmine\utils\UUID;
 
 class FactionsManager
@@ -38,7 +37,7 @@ class FactionsManager
                     $row["home"] = new Position($decodedHome["x"], $decodedHome["y"], $decodedHome["z"], $this->plugin->getServer()->getLevelByName($decodedHome["level"]));
                 }
 
-                $this->factions[$row["id"]] = new Faction($row["id"], $row["name"], UUID::fromString($row["leader"]), $row["description"], $row["motd"], json_decode($row["members"], true), json_decode($row["permissions"], true), json_decode($row["flags"] ?? "[]", true), $row["home"], isset($row["relations"]) ? json_decode($row["relations"], true) : []);
+                $this->factions[$row["id"]] = new Faction($row["id"], $row["name"], $row["description"], $row["motd"], json_decode($row["members"], true), json_decode($row["permissions"], true), json_decode($row["flags"] ?? "[]", true), $row["home"], isset($row["relations"]) ? json_decode($row["relations"], true) : []);
             }
             $this->plugin->getLogger()->debug("Loaded " . count($rows) . " factions");
         });
@@ -70,18 +69,20 @@ class FactionsManager
         return $this->factions;
     }
 
-    public function createFaction(string $name, Player $leader): void
+    public function createFaction(string $name, array $members, ?array $flags = null): void
     {
-        $this->plugin->getDatabase()->executeInsert("piggyfactions.factions.create", ["name" => $name, "leader" => $leader->getUniqueId()->toString(), "members" => json_encode([$leader->getUniqueId()->toString()]), "permissions" => json_encode(PermissionFactory::getPermissions()), "flags" => json_encode(FlagFactory::getFlags())], function (int $id) use ($name, $leader): void {
-            $this->factions[$id] = new Faction($id, $name, $leader->getUniqueId(), null, null, [$leader->getUniqueId()->toString()],
+        $flags = $flags ?? FlagFactory::getFlags();
+        $this->plugin->getDatabase()->executeInsert("piggyfactions.factions.create", ["name" => $name, "members" => json_encode($members), "permissions" => json_encode(PermissionFactory::getPermissions()), "flags" => json_encode($flags)], function (int $id) use ($name, $members, $flags): void {
+            $this->factions[$id] = new Faction($id, $name, null, null, $members,
                 array_map(function (FactionPermission $permission): array {
                     return $permission->getHolders();
                 }, PermissionFactory::getPermissions()),
                 array_map(function (Flag $flag): bool {
                     return $flag->getValue();
-                }, FlagFactory::getFlags()), null, []);
-            $this->plugin->getPlayerManager()->getPlayer($leader->getUniqueId())->setFaction($this->factions[$id]);
-            $this->plugin->getPlayerManager()->getPlayer($leader->getUniqueId())->setRole(Roles::LEADER);
+                }, $flags), null, []);
+            foreach ($members as $member) {
+                PlayerManager::getInstance()->getPlayer(UUID::fromString($member))->setFaction($this->factions[$id]);
+            }
         });
     }
 

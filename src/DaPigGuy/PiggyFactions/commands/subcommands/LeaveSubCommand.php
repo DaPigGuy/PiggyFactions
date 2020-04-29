@@ -15,7 +15,7 @@ class LeaveSubCommand extends FactionSubCommand
 {
     public function onNormalRun(Player $sender, ?Faction $faction, FactionsPlayer $member, string $aliasUsed, array $args): void
     {
-        if ($member->getRole() === Roles::LEADER) {
+        if (!$member->isInAdminMode() && $member->getRole() === Roles::LEADER) {
             LanguageManager::getInstance()->sendMessage($sender, "commands.leave.is-leader");
             return;
         }

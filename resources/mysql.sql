@@ -8,7 +8,6 @@ CREATE TABLE IF NOT EXISTS factions
 (
     id          INTEGER PRIMARY KEY AUTO_INCREMENT,
     name        VARCHAR(16) UNIQUE,
-    leader      VARCHAR(36),
     description TEXT,
     motd        TEXT,
     members     JSON,
@@ -26,12 +25,11 @@ FROM factions;
 
 -- # { create
 -- #    :name string
--- #    :leader string
 -- #    :members string
 -- #    :permissions string
 -- #    :flags string
-INSERT INTO factions (name, leader, members, permissions, flags)
-VALUES (:name, :leader, :members, :permissions, :flags);
+INSERT INTO factions (name, members, permissions, flags)
+VALUES (:name, :members, :permissions, :flags);
 -- # }
 
 -- # { delete
@@ -44,7 +42,6 @@ WHERE id = :id;
 -- # { update
 -- #    :id int
 -- #    :name string
--- #    :leader string
 -- #    :description ?string
 -- #    :motd ?string
 -- #    :members string
@@ -54,7 +51,6 @@ WHERE id = :id;
 -- #    :relations string
 UPDATE factions
 SET name=:name,
-    leader=:leader,
     description=:description,
     motd=:motd,
     members=:members,

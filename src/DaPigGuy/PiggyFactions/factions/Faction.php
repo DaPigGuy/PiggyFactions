@@ -25,8 +25,6 @@ class Faction
     private $id;
     /** @var string */
     private $name;
-    /** @var UUID */
-    private $leader;
     /** @var ?string */
     private $description;
     /** @var ?string */
@@ -48,11 +46,10 @@ class Faction
     /** @var array */
     private $invitedPlayers;
 
-    public function __construct(int $id, string $name, UUID $leader, ?string $description, ?string $motd, array $members, array $permissions, array $flags, ?Position $home, array $relations)
+    public function __construct(int $id, string $name, ?string $description, ?string $motd, array $members, array $permissions, array $flags, ?Position $home, array $relations)
     {
         $this->id = $id;
         $this->name = $name;
-        $this->leader = $leader;
         $this->description = $description;
         $this->motd = $motd;
         $this->members = array_map(function (string $uuid): UUID {
@@ -85,17 +82,6 @@ class Faction
     public function setName(string $name): void
     {
         $this->name = $name;
-        $this->update();
-    }
-
-    public function getLeader(): UUID
-    {
-        return $this->leader;
-    }
-
-    public function setLeader(UUID $leader): void
-    {
-        $this->leader = $leader;
         $this->update();
     }
 
@@ -185,6 +171,16 @@ class Faction
         PlayerManager::getInstance()->getPlayer($uuid)->setFaction(null);
         PlayerManager::getInstance()->getPlayer($uuid)->setRole(null);
         $this->update();
+    }
+
+    public function getLeader(): ?FactionsPlayer
+    {
+        foreach ($this->members as $member) {
+            if (($member = PlayerManager::getInstance()->getPlayer($member)) !== null && $member->getRole() === Roles::LEADER) {
+                return $member;
+            }
+        }
+        return null;
     }
 
     public function hasInvite(Player $player): bool
@@ -294,7 +290,7 @@ class Faction
         $allies = [];
         foreach ($this->relations as $id => $relation) {
             if ($relation === Relations::ALLY) {
-                $allies[] = FactionsManager::getInstance()->getFaction($id);
+                if (($ally = FactionsManager::getInstance()->getFaction($id)) !== null) $allies[] = $ally;
             }
         }
         return $allies;
@@ -305,13 +301,13 @@ class Faction
      */
     public function getEnemies(): array
     {
-        $allies = [];
+        $enemies = [];
         foreach ($this->relations as $id => $relation) {
             if ($relation === Relations::ENEMY) {
-                $allies[] = FactionsManager::getInstance()->getFaction($id);
+                if (($enemy = FactionsManager::getInstance()->getFaction($id)) !== null) $enemies[] = $enemy;
             }
         }
-        return $allies;
+        return $enemies;
     }
 
     public function isAllied(Faction $faction): bool
@@ -341,7 +337,7 @@ class Faction
         foreach ($this->relations as $id => $relation) {
             if ($relation === Relations::ALLY || $relation === Relations::TRUCE) {
                 $faction = FactionsManager::getInstance()->getFaction($id);
-                $faction->revokeRelation($this);
+                if ($faction !== null) $faction->revokeRelation($this);
             }
         }
         FactionsManager::getInstance()->deleteFaction($this->getId());
@@ -352,7 +348,6 @@ class Faction
         PiggyFactions::getInstance()->getDatabase()->executeChange("piggyfactions.factions.update", [
             "id" => $this->id,
             "name" => $this->name,
-            "leader" => $this->leader->toString(),
             "description" => $this->description,
             "motd" => $this->motd,
             "members" => json_encode(array_map(function (UUID $uuid): string {

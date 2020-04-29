@@ -36,7 +36,7 @@ class InfoSubCommand extends FactionSubCommand
         $memberNamesByRole = [];
         foreach ($faction->getMembers() as $m) {
             $memberNamesByRole[$m->getRole()][] = $m->getUsername();
-            if (!$m->getUuid()->equals($faction->getLeader())) $memberNamesWithRole[] = $this->plugin->getTagManager()->getPlayerRankSymbol($m) . $m->getUsername();
+            $memberNamesWithRole[] = $this->plugin->getTagManager()->getPlayerRankSymbol($m) . $m->getUsername();
         }
 
         LanguageManager::getInstance()->sendMessage($sender, "commands.info.message", [
@@ -44,7 +44,7 @@ class InfoSubCommand extends FactionSubCommand
             "{DESCRIPTION}" => $faction->getDescription(),
             "{POWER}" => round($faction->getPower(), 2, PHP_ROUND_HALF_DOWN),
             "{TOTALPOWER}" => count($faction->getMembers()) * $this->plugin->getConfig()->getNested("factions.power.max"),
-            "{LEADER}" => $faction->getMemberByUUID($faction->getLeader())->getUsername(),
+            "{LEADER}" => ($leader = $faction->getLeader()) === null ? "" : $leader->getUsername(),
             "{ALLIES}" => implode(",", array_map(function (Faction $f): string {
                 return $f->getName();
             }, $faction->getAllies())),

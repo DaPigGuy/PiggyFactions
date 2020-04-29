@@ -11,6 +11,7 @@ use DaPigGuy\PiggyFactions\event\management\FactionCreateEvent;
 use DaPigGuy\PiggyFactions\factions\Faction;
 use DaPigGuy\PiggyFactions\language\LanguageManager;
 use DaPigGuy\PiggyFactions\players\FactionsPlayer;
+use DaPigGuy\PiggyFactions\utils\Roles;
 use pocketmine\Player;
 
 class CreateSubCommand extends FactionSubCommand
@@ -36,7 +37,8 @@ class CreateSubCommand extends FactionSubCommand
         $ev->call();
         if ($ev->isCancelled()) return;
 
-        $this->plugin->getFactionsManager()->createFaction($args["name"], $sender);
+        $this->plugin->getFactionsManager()->createFaction($args["name"], [$sender->getUniqueId()->toString()]);
+        $member->setRole(Roles::LEADER);
         LanguageManager::getInstance()->sendMessage($sender, "commands.create.success", ["{NAME}" => $args["name"]]);
     }
 

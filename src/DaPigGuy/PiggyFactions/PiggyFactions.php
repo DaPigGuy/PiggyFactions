@@ -95,9 +95,6 @@ class PiggyFactions extends PluginBase
         $this->getScheduler()->scheduleRepeatingTask(new ShowChunksTask($this), 10);
         $this->getScheduler()->scheduleRepeatingTask(new UpdatePowerTask($this), UpdatePowerTask::INTERVAL);
         //$this->getServer()->getAsyncPool()->submitTask(new CheckUpdatesTask($this->getDescription()->getVersion(), $this->getDescription()->getCompatibleApis()[0])); //TODO: Uncomment before Poggit release
-        foreach ($this->getDescription()->getPermissions() as $permission) {
-            echo "| `" . $permission->getName() . "` | " . $permission->getDescription() . " | `" . $permission->getDefault() . "` |\n";
-        }
     }
 
     private function checkSoftDependencies(): void
