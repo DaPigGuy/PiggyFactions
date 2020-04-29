@@ -28,13 +28,15 @@ class ClaimSubCommand extends FactionSubCommand
             LanguageManager::getInstance()->sendMessage($sender, "commands.claim.blacklisted-world");
             return;
         }
-        if ($faction->getPower() / $this->plugin->getConfig()->getNested("factions.claim.cost", 1) < count(ClaimsManager::getInstance()->getFactionClaims($faction)) + 1) {
-            LanguageManager::getInstance()->sendMessage($sender, "commands.claim.no-power");
-            return;
-        }
-        if (count(ClaimsManager::getInstance()->getFactionClaims($faction)) >= ($max = $this->plugin->getConfig()->getNested("factions.claims.max", -1)) && $max !== -1) {
-            LanguageManager::getInstance()->sendMessage($sender, "commands.claim.max-claimed");
-            return;
+        if (!$member->isInAdminMode()) {
+            if ($faction->getPower() / $this->plugin->getConfig()->getNested("factions.claim.cost", 1) < count(ClaimsManager::getInstance()->getFactionClaims($faction)) + 1) {
+                LanguageManager::getInstance()->sendMessage($sender, "commands.claim.no-power");
+                return;
+            }
+            if (count(ClaimsManager::getInstance()->getFactionClaims($faction)) >= ($max = $this->plugin->getConfig()->getNested("factions.claims.max", -1)) && $max !== -1) {
+                LanguageManager::getInstance()->sendMessage($sender, "commands.claim.max-claimed");
+                return;
+            }
         }
         $claim = ClaimsManager::getInstance()->getClaim($sender->getLevel(), $sender->getLevel()->getChunkAtPosition($sender));
         if ($claim !== null) {

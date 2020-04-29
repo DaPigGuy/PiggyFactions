@@ -16,6 +16,7 @@ use DaPigGuy\PiggyFactions\chat\TagManager;
 use DaPigGuy\PiggyFactions\claims\ClaimsManager;
 use DaPigGuy\PiggyFactions\commands\FactionCommand;
 use DaPigGuy\PiggyFactions\factions\FactionsManager;
+use DaPigGuy\PiggyFactions\flags\FlagFactory;
 use DaPigGuy\PiggyFactions\language\LanguageManager;
 use DaPigGuy\PiggyFactions\permissions\PermissionFactory;
 use DaPigGuy\PiggyFactions\players\PlayerManager;
@@ -72,6 +73,7 @@ class PiggyFactions extends PluginBase
         $this->economyProvider = libPiggyEconomy::getProvider($this->getConfig()->get("economy"));
 
         PermissionFactory::init();
+        FlagFactory::init();
 
         $this->factionsManager = new FactionsManager($this);
         $this->claimsManager = new ClaimsManager($this);

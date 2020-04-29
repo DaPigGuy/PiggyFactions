@@ -48,6 +48,11 @@ commands:
     self: "{RED}You can not mark yourself as an enemy."
     already-enemy: "{RED}{FACTION} is already an enemy!"
     success: "{GREEN}{FACTION} has been marked as an enemy."
+  flag:
+    invalid-flag: "{RED}Flag {FLAG} not found."
+    not-editable: "{RED}Flag {FLAG} is not editable."
+    toggled: "{GREEN}Flag {FLAG} has been enabled."
+    toggled-off: "{GREEN}Flag {FLAG} has been disabled."
   home:
     not-set: "{RED}Faction home is not set."
   info:
@@ -71,6 +76,8 @@ commands:
   leave:
     is-leader: "{RED}You are the leader of your faction."
     success: "{YELLOW}You have left your faction."
+  map:
+    header: "{GOLD}____________.[ {GREEN}({X},{Y}) {FACTION} {GOLD}].____________"
   motd:
     success: "{GREEN}Faction MOTD has been set to {MOTD}"
   name:

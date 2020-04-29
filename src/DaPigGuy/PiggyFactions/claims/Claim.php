@@ -6,6 +6,7 @@ namespace DaPigGuy\PiggyFactions\claims;
 
 use DaPigGuy\PiggyFactions\factions\Faction;
 use DaPigGuy\PiggyFactions\factions\FactionsManager;
+use DaPigGuy\PiggyFactions\flags\Flag;
 use DaPigGuy\PiggyFactions\PiggyFactions;
 use pocketmine\level\format\Chunk;
 use pocketmine\level\Level;
@@ -64,6 +65,7 @@ class Claim
     {
         $faction = $this->getFaction();
         if ($faction === null) return false;
+        if ($faction->getFlag(Flag::WARZONE) || $faction->getFlag(Flag::SAFEZONE)) return false;
         return $faction->getPower() / PiggyFactions::getInstance()->getConfig()->getNested("factions.claim.cost", 1) < count(ClaimsManager::getInstance()->getFactionClaims($faction));
     }
 }

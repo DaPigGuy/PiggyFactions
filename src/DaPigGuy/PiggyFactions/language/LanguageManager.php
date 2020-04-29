@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace DaPigGuy\PiggyFactions\language;
 
 use DaPigGuy\PiggyFactions\factions\Faction;
+use DaPigGuy\PiggyFactions\flags\Flag;
 use DaPigGuy\PiggyFactions\PiggyFactions;
 use DaPigGuy\PiggyFactions\players\PlayerManager;
 use pocketmine\command\CommandSender;
@@ -73,7 +74,11 @@ class LanguageManager
     {
         $playerFaction = PlayerManager::getInstance()->getPlayerFaction($player->getUniqueId());
         $relation = "neutral";
-        if ($playerFaction === null) {
+        if ($faction->getFlag(Flag::WARZONE)) {
+            $relation = "warzone";
+        } elseif ($faction->getFlag(Flag::SAFEZONE)) {
+            $relation = "safezone";
+        } elseif ($playerFaction === null) {
             $relation = "neutral";
         } elseif ($playerFaction->getId() === $faction->getId()) {
             $relation = "member";

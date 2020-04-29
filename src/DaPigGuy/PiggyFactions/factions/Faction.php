@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace DaPigGuy\PiggyFactions\factions;
 
 use DaPigGuy\PiggyFactions\claims\ClaimsManager;
+use DaPigGuy\PiggyFactions\flags\Flag;
+use DaPigGuy\PiggyFactions\flags\FlagFactory;
 use DaPigGuy\PiggyFactions\language\LanguageManager;
 use DaPigGuy\PiggyFactions\permissions\FactionPermission;
 use DaPigGuy\PiggyFactions\permissions\PermissionFactory;
@@ -33,6 +35,8 @@ class Faction
     private $members;
     /** @var FactionPermission[] */
     private $permissions;
+    /** @var Flag[] */
+    private $flags;
     /** @var ?Position */
     private $home;
 
@@ -44,7 +48,7 @@ class Faction
     /** @var array */
     private $invitedPlayers;
 
-    public function __construct(int $id, string $name, UUID $leader, ?string $description, ?string $motd, array $members, array $permissions, ?Position $home, array $relations)
+    public function __construct(int $id, string $name, UUID $leader, ?string $description, ?string $motd, array $members, array $permissions, array $flags, ?Position $home, array $relations)
     {
         $this->id = $id;
         $this->name = $name;
@@ -58,6 +62,11 @@ class Faction
             $permission = clone $permission;
             if (isset($permissions[$name])) $permission->setHolders($permissions[$name]);
             $this->permissions[$name] = $permission;
+        }
+        foreach (FlagFactory::getFlags() as $name => $flag) {
+            $flag = clone $flag;
+            if (isset($flags[$name])) $flag->setValue($flags[$name]);
+            $this->flags[$name] = $flag;
         }
         $this->home = $home;
         $this->relations = $relations;
@@ -216,6 +225,17 @@ class Faction
         $this->update();
     }
 
+    public function getFlag(string $flag): bool
+    {
+        return $this->flags[$flag]->getValue();
+    }
+
+    public function setFlag(string $flag, bool $value): void
+    {
+        $this->flags[$flag]->setValue($value);
+        $this->update();
+    }
+
     public function getHome(): ?Position
     {
         return $this->home;
@@ -339,6 +359,7 @@ class Faction
                 return $uuid->toString();
             }, $this->members)),
             "permissions" => json_encode($this->permissions),
+            "flags" => json_encode($this->flags),
             "home" => $this->home === null ? null : json_encode([
                 "x" => $this->home->x,
                 "y" => $this->home->y,

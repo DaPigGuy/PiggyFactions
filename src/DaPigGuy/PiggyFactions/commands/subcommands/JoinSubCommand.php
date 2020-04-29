@@ -8,6 +8,7 @@ use CortexPE\Commando\args\TextArgument;
 use CortexPE\Commando\exception\ArgumentOrderException;
 use DaPigGuy\PiggyFactions\event\member\FactionJoinEvent;
 use DaPigGuy\PiggyFactions\factions\Faction;
+use DaPigGuy\PiggyFactions\flags\Flag;
 use DaPigGuy\PiggyFactions\language\LanguageManager;
 use DaPigGuy\PiggyFactions\players\FactionsPlayer;
 use pocketmine\Player;
@@ -24,7 +25,7 @@ class JoinSubCommand extends FactionSubCommand
             LanguageManager::getInstance()->sendMessage($sender, "commands.invalid-faction", ["{FACTION}" => $args["faction"]]);
             return;
         }
-        if (!$targetFaction->hasInvite($sender) && !$member->isInAdminMode()) {
+        if (!$targetFaction->hasInvite($sender) && !$targetFaction->getFlag(Flag::OPEN) && !$member->isInAdminMode()) {
             LanguageManager::getInstance()->sendMessage($sender, "commands.join.no-invite", ["{FACTION}" => $targetFaction->getName()]);
             return;
         }

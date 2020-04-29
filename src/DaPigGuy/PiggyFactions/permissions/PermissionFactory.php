@@ -20,6 +20,7 @@ class PermissionFactory
         self::registerPermission(new FactionPermission(FactionPermission::DEMOTE, [Roles::LEADER]));
         self::registerPermission(new FactionPermission(FactionPermission::DESCRIPTION, [Roles::LEADER, Roles::OFFICER]));
         self::registerPermission(new FactionPermission(FactionPermission::ENEMY, [Roles::LEADER]));
+        self::registerPermission(new FactionPermission(FactionPermission::FLAG, [Roles::LEADER]));
         self::registerPermission(new FactionPermission(FactionPermission::INVITE, [Roles::LEADER, Roles::OFFICER]));
         self::registerPermission(new FactionPermission(FactionPermission::INTERACT, [Roles::LEADER, Roles::OFFICER, Roles::MEMBER, Roles::RECRUIT]));
         self::registerPermission(new FactionPermission(FactionPermission::KICK, [Roles::LEADER, Roles::OFFICER]));

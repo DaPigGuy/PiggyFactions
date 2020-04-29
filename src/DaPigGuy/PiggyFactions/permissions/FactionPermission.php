@@ -15,6 +15,7 @@ class FactionPermission implements \JsonSerializable
     const DEMOTE = "demote";
     const DESCRIPTION = "description";
     const ENEMY = "enemy";
+    const FLAG = "flag";
     const INVITE = "invite";
     const INTERACT = "interact";
     const KICK = "kick";

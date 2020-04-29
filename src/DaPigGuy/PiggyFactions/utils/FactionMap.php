@@ -36,11 +36,7 @@ class FactionMap
         $center = $player->getLevel()->getChunkAtPosition($player);
         $centerFaction = ($claim = ClaimsManager::getInstance()->getClaim($player->getLevel(), $center)) === null ? null : $claim->getFaction();
 
-        $map = [];
-
-        $head = TextFormat::GREEN . " (" . $center->getX() . "," . $center->getZ() . ") " . ($centerFaction === null ? "Wilderness" : $centerFaction->getName()) . " " . TextFormat::WHITE;
-        $head = TextFormat::GOLD . str_repeat("_", (($width - strlen($head)) / 2)) . ".[" . $head . TextFormat::GOLD . "]." . str_repeat("_", (($width - strlen($head)) / 2));
-        $map[] = $head;
+        $map = [LanguageManager::getInstance()->getMessage(LanguageManager::getInstance()->getPlayerLanguage($player), "commands.map.header", ["{X}" => $center->getX(), "{Z}" => $center->getZ(), "{FACTION}" => $centerFaction === null ? "Wilderness" : $centerFaction->getName()])];
 
         $halfWidth = $width / 2;
         $halfHeight = $height / 2;

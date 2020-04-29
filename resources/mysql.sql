@@ -13,6 +13,7 @@ CREATE TABLE IF NOT EXISTS factions
     motd        TEXT,
     members     JSON,
     permissions JSON,
+    flags       JSON,
     home        JSON,
     relations   JSON
 );
@@ -28,8 +29,9 @@ FROM factions;
 -- #    :leader string
 -- #    :members string
 -- #    :permissions string
-INSERT INTO factions (name, leader, members, permissions)
-VALUES (:name, :leader, :members, :permissions);
+-- #    :flags string
+INSERT INTO factions (name, leader, members, permissions, flags)
+VALUES (:name, :leader, :members, :permissions, :flags);
 -- # }
 
 -- # { delete
@@ -47,6 +49,7 @@ WHERE id = :id;
 -- #    :motd ?string
 -- #    :members string
 -- #    :permissions string
+-- #    :flags string
 -- #    :home ?string
 -- #    :relations string
 UPDATE factions
@@ -56,6 +59,7 @@ SET name=:name,
     motd=:motd,
     members=:members,
     permissions=:permissions,
+    flags=:flags,
     home=:home,
     relations=:relations
 WHERE id = :id;

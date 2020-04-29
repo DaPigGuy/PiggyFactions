@@ -8,6 +8,7 @@ use DaPigGuy\PiggyFactions\chat\ChatManager;
 use DaPigGuy\PiggyFactions\claims\ClaimsManager;
 use DaPigGuy\PiggyFactions\event\member\PowerChangeEvent;
 use DaPigGuy\PiggyFactions\factions\Faction;
+use DaPigGuy\PiggyFactions\flags\Flag;
 use DaPigGuy\PiggyFactions\language\LanguageManager;
 use DaPigGuy\PiggyFactions\players\PlayerManager;
 use pocketmine\event\entity\EntityDamageByEntityEvent;
@@ -96,6 +97,8 @@ class EventListener implements Listener
                         return;
                     }
                     $event->setModifier(-$this->plugin->getConfig()->getNested("factions.claims.shield-factor", 0.1), 56789);
+                } elseif ($claim->getFaction()->getFlag(Flag::SAFEZONE)) {
+                    $event->setCancelled();
                 }
             }
         }
