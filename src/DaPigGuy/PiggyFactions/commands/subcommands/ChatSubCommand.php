@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace DaPigGuy\PiggyFactions\commands\subcommands;
 
-use DaPigGuy\PiggyFactions\chat\ChatManager;
 use DaPigGuy\PiggyFactions\factions\Faction;
 use DaPigGuy\PiggyFactions\language\LanguageManager;
 use DaPigGuy\PiggyFactions\PiggyFactions;
 use DaPigGuy\PiggyFactions\players\FactionsPlayer;
+use DaPigGuy\PiggyFactions\utils\ChatTypes;
 use pocketmine\Player;
 
 class ChatSubCommand extends FactionSubCommand
@@ -24,7 +24,7 @@ class ChatSubCommand extends FactionSubCommand
 
     public function onNormalRun(Player $sender, ?Faction $faction, FactionsPlayer $member, string $aliasUsed, array $args): void
     {
-        ChatManager::getInstance()->setCurrentChat($sender, ChatManager::getInstance()->getCurrentChat($sender) === $this->chat ? ChatManager::ALL_CHAT : $this->chat);
-        LanguageManager::getInstance()->sendMessage($sender, "commands.chat.toggled" . (ChatManager::getInstance()->getCurrentChat($sender) === $this->chat ? "" : "-off"), ["{CHAT}" => $this->chat]);
+        $member->setCurrentChat($member->getCurrentChat() === $this->chat ? ChatTypes::ALL : $this->chat);
+        LanguageManager::getInstance()->sendMessage($sender, "commands.chat.toggled" . ($member->getCurrentChat() === $this->chat ? "" : "-off"), ["{CHAT}" => $this->chat]);
     }
 }

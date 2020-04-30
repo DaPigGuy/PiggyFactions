@@ -11,8 +11,6 @@ use DaPigGuy\libPiggyEconomy\exceptions\UnknownProviderException;
 use DaPigGuy\libPiggyEconomy\libPiggyEconomy;
 use DaPigGuy\libPiggyEconomy\providers\EconomyProvider;
 use DaPigGuy\PiggyCustomEnchants\utils\AllyChecks;
-use DaPigGuy\PiggyFactions\chat\ChatManager;
-use DaPigGuy\PiggyFactions\chat\TagManager;
 use DaPigGuy\PiggyFactions\claims\ClaimsManager;
 use DaPigGuy\PiggyFactions\commands\FactionCommand;
 use DaPigGuy\PiggyFactions\factions\FactionsManager;
@@ -20,6 +18,7 @@ use DaPigGuy\PiggyFactions\flags\FlagFactory;
 use DaPigGuy\PiggyFactions\language\LanguageManager;
 use DaPigGuy\PiggyFactions\permissions\PermissionFactory;
 use DaPigGuy\PiggyFactions\players\PlayerManager;
+use DaPigGuy\PiggyFactions\tag\TagManager;
 use DaPigGuy\PiggyFactions\task\AutoClaimTask;
 use DaPigGuy\PiggyFactions\task\ShowChunksTask;
 use DaPigGuy\PiggyFactions\task\UpdatePowerTask;
@@ -48,8 +47,6 @@ class PiggyFactions extends PluginBase
 
     /** @var LanguageManager */
     private $languageManager;
-    /** @var ChatManager */
-    private $chatManager;
     /** @var TagManager */
     private $tagManager;
 
@@ -80,8 +77,6 @@ class PiggyFactions extends PluginBase
         $this->playerManager = new PlayerManager($this);
 
         $this->languageManager = new LanguageManager($this);
-        $this->chatManager = new ChatManager($this);
-
         $this->tagManager = new TagManager($this);
 
         $this->checkSoftDependencies();
@@ -140,11 +135,6 @@ class PiggyFactions extends PluginBase
     public function getLanguageManager(): LanguageManager
     {
         return $this->languageManager;
-    }
-
-    public function getChatManager(): ChatManager
-    {
-        return $this->chatManager;
     }
 
     public function getTagManager(): TagManager

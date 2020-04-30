@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace DaPigGuy\PiggyFactions;
 
-use DaPigGuy\PiggyFactions\chat\ChatManager;
 use DaPigGuy\PiggyFactions\claims\ClaimsManager;
 use DaPigGuy\PiggyFactions\event\member\PowerChangeEvent;
 use DaPigGuy\PiggyFactions\factions\Faction;
 use DaPigGuy\PiggyFactions\flags\Flag;
 use DaPigGuy\PiggyFactions\language\LanguageManager;
 use DaPigGuy\PiggyFactions\players\PlayerManager;
+use DaPigGuy\PiggyFactions\utils\ChatTypes;
 use pocketmine\event\entity\EntityDamageByEntityEvent;
 use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerChatEvent;
@@ -37,10 +37,11 @@ class EventListener implements Listener
     public function onChat(PlayerChatEvent $event): void
     {
         $player = $event->getPlayer();
-        $faction = PlayerManager::getInstance()->getPlayerFaction($player->getUniqueId());
+        $member = PlayerManager::getInstance()->getPlayer($player->getUniqueId());
+        $faction = $member->getFaction();
         if ($faction !== null) {
-            switch (ChatManager::getInstance()->getCurrentChat($player)) {
-                case ChatManager::ALLY_CHAT:
+            switch ($member->getCurrentChat()) {
+                case ChatTypes::ALLY:
                     $event->setRecipients(array_merge($faction->getOnlineMembers(), ...array_map(function (Faction $ally): array {
                         return $ally->getOnlineMembers();
                     }, $faction->getAllies())));
@@ -50,7 +51,7 @@ class EventListener implements Listener
                         "{MESSAGE}" => $event->getMessage()
                     ]));
                     break;
-                case ChatManager::FACTION_CHAT:
+                case ChatTypes::FACTION:
                     $event->setRecipients($faction->getOnlineMembers());
                     $event->setFormat(LanguageManager::getInstance()->getMessage(LanguageManager::DEFAULT_LANGUAGE, "chat.faction", [
                         "{PLAYER}" => $player->getDisplayName(),

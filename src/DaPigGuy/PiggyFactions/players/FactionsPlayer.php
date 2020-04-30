@@ -7,6 +7,7 @@ namespace DaPigGuy\PiggyFactions\players;
 use DaPigGuy\PiggyFactions\factions\Faction;
 use DaPigGuy\PiggyFactions\factions\FactionsManager;
 use DaPigGuy\PiggyFactions\PiggyFactions;
+use DaPigGuy\PiggyFactions\utils\ChatTypes;
 use pocketmine\utils\UUID;
 
 class FactionsPlayer
@@ -26,6 +27,9 @@ class FactionsPlayer
     private $canSeeChunks = false;
     /** @var bool */
     private $isAutoClaiming = false;
+
+    /** @var string */
+    private $chat = ChatTypes::ALL;
 
     /** @var bool */
     private $adminMode = false;
@@ -109,6 +113,16 @@ class FactionsPlayer
     public function setAutoClaiming(bool $value): void
     {
         $this->isAutoClaiming = $value;
+    }
+
+    public function getCurrentChat(): string
+    {
+        return $this->chat;
+    }
+
+    public function setCurrentChat(string $chat): void
+    {
+        $this->chat = $chat;
     }
 
     public function isInAdminMode(): bool
