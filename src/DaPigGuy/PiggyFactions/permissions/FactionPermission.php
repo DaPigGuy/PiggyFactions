@@ -21,6 +21,7 @@ class FactionPermission implements \JsonSerializable
     const KICK = "kick";
     const MOTD = "motd";
     const NAME = "name";
+    const NEUTRAL = "neutral";
     const PROMOTE = "promote";
     const SETHOME = "sethome";
     const UNALLY = "unally";

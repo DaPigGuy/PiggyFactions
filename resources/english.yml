@@ -77,11 +77,14 @@ commands:
     is-leader: "{RED}You are the leader of your faction."
     success: "{YELLOW}You have left your faction."
   map:
-    header: "{GOLD}____________.[ {GREEN}({X},{Y}) {FACTION} {GOLD}].____________"
+    header: "{GOLD}____________.[ {GREEN}({X},{Z}) {FACTION} {GOLD}].____________"
   motd:
     success: "{GREEN}Faction MOTD has been set to {MOTD}"
   name:
     success: "{GREEN}Faction has been renamed to {FACTION}."
+  neutral:
+    already-neutral: "{RED}Your faction is not in a relation with {FACTION}."
+    success: "{GREEN}Your faction is now neutral with {FACTION}."
   permission:
     role-not-found: "{RED}Role not found."
     permission-not-found: "{RED}Permission not found."

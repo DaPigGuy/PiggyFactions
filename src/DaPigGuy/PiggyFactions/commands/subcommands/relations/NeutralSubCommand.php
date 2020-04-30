@@ -15,7 +15,7 @@ use DaPigGuy\PiggyFactions\players\FactionsPlayer;
 use DaPigGuy\PiggyFactions\utils\Relations;
 use pocketmine\Player;
 
-class EnemySubCommand extends FactionSubCommand
+class NeutralSubCommand extends FactionSubCommand
 {
     public function onNormalRun(Player $sender, ?Faction $faction, FactionsPlayer $member, string $aliasUsed, array $args): void
     {
@@ -24,21 +24,23 @@ class EnemySubCommand extends FactionSubCommand
             LanguageManager::getInstance()->sendMessage($sender, "commands.invalid-faction", ["{FACTION}" => $args["faction"]]);
             return;
         }
-        if ($targetFaction->getId() === $faction->getId()) {
-            LanguageManager::getInstance()->sendMessage($sender, "commands.enemy.self");
+        if ($faction->getRelation($targetFaction) === Relations::NONE) {
+            LanguageManager::getInstance()->sendMessage($sender, "commands.neutral.already-neutral", ["{FACTION}" => $targetFaction->getName()]);
             return;
         }
-        if ($faction->isEnemy($targetFaction)) {
-            LanguageManager::getInstance()->sendMessage($sender, "commands.enemy.already-enemy", ["{FACTION}" => $targetFaction->getName()]);
-            return;
-        }
-        $ev = new FactionRelationEvent([$faction, $targetFaction], Relations::ENEMY);
+        $ev = new FactionRelationEvent([$faction, $targetFaction], Relations::NONE);
         $ev->call();
         if ($ev->isCancelled()) return;
 
-        $faction->setRelation($targetFaction, Relations::ENEMY);
-        foreach ($faction->getOnlineMembers() as $p) {
-            LanguageManager::getInstance()->sendMessage($p, "commands.enemy.success", ["{FACTION}" => $targetFaction->getName()]);
+        $faction->setRelation($targetFaction, Relations::NONE);
+        foreach ($faction->getOnlineMembers() as $m) {
+            LanguageManager::getInstance()->sendMessage($m, "commands.neutral.success", ["{FACTION}" => $targetFaction->getName()]);
+        }
+        if ($targetFaction->isAllied($faction) || $targetFaction->isTruced($faction)) {
+            foreach ($targetFaction->getOnlineMembers() as $m) {
+                LanguageManager::getInstance()->sendMessage($m, "commands.neutral.success", ["{FACTION}" => $faction->getName()]);
+            }
+            $targetFaction->setRelation($faction, Relations::NONE);
         }
     }
 

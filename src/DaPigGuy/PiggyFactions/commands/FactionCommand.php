@@ -28,6 +28,7 @@ use DaPigGuy\PiggyFactions\commands\subcommands\management\MotdSubCommand;
 use DaPigGuy\PiggyFactions\commands\subcommands\management\NameSubCommand;
 use DaPigGuy\PiggyFactions\commands\subcommands\relations\AllySubCommand;
 use DaPigGuy\PiggyFactions\commands\subcommands\relations\EnemySubCommand;
+use DaPigGuy\PiggyFactions\commands\subcommands\relations\NeutralSubCommand;
 use DaPigGuy\PiggyFactions\commands\subcommands\relations\TruceSubCommand;
 use DaPigGuy\PiggyFactions\commands\subcommands\relations\UnallySubCommand;
 use DaPigGuy\PiggyFactions\commands\subcommands\roles\DemoteSubCommand;
@@ -82,6 +83,7 @@ class FactionCommand extends BaseCommand
         $this->registerSubCommand(new MapSubCommand($this->plugin, "map", "View map of area"));
         $this->registerSubCommand(new MotdSubCommand($this->plugin, "motd", "Set faction MOTD"));
         $this->registerSubCommand(new NameSubCommand($this->plugin, "name", "Rename your faction"));
+        $this->registerSubCommand(new NeutralSubCommand($this->plugin, "neutral", "Reset relation with another faction"));
         $this->registerSubCommand(new PermissionSubCommand($this->plugin, "permission", "Set faction role permissions", ["perms"]));
         $this->registerSubCommand(new PromoteSubCommand($this->plugin, "promote", "Promote a faction member"));
         $this->registerSubCommand(new SeeChunkSubCommand($this->plugin, "seechunk", "Toggle chunk visualizer", ["sc"]));

@@ -26,6 +26,7 @@ class PermissionFactory
         self::registerPermission(new FactionPermission(FactionPermission::KICK, [Roles::LEADER, Roles::OFFICER]));
         self::registerPermission(new FactionPermission(FactionPermission::MOTD, [Roles::LEADER, Roles::OFFICER]));
         self::registerPermission(new FactionPermission(FactionPermission::NAME, [Roles::LEADER]));
+        self::registerPermission(new FactionPermission(FactionPermission::NEUTRAL, [Roles::LEADER]));
         self::registerPermission(new FactionPermission(FactionPermission::PROMOTE, [Roles::LEADER]));
         self::registerPermission(new FactionPermission(FactionPermission::SETHOME, [Roles::LEADER, Roles::OFFICER]));
         self::registerPermission(new FactionPermission(FactionPermission::UNALLY, [Roles::LEADER]));

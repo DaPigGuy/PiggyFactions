@@ -33,7 +33,7 @@ PiggyFactions is an open-sourced factions plugin for [PocketMine-MP](https://git
 4. (Optional) You may want to setup safezones & warzones
    1. Run the command `/f admin`
    2. Create a faction (preferably named Safezone/Warzone)
-   3. Set the appropriate flags (either safezone/warzone) with /f flag
+   3. Set the appropriate flags (either safezone/warzone) with `/f flag`
    4. Claim chunks for their respective types
    5. Leave the faction
 5. You're done!

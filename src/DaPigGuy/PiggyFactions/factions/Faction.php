@@ -304,7 +304,12 @@ class Faction
         $enemies = [];
         foreach ($this->relations as $id => $relation) {
             if ($relation === Relations::ENEMY) {
-                if (($enemy = FactionsManager::getInstance()->getFaction($id)) !== null) $enemies[] = $enemy;
+                if (($enemy = FactionsManager::getInstance()->getFaction($id)) !== null) {
+                    $enemies[] = $enemy;
+                } else {
+                    unset($this->relations[$id]);
+                    $this->update();
+                }
             }
         }
         return $enemies;
