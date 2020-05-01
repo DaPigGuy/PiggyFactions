@@ -21,7 +21,7 @@ use pocketmine\utils\UUID;
 
 class Faction
 {
-    /** @var int */
+    /** @var string */
     private $id;
     /** @var string */
     private $name;
@@ -46,7 +46,7 @@ class Faction
     /** @var array */
     private $invitedPlayers;
 
-    public function __construct(int $id, string $name, ?string $description, ?string $motd, array $members, array $permissions, array $flags, ?Position $home, array $relations)
+    public function __construct(string $id, string $name, ?string $description, ?string $motd, array $members, array $permissions, array $flags, ?Position $home, array $relations)
     {
         $this->id = $id;
         $this->name = $name;
@@ -69,7 +69,7 @@ class Faction
         $this->relations = $relations;
     }
 
-    public function getId(): int
+    public function getId(): string
     {
         return $this->id;
     }
@@ -266,6 +266,7 @@ class Faction
     public function setRelation(Faction $faction, string $relation): void
     {
         $this->relations[$faction->getId()] = $relation;
+        if ($relation === Relations::NONE) unset($this->relations[$faction->getId()]);
         $this->update();
     }
 
@@ -355,9 +356,9 @@ class Faction
             "name" => $this->name,
             "description" => $this->description,
             "motd" => $this->motd,
-            "members" => json_encode(array_map(function (UUID $uuid): string {
+            "members" => json_encode(array_values(array_map(function (UUID $uuid): string {
                 return $uuid->toString();
-            }, $this->members)),
+            }, $this->members))),
             "permissions" => json_encode($this->permissions),
             "flags" => json_encode($this->flags),
             "home" => $this->home === null ? null : json_encode([

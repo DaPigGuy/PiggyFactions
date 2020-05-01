@@ -48,7 +48,7 @@ class FactionsManager
         return self::$instance;
     }
 
-    public function getFaction(int $id): ?Faction
+    public function getFaction(string $id): ?Faction
     {
         return $this->factions[$id] ?? null;
     }
@@ -72,21 +72,22 @@ class FactionsManager
     public function createFaction(string $name, array $members, ?array $flags = null): void
     {
         $flags = $flags ?? FlagFactory::getFlags();
-        $this->plugin->getDatabase()->executeInsert("piggyfactions.factions.create", ["name" => $name, "members" => json_encode($members), "permissions" => json_encode(PermissionFactory::getPermissions()), "flags" => json_encode($flags)], function (int $id) use ($name, $members, $flags): void {
-            $this->factions[$id] = new Faction($id, $name, null, null, $members,
-                array_map(function (FactionPermission $permission): array {
-                    return $permission->getHolders();
-                }, PermissionFactory::getPermissions()),
-                array_map(function (Flag $flag): bool {
-                    return $flag->getValue();
-                }, $flags), null, []);
-            foreach ($members as $member) {
-                PlayerManager::getInstance()->getPlayer(UUID::fromString($member))->setFaction($this->factions[$id]);
-            }
-        });
+        $id = UUID::fromRandom()->toString();
+        while (isset($this->factions[$id])) $id = UUID::fromRandom()->toString();
+        $this->factions[$id] = new Faction($id, $name, null, null, $members,
+            array_map(function (FactionPermission $permission): array {
+                return $permission->getHolders();
+            }, PermissionFactory::getPermissions()),
+            array_map(function (Flag $flag): bool {
+                return $flag->getValue();
+            }, $flags), null, []);
+        foreach ($members as $member) {
+            PlayerManager::getInstance()->getPlayer(UUID::fromString($member))->setFaction($this->factions[$id]);
+        }
+        $this->plugin->getDatabase()->executeInsert("piggyfactions.factions.create", ["id" => $id, "name" => $name, "members" => json_encode($members), "permissions" => json_encode(PermissionFactory::getPermissions()), "flags" => json_encode($flags)]);
     }
 
-    public function deleteFaction(int $id): void
+    public function deleteFaction(string $id): void
     {
         unset($this->factions[$id]);
         $this->plugin->getDatabase()->executeGeneric("piggyfactions.factions.delete", ["id" => $id]);

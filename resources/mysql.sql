@@ -6,7 +6,7 @@
 -- # { init
 CREATE TABLE IF NOT EXISTS factions
 (
-    id          INTEGER PRIMARY KEY AUTO_INCREMENT,
+    id          VARCHAR(36) PRIMARY KEY,
     name        VARCHAR(16) UNIQUE,
     description TEXT,
     motd        TEXT,
@@ -24,23 +24,24 @@ FROM factions;
 -- # }
 
 -- # { create
+-- #    :id string
 -- #    :name string
 -- #    :members string
 -- #    :permissions string
 -- #    :flags string
-INSERT INTO factions (name, members, permissions, flags)
-VALUES (:name, :members, :permissions, :flags);
+INSERT INTO factions (id, name, members, permissions, flags)
+VALUES (:id, :name, :members, :permissions, :flags);
 -- # }
 
 -- # { delete
--- #    :id int
+-- #    :id string
 DELETE
 FROM factions
 WHERE id = :id;
 -- # }
 
 -- # { update
--- #    :id int
+-- #    :id string
 -- #    :name string
 -- #    :description ?string
 -- #    :motd ?string
@@ -84,7 +85,7 @@ FROM players;
 -- # { create
 -- #    :uuid string
 -- #    :username string
--- #    :faction ?int
+-- #    :faction ?string
 -- #    :role ?string
 -- #    :power float
 INSERT INTO players (uuid, username, faction, role, power)
@@ -94,7 +95,7 @@ VALUES (:uuid, :username, :faction, :role, :power);
 -- # { update
 -- #    :uuid string
 -- #    :username string
--- #    :faction ?int
+-- #    :faction ?string
 -- #    :role ?string
 -- #    :power float
 UPDATE players
@@ -136,7 +137,7 @@ VALUES (:chunkX, :chunkZ, :level, :faction);
 
 -- # { update
 -- #    :id int
--- #    :faction int
+-- #    :faction string
 UPDATE claims
 SET faction=:faction
 WHERE id = :id;

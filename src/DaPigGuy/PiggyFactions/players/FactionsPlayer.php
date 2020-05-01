@@ -16,7 +16,7 @@ class FactionsPlayer
     private $uuid;
     /** @var string */
     private $username;
-    /** @var ?int */
+    /** @var ?string */
     private $faction;
     /** @var ?string */
     private $role;
@@ -34,7 +34,7 @@ class FactionsPlayer
     /** @var bool */
     private $adminMode = false;
 
-    public function __construct(UUID $uuid, string $username, ?int $faction, ?string $role, float $power)
+    public function __construct(UUID $uuid, string $username, ?string $faction, ?string $role, float $power)
     {
 
         $this->uuid = $uuid;

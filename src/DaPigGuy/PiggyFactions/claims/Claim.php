@@ -15,7 +15,7 @@ class Claim
 {
     /** @var int */
     private $id;
-    /** @var int */
+    /** @var string */
     private $faction;
     /** @var int */
     private $chunkX;
@@ -24,7 +24,7 @@ class Claim
     /** @var string */
     private $level;
 
-    public function __construct(int $id, int $faction, int $chunkX, int $chunkZ, string $level)
+    public function __construct(int $id, string $faction, int $chunkX, int $chunkZ, string $level)
     {
         $this->id = $id;
         $this->faction = $faction;
