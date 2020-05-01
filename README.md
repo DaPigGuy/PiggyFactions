@@ -63,6 +63,7 @@ PiggyFactions is an open-sourced factions plugin for [PocketMine-MP](https://git
 | `/f map` | View map of area | `piggyfactions.command.faction.map` |
 | `/f motd <motd>` | Set faction MOTD | `piggyfactions.command.faction.motd` |
 | `/f name <name>` | Rename your faction | `piggyfactions.command.faction.name` |
+| `/f neutral <faction>` | Reset relation with another faction | `piggyfactions.command.faction.neutral` |
 | `/f permission <role> <permission> [value]` | Set faction role permissions | `piggyfactions.command.faction.permission` | `/f perms`
 | `/f promote <player>` | Promote a faction member | `piggyfactions.command.faction.promote` |
 | `/f seechunk` | Toggle chunk visualizer | `piggyfactions.command.faction.seechunk` | `/f sc` |
@@ -97,6 +98,7 @@ PiggyFactions is an open-sourced factions plugin for [PocketMine-MP](https://git
 | `piggyfactions.command.faction.map` | Allow usage of /f map | `true` |
 | `piggyfactions.command.faction.motd` | Allow usage of /f motd | `true` |
 | `piggyfactions.command.faction.name` | Allow usage of /f name | `true` |
+| `piggyfactions.command.faction.neutral` | Allow usage of /f neutral | `true` |
 | `piggyfactions.command.faction.permission` | Allow usage of /f permission | `true` |
 | `piggyfactions.command.faction.promote` | Allow usage of /f promote | `true` |
 | `piggyfactions.command.faction.seechunk` | Allow usage of /f seechunk | `true` |

@@ -12,6 +12,7 @@ use pocketmine\command\CommandSender;
 use pocketmine\Player;
 use pocketmine\utils\Config;
 use pocketmine\utils\TextFormat;
+use ReflectionClass;
 
 class LanguageManager
 {
@@ -32,6 +33,9 @@ class LanguageManager
     /** @var array */
     private $playerLanguage;
 
+    /** @var array */
+    private $colorTags;
+
     public function __construct(PiggyFactions $plugin)
     {
         self::$instance = $this;
@@ -41,6 +45,9 @@ class LanguageManager
             $plugin->saveResource($language . ".yml");
 
             $this->messages[$language] = new Config($plugin->getDataFolder() . $language . ".yml");
+        }
+        foreach ((new ReflectionClass(TextFormat::class))->getConstants() as $color => $code) {
+            $this->colorTags["{" . $color . "}"] = $code;
         }
     }
 
@@ -94,31 +101,7 @@ class LanguageManager
 
     public function translateColorTags(string $message): string
     {
-        $replacements = [
-            "{BLACK}" => TextFormat::BLACK,
-            "{DARK_BLUE}" => TextFormat::DARK_BLUE,
-            "{DARK_GREEN}" => TextFormat::DARK_GREEN,
-            "{DARK_AQUA}" => TextFormat::DARK_AQUA,
-            "{DARK_RED}" => TextFormat::DARK_RED,
-            "{DARK_PURPLE}" => TextFormat::DARK_PURPLE,
-            "{GOLD}" => TextFormat::GOLD,
-            "{GRAY}" => TextFormat::GRAY,
-            "{DARK_GRAY}" => TextFormat::DARK_GRAY,
-            "{BLUE}" => TextFormat::BLUE,
-            "{GREEN}" => TextFormat::GREEN,
-            "{AQUA}" => TextFormat::AQUA,
-            "{RED}" => TextFormat::RED,
-            "{LIGHT_PURPLE}" => TextFormat::LIGHT_PURPLE,
-            "{YELLOW}" => TextFormat::YELLOW,
-            "{WHITE}" => TextFormat::WHITE,
-            "{OBFUSCATED}" => TextFormat::OBFUSCATED,
-            "{BOLD}" => TextFormat::BOLD,
-            "{STRIKETHROUGH}" => TextFormat::STRIKETHROUGH,
-            "{UNDERLINE}" => TextFormat::UNDERLINE,
-            "{ITALIC}" => TextFormat::ITALIC,
-            "{RESET}" => TextFormat::RESET
-        ];
-        return str_replace(array_keys($replacements), $replacements, $message);
+        return str_replace(array_keys($this->colorTags), $this->colorTags, TextFormat::colorize($message));
     }
 
     public function getPlayerLanguage(Player $player): string

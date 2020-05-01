@@ -75,6 +75,9 @@ permissions:
               piggyfactions.command.faction.name:
                 default: true
                 description: "Allow usage of /f name"
+              piggyfactions.command.faction.neutral:
+                default: true
+                description: "Allow usage of /f neutral"
               piggyfactions.command.faction.permission:
                 default: true
                 description: "Allow usage of /f permission"
