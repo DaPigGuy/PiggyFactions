@@ -136,18 +136,26 @@ VALUES (:chunkX, :chunkZ, :level, :faction);
 -- # }
 
 -- # { update
--- #    :id int
+-- #    :chunkX int
+-- #    :chunkZ int
+-- #    :level string
 -- #    :faction string
 UPDATE claims
 SET faction=:faction
-WHERE id = :id;
+WHERE chunkX = :chunkX
+  AND chunkZ = :chunkZ
+  AND level = :level;
 -- # }
 
 -- # { delete
--- #    :id int
+-- #    :chunkX int
+-- #    :chunkZ int
+-- #    :level string
 DELETE
 FROM claims
-WHERE id = :id;
+WHERE chunkX = :chunkX
+  AND chunkZ = :chunkZ
+  AND level = :level;
 -- # }
 
 -- # }

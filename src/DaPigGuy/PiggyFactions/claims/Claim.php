@@ -13,8 +13,6 @@ use pocketmine\level\Level;
 
 class Claim
 {
-    /** @var int */
-    private $id;
     /** @var string */
     private $faction;
     /** @var int */
@@ -24,18 +22,12 @@ class Claim
     /** @var string */
     private $level;
 
-    public function __construct(int $id, string $faction, int $chunkX, int $chunkZ, string $level)
+    public function __construct(string $faction, int $chunkX, int $chunkZ, string $level)
     {
-        $this->id = $id;
         $this->faction = $faction;
         $this->chunkX = $chunkX;
         $this->chunkZ = $chunkZ;
         $this->level = $level;
-    }
-
-    public function getId(): int
-    {
-        return $this->id;
     }
 
     public function getFaction(): ?Faction
@@ -46,7 +38,7 @@ class Claim
     public function setFaction(Faction $faction): void
     {
         $this->faction = $faction->getId();
-        PiggyFactions::getInstance()->getDatabase()->executeChange("piggyfactions.claims.update", ["id" => $this->id, "faction" => $this->faction]);
+        PiggyFactions::getInstance()->getDatabase()->executeChange("piggyfactions.claims.update", ["chunkX" => $this->chunkX, "chunkZ" => $this->chunkZ, "level" => $this->level, "faction" => $this->faction]);
     }
 
     public function getLevel(): ?Level

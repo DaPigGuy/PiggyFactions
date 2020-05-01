@@ -29,7 +29,7 @@ class ClaimsManager
         $plugin->getDatabase()->executeGeneric("piggyfactions.claims.init");
         $plugin->getDatabase()->executeSelect("piggyfactions.claims.load", [], function (array $rows): void {
             foreach ($rows as $row) {
-                $this->claims[$row["chunkX"] . ":" . $row["chunkZ"] . ":" . $row["level"]] = new Claim($row["id"], $row["faction"], $row["chunkX"], $row["chunkZ"], $row["level"]);
+                $this->claims[$row["chunkX"] . ":" . $row["chunkZ"] . ":" . $row["level"]] = new Claim($row["faction"], $row["chunkX"], $row["chunkZ"], $row["level"]);
             }
             $this->plugin->getLogger()->debug("Loaded " . count($rows) . " claims");
         });
@@ -63,14 +63,13 @@ class ClaimsManager
             "chunkZ" => $chunk->getZ(),
             "level" => $level->getFolderName()
         ];
-        $this->plugin->getDatabase()->executeInsert("piggyfactions.claims.create", $args, function (int $id) use ($args): void {
-            $this->claims[$args["chunkX"] . ":" . $args["chunkZ"] . ":" . $args["level"]] = new Claim($id, ...array_values($args));
-        });
+        $this->claims[$args["chunkX"] . ":" . $args["chunkZ"] . ":" . $args["level"]] = new Claim(...array_values($args));
+        $this->plugin->getDatabase()->executeInsert("piggyfactions.claims.create", $args);
     }
 
     public function deleteClaim(Claim $claim): void
     {
-        unset($this->claims[$claim->getChunk()->getX() . ":" . $claim->getChunk()->getZ() . ":" . $claim->getLevel()->getFolderName()]);
-        $this->plugin->getDatabase()->executeGeneric("piggyfactions.claims.delete", ["id" => $claim->getId()]);
+        unset($this->claims[($chunkX = $claim->getChunk()->getX()) . ":" . ($chunkZ = $claim->getChunk()->getZ()) . ":" . ($level = $claim->getLevel()->getFolderName())]);
+        $this->plugin->getDatabase()->executeGeneric("piggyfactions.claims.delete", ["chunkX" => $chunkX, "chunkZ" => $chunkZ, "level" => $level]);
     }
 }
