@@ -51,8 +51,22 @@ class ClaimsListener implements Listener
         $member = PlayerManager::getInstance()->getPlayer($player->getUniqueId());
         if ($member !== null) {
             $oldClaim = ClaimsManager::getInstance()->getClaim($player->getLevel(), $player->getLevel()->getChunkAtPosition($event->getFrom()));
-            $newClaim = ClaimsManager::getInstance()->getClaim($player->getLevel(), $player->getLevel()->getChunkAtPosition($event->getTo()));
+            $newClaim = ClaimsManager::getInstance()->getClaim($player->getLevel(), ($newChunk = $player->getLevel()->getChunkAtPosition($event->getTo())));
             if ($oldClaim !== $newClaim) {
+                if (($faction = $member->getFaction()) !== null && $member->isAutoClaiming()) {
+                    if (floor($faction->getPower() / $this->plugin->getConfig()->getNested("factions.claim.cost", 1)) > ($total = count(ClaimsManager::getInstance()->getFactionClaims($faction)))) {
+                        if ($total < ($max = $this->plugin->getConfig()->getNested("factions.claims.max", -1)) || $max === -1) {
+                            if ($newClaim === null) {
+                                $this->plugin->getClaimsManager()->createClaim($faction, $player->getLevel(), $newChunk);
+                            } else {
+                                if ($this->plugin->getConfig()->getNested("factions.claim.overclaim", true) && $newClaim->canBeOverClaimed() && $newClaim->getFaction()->getId() !== $faction->getId()) {
+                                    $newClaim->setFaction($faction);
+                                }
+                            }
+                        }
+                    }
+                }
+
                 $language = LanguageManager::getInstance()->getPlayerLanguage($player);
                 if ($newClaim === null) {
                     $player->addTitle(LanguageManager::getInstance()->getMessage($language, "territory-titles.wilderness-title"), LanguageManager::getInstance()->getMessage($language, "territory-titles.wilderness-subtitle"), 5, 60, 5);

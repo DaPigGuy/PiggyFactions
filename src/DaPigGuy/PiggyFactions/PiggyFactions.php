@@ -19,7 +19,6 @@ use DaPigGuy\PiggyFactions\language\LanguageManager;
 use DaPigGuy\PiggyFactions\permissions\PermissionFactory;
 use DaPigGuy\PiggyFactions\players\PlayerManager;
 use DaPigGuy\PiggyFactions\tag\TagManager;
-use DaPigGuy\PiggyFactions\task\AutoClaimTask;
 use DaPigGuy\PiggyFactions\task\ShowChunksTask;
 use DaPigGuy\PiggyFactions\task\UpdatePowerTask;
 use pocketmine\entity\Entity;
@@ -86,7 +85,6 @@ class PiggyFactions extends PluginBase
 
         $this->getServer()->getPluginManager()->registerEvents(new EventListener($this), $this);
 
-        $this->getScheduler()->scheduleRepeatingTask(new AutoClaimTask($this), 10);
         $this->getScheduler()->scheduleRepeatingTask(new ShowChunksTask($this), 10);
         $this->getScheduler()->scheduleRepeatingTask(new UpdatePowerTask($this), UpdatePowerTask::INTERVAL);
         //$this->getServer()->getAsyncPool()->submitTask(new CheckUpdatesTask($this->getDescription()->getVersion(), $this->getDescription()->getCompatibleApis()[0])); //TODO: Uncomment before Poggit release
