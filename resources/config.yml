@@ -16,6 +16,7 @@ factions:
     - owner
     - admin
     - mojang
+  max-name-length: 16
   pvp:
     factionless: true
     between-factionless: true

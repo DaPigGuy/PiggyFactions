@@ -33,6 +33,10 @@ class CreateSubCommand extends FactionSubCommand
             LanguageManager::getInstance()->sendMessage($sender, "commands.create.name-blacklisted", ["{NAME}" => $args["name"]]);
             return;
         }
+        if (strlen($args["name"]) > $this->plugin->getConfig()->getNested("factions.max-name-length", 16)) {
+            LanguageManager::getInstance()->sendMessage($sender, "commands.create.name-too-long", ["{NAME}" => $args["name"]]);
+            return;
+        }
         $ev = new FactionCreateEvent($sender, $args["name"]);
         $ev->call();
         if ($ev->isCancelled()) return;

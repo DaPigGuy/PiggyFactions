@@ -27,6 +27,7 @@ commands:
     max-claimed: "{RED}You can not claim any more land."
     already-claimed: "{RED}This chunk is already claimed."
     no-power: "{RED}Your faction has an insufficient amount of power."
+    over-claimed: "{GREEN}This chunk has been overclaimed."
     success: "{GREEN}This chunk has been claimed."
     auto:
       toggled: "{GREEN}You are now auto-claiming."
@@ -34,6 +35,7 @@ commands:
   create:
     name-taken: "{RED}A faction with the name {NAME} already exists."
     name-blacklisted: "{RED}The name {NAME} is blacklisted."
+    name-too-long: "{RED}The name {NAME} exceeds the maximum character limit."
     success: "{GREEN}Faction {NAME} has been created."
   demote:
     cant-demote-higher: "{RED}You can not demote members of higher rank."

@@ -7,7 +7,7 @@
 CREATE TABLE IF NOT EXISTS factions
 (
     id          VARCHAR(36) PRIMARY KEY,
-    name        VARCHAR(16) UNIQUE,
+    name        TEXT UNIQUE,
     description TEXT,
     motd        TEXT,
     members     TEXT,
@@ -69,8 +69,8 @@ WHERE id = :id;
 -- # { init
 CREATE TABLE IF NOT EXISTS players
 (
-    uuid     VARCHAR(36) PRIMARY KEY UNIQUE,
-    username VARCHAR(16) UNIQUE,
+    uuid     VARCHAR(36) PRIMARY KEY,
+    username VARCHAR(16),
     faction  INTEGER,
     role     TEXT,
     power    FLOAT
