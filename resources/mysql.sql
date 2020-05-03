@@ -7,7 +7,7 @@
 CREATE TABLE IF NOT EXISTS factions
 (
     id          VARCHAR(36) PRIMARY KEY,
-    name        TEXT UNIQUE,
+    name        TEXT,
     description TEXT,
     motd        TEXT,
     members     JSON,
