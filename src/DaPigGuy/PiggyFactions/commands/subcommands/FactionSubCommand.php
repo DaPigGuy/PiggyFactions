@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace DaPigGuy\PiggyFactions\commands\subcommands;
 
+use CortexPE\Commando\args\BaseArgument;
+use CortexPE\Commando\args\BooleanArgument;
+use CortexPE\Commando\args\StringEnumArgument;
 use CortexPE\Commando\BaseSubCommand;
 use DaPigGuy\PiggyFactions\factions\Faction;
 use DaPigGuy\PiggyFactions\language\LanguageManager;
@@ -11,6 +14,8 @@ use DaPigGuy\PiggyFactions\permissions\PermissionFactory;
 use DaPigGuy\PiggyFactions\PiggyFactions;
 use DaPigGuy\PiggyFactions\players\FactionsPlayer;
 use DaPigGuy\PiggyFactions\players\PlayerManager;
+use DaPigGuy\PiggyFactions\utils\PiggyArgument;
+use jojoe77777\FormAPI\CustomForm;
 use pocketmine\command\CommandSender;
 use pocketmine\Player;
 use pocketmine\utils\TextFormat;
@@ -53,6 +58,16 @@ abstract class FactionSubCommand extends BaseSubCommand
             }
         }
 
+        foreach ($this->getArgumentList() as $arguments) {
+            /** @var PiggyArgument $argument */
+            foreach ($arguments as $argument) {
+                if (!$argument->getWrappedArgument()->isOptional() && !isset($args[$argument->getName()])) {
+                    $this->onFormRun($sender, $faction, $member, $aliasUsed, $args);
+                    return;
+                }
+            }
+        }
+
         $this->onNormalRun($sender, $faction, $member, $aliasUsed, $args);
     }
 
@@ -60,7 +75,38 @@ abstract class FactionSubCommand extends BaseSubCommand
 
     public function onFormRun(Player $sender, ?Faction $faction, FactionsPlayer $member, string $aliasUsed, array $args): void
     {
-        $this->onNormalRun($sender, $faction, $member, $aliasUsed, $args);
+        $form = new CustomForm(function (Player $player, ?array $data): void {
+            if ($data !== null) {
+                $args = [];
+                foreach ($this->getArgumentList() as $position => $arguments) {
+                    /** @var PiggyArgument $argument */
+                    foreach ($arguments as $argument) {
+                        $args[$argument->getName()] = (($enum = $argument->getWrappedArgument()) instanceof StringEnumArgument) ? $enum->getEnumValues()[$data[$position]] : $data[$position];
+                    }
+                }
+                $this->onRun($player, $this->getName(), $args);
+            }
+        });
+        $form->setTitle("/f " . $this->getName());
+        foreach ($this->getArgumentList() as $arguments) {
+            /** @var PiggyArgument $argument */
+            foreach ($arguments as $argument) {
+                $argument = $argument->getWrappedArgument();
+                if ($argument instanceof BooleanArgument) {
+                    $form->addToggle(ucfirst($argument->getName()), $args[$argument->getName()] ?? null);
+                } elseif ($argument instanceof StringEnumArgument) {
+                    $form->addDropdown(ucfirst($argument->getName()), $argument->getEnumValues());
+                } else {
+                    $form->addInput(ucfirst($argument->getName()), "", $args[$argument->getName()] ?? null);
+                }
+            }
+        }
+        $sender->sendForm($form);
+    }
+
+    public function registerArgument(int $position, BaseArgument $argument): void
+    {
+        parent::registerArgument($position, new PiggyArgument($argument));
     }
 
     protected function prepare(): void

@@ -139,4 +139,9 @@ class PiggyFactions extends PluginBase
     {
         return $this->tagManager;
     }
+
+    public function areFormsEnabled(): bool
+    {
+        return $this->getConfig()->get("forms", true);
+    }
 }

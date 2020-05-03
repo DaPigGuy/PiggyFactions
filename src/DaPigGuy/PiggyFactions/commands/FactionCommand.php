@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace DaPigGuy\PiggyFactions\commands;
 
 use CortexPE\Commando\BaseCommand;
+use CortexPE\Commando\BaseSubCommand;
 use CortexPE\Commando\exception\SubCommandCollision;
 use DaPigGuy\PiggyFactions\commands\subcommands\admin\AdminSubCommand;
 use DaPigGuy\PiggyFactions\commands\subcommands\ChatSubCommand;
@@ -37,7 +38,9 @@ use DaPigGuy\PiggyFactions\commands\subcommands\roles\PromoteSubCommand;
 use DaPigGuy\PiggyFactions\commands\subcommands\TopSubCommand;
 use DaPigGuy\PiggyFactions\PiggyFactions;
 use DaPigGuy\PiggyFactions\utils\ChatTypes;
+use jojoe77777\FormAPI\SimpleForm;
 use pocketmine\command\CommandSender;
+use pocketmine\Player;
 
 class FactionCommand extends BaseCommand
 {
@@ -52,7 +55,23 @@ class FactionCommand extends BaseCommand
 
     public function onRun(CommandSender $sender, string $aliasUsed, array $args): void
     {
-        //TODO: Form UI
+        if ($this->plugin->areFormsEnabled() && $sender instanceof Player) {
+            $subcommands = array_filter($this->getSubCommands(), function (BaseSubCommand $subCommand, string $alias) use ($sender): bool {
+                return $subCommand->getName() === $alias && $sender->hasPermission($subCommand->getPermission());
+            }, ARRAY_FILTER_USE_BOTH);
+            $form = new SimpleForm(function (Player $player, ?int $data) use ($subcommands): void {
+                if ($data !== null) {
+                    $subcommand = $subcommands[array_keys($subcommands)[$data]];
+                    $subcommand->onRun($player, $subcommand->getName(), []);
+                }
+            });
+            $form->setTitle("PiggyFactions UI");
+            foreach ($subcommands as $key => $subcommand) {
+                $form->addButton(ucfirst($subcommand->getName()));
+            }
+            $sender->sendForm($form);
+            return;
+        }
         $this->sendUsage();
     }
 

@@ -37,7 +37,7 @@ class FactionsManager
                     $row["home"] = new Position($decodedHome["x"], $decodedHome["y"], $decodedHome["z"], $this->plugin->getServer()->getLevelByName($decodedHome["level"]));
                 }
 
-                $this->factions[$row["id"]] = new Faction($row["id"], $row["name"], $row["description"], $row["motd"], json_decode($row["members"], true), json_decode($row["permissions"], true), json_decode($row["flags"] ?? "[]", true), $row["home"], isset($row["relations"]) ? json_decode($row["relations"], true) : []);
+                $this->factions[$row["id"]] = new Faction($row["id"], $row["name"], $row["description"], $row["motd"], json_decode($row["members"], true), json_decode($row["permissions"], true), json_decode($row["flags"], true), $row["home"], isset($row["relations"]) ? json_decode($row["relations"], true) : []);
             }
             $this->plugin->getLogger()->debug("Loaded " . count($rows) . " factions");
         });
