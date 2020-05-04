@@ -8,7 +8,7 @@ use CortexPE\HRKChat\event\PlaceholderResolveEvent;
 use pocketmine\event\Listener;
 use pocketmine\Player;
 
-class TagListener implements Listener
+class HRKChatTagListener implements Listener
 {
     /** @var TagManager */
     private $tagManager;

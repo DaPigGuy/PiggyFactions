@@ -32,7 +32,7 @@ class TagManager
         $this->factionless = $config["factionless"] ?? "";
         $this->powerless = $config["powerless"] ?? "";
 
-        $plugin->getServer()->getPluginManager()->registerEvents(new TagListener($this), $plugin);
+        if (($hrkchat = $plugin->getServer()->getPluginManager()->getPlugin("HRKChat")) !== null && $hrkchat->isEnabled()) $plugin->getServer()->getPluginManager()->registerEvents(new HRKChatTagListener($this), $plugin);
     }
 
     public function getHRKTag(Player $player, string $tag): ?string
