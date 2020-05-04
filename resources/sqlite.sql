@@ -6,15 +6,16 @@
 -- # { init
 CREATE TABLE IF NOT EXISTS factions
 (
-    id          VARCHAR(36) PRIMARY KEY,
-    name        TEXT,
-    description TEXT,
-    motd        TEXT,
-    members     TEXT,
-    permissions TEXT,
-    flags       TEXT,
-    home        TEXT,
-    relations   TEXT
+    id            VARCHAR(36) PRIMARY KEY,
+    name          TEXT,
+    creation_time INTEGER,
+    description   TEXT,
+    motd          TEXT,
+    members       TEXT,
+    permissions   TEXT,
+    flags         TEXT,
+    home          TEXT,
+    relations     TEXT
 );
 -- # }
 
@@ -29,8 +30,8 @@ FROM factions;
 -- #    :members string
 -- #    :permissions string
 -- #    :flags string
-INSERT INTO factions (id, name, members, permissions, flags)
-VALUES (:id, :name, :members, :permissions, :flags);
+INSERT INTO factions (id, name, creation_time, members, permissions, flags)
+VALUES (:id, :name, strftime('%s', 'now'), :members, :permissions, :flags);
 -- # }
 
 -- # { delete

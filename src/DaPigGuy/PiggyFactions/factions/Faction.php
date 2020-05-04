@@ -25,6 +25,8 @@ class Faction
     private $id;
     /** @var string */
     private $name;
+    /** @var int */
+    private $creationTime;
     /** @var ?string */
     private $description;
     /** @var ?string */
@@ -46,10 +48,11 @@ class Faction
     /** @var array */
     private $invitedPlayers;
 
-    public function __construct(string $id, string $name, ?string $description, ?string $motd, array $members, array $permissions, array $flags, ?Position $home, array $relations)
+    public function __construct(string $id, string $name, int $creationTime, ?string $description, ?string $motd, array $members, array $permissions, array $flags, ?Position $home, array $relations)
     {
         $this->id = $id;
         $this->name = $name;
+        $this->creationTime = $creationTime;
         $this->description = $description;
         $this->motd = $motd;
         $this->members = array_map(function (string $uuid): UUID {
@@ -83,6 +86,11 @@ class Faction
     {
         $this->name = $name;
         $this->update();
+    }
+
+    public function getCreationTime(): int
+    {
+        return $this->creationTime;
     }
 
     public function getDescription(): ?string

@@ -130,6 +130,6 @@ pvp:
   cant-attack-in-territory: "{RED}You can not hurt {PLAYER} in their own territory unless you declare them as enemy."
 territory-titles:
   wilderness-title: "{DARK_GREEN}Wilderness"
-  wilderness-subtitle: ""
+  wilderness-subtitle: "{YELLOW}It's dangerous to go alone."
   faction-title: "{RELATION}{FACTION}"
   faction-subtitle: "{ITALIC}{DESCRIPTION}"
