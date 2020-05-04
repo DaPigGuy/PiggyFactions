@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace DaPigGuy\PiggyFactions\commands\subcommands;
 
-use CortexPE\Commando\args\RawStringArgument;
+use CortexPE\Commando\args\TextArgument;
 use CortexPE\Commando\exception\ArgumentOrderException;
 use DaPigGuy\PiggyFactions\factions\Faction;
 use DaPigGuy\PiggyFactions\factions\FactionsManager;
@@ -65,6 +65,6 @@ class InfoSubCommand extends FactionSubCommand
      */
     protected function prepare(): void
     {
-        $this->registerArgument(0, new RawStringArgument("faction", true));
+        $this->registerArgument(0, new TextArgument("faction", true));
     }
 }

@@ -23,6 +23,7 @@ PiggyFactions is an open-sourced factions plugin for [PocketMine-MP](https://git
 | MySQL Support | ✔ | ❌ |
 | Async Queries | ✔ | ❌ |
 | Command Autocomplete | ✔ | ❌ |
+| Form UI | ✔ | ❌ |
 | Multi-Language Support | ✔ | ❌ |
 
 ## Installation & Setup

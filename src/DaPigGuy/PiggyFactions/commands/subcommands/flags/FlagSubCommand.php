@@ -4,9 +4,11 @@ declare(strict_types=1);
 
 namespace DaPigGuy\PiggyFactions\commands\subcommands\flags;
 
-use CortexPE\Commando\args\TextArgument;
+use CortexPE\Commando\args\BooleanArgument;
+use CortexPE\Commando\args\RawStringArgument;
 use CortexPE\Commando\exception\ArgumentOrderException;
 use DaPigGuy\PiggyFactions\commands\subcommands\FactionSubCommand;
+use DaPigGuy\PiggyFactions\event\flags\FactionFlagChangeEvent;
 use DaPigGuy\PiggyFactions\factions\Faction;
 use DaPigGuy\PiggyFactions\flags\FlagFactory;
 use DaPigGuy\PiggyFactions\language\LanguageManager;
@@ -25,8 +27,13 @@ class FlagSubCommand extends FactionSubCommand
             LanguageManager::getInstance()->sendMessage($sender, "commands.flag.not-editable", ["{FLAG}" => $args["flag"]]);
             return;
         }
-        $faction->setFlag($args["flag"], !$faction->getFlag($args["flag"]));
-        LanguageManager::getInstance()->sendMessage($sender, "commands.flag.toggled" . ($faction->getFlag($args["flag"]) ? "" : "-off"), ["{FLAG}" => $args["flag"]]);
+
+        $ev = new FactionFlagChangeEvent($faction, $args["flag"], $args["value"] ?? !$faction->getFlag($args["flag"]));
+        $ev->call();
+        if ($ev->isCancelled()) return;
+
+        $faction->setFlag($args["flag"], $ev->getValue());
+        LanguageManager::getInstance()->sendMessage($sender, "commands.flag.toggled" . ($ev->getValue() ? "" : "-off"), ["{FLAG}" => $args["flag"]]);
     }
 
     /**
@@ -34,6 +41,7 @@ class FlagSubCommand extends FactionSubCommand
      */
     protected function prepare(): void
     {
-        $this->registerArgument(0, new TextArgument("flag"));
+        $this->registerArgument(0, new RawStringArgument("flag"));
+        $this->registerArgument(1, new BooleanArgument("value", true));
     }
 }

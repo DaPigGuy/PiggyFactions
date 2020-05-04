@@ -81,7 +81,7 @@ abstract class FactionSubCommand extends BaseSubCommand
                 foreach ($this->getArgumentList() as $position => $arguments) {
                     /** @var PiggyArgument $argument */
                     foreach ($arguments as $argument) {
-                        $args[$argument->getName()] = (($enum = $argument->getWrappedArgument()) instanceof StringEnumArgument) ? $enum->getEnumValues()[$data[$position]] : $data[$position];
+                        $args[$argument->getName()] = (($enum = $argument->getWrappedArgument()) instanceof StringEnumArgument && !$enum instanceof BooleanArgument) ? $enum->getEnumValues()[$data[$position]] : $data[$position];
                     }
                 }
                 $this->onRun($player, $this->getName(), $args);
