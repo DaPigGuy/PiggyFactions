@@ -62,6 +62,9 @@ commands:
     not-editable: "{RED}Flag {FLAG} is not editable."
     toggled: "{GREEN}Flag {FLAG} has been enabled."
     toggled-off: "{GREEN}Flag {FLAG} has been disabled."
+  help:
+    header: "{GOLD}____________.[{DARK_GREEN}Faction Help ({PAGE}/{MAXPAGE}){GOLD}].____________"
+    command: "\n{GREEN}/f {COMMAND} - {RESET}{DESCRIPTION}"
   home:
     not-set: "{RED}Faction home is not set."
   info:

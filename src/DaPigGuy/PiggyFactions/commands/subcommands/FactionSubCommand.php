@@ -75,30 +75,37 @@ abstract class FactionSubCommand extends BaseSubCommand
 
     public function onFormRun(Player $sender, ?Faction $faction, FactionsPlayer $member, string $aliasUsed, array $args): void
     {
-        $form = new CustomForm(function (Player $player, ?array $data): void {
+        $commandArguments = [];
+        $enums = [];
+        foreach ($this->getArgumentList() as $position => $arguments) {
+            /** @var PiggyArgument $argument */
+            foreach ($arguments as $argument) {
+                $argument = $argument->getWrappedArgument();
+                $commandArguments[$position] = $argument;
+                if ($argument instanceof StringEnumArgument) $enums[$position] = $argument->getEnumValues();
+            }
+        }
+
+        $form = new CustomForm(function (Player $player, ?array $data) use ($enums): void {
             if ($data !== null) {
                 $args = [];
                 foreach ($this->getArgumentList() as $position => $arguments) {
                     /** @var PiggyArgument $argument */
                     foreach ($arguments as $argument) {
-                        $args[$argument->getName()] = (($enum = $argument->getWrappedArgument()) instanceof StringEnumArgument && !$enum instanceof BooleanArgument) ? $enum->getEnumValues()[$data[$position]] : $data[$position];
+                        $args[$argument->getName()] = (($enum = $argument->getWrappedArgument()) instanceof StringEnumArgument && !$enum instanceof BooleanArgument) ? $enums[$position][$data[$position]] : $data[$position];
                     }
                 }
                 $this->onRun($player, $this->getName(), $args);
             }
         });
         $form->setTitle("/f " . $this->getName());
-        foreach ($this->getArgumentList() as $arguments) {
-            /** @var PiggyArgument $argument */
-            foreach ($arguments as $argument) {
-                $argument = $argument->getWrappedArgument();
-                if ($argument instanceof BooleanArgument) {
-                    $form->addToggle(ucfirst($argument->getName()), $args[$argument->getName()] ?? null);
-                } elseif ($argument instanceof StringEnumArgument) {
-                    $form->addDropdown(ucfirst($argument->getName()), $argument->getEnumValues());
-                } else {
-                    $form->addInput(ucfirst($argument->getName()), "", $args[$argument->getName()] ?? null);
-                }
+        foreach ($commandArguments as $argument) {
+            if ($argument instanceof BooleanArgument) {
+                $form->addToggle(ucfirst($argument->getName()), $args[$argument->getName()] ?? null);
+            } elseif ($argument instanceof StringEnumArgument) {
+                $form->addDropdown(ucfirst($argument->getName()), $argument->getEnumValues(), (int)(array_search($args[$argument->getName()] ?? "", $argument->getEnumValues())));
+            } else {
+                $form->addInput(ucfirst($argument->getName()), "", $args[$argument->getName()] ?? null);
             }
         }
         $sender->sendForm($form);

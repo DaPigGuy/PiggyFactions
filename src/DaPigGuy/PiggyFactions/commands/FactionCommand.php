@@ -14,6 +14,7 @@ use DaPigGuy\PiggyFactions\commands\subcommands\claims\MapSubCommand;
 use DaPigGuy\PiggyFactions\commands\subcommands\claims\SeeChunkSubCommand;
 use DaPigGuy\PiggyFactions\commands\subcommands\claims\UnclaimSubCommand;
 use DaPigGuy\PiggyFactions\commands\subcommands\flags\FlagSubCommand;
+use DaPigGuy\PiggyFactions\commands\subcommands\HelpSubCommand;
 use DaPigGuy\PiggyFactions\commands\subcommands\homes\HomeSubCommand;
 use DaPigGuy\PiggyFactions\commands\subcommands\homes\SetHomeSubCommand;
 use DaPigGuy\PiggyFactions\commands\subcommands\InfoSubCommand;
@@ -95,6 +96,7 @@ class FactionCommand extends BaseCommand
         $this->registerSubCommand(new DisbandSubCommand($this->plugin, "disband", "Disband your faction"));
         $this->registerSubCommand(new EnemySubCommand($this->plugin, "enemy", "Mark faction as an enemy"));
         $this->registerSubCommand(new FlagSubCommand($this->plugin, "flag", "Manage faction flags"));
+        $this->registerSubCommand(new HelpSubCommand($this->plugin, $this, "help", "Display command information"));
         $this->registerSubCommand(new HomeSubCommand($this->plugin, "home", "Teleport to faction home"));
         $this->registerSubCommand(new InfoSubCommand($this->plugin, "info", "Display faction info", ["who"]));
         $this->registerSubCommand(new InviteSubCommand($this->plugin, "invite", "Invite a player to your faction"));

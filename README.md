@@ -55,6 +55,7 @@ PiggyFactions is an open-sourced factions plugin for [PocketMine-MP](https://git
 | `/f disband` | Disband your faction | `piggyfactions.command.faction.disband` |
 | `/f enemy <faction>` | Mark faction as an enemy | `piggyfactions.command.faction.enemy` |
 | `/f flag <flag>` | Manage faction flags | `piggyfactions.command.faction.flag` |
+| `/f help [page]` | Display command information | `piggyfactions.command.faction.help` |
 | `/f home` | Teleport to faction home | `piggyfactions.command.faction.home` |
 | `/f info [faction]` | Display faction info | `piggyfactions.command.faction.info` |
 | `/f invite <player>` | Invite a player to your faction | `piggyfactions.command.faction.invite` |
@@ -92,6 +93,7 @@ PiggyFactions is an open-sourced factions plugin for [PocketMine-MP](https://git
 | `piggyfactions.command.faction.create` | Allow usage of /f create | `true` |
 | `piggyfactions.command.faction.demote` | Allow usage of /f demote | `true` |
 | `piggyfactions.command.faction.description` | Allow usage of /f description | `true` |
+| `piggyfactions.command.faction.help` | Allow usage of /f help | `true` |
 | `piggyfactions.command.faction.home` | Allow usage of /f home | `true` |
 | `piggyfactions.command.faction.info` | Allow usage of /f info | `true` |
 | `piggyfactions.command.faction.invite` | Allow usage of /f invite | `true` |

@@ -48,6 +48,9 @@ permissions:
               piggyfactions.command.faction.description:
                 default: true
                 description: "Allow usage of /f description"
+              piggyfactions.command.faction.help:
+                default: true
+                description: "Allow usage of /f help"
               piggyfactions.command.faction.home:
                 default: true
                 description: "Allow usage of /f home"
