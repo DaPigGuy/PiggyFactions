@@ -46,9 +46,12 @@ class Faction
     private $relationWish;
 
     /** @var array */
+    private $banned;
+
+    /** @var array */
     private $invitedPlayers;
 
-    public function __construct(string $id, string $name, int $creationTime, ?string $description, ?string $motd, array $members, array $permissions, array $flags, ?Position $home, array $relations)
+    public function __construct(string $id, string $name, int $creationTime, ?string $description, ?string $motd, array $members, array $permissions, array $flags, ?Position $home, array $relations, array $banned)
     {
         $this->id = $id;
         $this->name = $name;
@@ -70,6 +73,7 @@ class Faction
         }
         $this->home = $home;
         $this->relations = $relations;
+        $this->banned = $banned;
     }
 
     public function getId(): string
@@ -339,6 +343,28 @@ class Faction
         return ($this->relations[$faction->getId()] ?? Relations::NONE) === Relations::ENEMY;
     }
 
+    public function getBanned(): array
+    {
+        return $this->banned;
+    }
+
+    public function isBanned(UUID $uuid): bool
+    {
+        return in_array($uuid->toString(), $this->banned);
+    }
+
+    public function banPlayer(UUID $uuid): void
+    {
+        $this->banned[] = $uuid->toString();
+        $this->update();
+    }
+
+    public function unbanPlayer(UUID $uuid): void
+    {
+        $key = array_search($uuid->toString(), $this->banned);
+        if ($key !== false) unset($this->banned[$key]);
+    }
+
     public function disband(): void
     {
         foreach ($this->getMembers() as $member) {
@@ -375,7 +401,8 @@ class Faction
                 "z" => $this->home->z,
                 "level" => $this->home->level->getFolderName()
             ]),
-            "relations" => json_encode($this->relations)
+            "relations" => json_encode($this->relations),
+            "banned" => json_encode($this->banned)
         ]);
     }
 }

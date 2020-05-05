@@ -14,6 +14,7 @@ class PermissionFactory
     public static function init(): void
     {
         self::registerPermission(new FactionPermission(FactionPermission::ALLY, [Roles::LEADER]));
+        self::registerPermission(new FactionPermission(FactionPermission::BAN, [Roles::LEADER, Roles::OFFICER]));
         self::registerPermission(new FactionPermission(FactionPermission::BUILD, [Roles::LEADER, Roles::OFFICER, Roles::MEMBER]));
         self::registerPermission(new FactionPermission(FactionPermission::CLAIM, [Roles::LEADER, Roles::OFFICER]));
         self::registerPermission(new FactionPermission(FactionPermission::CONTAINERS, [Roles::LEADER, Roles::OFFICER, Roles::MEMBER]));
@@ -30,6 +31,7 @@ class PermissionFactory
         self::registerPermission(new FactionPermission(FactionPermission::PROMOTE, [Roles::LEADER]));
         self::registerPermission(new FactionPermission(FactionPermission::SETHOME, [Roles::LEADER, Roles::OFFICER]));
         self::registerPermission(new FactionPermission(FactionPermission::UNALLY, [Roles::LEADER]));
+        self::registerPermission(new FactionPermission(FactionPermission::UNBAN, [Roles::LEADER, Roles::OFFICER]));
         self::registerPermission(new FactionPermission(FactionPermission::UNCLAIM, [Roles::LEADER, Roles::OFFICER]));
     }
 

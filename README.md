@@ -46,6 +46,7 @@ PiggyFactions is an open-sourced factions plugin for [PocketMine-MP](https://git
 | `/f admin` | Toggle admin mode | `piggyfactions.command.faction.admin` |
 | `/f ally <faction>` | Ally with other factions | `piggyfactions.command.faction.ally` |
 | `/f allychat` | Toggle ally chat | `piggyfactions.command.faction.allychat` | `/f ac` |
+| `/f ban <player>` | Ban a member from your faction | `piggyfactions.command.faction.ban` |
 | `/f chat` | Toggle faction chat | `piggyfactions.command.faction.chat` | `/f c` |
 | `/f claim [auto]` | Claim a chunk | `piggyfactions.command.faction.claim` |
 | `/f create <name>` | Create a faction | `piggyfactions.command.faction.create` |
@@ -72,6 +73,7 @@ PiggyFactions is an open-sourced factions plugin for [PocketMine-MP](https://git
 | `/f top [page]` | Display top factions | `piggyfactions.command.faction.top` |
 | `/f truce <faction>` | Truce with other factions | `piggyfactions.command.faction.truce` |
 | `/f unally <faction>` | End faction alliance | `piggyfactions.command.faction.unally` |
+| `/f unban <player>` | Unban a member from your faction | `piggyfactions.command.faction.unban` |
 | `/f unclaim [all]` | Unclaim a chunk | `piggyfactions.command.faction.unclaim` |
 
 ## Permissions
@@ -84,6 +86,7 @@ PiggyFactions is an open-sourced factions plugin for [PocketMine-MP](https://git
 | `piggyfactions.command.faction.admin` | Allow usage of /f admin | `op` |
 | `piggyfactions.command.faction.ally` | Allow usage of /f ally | `true` |
 | `piggyfactions.command.faction.allychat` | Allow usage of /f allychat | `true` |
+| `piggyfactions.command.faction.ban` | Allow usage of /f ban | `true` |
 | `piggyfactions.command.faction.chat` | Allow usage of /f chat | `true` |
 | `piggyfactions.command.faction.claim` | Allow usage of /f claim | `true` |
 | `piggyfactions.command.faction.create` | Allow usage of /f create | `true` |
@@ -105,6 +108,7 @@ PiggyFactions is an open-sourced factions plugin for [PocketMine-MP](https://git
 | `piggyfactions.command.faction.seechunk` | Allow usage of /f seechunk | `true` |
 | `piggyfactions.command.faction.sethome` | Allow usage of /f sethome | `true` |
 | `piggyfactions.command.faction.unally` | Allow usage of /f unally | `true` |
+| `piggyfactions.command.faction.unban` | Allow usage of /f unban | `true` |
 | `piggyfactions.command.faction.unclaim` | Allow usage of /f unclaim | `true` |
 
 ## Issue Reporting

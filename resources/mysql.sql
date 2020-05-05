@@ -15,7 +15,8 @@ CREATE TABLE IF NOT EXISTS factions
     permissions   JSON,
     flags         JSON,
     home          JSON,
-    relations     JSON
+    relations     JSON,
+    banned        JSON
 );
 -- # }
 
@@ -51,6 +52,7 @@ WHERE id = :id;
 -- #    :flags string
 -- #    :home ?string
 -- #    :relations string
+-- #    :banned string
 UPDATE factions
 SET name=:name,
     description=:description,
@@ -59,7 +61,8 @@ SET name=:name,
     permissions=:permissions,
     flags=:flags,
     home=:home,
-    relations=:relations
+    relations=:relations,
+    banned=:banned
 WHERE id = :id;
 -- # }
 

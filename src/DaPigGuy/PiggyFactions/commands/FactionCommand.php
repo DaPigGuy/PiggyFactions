@@ -19,6 +19,7 @@ use DaPigGuy\PiggyFactions\commands\subcommands\homes\SetHomeSubCommand;
 use DaPigGuy\PiggyFactions\commands\subcommands\InfoSubCommand;
 use DaPigGuy\PiggyFactions\commands\subcommands\JoinSubCommand;
 use DaPigGuy\PiggyFactions\commands\subcommands\LeaveSubCommand;
+use DaPigGuy\PiggyFactions\commands\subcommands\management\BanSubCommand;
 use DaPigGuy\PiggyFactions\commands\subcommands\management\CreateSubCommand;
 use DaPigGuy\PiggyFactions\commands\subcommands\management\DescriptionSubCommand;
 use DaPigGuy\PiggyFactions\commands\subcommands\management\DisbandSubCommand;
@@ -26,6 +27,7 @@ use DaPigGuy\PiggyFactions\commands\subcommands\management\InviteSubCommand;
 use DaPigGuy\PiggyFactions\commands\subcommands\management\KickSubCommand;
 use DaPigGuy\PiggyFactions\commands\subcommands\management\MotdSubCommand;
 use DaPigGuy\PiggyFactions\commands\subcommands\management\NameSubCommand;
+use DaPigGuy\PiggyFactions\commands\subcommands\management\UnbanSubCommand;
 use DaPigGuy\PiggyFactions\commands\subcommands\relations\AllySubCommand;
 use DaPigGuy\PiggyFactions\commands\subcommands\relations\EnemySubCommand;
 use DaPigGuy\PiggyFactions\commands\subcommands\relations\NeutralSubCommand;
@@ -83,6 +85,7 @@ class FactionCommand extends BaseCommand
         $this->setPermission("piggyfactions.command.faction.use");
         $this->registerSubCommand(new AdminSubCommand($this->plugin, "admin", "Toggle admin mode"));
         $this->registerSubCommand(new AllySubCommand($this->plugin, "ally", "Ally with other factions"));
+        $this->registerSubCommand(new BanSubCommand($this->plugin, "ban", "Ban a member from your faction"));
         $this->registerSubCommand(new ChatSubCommand($this->plugin, ChatTypes::ALLY, "allychat", "Toggle ally chat", ["ac"]));
         $this->registerSubCommand(new ChatSubCommand($this->plugin, ChatTypes::FACTION, "chat", "Toggle faction chat", ["c"]));
         $this->registerSubCommand(new ClaimSubCommand($this->plugin, "claim", "Claim a chunk"));
@@ -110,6 +113,7 @@ class FactionCommand extends BaseCommand
         $this->registerSubCommand(new TopSubCommand($this->plugin, "top", "Display top factions", ["list"]));
         $this->registerSubCommand(new TruceSubCommand($this->plugin, "truce", "Truce with other factions"));
         $this->registerSubCommand(new UnallySubCommand($this->plugin, "unally", "End faction alliance"));
+        $this->registerSubCommand(new UnbanSubCommand($this->plugin, "unban", "Unban a member from your faction"));
         $this->registerSubCommand(new UnclaimSubCommand($this->plugin, "unclaim", "Unclaim a chunk"));
     }
 }

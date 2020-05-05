@@ -33,6 +33,10 @@ class JoinSubCommand extends FactionSubCommand
             LanguageManager::getInstance()->sendMessage($sender, "commands.already-in-faction");
             return;
         }
+        if ($targetFaction->isBanned($sender->getUniqueId())) {
+            LanguageManager::getInstance()->sendMessage($sender, "commands.you-are-banned");
+            return;
+        }
         $ev = new FactionJoinEvent($targetFaction, $member);
         $ev->call();
         if ($ev->isCancelled()) return;

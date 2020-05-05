@@ -31,6 +31,10 @@ class InviteSubCommand extends FactionSubCommand
             LanguageManager::getInstance()->sendMessage($sender, "commands.invite.already-sent", ["{PLAYER}" => $target->getName()]);
             return;
         }
+        if ($faction->isBanned($target->getUniqueId())) {
+            LanguageManager::getInstance()->sendMessage($sender, "commands.player-is-banned", ["{PLAYER}" => $target->getName()]);
+            return;
+        }
         $ev = new FactionInviteEvent($faction, $member, $target);
         $ev->call();
         if ($ev->isCancelled()) return;

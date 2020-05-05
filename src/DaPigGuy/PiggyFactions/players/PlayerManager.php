@@ -57,6 +57,14 @@ class PlayerManager
         return $this->players[$uuid->toString()] ?? null;
     }
 
+    public function getPlayerByName(string $name): ?FactionsPlayer
+    {
+        foreach ($this->players as $player) {
+            if (strtolower($player->getUsername()) === strtolower($name)) return $player;
+        }
+        return null;
+    }
+
     public function getPlayerFaction(UUID $uuid): ?Faction
     {
         return $this->getPlayer($uuid)->getFaction();

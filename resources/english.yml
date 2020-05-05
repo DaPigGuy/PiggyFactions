@@ -9,6 +9,8 @@ commands:
   already-in-faction: "{RED}You are already in a faction."
   not-leader: "{RED}You are not the faction leader!"
   no-permission: "{RED}You are not permitted to do this."
+  player-is-banned: "{RED}{PLAYER} is banned from your faction."
+  you-are-banned: "{RED}You are banned from this faction."
   admin:
     toggled: "{GREEN}You are now in admin mode."
     toggled-off: "{RED}You are no longer in admin mode."
@@ -18,6 +20,11 @@ commands:
     request: "{GREEN}{FACTION} has sent an ally request. Do /f ally {FACTION} to accept."
     allied: "{GREEN}Your faction is now allied with {ALLY}"
     success: "{GREEN}An ally request has been sent to {FACTION}."
+  ban:
+    cant-ban-higher: "{RED}You can not ban members of higher rank."
+    already-banned: "{RED}{PLAYER} is already banned."
+    announcement: "{YELLOW}{PLAYER} was banned from the faction."
+    banned: "{RED}You were banned from your faction."
   chat:
     already-in-chat: "{RED}You are already in this chat!"
     toggled: "{GREEN}You are now in the {CHAT} chat."
@@ -58,7 +65,7 @@ commands:
   home:
     not-set: "{RED}Faction home is not set."
   info:
-    message: "{GOLD}__.[{DARK_GREEN}Faction {FACTION}{GOLD}].__\n{GOLD}Description: {YELLOW}{DESCRIPTION}\n{GOLD}Power: {YELLOW}{POWER}/{TOTALPOWER}\n{GOLD}Online: {YELLOW}{ONLINECOUNT}/{TOTALPLAYERS}\n{GOLD}Leader: {YELLOW}{LEADER}\n{GOLD}Allies: {DARK_PURPLE}{ALLIES}\n{GOLD}Enemies: {RED}{ENEMIES}\n{GOLD}Members: {YELLOW}{PLAYERS}"
+    message: "{GOLD}____________.[{DARK_GREEN}Faction {FACTION}{GOLD}].____________\n{GOLD}Description: {YELLOW}{DESCRIPTION}\n{GOLD}Power: {YELLOW}{POWER}/{TOTALPOWER}\n{GOLD}Online: {YELLOW}{ONLINECOUNT}/{TOTALPLAYERS}\n{GOLD}Leader: {YELLOW}{LEADER}\n{GOLD}Allies: {DARK_PURPLE}{ALLIES}\n{GOLD}Enemies: {RED}{ENEMIES}\n{GOLD}Members: {YELLOW}{PLAYERS}"
   invite:
     already-in-faction: "{RED}{PLAYER} is already in a faction."
     already-sent: "{RED}An invite has already been sent to {PLAYER}."
@@ -115,6 +122,9 @@ commands:
   unally:
     not-allied: "{RED}You are not allied with {FACTION}."
     unallied: "{RED}Your faction is no longer allied with {FACTION}."
+  unban:
+    not-banned: "{RED}{PLAYER} is not banned."
+    announcement: "{YELLOW}{PLAYER} was unbanned from the faction."
   unclaim:
     not-claimed: "{RED}This chunk is not claimed."
     other-faction: "{RED}This chunk is claimed by another faction."

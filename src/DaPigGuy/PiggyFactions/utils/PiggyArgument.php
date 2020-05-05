@@ -49,4 +49,9 @@ class PiggyArgument extends BaseArgument
     {
         return $this->argument->getTypeName();
     }
+
+    public function getSpanLength(): int
+    {
+        return $this->argument->getSpanLength();
+    }
 }

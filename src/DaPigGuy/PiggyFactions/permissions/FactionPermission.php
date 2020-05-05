@@ -9,6 +9,7 @@ use DaPigGuy\PiggyFactions\utils\Roles;
 class FactionPermission implements \JsonSerializable
 {
     const ALLY = "ally";
+    const BAN = "ban";
     const BUILD = "build";
     const CLAIM = "claim";
     const CONTAINERS = "containers";
@@ -25,6 +26,7 @@ class FactionPermission implements \JsonSerializable
     const PROMOTE = "promote";
     const SETHOME = "sethome";
     const UNALLY = "unally";
+    const UNBAN = "unban";
     const UNCLAIM = "unclaim";
 
     /** @var string */

@@ -30,6 +30,9 @@ permissions:
               piggyfactions.command.faction.allychat:
                 default: true
                 description: "Allow usage of /f allychat"
+              piggyfactions.command.faction.ban:
+                default: true
+                description: "Allow usage of /f ban"
               piggyfactions.command.faction.chat:
                 default: true
                 description: "Allow usage of /f chat"
@@ -93,6 +96,9 @@ permissions:
               piggyfactions.command.faction.unally:
                 default: true
                 description: "Allow usage of /f unally"
+              piggyfactions.command.faction.unban:
+                default: true
+                description: "Allow usage of /f unban"
               piggyfactions.command.faction.unclaim:
                 default: true
                 description: "Allow usage of /f unclaim"
