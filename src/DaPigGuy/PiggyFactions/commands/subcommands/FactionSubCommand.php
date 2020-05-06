@@ -73,7 +73,7 @@ abstract class FactionSubCommand extends BaseSubCommand
             }
         }
 
-        if ($this->requiresPlayer) {
+        if ($this->requiresPlayer && $sender instanceof Player) {
             $this->onNormalRun($sender, $faction, $member, $aliasUsed, $args);
         } else {
             $this->onBasicRun($sender, $args);
