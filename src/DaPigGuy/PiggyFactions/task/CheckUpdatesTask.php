@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace DaPigGuy\PiggyFactions\tasks;
+namespace DaPigGuy\PiggyFactions\task;
 
 use DaPigGuy\PiggyFactions\PiggyFactions;
 use pocketmine\scheduler\AsyncTask;
