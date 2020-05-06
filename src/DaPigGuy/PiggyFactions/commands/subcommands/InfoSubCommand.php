@@ -9,17 +9,21 @@ use CortexPE\Commando\exception\ArgumentOrderException;
 use DaPigGuy\PiggyFactions\factions\Faction;
 use DaPigGuy\PiggyFactions\factions\FactionsManager;
 use DaPigGuy\PiggyFactions\language\LanguageManager;
-use DaPigGuy\PiggyFactions\players\FactionsPlayer;
+use DaPigGuy\PiggyFactions\players\PlayerManager;
 use DaPigGuy\PiggyFactions\utils\Roles;
+use pocketmine\command\CommandSender;
 use pocketmine\Player;
 
 class InfoSubCommand extends FactionSubCommand
 {
     /** @var bool */
-    public $requiresFaction = false;
+    protected $requiresPlayer = false;
+    /** @var bool */
+    protected $requiresFaction = false;
 
-    public function onNormalRun(Player $sender, ?Faction $faction, FactionsPlayer $member, string $aliasUsed, array $args): void
+    public function onBasicRun(CommandSender $sender, array $args): void
     {
+        $faction = $sender instanceof Player ? PlayerManager::getInstance()->getPlayerFaction($sender->getUniqueId()) : null;
         if (isset($args["faction"])) {
             $faction = FactionsManager::getInstance()->getFactionByName($args["faction"]);
             if ($faction === null) {

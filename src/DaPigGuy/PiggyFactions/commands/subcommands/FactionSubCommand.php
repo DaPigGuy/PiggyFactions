@@ -25,6 +25,8 @@ abstract class FactionSubCommand extends BaseSubCommand
     /** @var PiggyFactions */
     protected $plugin;
     /** @var bool */
+    protected $requiresPlayer = true;
+    /** @var bool */
     protected $requiresFaction = true;
 
     public function __construct(PiggyFactions $plugin, string $name, string $description = "", array $aliases = [])
@@ -36,6 +38,11 @@ abstract class FactionSubCommand extends BaseSubCommand
 
     public function onRun(CommandSender $sender, string $aliasUsed, array $args): void
     {
+        if (!$this->requiresPlayer) {
+            $this->onBasicRun($sender, $args);
+            return;
+        }
+
         if (!$sender instanceof Player) {
             $sender->sendMessage(TextFormat::RED . "Please use this command in-game.");
             return;
@@ -71,7 +78,13 @@ abstract class FactionSubCommand extends BaseSubCommand
         $this->onNormalRun($sender, $faction, $member, $aliasUsed, $args);
     }
 
-    abstract public function onNormalRun(Player $sender, ?Faction $faction, FactionsPlayer $member, string $aliasUsed, array $args): void;
+    public function onBasicRun(CommandSender $sender, array $args): void
+    {
+    }
+
+    public function onNormalRun(Player $sender, ?Faction $faction, FactionsPlayer $member, string $aliasUsed, array $args): void
+    {
+    }
 
     public function onFormRun(Player $sender, ?Faction $faction, FactionsPlayer $member, string $aliasUsed, array $args): void
     {
