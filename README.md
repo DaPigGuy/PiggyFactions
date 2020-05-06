@@ -5,9 +5,24 @@ PiggyFactions is an open-sourced factions plugin for [PocketMine-MP](https://git
 ## Disclaimer
 PiggyFactions is currently in beta. While we have tested quite thoroughly, there may exist some bugs. Please report any issue on GitHub. PureChat support currently does not exist.
 
+## Table of Contents
+* [Prerequisites](#prerequisites)
+* [Features](#features)
+* [Installation & Setup](#installation--setup)
+* Commands and Permissions
+  * [Commands](#commands)
+  * [Permissions](#permissions)
+* [Flags](#flags)
+* Chat Formatting
+  * [HRKChat Tags](#hrkchat-tags)
+* [Issue Reporting](#issue-reporting)
+* [Additional Information](#additional-information)
+* [License](#license)
+
 ## Prerequisites
 * Basic knowledge on how to install plugins from Poggit Releases and/or Poggit CI
 * PMMP 3.2.0 or greater
+* mysql & sqlite3 PHP extensions (should already exist within your PHP binaries)
 <!-- Not quite a requirement yet :l
 * Economy type supported by libPiggyEconomy:
   * [EconomyAPI](https://github.com/onebone/EconomyS/tree/3.x/EconomyAPI) by onebone
@@ -17,7 +32,7 @@ PiggyFactions is currently in beta. While we have tested quite thoroughly, there
 
 ## Features
 | Feature | PiggyFactions | FactionsPro |
-| --- | --- | --- |
+| --- | :-: | :-: |
 | PiggyCE Integration | ✔ | ❌ |
 | Hierarchy/HRKChat Integration | ✔ | ❌ |
 | Saves Players by UUID | ✔ | ❌ |
@@ -60,7 +75,7 @@ PiggyFactions is currently in beta. While we have tested quite thoroughly, there
 | `/f flag <flag>` | Manage faction flags | `piggyfactions.command.faction.flag` |
 | `/f help [page]` | Display command information | `piggyfactions.command.faction.help` |
 | `/f home` | Teleport to faction home | `piggyfactions.command.faction.home` |
-| `/f info [faction]` | Display faction info | `piggyfactions.command.faction.info` |
+| `/f info [faction]` | Display faction info | `piggyfactions.command.faction.info` | `/f who` |
 | `/f invite <player>` | Invite a player to your faction | `piggyfactions.command.faction.invite` |
 | `/f join <faction>` | Join a faction | `piggyfactions.command.faction.join` |
 | `/f kick <player>` | Kick a member from your faction | `piggyfactions.command.faction.kick` |
@@ -118,7 +133,14 @@ PiggyFactions is currently in beta. While we have tested quite thoroughly, there
 | `piggyfactions.command.faction.unban` | Allow usage of /f unban | `true` |
 | `piggyfactions.command.faction.unclaim` | Allow usage of /f unclaim | `true` |
 
-## HRKChat Available Custom Tags
+## Flags
+| Flag | Description |
+| --- | --- |
+| Open | Anyone is able to join the faction |
+| SafeZone | Mark current faction as a SafeZone |
+| WarZone | Mark current faction as a WarZone |
+
+## HRKChat Tags
 Sample Format: `&6{{piggyfacs.rank.symbol}}{{piggyfacs.name}} &r&7{{hrk.displayName}}&r: {{msg}}`
 | Tag Name | Description |
 | --- | --- |
