@@ -118,6 +118,17 @@ PiggyFactions is currently in beta. While we have tested quite thoroughly, there
 | `piggyfactions.command.faction.unban` | Allow usage of /f unban | `true` |
 | `piggyfactions.command.faction.unclaim` | Allow usage of /f unclaim | `true` |
 
+## HRKChat Available Custom Tags
+Sample format: `[{{piggyfacs.name}}{{piggyfacs.rank.symbol}}] {{hrk.displayName}}: {{msg}}`
+| Tag Name | Description |
+| -------- | ----------- |
+| `piggyfacs.name` | Player's faction name |
+| `piggyfacs.power` | Player's faction power |
+| `piggyfacs.rank.name` | Faction rank name |
+| `piggyfacs.rank.symbol` | Faction rank symbol |
+| `piggyfacs.members.all` | Total member count |
+| `piggyfacs.members.online` | Online member count |
+
 ## Issue Reporting
 * If you experience an unexpected non-crash behavior with PiggyFactions, click [here](https://github.com/DaPigGuy/PiggyFactions/issues/new?assignees=DaPigGuy&labels=bug&template=bug_report.md&title=).
 * If you experience a crash in PiggyFactions, click [here](https://github.com/DaPigGuy/PiggyFactions/issues/new?assignees=DaPigGuy&labels=bug&template=crash.md&title=).
