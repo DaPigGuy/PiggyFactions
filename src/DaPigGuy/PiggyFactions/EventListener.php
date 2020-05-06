@@ -17,8 +17,6 @@ use pocketmine\event\player\PlayerChatEvent;
 use pocketmine\event\player\PlayerDeathEvent;
 use pocketmine\event\player\PlayerJoinEvent;
 use pocketmine\event\player\PlayerRespawnEvent;
-use pocketmine\event\server\DataPacketReceiveEvent;
-use pocketmine\network\mcpe\protocol\LoginPacket;
 use pocketmine\Player;
 
 class EventListener implements Listener
@@ -122,6 +120,7 @@ class EventListener implements Listener
         $player = $event->getPlayer();
         if (($member = PlayerManager::getInstance()->getPlayer($player->getUniqueId())) === null) $member = PlayerManager::getInstance()->createPlayer($player);
         if ($member->getUsername() !== $player->getName()) $member->setUsername($member->getUsername());
+        LanguageManager::getInstance()->setPlayerLanguage($player, LanguageManager::LANGUAGES[$player->getLocale()] ?? LanguageManager::DEFAULT_LANGUAGE);
         if (($faction = $member->getFaction()) !== null) {
             if (($motd = $faction->getMotd()) !== null) LanguageManager::getInstance()->sendMessage($player, "motd", ["{MOTD}" => $motd]);
         }
@@ -134,15 +133,6 @@ class EventListener implements Listener
         $faction = PlayerManager::getInstance()->getPlayerFaction($player->getUniqueId());
         if ($this->plugin->getConfig()->getNested("factions.homes.teleport-on-death") && $faction !== null && $faction->getHome() !== null) {
             $event->setRespawnPosition($faction->getHome());
-        }
-    }
-
-    public function onDataPacketReceive(DataPacketReceiveEvent $event): void
-    {
-        $player = $event->getPlayer();
-        $packet = $event->getPacket();
-        if ($packet instanceof LoginPacket) {
-            LanguageManager::getInstance()->setPlayerLanguage($player, LanguageManager::LANGUAGES[$packet->locale] ?? LanguageManager::DEFAULT_LANGUAGE);
         }
     }
 }
