@@ -119,9 +119,9 @@ PiggyFactions is currently in beta. While we have tested quite thoroughly, there
 | `piggyfactions.command.faction.unclaim` | Allow usage of /f unclaim | `true` |
 
 ## HRKChat Available Custom Tags
-Sample format: `[{{piggyfacs.name}}{{piggyfacs.rank.symbol}}] {{hrk.displayName}}: {{msg}}`
+Sample Format: `&6{{piggyfacs.rank.symbol}}{{piggyfacs.name}} &r&7{{hrk.displayName}}&r: {{msg}}`
 | Tag Name | Description |
-| -------- | ----------- |
+| --- | --- |
 | `piggyfacs.name` | Player's faction name |
 | `piggyfacs.power` | Player's faction power |
 | `piggyfacs.rank.name` | Faction rank name |
