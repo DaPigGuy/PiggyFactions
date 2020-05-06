@@ -2,6 +2,9 @@
 
 PiggyFactions is an open-sourced factions plugin for [PocketMine-MP](https://github.com/pmmp/PocketMine-MP).
 
+## Disclaimer
+PiggyFactions is currently in beta. While we have tested quite thoroughly, there may exist some bugs. Please report any issue on GitHub. PureChat support currently does not exist.
+
 ## Prerequisites
 * Basic knowledge on how to install plugins from Poggit Releases and/or Poggit CI
 * PMMP 3.2.0 or greater
