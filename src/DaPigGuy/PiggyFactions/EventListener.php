@@ -38,24 +38,23 @@ class EventListener implements Listener
         $member = PlayerManager::getInstance()->getPlayer($player->getUniqueId());
         $faction = $member->getFaction();
         if ($faction !== null) {
+            $placeholders = [
+                "{PLAYER}" => $player->getDisplayName(),
+                "{FACTION}" => $faction->getName(),
+                "{RANK_NAME}" => $this->plugin->getTagManager()->getPlayerRankName($member),
+                "{RANK_SYMBOL}" => $this->plugin->getTagManager()->getPlayerRankSymbol($member),
+                "{MESSAGE}" => $event->getMessage()
+            ];
             switch ($member->getCurrentChat()) {
                 case ChatTypes::ALLY:
                     $event->setRecipients(array_merge($faction->getOnlineMembers(), ...array_map(function (Faction $ally): array {
                         return $ally->getOnlineMembers();
                     }, $faction->getAllies())));
-                    $event->setFormat(LanguageManager::getInstance()->getMessage(LanguageManager::DEFAULT_LANGUAGE, "chat.ally", [
-                        "{PLAYER}" => $player->getDisplayName(),
-                        "{FACTION}" => $faction->getName(),
-                        "{MESSAGE}" => $event->getMessage()
-                    ]));
+                    $event->setFormat(LanguageManager::getInstance()->getMessage(LanguageManager::DEFAULT_LANGUAGE, "chat.ally", $placeholders));
                     break;
                 case ChatTypes::FACTION:
                     $event->setRecipients($faction->getOnlineMembers());
-                    $event->setFormat(LanguageManager::getInstance()->getMessage(LanguageManager::DEFAULT_LANGUAGE, "chat.faction", [
-                        "{PLAYER}" => $player->getDisplayName(),
-                        "{FACTION}" => $faction->getName(),
-                        "{MESSAGE}" => $event->getMessage()
-                    ]));
+                    $event->setFormat(LanguageManager::getInstance()->getMessage(LanguageManager::DEFAULT_LANGUAGE, "chat.faction", $placeholders));
                     break;
             }
         }

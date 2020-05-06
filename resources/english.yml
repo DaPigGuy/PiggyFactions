@@ -1,6 +1,6 @@
 chat:
-  ally: "{BOLD}{GOLD}ALLY {RESET}{PLAYER}: {MESSAGE}"
-  faction: "{BOLD}{GOLD}FACTION {RESET}{PLAYER}: {MESSAGE}"
+  ally: "{BOLD}{GOLD}ALLY {RESET}{LIGHT_PURPLE}{RANK_SYMBOL}{FACTION} {RESET}{PLAYER}: {MESSAGE}"
+  faction: "{BOLD}{GOLD}FACTION {RESET}{RANK_SYMBOL}{PLAYER}: {MESSAGE}"
 claims:
   command-denied: "{RED}You can't use {COMMAND} in {RELATION} territory."
 commands:
