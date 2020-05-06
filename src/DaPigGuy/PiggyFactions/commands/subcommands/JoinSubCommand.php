@@ -33,9 +33,15 @@ class JoinSubCommand extends FactionSubCommand
             LanguageManager::getInstance()->sendMessage($sender, "commands.already-in-faction");
             return;
         }
-        if ($targetFaction->isBanned($sender->getUniqueId())) {
-            LanguageManager::getInstance()->sendMessage($sender, "commands.you-are-banned");
-            return;
+        if (!$member->isInAdminMode()) {
+            if ($targetFaction->isBanned($sender->getUniqueId())) {
+                LanguageManager::getInstance()->sendMessage($sender, "commands.you-are-banned");
+                return;
+            }
+            if (count($faction->getMembers()) >= ($maxPlayers = $this->plugin->getConfig()->getNested("factions.max-players", -1)) && $maxPlayers !== -1) {
+                LanguageManager::getInstance()->sendMessage($sender, "commands.faction-full");
+                return;
+            }
         }
         $ev = new FactionJoinEvent($targetFaction, $member);
         $ev->call();

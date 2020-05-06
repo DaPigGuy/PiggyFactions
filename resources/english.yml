@@ -13,6 +13,7 @@ commands:
   no-permission: "{RED}You are not permitted to do this."
   player-is-banned: "{RED}{PLAYER} is banned from your faction."
   you-are-banned: "{RED}You are banned from this faction."
+  faction-full: "{RED}The faction is full."
   admin:
     toggled: "{GREEN}You are now in admin mode."
     toggled-off: "{RED}You are no longer in admin mode."

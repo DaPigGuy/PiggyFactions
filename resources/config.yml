@@ -18,6 +18,7 @@ factions:
     - admin
     - mojang
   max-name-length: 16
+  max-players: 50
   pvp:
     factionless: true
     between-factionless: true

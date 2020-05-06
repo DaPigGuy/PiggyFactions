@@ -35,6 +35,10 @@ class InviteSubCommand extends FactionSubCommand
             LanguageManager::getInstance()->sendMessage($sender, "commands.player-is-banned", ["{PLAYER}" => $target->getName()]);
             return;
         }
+        if (count($faction->getMembers()) >= ($maxPlayers = $this->plugin->getConfig()->getNested("factions.max-players", -1)) && $maxPlayers !== -1 && !$member->isInAdminMode()) {
+            LanguageManager::getInstance()->sendMessage($sender, "commands.faction-full");
+            return;
+        }
         $ev = new FactionInviteEvent($faction, $member, $target);
         $ev->call();
         if ($ev->isCancelled()) return;
