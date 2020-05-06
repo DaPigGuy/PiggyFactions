@@ -1,0 +1,16 @@
+--- # Poggit-CI Manifest. Open the CI at https://poggit.pmmp.io/ci/DaPigGuy/PiggyFactions
+branches:
+  - master
+projects:
+  PiggyFactions:
+    path: ""
+    libs:
+      - src: CortexPE/Commando/Commando
+        version: ^0.6
+      - src: poggit/libasynql/libasynql
+        version: ^3.3.0
+      - src: jojoe77777/FormAPI/libFormAPI
+        version: ^1.3
+    lint:
+      phpstan: false
+...

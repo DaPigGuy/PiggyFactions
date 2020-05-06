@@ -8,8 +8,9 @@ database:
     password: ""
     schema: "piggyfactions"
   worker-limit: 1
-economy:
-  provider: economyapi
+#economy:
+  #enabled: false
+  #provider: economyapi
 factions:
   blacklisted-names:
     - staff

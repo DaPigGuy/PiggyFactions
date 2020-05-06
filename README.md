@@ -126,7 +126,7 @@ PiggyFactions is an open-sourced factions plugin for [PocketMine-MP](https://git
 
 ## Additional Information
 * We do not support any spoons. Anything to do with spoons (Issues or PRs) will be ignored.
-* We are using the following virions: [Commando](https://github.com/CortexPE/Commando), [libasynql](https://github.com/poggit/libasynql), [libFormAPI](https://github.com/jojoe77777/FormAPI), and [libPiggyEconomy](https://github.com/DaPigGuy/libPiggyEconomy).
+* We are using the following virions: [Commando](https://github.com/CortexPE/Commando), [libasynql](https://github.com/poggit/libasynql), and [libFormAPI](https://github.com/jojoe77777/FormAPI).
     * **Unless you know what you are doing, use the pre-compiled phar from [Poggit-CI](https://poggit.pmmp.io/ci/DaPigGuy/PiggyFactions/~) and not GitHub.**
     * If you wish to run it via source, check out [DEVirion](https://github.com/poggit/devirion).
 

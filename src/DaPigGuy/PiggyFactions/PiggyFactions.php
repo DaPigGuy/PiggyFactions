@@ -6,10 +6,6 @@ namespace DaPigGuy\PiggyFactions;
 
 use CortexPE\Commando\exception\HookAlreadyRegistered;
 use CortexPE\Commando\PacketHooker;
-use DaPigGuy\libPiggyEconomy\exceptions\MissingProviderDependencyException;
-use DaPigGuy\libPiggyEconomy\exceptions\UnknownProviderException;
-use DaPigGuy\libPiggyEconomy\libPiggyEconomy;
-use DaPigGuy\libPiggyEconomy\providers\EconomyProvider;
 use DaPigGuy\PiggyCustomEnchants\utils\AllyChecks;
 use DaPigGuy\PiggyFactions\claims\ClaimsManager;
 use DaPigGuy\PiggyFactions\commands\FactionCommand;
@@ -34,8 +30,7 @@ class PiggyFactions extends PluginBase
 
     /** @var DataConnector */
     private $database;
-    /** @var EconomyProvider */
-    private $economyProvider;
+    //private $economyProvider;
 
     /** @var FactionsManager */
     private $factionsManager;
@@ -50,8 +45,6 @@ class PiggyFactions extends PluginBase
     private $tagManager;
 
     /**
-     * @throws MissingProviderDependencyException
-     * @throws UnknownProviderException
      * @throws HookAlreadyRegistered
      */
     public function onEnable(): void
@@ -65,8 +58,14 @@ class PiggyFactions extends PluginBase
             "mysql" => "mysql.sql"
         ]);
 
-        libPiggyEconomy::init();
-        $this->economyProvider = libPiggyEconomy::getProvider($this->getConfig()->get("economy"));
+        /*
+        ibPiggyEconomy::init();
+        try {
+            if ($this->getConfig()->getNested("economy.enabled", false)) $this->economyProvider = libPiggyEconomy::getProvider($this->getConfig()->get("economy"));
+        } catch (\Exception $exception) {
+            $this->getLogger()->error($exception->getMessage());
+        }
+        */
 
         PermissionFactory::init();
         FlagFactory::init();
@@ -110,10 +109,12 @@ class PiggyFactions extends PluginBase
         return $this->database;
     }
 
+    /*
     public function getEconomyProvider(): EconomyProvider
     {
         return $this->economyProvider;
     }
+    */
 
     public function getFactionsManager(): FactionsManager
     {
