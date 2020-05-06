@@ -7,9 +7,11 @@ namespace DaPigGuy\PiggyFactions\claims;
 use DaPigGuy\PiggyFactions\language\LanguageManager;
 use DaPigGuy\PiggyFactions\PiggyFactions;
 use DaPigGuy\PiggyFactions\players\PlayerManager;
+use DaPigGuy\PiggyFactions\utils\Relations;
 use pocketmine\event\block\BlockBreakEvent;
 use pocketmine\event\block\BlockPlaceEvent;
 use pocketmine\event\Listener;
+use pocketmine\event\player\PlayerCommandPreprocessEvent;
 use pocketmine\event\player\PlayerInteractEvent;
 use pocketmine\event\player\PlayerMoveEvent;
 use pocketmine\level\Position;
@@ -37,6 +39,25 @@ class ClaimsListener implements Listener
     public function onPlace(BlockPlaceEvent $event): void
     {
         if (!$this->canAffectArea($event->getPlayer(), $event->getBlock())) $event->setCancelled();
+    }
+
+    public function onCommandPreprocess(PlayerCommandPreprocessEvent $event): void
+    {
+        $player = $event->getPlayer();
+        $message = $event->getMessage();
+        $member = PlayerManager::getInstance()->getPlayer($player->getUniqueId());
+        $faction = $member->getFaction();
+        $claim = ClaimsManager::getInstance()->getClaim($player->getLevel(), $player->getLevel()->getChunkAtPosition($player));
+        if (!$member->isInAdminMode() && $claim !== null && $claim->getFaction() !== $faction) {
+            $relation = $faction === null ? Relations::NONE : $faction->getRelation($claim->getFaction());
+            if (substr($message, 0, 1) === "/") {
+                $command = substr(explode(" ", $message)[0], 1);
+                if (in_array($command, $this->plugin->getConfig()->getNested("factions.claims.denied-commands." . $relation, []))) {
+                    LanguageManager::getInstance()->sendMessage($player, "claims.command-denied", ["{COMMAND}" => $command, "{RELATION}" => $relation === "none" ? "neutral" : $relation]);
+                    $event->setCancelled();
+                }
+            }
+        }
     }
 
     public function onInteract(PlayerInteractEvent $event): void

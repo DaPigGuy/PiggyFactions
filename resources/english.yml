@@ -1,6 +1,8 @@
 chat:
   ally: "{BOLD}{GOLD}ALLY {RESET}{PLAYER}: {MESSAGE}"
   faction: "{BOLD}{GOLD}FACTION {RESET}{PLAYER}: {MESSAGE}"
+claims:
+  command-denied: "{RED}You can't use {COMMAND} in {RELATION} territory."
 commands:
   invalid-player: "{RED}Player {PLAYER} not found."
   invalid-faction: "{RED}Faction {FACTION} not found."

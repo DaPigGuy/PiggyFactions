@@ -38,21 +38,15 @@ abstract class FactionSubCommand extends BaseSubCommand
 
     public function onRun(CommandSender $sender, string $aliasUsed, array $args): void
     {
-        if (!$this->requiresPlayer) {
-            $this->onBasicRun($sender, $args);
-            return;
-        }
-
-        if (!$sender instanceof Player) {
+        if (!$sender instanceof Player && $this->requiresPlayer) {
             $sender->sendMessage(TextFormat::RED . "Please use this command in-game.");
             return;
         }
 
-        $member = PlayerManager::getInstance()->getPlayer($sender->getUniqueId());
-        if ($member === null) return;
-        $faction = $member->getFaction();
+        $member = $sender instanceof Player ? PlayerManager::getInstance()->getPlayer($sender->getUniqueId()) : null;
+        $faction = $member === null ? null : $member->getFaction();
 
-        if ($this->requiresFaction) {
+        if ($this->requiresFaction && $this->requiresPlayer) {
             if ($faction === null) {
                 LanguageManager::getInstance()->sendMessage($sender, "commands.not-in-faction");
                 return;
@@ -69,13 +63,21 @@ abstract class FactionSubCommand extends BaseSubCommand
             /** @var PiggyArgument $argument */
             foreach ($arguments as $argument) {
                 if (!$argument->getWrappedArgument()->isOptional() && !isset($args[$argument->getName()])) {
-                    $this->onFormRun($sender, $faction, $member, $aliasUsed, $args);
+                    if ($sender instanceof Player) {
+                        $this->onFormRun($sender, $faction, $member, $aliasUsed, $args);
+                    } else {
+                        $this->sendUsage();
+                    }
                     return;
                 }
             }
         }
 
-        $this->onNormalRun($sender, $faction, $member, $aliasUsed, $args);
+        if ($this->requiresPlayer) {
+            $this->onNormalRun($sender, $faction, $member, $aliasUsed, $args);
+        } else {
+            $this->onBasicRun($sender, $args);
+        }
     }
 
     public function onBasicRun(CommandSender $sender, array $args): void

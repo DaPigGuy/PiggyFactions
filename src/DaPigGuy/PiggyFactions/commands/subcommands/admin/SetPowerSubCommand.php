@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace DaPigGuy\PiggyFactions\commands\subcommands\admin;
 
-use CortexPE\Commando\args\IntegerArgument;
+use CortexPE\Commando\args\FloatArgument;
 use CortexPE\Commando\args\RawStringArgument;
 use DaPigGuy\PiggyFactions\commands\subcommands\FactionSubCommand;
 use DaPigGuy\PiggyFactions\event\member\PowerChangeEvent;
@@ -24,7 +24,7 @@ class SetPowerSubCommand extends FactionSubCommand
             LanguageManager::getInstance()->sendMessage($sender, "commands.invalid-player", ["{PLAYER}" => $args["player"]]);
             return;
         }
-        $ev = new PowerChangeEvent($player, PowerChangeEvent::CAUSE_ADMIN, $args["power"]);
+        $ev = new PowerChangeEvent($player, PowerChangeEvent::CAUSE_ADMIN, (float)$args["power"]);
         $ev->call();
         if ($ev->isCancelled()) return;
 
@@ -36,6 +36,6 @@ class SetPowerSubCommand extends FactionSubCommand
     protected function prepare(): void
     {
         $this->registerArgument(0, new RawStringArgument("player"));
-        $this->registerArgument(1, new IntegerArgument("power"));
+        $this->registerArgument(1, new FloatArgument("power"));
     }
 }

@@ -33,6 +33,14 @@ factions:
     teleport-on-death: true
   claims:
     blacklisted-worlds: []
+    denied-commands:
+      enemy:
+        - home
+        - spawn
+        - hub
+      none: []
+      truce: []
+      ally: []
     overclaim: true
     cost: 1
     max: -1
