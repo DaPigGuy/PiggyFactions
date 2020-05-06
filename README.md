@@ -71,6 +71,7 @@ PiggyFactions is an open-sourced factions plugin for [PocketMine-MP](https://git
 | `/f promote <player>` | Promote a faction member | `piggyfactions.command.faction.promote` |
 | `/f seechunk` | Toggle chunk visualizer | `piggyfactions.command.faction.seechunk` | `/f sc` |
 | `/f sethome` | Set faction home | `piggyfactions.command.faction.sethome` |
+| `/f setpower` | Set player power | `piggyfactions.command.faction.setpower` |
 | `/f top [page]` | Display top factions | `piggyfactions.command.faction.top` |
 | `/f truce <faction>` | Truce with other factions | `piggyfactions.command.faction.truce` |
 | `/f unally <faction>` | End faction alliance | `piggyfactions.command.faction.unally` |
@@ -109,6 +110,7 @@ PiggyFactions is an open-sourced factions plugin for [PocketMine-MP](https://git
 | `piggyfactions.command.faction.promote` | Allow usage of /f promote | `true` |
 | `piggyfactions.command.faction.seechunk` | Allow usage of /f seechunk | `true` |
 | `piggyfactions.command.faction.sethome` | Allow usage of /f sethome | `true` |
+| `piggyfactions.command.faction.setpower` | Allow usage of /f setpower | `op` |
 | `piggyfactions.command.faction.unally` | Allow usage of /f unally | `true` |
 | `piggyfactions.command.faction.unban` | Allow usage of /f unban | `true` |
 | `piggyfactions.command.faction.unclaim` | Allow usage of /f unclaim | `true` |

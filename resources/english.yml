@@ -109,6 +109,9 @@ commands:
   sethome:
     not-within-territory: "{RED}Faction home must be within faction territory."
     success: "{GREEN}Faction home has been set."
+  setpower:
+    success: "{GREEN}{PLAYER}'s power has been set to {POWER}."
+    power-set: "{GREEN}Your power has been set to {POWER}"
   top:
     header: "{GOLD}____________.[{DARK_GREEN}Top Factions by {CATEGORY} ({PAGE}/{TOTALPAGES}){GOLD}].____________"
     line:

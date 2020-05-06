@@ -8,6 +8,7 @@ use CortexPE\Commando\BaseCommand;
 use CortexPE\Commando\BaseSubCommand;
 use CortexPE\Commando\exception\SubCommandCollision;
 use DaPigGuy\PiggyFactions\commands\subcommands\admin\AdminSubCommand;
+use DaPigGuy\PiggyFactions\commands\subcommands\admin\SetPowerSubCommand;
 use DaPigGuy\PiggyFactions\commands\subcommands\ChatSubCommand;
 use DaPigGuy\PiggyFactions\commands\subcommands\claims\ClaimSubCommand;
 use DaPigGuy\PiggyFactions\commands\subcommands\claims\MapSubCommand;
@@ -112,6 +113,7 @@ class FactionCommand extends BaseCommand
         $this->registerSubCommand(new PromoteSubCommand($this->plugin, "promote", "Promote a faction member"));
         $this->registerSubCommand(new SeeChunkSubCommand($this->plugin, "seechunk", "Toggle chunk visualizer", ["sc"]));
         $this->registerSubCommand(new SetHomeSubCommand($this->plugin, "sethome", "Set faction home"));
+        $this->registerSubCommand(new SetPowerSubCommand($this->plugin, "setpower", "Set player power"));
         $this->registerSubCommand(new TopSubCommand($this->plugin, "top", "Display top factions", ["list"]));
         $this->registerSubCommand(new TruceSubCommand($this->plugin, "truce", "Truce with other factions"));
         $this->registerSubCommand(new UnallySubCommand($this->plugin, "unally", "End faction alliance"));

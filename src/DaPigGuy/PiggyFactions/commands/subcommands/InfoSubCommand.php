@@ -18,8 +18,6 @@ class InfoSubCommand extends FactionSubCommand
 {
     /** @var bool */
     protected $requiresPlayer = false;
-    /** @var bool */
-    protected $requiresFaction = false;
 
     public function onBasicRun(CommandSender $sender, array $args): void
     {
