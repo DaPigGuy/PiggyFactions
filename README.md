@@ -15,6 +15,7 @@ PiggyFactions is currently in beta. While we have tested quite thoroughly, there
   * [Commands](#commands)
   * [Permissions](#permissions)
 * [Flags](#flags)
+* [Admin Mode](#admin-mode)
 * Chat Formatting
   * [HRKChat Tags](#hrkchat-tags)
 * [ScoreHUD Addon](#scorehud-addon)
@@ -142,6 +143,10 @@ PiggyFactions is currently in beta. While we have tested quite thoroughly, there
 | `open` | Anyone is able to join the faction |
 | `safezone` | Mark current faction as a SafeZone |
 | `warzone` | Mark current faction as a WarZone |
+
+## Admin Mode
+To enable Admin mode, use the command `/f admin`. Admin mode will allow you to modify claimed faction lands, forcibly unclaim faction lands, etc. Nearly all [commands](#commands) have support for admin mode. <br/>
+**NOTE:** `/f admin` should be toggled off when you are not using it to prevent accidental modifications. Admin mode will automatically be disabled upon server restart.
 
 ## HRKChat Tags
 Sample Format: `&6{{piggyfacs.rank.symbol}}{{piggyfacs.name}} &r&7{{hrk.displayName}}&r: {{msg}}`
