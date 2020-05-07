@@ -75,7 +75,7 @@ CREATE TABLE IF NOT EXISTS players
 (
     uuid     VARCHAR(36) PRIMARY KEY,
     username VARCHAR(16),
-    faction  INTEGER,
+    faction  VARCHAR(36),
     role     TEXT,
     power    FLOAT
 );
@@ -121,7 +121,7 @@ CREATE TABLE IF NOT EXISTS claims
     chunkX  INTEGER,
     chunkZ  INTEGER,
     level   TEXT,
-    faction INTEGER
+    faction  VARCHAR(36)
 );
 -- # }
 
