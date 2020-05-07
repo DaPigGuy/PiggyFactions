@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace DaPigGuy\PiggyFactions\claims;
 
 use DaPigGuy\PiggyFactions\language\LanguageManager;
+use DaPigGuy\PiggyFactions\permissions\FactionPermission;
 use DaPigGuy\PiggyFactions\PiggyFactions;
 use DaPigGuy\PiggyFactions\players\PlayerManager;
 use DaPigGuy\PiggyFactions\utils\Relations;
@@ -63,7 +64,7 @@ class ClaimsListener implements Listener
     public function onInteract(PlayerInteractEvent $event): void
     {
         $tile = $event->getBlock()->getLevel()->getTile($event->getBlock());
-        if (!$this->canAffectArea($event->getPlayer(), $event->getBlock(), $tile instanceof Container ? "container" : "interact")) $event->setCancelled();
+        if (!$this->canAffectArea($event->getPlayer(), $event->getBlock(), $tile instanceof Container ? FactionPermission::CONTAINERS : FactionPermission::INTERACT)) $event->setCancelled();
     }
 
     public function onMove(PlayerMoveEvent $event): void
@@ -107,7 +108,7 @@ class ClaimsListener implements Listener
         }
     }
 
-    public function canAffectArea(Player $player, Position $position, string $type = "build"): bool
+    public function canAffectArea(Player $player, Position $position, string $type = FactionPermission::BUILD): bool
     {
         $member = PlayerManager::getInstance()->getPlayer($player->getUniqueId());
         $claim = ($chunk = $position->getLevel()->getChunkAtPosition($position)) === null ? null : $this->manager->getClaim($position->getLevel(), $chunk);
