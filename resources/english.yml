@@ -142,6 +142,8 @@ commands:
       success: "{GREEN}All {FACTION} claims have been unclaimed."
 death:
   power: "{RED}Your power is now {POWER}."
+forms:
+  title: "PiggyFactions UI"
 motd: "{GOLD}____________.[{DARK_GREEN}{FACTION} MOTD{GOLD}].____________\n{WHITE}{MOTD}"
 pvp:
   attacker-factionless: "{RED}You can not hurt other players until you have joined a faction."
