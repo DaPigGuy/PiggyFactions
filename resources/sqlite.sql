@@ -164,4 +164,47 @@ WHERE chunkX = :chunkX
 
 -- # }
 
+-- # { logs
+
+-- # { init
+CREATE TABLE IF NOT EXISTS logs
+(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    faction TEXT,
+    action  TEXT,
+    timestamp INTEGER,
+    data TEXT
+);
+-- # }
+
+-- # { loadlogs
+-- #    :action string
+-- #    :faction string
+SELECT data, timestamp
+FROM logs
+WHERE action = :action
+  AND faction = :faction
+LIMIT 25;
+-- # }
+
+-- # { create
+-- #    :faction string
+-- #    :action string
+-- #    :timestamp int
+-- #    :data string
+INSERT INTO logs (faction, action, timestamp, data)
+VALUES (:faction, :action, :timestamp, :data);
+-- # }
+
+-- # { delete
+-- #    :id int
+-- #    :faction string
+DELETE
+FROM logs
+WHERE id = :id
+  AND faction = :faction
+-- # }
+
+-- # }
+
 -- # }
