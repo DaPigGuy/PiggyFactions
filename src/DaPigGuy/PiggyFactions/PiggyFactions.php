@@ -59,7 +59,7 @@ class PiggyFactions extends PluginBase
         ]);
 
         /*
-        ibPiggyEconomy::init();
+        libPiggyEconomy::init();
         try {
             if ($this->getConfig()->getNested("economy.enabled", false)) $this->economyProvider = libPiggyEconomy::getProvider($this->getConfig()->get("economy"));
         } catch (\Exception $exception) {
@@ -86,7 +86,7 @@ class PiggyFactions extends PluginBase
 
         $this->getScheduler()->scheduleRepeatingTask(new ShowChunksTask($this), 10);
         $this->getScheduler()->scheduleRepeatingTask(new UpdatePowerTask($this), UpdatePowerTask::INTERVAL);
-        //$this->getServer()->getAsyncPool()->submitTask(new CheckUpdatesTask($this->getDescription()->getVersion(), $this->getDescription()->getCompatibleApis()[0])); //TODO: Uncomment before Poggit release
+        $this->getServer()->getAsyncPool()->submitTask(new CheckUpdatesTask($this->getDescription()->getVersion(), $this->getDescription()->getCompatibleApis()[0])); //TODO: Uncomment before Poggit release
     }
 
     private function checkSoftDependencies(): void

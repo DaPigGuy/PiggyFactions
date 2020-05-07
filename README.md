@@ -1,3 +1,5 @@
+![PiggyFactions Banner](https://raw.githubusercontent.com/DaPigGuy/PiggyFactions/master/resources/img/PiggyFactions-banner.png)
+
 # PiggyFactions [![Poggit-CI](https://poggit.pmmp.io/shield.dl/PiggyFactions)](https://poggit.pmmp.io/p/PiggyFactions) [![Discord](https://img.shields.io/discord/330850307607363585?logo=discord)](https://discord.gg/qmnDsSD)
 
 PiggyFactions is an open-sourced factions plugin for [PocketMine-MP](https://github.com/pmmp/PocketMine-MP).
@@ -15,6 +17,7 @@ PiggyFactions is currently in beta. While we have tested quite thoroughly, there
 * [Flags](#flags)
 * Chat Formatting
   * [HRKChat Tags](#hrkchat-tags)
+* [ScoreHUD Addon](#scorehud-addon)
 * [Issue Reporting](#issue-reporting)
 * [Additional Information](#additional-information)
 * [License](#license)
@@ -136,9 +139,9 @@ PiggyFactions is currently in beta. While we have tested quite thoroughly, there
 ## Flags
 | Flag | Description |
 | --- | --- |
-| Open | Anyone is able to join the faction |
-| SafeZone | Mark current faction as a SafeZone |
-| WarZone | Mark current faction as a WarZone |
+| `open` | Anyone is able to join the faction |
+| `safezone` | Mark current faction as a SafeZone |
+| `warzone` | Mark current faction as a WarZone |
 
 ## HRKChat Tags
 Sample Format: `&6{{piggyfacs.rank.symbol}}{{piggyfacs.name}} &r&7{{hrk.displayName}}&r: {{msg}}`
@@ -150,6 +153,9 @@ Sample Format: `&6{{piggyfacs.rank.symbol}}{{piggyfacs.name}} &r&7{{hrk.displayN
 | `piggyfacs.rank.symbol` | Faction rank symbol |
 | `piggyfacs.members.all` | Total member count |
 | `piggyfacs.members.online` | Online member count |
+
+## ScoreHud Addon
+An addon for [JackMD's ScoreHud](https://github.com/JackMD/ScoreHud) can be found [here](https://gist.github.com/DaPigGuy/07442f8b98a70e5973a528e4516e35d1).
 
 ## Issue Reporting
 * If you experience an unexpected non-crash behavior with PiggyFactions, click [here](https://github.com/DaPigGuy/PiggyFactions/issues/new?assignees=DaPigGuy&labels=bug&template=bug_report.md&title=).
@@ -183,3 +189,4 @@ Sample Format: `&6{{piggyfacs.rank.symbol}}{{piggyfacs.name}} &r&7{{hrk.displayN
    limitations under the License.
 
 ```
+"[Castle](https://pixabay.com/images/id-2672317/)" vector graphic used in the [banner](https://raw.githubusercontent.com/DaPigGuy/PiggyFactions/master/resources/img/PiggyFactions-banner.png) and [icon](https://raw.githubusercontent.com/DaPigGuy/PiggyFactions/master/resources/img/PiggyFactions-icon.png) is licensed under the [Pixabay License](https://pixabay.com/service/license/).

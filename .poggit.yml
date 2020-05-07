@@ -4,6 +4,7 @@ branches:
 projects:
   PiggyFactions:
     path: ""
+    icon: "resources/img/PiggyFactions-icon.png"
     libs:
       - src: CortexPE/Commando/Commando
         version: ^0.6
