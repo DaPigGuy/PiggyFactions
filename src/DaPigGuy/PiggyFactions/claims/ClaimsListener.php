@@ -110,7 +110,7 @@ class ClaimsListener implements Listener
     public function canAffectArea(Player $player, Position $position, string $type = "build"): bool
     {
         $member = PlayerManager::getInstance()->getPlayer($player->getUniqueId());
-        $claim = $this->manager->getClaim($position->getLevel(), $position->getLevel()->getChunkAtPosition($position));
+        $claim = ($chunk = $position->getLevel()->getChunkAtPosition($position)) === null ? null : $this->manager->getClaim($position->getLevel(), $chunk);
         if ($claim !== null) {
             return $claim->getFaction()->hasPermission($member, $type);
         }
