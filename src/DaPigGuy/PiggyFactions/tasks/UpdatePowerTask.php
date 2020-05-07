@@ -25,10 +25,12 @@ class UpdatePowerTask extends Task
     {
         foreach ($this->plugin->getServer()->getOnlinePlayers() as $p) {
             $member = PlayerManager::getInstance()->getPlayer($p->getUniqueId());
-            $ev = new PowerChangeEvent($member, PowerChangeEvent::CAUSE_TIME, $member->getPower() + $this->plugin->getConfig()->getNested("factions.power.per.hour", 2) / (72000 / self::INTERVAL));
-            $ev->call();
-            if ($ev->isCancelled()) return;
-            $member->setPower($ev->getPower());
+            if ($member !== null) {
+                $ev = new PowerChangeEvent($member, PowerChangeEvent::CAUSE_TIME, $member->getPower() + $this->plugin->getConfig()->getNested("factions.power.per.hour", 2) / (72000 / self::INTERVAL));
+                $ev->call();
+                if ($ev->isCancelled()) return;
+                $member->setPower($ev->getPower());
+            }
         }
     }
 }
