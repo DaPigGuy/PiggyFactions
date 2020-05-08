@@ -7,14 +7,12 @@ use JsonSerializable;
 class FactionLog implements JsonSerializable
 {
     const BAN = "ban";
-    const CLAIM = "claim";
-    const DESCRIPTION = "description";
+    const UNBAN = "unban";
     const INVITE = "invite";
     const KICK = "kick";
-    const MOTD = "motd";
-    const NAME = "name";
     const JOIN = "join";
     const LEAVE = "leave";
+    const LEADER_CHANGE = "leader_change";
 
     /** @var string */
     private $name;

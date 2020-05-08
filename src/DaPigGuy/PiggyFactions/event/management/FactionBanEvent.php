@@ -6,6 +6,8 @@ namespace DaPigGuy\PiggyFactions\event\management;
 
 use DaPigGuy\PiggyFactions\event\FactionMemberEvent;
 use DaPigGuy\PiggyFactions\factions\Faction;
+use DaPigGuy\PiggyFactions\logs\FactionLog;
+use DaPigGuy\PiggyFactions\logs\LogsManager;
 use DaPigGuy\PiggyFactions\players\FactionsPlayer;
 use pocketmine\event\Cancellable;
 
@@ -18,6 +20,13 @@ class FactionBanEvent extends FactionMemberEvent implements Cancellable
     {
         parent::__construct($faction, $member);
         $this->bannedBy = $bannedBy;
+    }
+
+    public function call(): void
+    {
+        $factionLog = new FactionLog(FactionLog::BAN, ["bannedBy" => $this->getBannedBy()->getUsername(), "banned" => $this->getMember()->getUsername()]);
+        LogsManager::getInstance()->addFactionLog($this->getFaction(), $factionLog);
+        parent::call();
     }
 
     public function getBannedBy(): FactionsPlayer

@@ -27,6 +27,7 @@ use DaPigGuy\PiggyFactions\commands\subcommands\management\DescriptionSubCommand
 use DaPigGuy\PiggyFactions\commands\subcommands\management\DisbandSubCommand;
 use DaPigGuy\PiggyFactions\commands\subcommands\management\InviteSubCommand;
 use DaPigGuy\PiggyFactions\commands\subcommands\management\KickSubCommand;
+use DaPigGuy\PiggyFactions\commands\subcommands\management\LogsSubCommand;
 use DaPigGuy\PiggyFactions\commands\subcommands\management\MotdSubCommand;
 use DaPigGuy\PiggyFactions\commands\subcommands\management\NameSubCommand;
 use DaPigGuy\PiggyFactions\commands\subcommands\management\UnbanSubCommand;
@@ -106,6 +107,7 @@ class FactionCommand extends BaseCommand
         $this->registerSubCommand(new KickSubCommand($this->plugin, "kick", "Kick a member from your faction"));
         $this->registerSubCommand(new LeaderSubCommand($this->plugin, "leader", "Transfer leadership of your faction"));
         $this->registerSubCommand(new LeaveSubCommand($this->plugin, "leave", "Leave your faction"));
+        $this->registerSubCommand(new LogsSubCommand($this->plugin, "logs", "View your Factions logs!"));
         $this->registerSubCommand(new MapSubCommand($this->plugin, "map", "View map of area"));
         $this->registerSubCommand(new MotdSubCommand($this->plugin, "motd", "Set faction MOTD"));
         $this->registerSubCommand(new NameSubCommand($this->plugin, "name", "Rename your faction"));

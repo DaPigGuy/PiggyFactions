@@ -6,6 +6,8 @@ namespace DaPigGuy\PiggyFactions\event\role;
 
 use DaPigGuy\PiggyFactions\event\FactionEvent;
 use DaPigGuy\PiggyFactions\factions\Faction;
+use DaPigGuy\PiggyFactions\logs\FactionLog;
+use DaPigGuy\PiggyFactions\logs\LogsManager;
 use DaPigGuy\PiggyFactions\players\FactionsPlayer;
 use pocketmine\event\Cancellable;
 
@@ -21,6 +23,13 @@ class FactionLeadershipTransferEvent extends FactionEvent implements Cancellable
         parent::__construct($faction);
         $this->old = $old;
         $this->new = $new;
+    }
+
+    public function call(): void
+    {
+        $factionLog = new FactionLog(FactionLog::LEADER_CHANGE, ["new" => $this->getNew()->getUsername(), "old" => $this->getOld()->getUsername()]);
+        LogsManager::getInstance()->addFactionLog($this->getFaction(), $factionLog);
+        parent::call();
     }
 
     public function getOld(): FactionsPlayer

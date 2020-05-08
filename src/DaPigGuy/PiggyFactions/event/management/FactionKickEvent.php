@@ -25,7 +25,8 @@ class FactionKickEvent extends FactionMemberEvent implements Cancellable
 
     public function call(): void
     {
-        PiggyFactions::getInstance()->getDatabase()->executeInsert("piggyfactions.logs.create", ["faction" => $this->getFaction()->getId(), "action" => FactionLog::KICK, "timestamp" => time(), "data" => json_encode(new FactionLog(FactionLog::KICK, ["kicker" => $this->getKickedBy()->getUsername(), "kicked" => $this->getMember()->getUsername()]))]);
+        $factionLog = new FactionLog(FactionLog::KICK, ["kicker" => $this->getKickedBy()->getUsername(), "kicked" => $this->getMember()->getUsername()]);
+        LogsManager::getInstance()->addFactionLog($this->getFaction(), $factionLog);
         parent::call();
     }
 

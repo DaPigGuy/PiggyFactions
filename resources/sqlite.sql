@@ -177,14 +177,28 @@ CREATE TABLE IF NOT EXISTS logs
 );
 -- # }
 
--- # { loadlogs
+-- # { loadall
+-- #    :faction string
+-- #    :count int
+-- #    :startpoint int
+SELECT data, action, timestamp
+FROM logs
+WHERE faction = :faction
+LIMIT :count
+    OFFSET :startpoint;
+-- # }
+
+-- # { load
 -- #    :action string
 -- #    :faction string
-SELECT data, timestamp
+-- #    :count int
+-- #    :startpoint int
+SELECT data, timestamp, action
 FROM logs
 WHERE action = :action
   AND faction = :faction
-LIMIT 25;
+LIMIT :count
+OFFSET :startpoint;
 -- # }
 
 -- # { create
