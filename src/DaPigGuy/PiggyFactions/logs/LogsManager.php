@@ -9,7 +9,7 @@ use pocketmine\Player;
 
 class LogsManager
 {
-    /**@var LogsManager */
+    /** @var LogsManager */
     private static $instance;
 
     /** @var PiggyFactions */
@@ -73,7 +73,7 @@ class LogsManager
         return $message;
     }
 
-    private function parseMessageFromAction(string $action, array $data, string $language)
+    private function parseMessageFromAction(string $action, array $data, string $language): string
     {
         switch ($action) {
             case FactionLog::KICK:
