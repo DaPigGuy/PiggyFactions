@@ -5,7 +5,7 @@
 PiggyFactions is an open-sourced factions plugin for [PocketMine-MP](https://github.com/pmmp/PocketMine-MP).
 
 ## Disclaimer
-PiggyFactions is currently in beta. While we have tested quite thoroughly, there may exist some bugs. Please report any issue on GitHub. PureChat support currently does not exist.
+PiggyFactions is currently in beta. While we have tested quite thoroughly, there may exist some bugs. Please report any issue on GitHub. 
 
 ## Table of Contents
 * [Prerequisites](#prerequisites)
@@ -18,6 +18,7 @@ PiggyFactions is currently in beta. While we have tested quite thoroughly, there
 * [Admin Mode](#admin-mode)
 * Chat Formatting
   * [HRKChat Tags](#hrkchat-tags)
+  * [PureChat Tags](#purechat-tags)
 * [ScoreHUD Addon](#scorehud-addon)
 * [Issue Reporting](#issue-reporting)
 * [Additional Information](#additional-information)
@@ -158,6 +159,14 @@ Sample Format: `&6{{piggyfacs.rank.symbol}}{{piggyfacs.name}} &r&7{{hrk.displayN
 | `piggyfacs.rank.symbol` | Faction rank symbol |
 | `piggyfacs.members.all` | Total member count |
 | `piggyfacs.members.online` | Online member count |
+
+## PureChat Tags
+You will need to download our fork of PureChat for PiggyFactions integration, which can be downloaded [here](https://poggit.pmmp.io/r/85616/PureChat_pr-10.phar). <br/>
+Sample Format: `&6{fac_rank}{fac_name} &r&7{display_name}&r: {msg}`
+| Tag Name | Description |
+| --- | --- |
+| `{fac_name}` | Player's faction name |
+| `{fac_rank}` | Faction rank symbol |
 
 ## ScoreHud Addon
 An addon for [JackMD's ScoreHud](https://github.com/JackMD/ScoreHud) can be found [here](https://gist.github.com/DaPigGuy/07442f8b98a70e5973a528e4516e35d1).
