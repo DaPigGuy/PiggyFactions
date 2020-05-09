@@ -161,7 +161,8 @@ Sample Format: `&6{{piggyfacs.rank.symbol}}{{piggyfacs.name}} &r&7{{hrk.displayN
 | `piggyfacs.members.online` | Online member count |
 
 ## PureChat Tags
-You will need to download our fork of PureChat for PiggyFactions integration, which can be downloaded [here](https://poggit.pmmp.io/r/85616/PureChat_pr-10.phar). <br/>
+You will need to download our fork of PureChat for PiggyFactions integration [here](https://poggit.pmmp.io/r/85616/PureChat_pr-10.phar). <br/>
+Make sure to change `default-factions-plugin` to `PiggyFactions` in PureChat's `config.yml` <br/>
 Sample Format: `&6{fac_rank}{fac_name} &r&7{display_name}&r: {msg}`
 | Tag Name | Description |
 | --- | --- |
