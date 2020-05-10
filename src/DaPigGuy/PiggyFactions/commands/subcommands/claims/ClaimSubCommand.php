@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace DaPigGuy\PiggyFactions\commands\subcommands\claims;
 
-use CortexPE\Commando\args\RawStringArgument;
 use CortexPE\Commando\exception\ArgumentOrderException;
 use DaPigGuy\PiggyFactions\claims\ClaimsManager;
 use DaPigGuy\PiggyFactions\commands\subcommands\FactionSubCommand;
@@ -18,12 +17,6 @@ class ClaimSubCommand extends FactionSubCommand
 {
     public function onNormalRun(Player $sender, ?Faction $faction, FactionsPlayer $member, string $aliasUsed, array $args): void
     {
-        if (($args["type"] ?? null) === "auto") {
-            $member->setAutoClaiming(!$member->isAutoClaiming());
-            LanguageManager::getInstance()->sendMessage($sender, "commands.claim.auto.toggled" . ($member->isAutoClaiming() ? "" : "-off"));
-            return;
-        }
-
         if (in_array($sender->getLevel()->getFolderName(), $this->plugin->getConfig()->getNested("factions.claims.blacklisted-worlds"))) {
             LanguageManager::getInstance()->sendMessage($sender, "commands.claim.blacklisted-world");
             return;
@@ -62,6 +55,8 @@ class ClaimSubCommand extends FactionSubCommand
      */
     protected function prepare(): void
     {
-        $this->registerArgument(0, new RawStringArgument("type", true));
+        $this->registerSubCommand(new ClaimAutoSubCommand($this->plugin, "auto"));
+        $this->registerSubCommand(new ClaimCircleSubCommand($this->plugin, "circle"));
+        $this->registerSubCommand(new ClaimSquareSubCommand($this->plugin, "square"));
     }
 }

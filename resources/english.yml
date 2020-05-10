@@ -37,8 +37,10 @@ commands:
     max-claimed: "{RED}You can not claim any more land."
     already-claimed: "{RED}This chunk is already claimed."
     no-power: "{RED}Your faction has an insufficient amount of power."
+    radius-less-than-one: "{RED}Radius must be greater than one."
     over-claimed: "{GREEN}This chunk has been overclaimed."
     success: "{GREEN}This chunk has been claimed."
+    claimed-multiple: "{GREEN}{AMOUNT} chunks claimed by {COMMAND}."
     auto:
       toggled: "{GREEN}You are now auto-claiming."
       toggled-off: "{RED}You are no longer auto-claiming."
