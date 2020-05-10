@@ -8,6 +8,7 @@ use CortexPE\Commando\args\StringEnumArgument;
 use DaPigGuy\PiggyFactions\permissions\FactionPermission;
 use DaPigGuy\PiggyFactions\permissions\PermissionFactory;
 use pocketmine\command\CommandSender;
+use pocketmine\permission\Permission;
 
 class PermissionEnumArgument extends StringEnumArgument
 {
@@ -21,7 +22,7 @@ class PermissionEnumArgument extends StringEnumArgument
         return "permission";
     }
 
-    public function getValue(string $string)
+    public function getValue(string $string): ?Permission
     {
         return PermissionFactory::getPermission(strtolower($string));
     }

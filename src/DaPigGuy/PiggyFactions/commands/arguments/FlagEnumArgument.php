@@ -21,7 +21,7 @@ class FlagEnumArgument extends StringEnumArgument
         return "flag";
     }
 
-    public function getValue(string $string)
+    public function getValue(string $string): ?Flag
     {
         return FlagFactory::getFlag(strtolower($string));
     }

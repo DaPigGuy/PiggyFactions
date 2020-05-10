@@ -6,7 +6,6 @@ namespace DaPigGuy\PiggyFactions\commands;
 
 use CortexPE\Commando\BaseCommand;
 use CortexPE\Commando\BaseSubCommand;
-use CortexPE\Commando\exception\SubCommandCollision;
 use DaPigGuy\PiggyFactions\commands\subcommands\admin\AdminSubCommand;
 use DaPigGuy\PiggyFactions\commands\subcommands\admin\SetPowerSubCommand;
 use DaPigGuy\PiggyFactions\commands\subcommands\ChatSubCommand;
@@ -80,9 +79,6 @@ class FactionCommand extends BaseCommand
         $this->sendUsage();
     }
 
-    /**
-     * @throws SubCommandCollision
-     */
     protected function prepare(): void
     {
         $this->setPermission("piggyfactions.command.faction.use");
