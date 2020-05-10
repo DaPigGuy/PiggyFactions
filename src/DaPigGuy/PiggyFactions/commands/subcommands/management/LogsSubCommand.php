@@ -19,17 +19,21 @@ class LogsSubCommand extends FactionSubCommand
     //TODO: forms
     public function onNormalRun(Player $sender, ?Faction $faction, FactionsPlayer $member, string $aliasUsed, array $args): void
     {
-        $page = 0;
+        $currentPage = 0;
         if(isset($args["page"])) {
-            $page = (int)$args["page"];
+            $currentPage = (int)$args["page"];
         }
-        $offset = $page * LogsSubCommand::ENTRIES_PER_PAGE;
-        //TODO: Count total entries and get total number of pages to look cool. f.e: Page 1/69
-        LanguageManager::getInstance()->sendMessage($sender, "logs.title");
-        if(!isset($args["action"])) {
+        if(isset($args["action"]) && is_numeric($args["action"])) {
+            $currentPage = (int) $args["action"]; //very epic :| this is to allow both /f logs <page> and /f logs <action> <page>
+        }
+        $offset = $currentPage * LogsSubCommand::ENTRIES_PER_PAGE;
+
+        if(!isset($args["action"]) || is_numeric($args["action"])) {
+            LogsManager::getInstance()->sendAllLogsTitle($faction, $sender, $currentPage);
             LogsManager::getInstance()->sendAllLogs($faction, $sender, $offset);
             return;
         }
+        LogsManager::getInstance()->sendLogsTitle($faction, $sender, $args["action"], $currentPage);
         LogsManager::getInstance()->sendLogsByAction($faction, $sender, $args["action"], $offset);
     }
 
@@ -38,7 +42,6 @@ class LogsSubCommand extends FactionSubCommand
      */
     public function prepare(): void
     {
-        //TODO: Someone pls help how do I allow /f logs <page> and also /f logs <action> <page>
         $this->registerArgument(0, new RawStringArgument("action", true));
         $this->registerArgument(1, new IntegerArgument("page", true));
     }

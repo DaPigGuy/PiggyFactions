@@ -2,6 +2,7 @@
 
 namespace DaPigGuy\PiggyFactions\logs;
 
+use DaPigGuy\PiggyFactions\commands\subcommands\management\LogsSubCommand;
 use DaPigGuy\PiggyFactions\factions\Faction;
 use DaPigGuy\PiggyFactions\language\LanguageManager;
 use DaPigGuy\PiggyFactions\PiggyFactions;
@@ -27,7 +28,7 @@ class LogsManager
         return self::$instance;
     }
 
-    public function sendAllLogs(Faction $faction, Player $player, int $offset = 0, int $count = 15, callable $onSelect = null): void
+    public function sendAllLogs(Faction $faction, Player $player, int $offset = 0, int $count = 10, callable $onSelect = null): void
     {
         if ($onSelect === null) {
             $onSelect = function (array $rows) use ($player): void {
@@ -39,7 +40,18 @@ class LogsManager
         $this->plugin->getDatabase()->executeSelect("piggyfactions.logs.loadall", $psVars, $onSelect);
     }
 
-    public function sendLogsByAction(Faction $faction, Player $player, string $action, int $offset = 0, int $count = 15, callable $onSelect = null): void
+    public function sendAllLogsTitle(Faction $faction, Player $player, int $currentPage): void
+    {
+        $onSelect = function (array $rows) use ($player, $currentPage): void {
+            $totalCount = count($rows);
+            $totalPages = ceil($totalCount / LogsSubCommand::ENTRIES_PER_PAGE) - 1;
+            LanguageManager::getInstance()->sendMessage($player, "logs.title", ["{CURRENTPAGE}" => $currentPage, "{TOTALPAGES}" => $totalPages]);
+        };
+        $psVars = ["faction" => $faction->getId()];
+        $this->plugin->getDatabase()->executeSelect("piggyfactions.logs.countall", $psVars, $onSelect);
+    }
+
+    public function sendLogsByAction(Faction $faction, Player $player, string $action, int $offset = 0, int $count = 10, callable $onSelect = null): void
     {
         if ($onSelect === null) {
             $onSelect = function (array $rows) use ($player): void {
@@ -53,6 +65,17 @@ class LogsManager
         }
         $psVars = ["action" => $action, "faction" => $faction->getId(), "count" => $count, "startpoint" => $offset]; //someone pls help I cant name variables
         $this->plugin->getDatabase()->executeSelect("piggyfactions.logs.load", $psVars, $onSelect);
+    }
+
+    public function sendLogsTitle(Faction $faction, Player $player, string $action, int $currentPage): void
+    {
+        $onSelect = function (array $rows) use ($player, $currentPage): void {
+            $totalCount = count($rows);
+            $totalPages = ceil($totalCount / LogsSubCommand::ENTRIES_PER_PAGE) - 1;
+            LanguageManager::getInstance()->sendMessage($player, "logs.title", ["{CURRENTPAGE}" => $currentPage, "{TOTALPAGES}" => $totalPages]);
+        };
+        $psVars = ["faction" => $faction->getId(), "action" => $action];
+        $this->plugin->getDatabase()->executeSelect("piggyfactions.logs.count", $psVars, $onSelect);
     }
 
     public function addFactionLog(Faction $faction, FactionLog $factionLog): void
@@ -94,4 +117,5 @@ class LogsManager
                 return "";
         }
     }
+
 }

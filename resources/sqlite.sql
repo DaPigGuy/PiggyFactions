@@ -188,6 +188,22 @@ LIMIT :count
     OFFSET :startpoint;
 -- # }
 
+-- # { countall
+-- #    :faction string
+SELECT *
+FROM logs
+WHERE faction = :faction;
+-- # }
+
+-- # { count
+-- #    :faction string
+-- #    :action string
+SELECT *
+FROM logs
+WHERE action = :action
+  AND faction = :faction;
+-- # }
+
 -- # { load
 -- #    :action string
 -- #    :faction string
