@@ -44,7 +44,7 @@ abstract class ClaimMultipleSubCommand extends FactionSubCommand
 
             $ev = new ClaimChunkEvent($faction, $chunk);
             $ev->call();
-            if ($ev->isCancelled()) return;
+            if ($ev->isCancelled()) continue;
 
             ClaimsManager::getInstance()->createClaim($faction, $sender->getLevel(), $chunk);
             $claimed++;

@@ -118,7 +118,7 @@ class EventListener implements Listener
     {
         $player = $event->getPlayer();
         if (($member = PlayerManager::getInstance()->getPlayer($player->getUniqueId())) === null) $member = PlayerManager::getInstance()->createPlayer($player);
-        if ($member->getUsername() !== $player->getName()) $member->setUsername($member->getUsername());
+        if ($member->getUsername() !== $player->getName()) $member->setUsername($player->getName());
         LanguageManager::getInstance()->setPlayerLanguage($player, LanguageManager::LANGUAGES[$player->getLocale()] ?? LanguageManager::DEFAULT_LANGUAGE);
         if (($faction = $member->getFaction()) !== null) {
             if (($motd = $faction->getMotd()) !== null) LanguageManager::getInstance()->sendMessage($player, "motd", ["{MOTD}" => $motd]);
