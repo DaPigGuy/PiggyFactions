@@ -10,7 +10,6 @@ use DaPigGuy\PiggyFactions\factions\Faction;
 use DaPigGuy\PiggyFactions\factions\FactionsManager;
 use DaPigGuy\PiggyFactions\flags\Flag;
 use DaPigGuy\PiggyFactions\language\LanguageManager;
-use DaPigGuy\PiggyFactions\players\FactionsPlayer;
 use pocketmine\command\CommandSender;
 use pocketmine\Player;
 use pocketmine\utils\TextFormat;
@@ -19,7 +18,10 @@ class TopSubCommand extends FactionSubCommand
 {
     const PAGE_LENGTH = 10;
 
-    public function onRun(CommandSender $sender, string $aliasUsed, array $args): void
+    /** @var bool */
+    protected $requiresPlayer = false;
+
+    public function onBasicRun(CommandSender $sender, array $args): void
     {
         $types = [
             "online" => function (Faction $a, Faction $b): int {
@@ -57,11 +59,6 @@ class TopSubCommand extends FactionSubCommand
                 ]);
         }
         $sender->sendMessage($message);
-    }
-
-    public function onNormalRun(Player $sender, ?Faction $faction, FactionsPlayer $member, string $aliasUsed, array $args): void
-    {
-        //NOOP
     }
 
     protected function prepare(): void
