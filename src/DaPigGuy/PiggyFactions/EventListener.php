@@ -127,7 +127,6 @@ class EventListener implements Listener
 
     public function onRespawn(PlayerRespawnEvent $event): void
     {
-
         $player = $event->getPlayer();
         $faction = PlayerManager::getInstance()->getPlayerFaction($player->getUniqueId());
         if ($this->plugin->getConfig()->getNested("factions.homes.teleport-on-death") && $faction !== null && $faction->getHome() !== null) {
