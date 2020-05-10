@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace DaPigGuy\PiggyFactions\commands\subcommands\flags;
 
 use CortexPE\Commando\args\BooleanArgument;
-use CortexPE\Commando\args\RawStringArgument;
 use CortexPE\Commando\exception\ArgumentOrderException;
+use DaPigGuy\PiggyFactions\commands\arguments\FlagEnumArgument;
 use DaPigGuy\PiggyFactions\commands\subcommands\FactionSubCommand;
 use DaPigGuy\PiggyFactions\event\flags\FactionFlagChangeEvent;
 use DaPigGuy\PiggyFactions\factions\Faction;
@@ -41,7 +41,7 @@ class FlagSubCommand extends FactionSubCommand
      */
     protected function prepare(): void
     {
-        $this->registerArgument(0, new RawStringArgument("flag"));
+        $this->registerArgument(0, new FlagEnumArgument("flag"));
         $this->registerArgument(1, new BooleanArgument("value", true));
     }
 }

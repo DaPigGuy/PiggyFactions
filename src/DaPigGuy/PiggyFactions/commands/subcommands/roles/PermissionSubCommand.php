@@ -5,8 +5,9 @@ declare(strict_types=1);
 namespace DaPigGuy\PiggyFactions\commands\subcommands\roles;
 
 use CortexPE\Commando\args\BooleanArgument;
-use CortexPE\Commando\args\RawStringArgument;
 use CortexPE\Commando\exception\ArgumentOrderException;
+use DaPigGuy\PiggyFactions\commands\arguments\PermissibleEnumArgument;
+use DaPigGuy\PiggyFactions\commands\arguments\PermissionEnumArgument;
 use DaPigGuy\PiggyFactions\commands\subcommands\FactionSubCommand;
 use DaPigGuy\PiggyFactions\event\role\FactionPermissionChangeEvent;
 use DaPigGuy\PiggyFactions\factions\Faction;
@@ -47,8 +48,8 @@ class PermissionSubCommand extends FactionSubCommand
      */
     protected function prepare(): void
     {
-        $this->registerArgument(0, new RawStringArgument("role"));
-        $this->registerArgument(1, new RawStringArgument("permission"));
+        $this->registerArgument(0, new PermissibleEnumArgument("role"));
+        $this->registerArgument(1, new PermissionEnumArgument("permission"));
         $this->registerArgument(2, new BooleanArgument("value", true));
     }
 }
