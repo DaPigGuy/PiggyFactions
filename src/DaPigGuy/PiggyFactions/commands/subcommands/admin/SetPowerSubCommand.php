@@ -29,8 +29,8 @@ class SetPowerSubCommand extends FactionSubCommand
         if ($ev->isCancelled()) return;
 
         $player->setPower($ev->getPower());
-        LanguageManager::getInstance()->sendMessage($sender, "commands.setpower.success", ["{PLAYER}" => $player->getUsername(), "{POWER}" => $ev->getPower()]);
-        if (($p = $this->plugin->getServer()->getPlayerByUUID($player->getUuid())) !== null) LanguageManager::getInstance()->sendMessage($p, "commands.setpower.power-set", ["{POWER}" => $ev->getPower()]);
+        LanguageManager::getInstance()->sendMessage($sender, "commands.setpower.success", ["{PLAYER}" => $player->getUsername(), "{POWER}" => $player->getPower()]);
+        if (($p = $this->plugin->getServer()->getPlayerByUUID($player->getUuid())) !== null) LanguageManager::getInstance()->sendMessage($p, "commands.setpower.power-set", ["{POWER}" => $player->getPower()]);
     }
 
     protected function prepare(): void
