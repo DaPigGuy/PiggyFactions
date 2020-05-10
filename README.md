@@ -117,6 +117,9 @@ PiggyFactions is currently in beta. While we have tested quite thoroughly, there
 | `piggyfactions.command.faction.create` | Allow usage of /f create | `true` |
 | `piggyfactions.command.faction.demote` | Allow usage of /f demote | `true` |
 | `piggyfactions.command.faction.description` | Allow usage of /f description | `true` |
+| `piggyfactions.command.faction.disband` | Allow usage of /f disband | `true` |
+| `piggyfactions.command.faction.enemy` | Allow usage of /f enemy | `true` |
+| `piggyfactions.command.faction.flag` | Allow usage of /f flag | `true` |
 | `piggyfactions.command.faction.help` | Allow usage of /f help | `true` |
 | `piggyfactions.command.faction.home` | Allow usage of /f home | `true` |
 | `piggyfactions.command.faction.info` | Allow usage of /f info | `true` |
@@ -134,6 +137,8 @@ PiggyFactions is currently in beta. While we have tested quite thoroughly, there
 | `piggyfactions.command.faction.seechunk` | Allow usage of /f seechunk | `true` |
 | `piggyfactions.command.faction.sethome` | Allow usage of /f sethome | `true` |
 | `piggyfactions.command.faction.setpower` | Allow usage of /f setpower | `op` |
+| `piggyfactions.command.faction.top` | Allow usage of /f top | `true` |
+| `piggyfactions.command.faction.truce` | Allow usage of /f truce | `true` |
 | `piggyfactions.command.faction.unally` | Allow usage of /f unally | `true` |
 | `piggyfactions.command.faction.unban` | Allow usage of /f unban | `true` |
 | `piggyfactions.command.faction.unclaim` | Allow usage of /f unclaim | `true` |

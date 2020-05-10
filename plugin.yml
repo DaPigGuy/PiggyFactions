@@ -48,6 +48,15 @@ permissions:
               piggyfactions.command.faction.description:
                 default: true
                 description: "Allow usage of /f description"
+              piggyfactions.command.faction.disband:
+                default: true
+                description: "Allow usage of /f disband"
+              piggyfactions.command.faction.enemy:
+                default: true
+                description: "Allow usage of /f enemy"
+              piggyfactions.command.faction.flag:
+                default: true
+                description: "Allow usage of /f flag"
               piggyfactions.command.faction.help:
                 default: true
                 description: "Allow usage of /f help"
@@ -99,6 +108,12 @@ permissions:
               piggyfactions.command.faction.setpower:
                 default: op
                 description: "Allow usage of /f setpower"
+              piggyfactions.command.faction.top:
+                default: true
+                description: "Allow usage of /f top"
+              piggyfactions.command.faction.truce:
+                default: true
+                description: "Allow usage of /f truce"
               piggyfactions.command.faction.unally:
                 default: true
                 description: "Allow usage of /f unally"
