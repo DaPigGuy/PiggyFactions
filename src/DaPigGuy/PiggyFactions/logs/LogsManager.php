@@ -6,6 +6,7 @@ use DaPigGuy\PiggyFactions\commands\subcommands\management\LogsSubCommand;
 use DaPigGuy\PiggyFactions\factions\Faction;
 use DaPigGuy\PiggyFactions\language\LanguageManager;
 use DaPigGuy\PiggyFactions\PiggyFactions;
+use jojoe77777\FormAPI\SimpleForm;
 use pocketmine\Player;
 
 class LogsManager
@@ -26,6 +27,29 @@ class LogsManager
     public static function getInstance(): LogsManager
     {
         return self::$instance;
+    }
+
+    public function sendLogsForm(Faction $faction, SimpleForm $form, Player $player, int $offset = 0, ?string $action = null, int $count = 10, callable $onSelect = null): void
+    {
+        $playerLang = LanguageManager::getInstance()->getPlayerLanguage($player);
+        $form->setTitle(LanguageManager::getInstance()->getMessage($playerLang, "logs.title", ["{CURRENTPAGE}" => $offset / LogsSubCommand::ENTRIES_PER_PAGE, "/{TOTALPAGES}" => ""]));
+
+        if ($onSelect === null) {
+            $onSelect = function (array $rows) use ($form, $player, $playerLang): void {
+                $message = $this->parseDataToMessage($rows, $playerLang);
+                $message = str_replace("=>", ":\n", $message);
+                if($message === "") $message = LanguageManager::getInstance()->getMessage($playerLang, "logs.invalid-log");
+                $form->setContent($message);
+                $player->sendForm($form);
+            };
+        }
+        if($action === null) {
+            $psVars = ["faction" => $faction->getId(), "count" => $count, "startpoint" => $offset];
+            $this->plugin->getDatabase()->executeSelect("piggyfactions.logs.loadall", $psVars, $onSelect);
+        } else {
+            $psVars = ["action" => $action, "faction" => $faction->getId(), "count" => $count, "startpoint" => $offset];
+            $this->plugin->getDatabase()->executeSelect("piggyfactions.logs.load", $psVars, $onSelect);
+        }
     }
 
     public function sendAllLogs(Faction $faction, Player $player, int $offset = 0, int $count = 10, callable $onSelect = null): void
