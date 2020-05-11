@@ -23,13 +23,6 @@ class FactionKickEvent extends FactionMemberEvent implements Cancellable
         $this->kickedBy = $kickedBy;
     }
 
-    public function call(): void
-    {
-        $factionLog = new FactionLog(FactionLog::KICK, ["kicker" => $this->getKickedBy()->getUsername(), "kicked" => $this->getMember()->getUsername()]);
-        LogsManager::getInstance()->addFactionLog($this->getFaction(), $factionLog);
-        parent::call();
-    }
-
     public function getKickedBy(): FactionsPlayer
     {
         return $this->kickedBy;

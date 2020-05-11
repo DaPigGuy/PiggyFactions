@@ -11,10 +11,5 @@ use pocketmine\event\Cancellable;
 
 class FactionLeaveEvent extends FactionMemberEvent implements Cancellable
 {
-    public function call(): void
-    {
-        $factionLog = new FactionLog(FactionLog::LEAVE, ["left" => $this->getMember()->getUsername()]);
-        LogsManager::getInstance()->addFactionLog($this->getFaction(), $factionLog);
-        parent::call();
-    }
+
 }

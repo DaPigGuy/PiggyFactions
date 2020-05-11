@@ -155,7 +155,7 @@ territory-titles:
   faction-title: "{RELATION}{FACTION}"
   faction-subtitle: "{ITALIC}{DESCRIPTION}"
 logs:
-  invalid-log: "{RED}Invalid log type or page number! Do /f logs <kick/ban/invite/join/leave/unban/leader_change>"
+  invalid-log: "{RED}Invalid log type or page number! Do /f logs <kick/ban/invite/join/leave/unban/leader_change> <page>"
   title: "{GOLD}Faction Logs: {AQUA}Page {CURRENTPAGE}/{TOTALPAGES}"
   actions:
     kick: "{GOLD}{TIME} => {GREEN}{KICKED}{AQUA}was kicked out of the Faction by {GREEN}{KICKER}"

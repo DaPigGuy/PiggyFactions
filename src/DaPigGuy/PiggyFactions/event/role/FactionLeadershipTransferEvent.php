@@ -25,13 +25,6 @@ class FactionLeadershipTransferEvent extends FactionEvent implements Cancellable
         $this->new = $new;
     }
 
-    public function call(): void
-    {
-        $factionLog = new FactionLog(FactionLog::LEADER_CHANGE, ["new" => $this->getNew()->getUsername(), "old" => $this->getOld()->getUsername()]);
-        LogsManager::getInstance()->addFactionLog($this->getFaction(), $factionLog);
-        parent::call();
-    }
-
     public function getOld(): FactionsPlayer
     {
         return $this->old;

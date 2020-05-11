@@ -22,13 +22,6 @@ class FactionBanEvent extends FactionMemberEvent implements Cancellable
         $this->bannedBy = $bannedBy;
     }
 
-    public function call(): void
-    {
-        $factionLog = new FactionLog(FactionLog::BAN, ["bannedBy" => $this->getBannedBy()->getUsername(), "banned" => $this->getMember()->getUsername()]);
-        LogsManager::getInstance()->addFactionLog($this->getFaction(), $factionLog);
-        parent::call();
-    }
-
     public function getBannedBy(): FactionsPlayer
     {
         return $this->bannedBy;

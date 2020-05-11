@@ -12,6 +12,7 @@ use DaPigGuy\PiggyFactions\commands\FactionCommand;
 use DaPigGuy\PiggyFactions\factions\FactionsManager;
 use DaPigGuy\PiggyFactions\flags\FlagFactory;
 use DaPigGuy\PiggyFactions\language\LanguageManager;
+use DaPigGuy\PiggyFactions\logs\LogsListener;
 use DaPigGuy\PiggyFactions\logs\LogsManager;
 use DaPigGuy\PiggyFactions\permissions\PermissionFactory;
 use DaPigGuy\PiggyFactions\players\PlayerManager;
@@ -88,6 +89,7 @@ class PiggyFactions extends PluginBase
         $this->getServer()->getCommandMap()->register("piggyfactions", new FactionCommand($this, "faction", "The PiggyFactions command", ["f", "factions"]));
 
         $this->getServer()->getPluginManager()->registerEvents(new EventListener($this), $this);
+        $this->getServer()->getPluginManager()->registerEvents(new LogsListener($this), $this);
 
         $this->getScheduler()->scheduleRepeatingTask(new ShowChunksTask($this), 10);
         $this->getScheduler()->scheduleRepeatingTask(new UpdatePowerTask($this), UpdatePowerTask::INTERVAL);

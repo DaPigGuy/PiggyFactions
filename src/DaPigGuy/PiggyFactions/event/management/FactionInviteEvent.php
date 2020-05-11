@@ -26,13 +26,6 @@ class FactionInviteEvent extends FactionEvent implements Cancellable
         $this->invited = $invited;
     }
 
-    public function call(): void
-    {
-        $factionLog = new FactionLog(FactionLog::INVITE, ["invitedBy" => $this->getInvitedBy()->getUsername(), "invited" => $this->getInvited()->getName()]);
-        LogsManager::getInstance()->addFactionLog($this->getFaction(), $factionLog);
-        parent::call();
-    }
-
     public function getInvitedBy(): FactionsPlayer
     {
         return $this->invitedBy;

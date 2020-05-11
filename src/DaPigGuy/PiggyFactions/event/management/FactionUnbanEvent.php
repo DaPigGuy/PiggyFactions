@@ -22,13 +22,6 @@ class FactionUnbanEvent extends FactionMemberEvent implements Cancellable
         $this->unbannedBy = $unbannedBy;
     }
 
-    public function call(): void
-    {
-        $factionLog = new FactionLog(FactionLog::UNBAN, ["unbannedBy" => $this->getUnbannedBy()->getUsername(), "unbanned" => $this->getMember()->getUsername()]);
-        LogsManager::getInstance()->addFactionLog($this->getFaction(), $factionLog);
-        parent::call();
-    }
-
     public function getUnbannedBy(): FactionsPlayer
     {
         return $this->unbannedBy;
