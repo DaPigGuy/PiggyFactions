@@ -15,7 +15,6 @@ class LogsSubCommand extends FactionSubCommand
 {
     const ENTRIES_PER_PAGE = 10;
 
-    //TODO: forms
     public function onNormalRun(Player $sender, ?Faction $faction, FactionsPlayer $member, string $aliasUsed, array $args): void
     {
         $currentPage = 0;

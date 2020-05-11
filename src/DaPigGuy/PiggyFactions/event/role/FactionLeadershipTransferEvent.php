@@ -6,8 +6,6 @@ namespace DaPigGuy\PiggyFactions\event\role;
 
 use DaPigGuy\PiggyFactions\event\FactionEvent;
 use DaPigGuy\PiggyFactions\factions\Faction;
-use DaPigGuy\PiggyFactions\logs\FactionLog;
-use DaPigGuy\PiggyFactions\logs\LogsManager;
 use DaPigGuy\PiggyFactions\players\FactionsPlayer;
 use pocketmine\event\Cancellable;
 
