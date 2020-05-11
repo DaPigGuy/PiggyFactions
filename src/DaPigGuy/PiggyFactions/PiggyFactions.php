@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace DaPigGuy\PiggyFactions;
 
+use CortexPE\Commando\BaseCommand;
 use CortexPE\Commando\exception\HookAlreadyRegistered;
 use CortexPE\Commando\PacketHooker;
 use DaPigGuy\PiggyCustomEnchants\utils\AllyChecks;
@@ -18,6 +19,7 @@ use DaPigGuy\PiggyFactions\tag\TagManager;
 use DaPigGuy\PiggyFactions\tasks\CheckUpdatesTask;
 use DaPigGuy\PiggyFactions\tasks\ShowChunksTask;
 use DaPigGuy\PiggyFactions\tasks\UpdatePowerTask;
+use jojoe77777\FormAPI\Form;
 use pocketmine\entity\Entity;
 use pocketmine\Player;
 use pocketmine\plugin\PluginBase;
@@ -50,6 +52,20 @@ class PiggyFactions extends PluginBase
      */
     public function onEnable(): void
     {
+        foreach (
+            [
+                "libasynql" => libasynql::class,
+                "Commando" => BaseCommand::class,
+                "libformapi" => Form::class
+            ] as $virion => $class
+        ) {
+            if (!class_exists($class)) {
+                $this->getLogger()->error($virion . " virion not found. Please download PiggyFactions from Poggit-CI or use DEVirion (not recommended).");
+                $this->getServer()->getPluginManager()->disablePlugin($this);
+                return;
+            }
+        }
+
         self::$instance = $this;
 
         $this->saveDefaultConfig();
