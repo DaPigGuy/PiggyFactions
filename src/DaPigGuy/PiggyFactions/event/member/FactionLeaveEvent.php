@@ -9,5 +9,4 @@ use pocketmine\event\Cancellable;
 
 class FactionLeaveEvent extends FactionMemberEvent implements Cancellable
 {
-
 }

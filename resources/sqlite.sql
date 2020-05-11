@@ -170,7 +170,7 @@ WHERE chunkX = :chunkX
 CREATE TABLE IF NOT EXISTS logs
 (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    faction TEXT,
+    faction VARCHAR(36),
     action  TEXT,
     timestamp INTEGER,
     data TEXT
@@ -228,11 +228,9 @@ VALUES (:faction, :action, :timestamp, :data);
 
 -- # { delete
 -- #    :id int
--- #    :faction string
 DELETE
 FROM logs
-WHERE id = :id
-  AND faction = :faction
+WHERE id = :id;
 -- # }
 
 -- # }

@@ -100,5 +100,4 @@ class LogsListener implements Listener
         $factionLog = new FactionLog(FactionLog::UNBAN, ["unbannedBy" => $event->getUnbannedBy()->getUsername(), "unbanned" => $event->getMember()->getUsername()]);
         LogsManager::getInstance()->addFactionLog($event->getFaction(), $factionLog);
     }
-
 }
