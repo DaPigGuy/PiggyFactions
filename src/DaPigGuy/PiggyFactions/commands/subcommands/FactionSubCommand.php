@@ -28,6 +28,8 @@ abstract class FactionSubCommand extends BaseSubCommand
     protected $requiresPlayer = true;
     /** @var bool */
     protected $requiresFaction = true;
+    /** @var null */
+    protected $factionPermission = null;
 
     public function __construct(PiggyFactions $plugin, string $name, string $description = "", array $aliases = [])
     {
@@ -52,17 +54,22 @@ abstract class FactionSubCommand extends BaseSubCommand
                 return;
             }
 
-            $parent = $this->getParent();
-            $permission = $this->getName();
-            while ($parent instanceof BaseSubCommand) {
-                $permission = $parent->getName();
-                $parent = $parent->getParent();
+            $permission = $this->factionPermission;
+            if ($permission === null) {
+                $parent = $this->getParent();
+                $permission = $this->getName();
+                while ($parent instanceof BaseSubCommand) {
+                    $permission = $parent->getName();
+                    $parent = $parent->getParent();
+                }
             }
 
-            if (PermissionFactory::getPermission($permission) !== null) {
-                if (!$faction->hasPermission($member, $permission)) {
-                    LanguageManager::getInstance()->sendMessage($sender, "commands.no-permission");
-                    return;
+            if ($permission !== false) {
+                if (PermissionFactory::getPermission($permission) !== null) {
+                    if (!$faction->hasPermission($member, $permission)) {
+                        LanguageManager::getInstance()->sendMessage($sender, "commands.no-permission");
+                        return;
+                    }
                 }
             }
         }

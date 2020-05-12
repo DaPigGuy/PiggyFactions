@@ -78,6 +78,7 @@ PiggyFactions is currently in beta. While we have tested quite thoroughly, there
 | `/f disband` | Disband your faction | `piggyfactions.command.faction.disband` |
 | `/f enemy <faction>` | Mark faction as an enemy | `piggyfactions.command.faction.enemy` |
 | `/f flag <flag>` | Manage faction flags | `piggyfactions.command.faction.flag` |
+| `/f fly` | Fly within faction territory | `piggyfactions.command.faction.fly` |
 | `/f help [page]` | Display command information | `piggyfactions.command.faction.help` |
 | `/f home` | Teleport to faction home | `piggyfactions.command.faction.home` |
 | `/f info [faction]` | Display faction info | `piggyfactions.command.faction.info` | `/f who` |
@@ -120,6 +121,7 @@ PiggyFactions is currently in beta. While we have tested quite thoroughly, there
 | `piggyfactions.command.faction.disband` | Allow usage of /f disband | `true` |
 | `piggyfactions.command.faction.enemy` | Allow usage of /f enemy | `true` |
 | `piggyfactions.command.faction.flag` | Allow usage of /f flag | `true` |
+| `piggyfactions.command.faction.fly` | Allow usage of /f fly | `true` |
 | `piggyfactions.command.faction.help` | Allow usage of /f help | `true` |
 | `piggyfactions.command.faction.home` | Allow usage of /f home | `true` |
 | `piggyfactions.command.faction.info` | Allow usage of /f info | `true` |

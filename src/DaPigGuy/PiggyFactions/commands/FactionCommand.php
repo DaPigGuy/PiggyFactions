@@ -14,6 +14,7 @@ use DaPigGuy\PiggyFactions\commands\subcommands\claims\MapSubCommand;
 use DaPigGuy\PiggyFactions\commands\subcommands\claims\SeeChunkSubCommand;
 use DaPigGuy\PiggyFactions\commands\subcommands\claims\UnclaimSubCommand;
 use DaPigGuy\PiggyFactions\commands\subcommands\flags\FlagSubCommand;
+use DaPigGuy\PiggyFactions\commands\subcommands\FlySubCommand;
 use DaPigGuy\PiggyFactions\commands\subcommands\HelpSubCommand;
 use DaPigGuy\PiggyFactions\commands\subcommands\homes\HomeSubCommand;
 use DaPigGuy\PiggyFactions\commands\subcommands\homes\SetHomeSubCommand;
@@ -83,9 +84,9 @@ class FactionCommand extends BaseCommand
     {
         $this->setPermission("piggyfactions.command.faction.use");
         $this->registerSubCommand(new AdminSubCommand($this->plugin, "admin", "Toggle admin mode"));
+        $this->registerSubCommand(new ChatSubCommand($this->plugin, ChatTypes::ALLY, "allychat", "Toggle ally chat", ["ac"]));
         $this->registerSubCommand(new AllySubCommand($this->plugin, "ally", "Ally with other factions"));
         $this->registerSubCommand(new BanSubCommand($this->plugin, "ban", "Ban a member from your faction"));
-        $this->registerSubCommand(new ChatSubCommand($this->plugin, ChatTypes::ALLY, "allychat", "Toggle ally chat", ["ac"]));
         $this->registerSubCommand(new ChatSubCommand($this->plugin, ChatTypes::FACTION, "chat", "Toggle faction chat", ["c"]));
         $this->registerSubCommand(new ClaimSubCommand($this->plugin, "claim", "Claim a chunk"));
         $this->registerSubCommand(new CreateSubCommand($this->plugin, "create", "Create a faction"));
@@ -94,6 +95,7 @@ class FactionCommand extends BaseCommand
         $this->registerSubCommand(new DisbandSubCommand($this->plugin, "disband", "Disband your faction"));
         $this->registerSubCommand(new EnemySubCommand($this->plugin, "enemy", "Mark faction as an enemy"));
         $this->registerSubCommand(new FlagSubCommand($this->plugin, "flag", "Manage faction flags"));
+        $this->registerSubCommand(new FlySubCommand($this->plugin, "fly", "Fly within faction territories"));
         $this->registerSubCommand(new HelpSubCommand($this->plugin, $this, "help", "Display command information"));
         $this->registerSubCommand(new HomeSubCommand($this->plugin, "home", "Teleport to faction home"));
         $this->registerSubCommand(new InfoSubCommand($this->plugin, "info", "Display faction info", ["who"]));

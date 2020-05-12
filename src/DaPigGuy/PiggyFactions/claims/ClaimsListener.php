@@ -8,6 +8,7 @@ use DaPigGuy\PiggyFactions\language\LanguageManager;
 use DaPigGuy\PiggyFactions\permissions\FactionPermission;
 use DaPigGuy\PiggyFactions\PiggyFactions;
 use DaPigGuy\PiggyFactions\players\PlayerManager;
+use DaPigGuy\PiggyFactions\tasks\DisableFlightTask;
 use DaPigGuy\PiggyFactions\utils\Relations;
 use pocketmine\event\block\BlockBreakEvent;
 use pocketmine\event\block\BlockPlaceEvent;
@@ -90,19 +91,26 @@ class ClaimsListener implements Listener
                 }
 
                 $language = LanguageManager::getInstance()->getPlayerLanguage($player);
-                if ($newClaim === null) {
-                    $player->addTitle(LanguageManager::getInstance()->getMessage($language, "territory-titles.wilderness-title"), LanguageManager::getInstance()->getMessage($language, "territory-titles.wilderness-subtitle"), 5, 60, 5);
-                    return;
-                }
-                $newFaction = $newClaim->getFaction();
-                if ($oldClaim === null || $oldClaim->getFaction() !== $newFaction) {
-                    $tags = [
-                        "{RELATION}" => LanguageManager::getInstance()->getColorFor($player, $newFaction),
-                        "{FACTION}" => $newFaction->getName(),
-                        "{DESCRIPTION}" => $newFaction->getDescription()
-                    ];
+                $oldFaction = $oldClaim === null ? null : $oldClaim->getFaction();
+                $newFaction = $newClaim === null ? null : $newClaim->getFaction();
+                if ($oldFaction !== $newFaction) {
+                    if ($member->isFlying()) {
+                        if ($newFaction === null || ($newFaction !== $faction && !$faction->isAllied($newFaction))) {
+                            $this->plugin->getScheduler()->scheduleRepeatingTask(new DisableFlightTask($player, $member), 20);
+                        }
+                    }
 
-                    $player->addTitle(LanguageManager::getInstance()->getMessage($language, "territory-titles.faction-title", $tags), LanguageManager::getInstance()->getMessage($language, "territory-titles.faction-subtitle", $tags), 5, 60, 5);
+                    if ($newClaim === null) {
+                        $player->addTitle(LanguageManager::getInstance()->getMessage($language, "territory-titles.wilderness-title"), LanguageManager::getInstance()->getMessage($language, "territory-titles.wilderness-subtitle"), 5, 60, 5);
+                    } else {
+                        $tags = [
+                            "{RELATION}" => LanguageManager::getInstance()->getColorFor($player, $newFaction),
+                            "{FACTION}" => $newFaction->getName(),
+                            "{DESCRIPTION}" => $newFaction->getDescription()
+                        ];
+
+                        $player->addTitle(LanguageManager::getInstance()->getMessage($language, "territory-titles.faction-title", $tags), LanguageManager::getInstance()->getMessage($language, "territory-titles.faction-subtitle", $tags), 5, 60, 5);
+                    }
                 }
             }
         }

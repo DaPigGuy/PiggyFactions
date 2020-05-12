@@ -27,6 +27,8 @@ class FactionsPlayer
     private $canSeeChunks = false;
     /** @var bool */
     private $isAutoClaiming = false;
+    /** @var bool */
+    private $flying = false;
 
     /** @var string */
     private $chat = ChatTypes::ALL;
@@ -113,6 +115,16 @@ class FactionsPlayer
     public function setAutoClaiming(bool $value): void
     {
         $this->isAutoClaiming = $value;
+    }
+
+    public function isFlying(): bool
+    {
+        return $this->flying;
+    }
+
+    public function setFlying(bool $value): void
+    {
+        $this->flying = $value;
     }
 
     public function getCurrentChat(): string

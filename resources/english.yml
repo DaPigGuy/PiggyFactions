@@ -3,6 +3,7 @@ chat:
   faction: "{BOLD}{GOLD}FACTION {RESET}{RANK_SYMBOL}{PLAYER}: {MESSAGE}"
 claims:
   command-denied: "{RED}You can't use {COMMAND} in {RELATION} territory."
+  flight-disable-warning: "{RED}Not within faction territory. Disabling flight in {AMOUNT}..."
 commands:
   invalid-player: "{RED}Player {PLAYER} not found."
   invalid-faction: "{RED}Faction {FACTION} not found."
@@ -67,6 +68,10 @@ commands:
     not-editable: "{RED}Flag {FLAG} is not editable."
     toggled: "{GREEN}Flag {FLAG} has been enabled."
     toggled-off: "{GREEN}Flag {FLAG} has been disabled."
+  fly:
+    not-allowed: "{RED}You are not permitted to fly here."
+    toggled: "{GREEN}Flight has been enabled."
+    toggled-off: "{RED}Flight has been disabled."
   help:
     header: "{GOLD}____________.[{DARK_GREEN}Faction Help ({PAGE}/{MAXPAGE}){GOLD}].____________"
     command: "\n{GREEN}/f {COMMAND} - {RESET}{DESCRIPTION}"
