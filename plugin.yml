@@ -84,6 +84,9 @@ permissions:
               piggyfactions.command.faction.leave:
                 default: true
                 description: "Allow usage of /f leave"
+              piggyfactions.command.faction.logs:
+                default: true
+                description: "Allow usage of /f logs"
               piggyfactions.command.faction.map:
                 default: true
                 description: "Allow usage of /f map"

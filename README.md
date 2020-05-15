@@ -87,6 +87,7 @@ PiggyFactions is currently in beta. While we have tested quite thoroughly, there
 | `/f kick <player>` | Kick a member from your faction | `piggyfactions.command.faction.kick` |
 | `/f leader <player>` | Transfer leadership of your faction | `piggyfactions.command.faction.leader` |
 | `/f leave` | Leave your faction | `piggyfactions.command.faction.leave` |
+| `/f logs` | View your faction logs | `piggyfactions.command.faction.logs` |
 | `/f map` | View map of area | `piggyfactions.command.faction.map` |
 | `/f motd <motd>` | Set faction MOTD | `piggyfactions.command.faction.motd` |
 | `/f name <name>` | Rename your faction | `piggyfactions.command.faction.name` |
@@ -130,6 +131,7 @@ PiggyFactions is currently in beta. While we have tested quite thoroughly, there
 | `piggyfactions.command.faction.kick` | Allow usage of /f kick | `true` |
 | `piggyfactions.command.faction.leader` | Allow usage of /f leader | `true` |
 | `piggyfactions.command.faction.leave` | Allow usage of /f leave | `true` |
+| `piggyfactions.command.faction.logs` | Allow usage of /f logs | `true` |
 | `piggyfactions.command.faction.map` | Allow usage of /f map | `true` |
 | `piggyfactions.command.faction.motd` | Allow usage of /f motd | `true` |
 | `piggyfactions.command.faction.name` | Allow usage of /f name | `true` |

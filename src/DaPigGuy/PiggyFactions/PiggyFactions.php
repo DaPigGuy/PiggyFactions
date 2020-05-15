@@ -13,6 +13,8 @@ use DaPigGuy\PiggyFactions\commands\FactionCommand;
 use DaPigGuy\PiggyFactions\factions\FactionsManager;
 use DaPigGuy\PiggyFactions\flags\FlagFactory;
 use DaPigGuy\PiggyFactions\language\LanguageManager;
+use DaPigGuy\PiggyFactions\logs\LogsListener;
+use DaPigGuy\PiggyFactions\logs\LogsManager;
 use DaPigGuy\PiggyFactions\permissions\PermissionFactory;
 use DaPigGuy\PiggyFactions\players\PlayerManager;
 use DaPigGuy\PiggyFactions\tag\TagManager;
@@ -46,6 +48,8 @@ class PiggyFactions extends PluginBase
     private $languageManager;
     /** @var TagManager */
     private $tagManager;
+    /** @var LogsManager */
+    private $logsManager;
 
     /**
      * @throws HookAlreadyRegistered
@@ -93,6 +97,7 @@ class PiggyFactions extends PluginBase
 
         $this->languageManager = new LanguageManager($this);
         $this->tagManager = new TagManager($this);
+        $this->logsManager = new LogsManager($this);
 
         $this->checkSoftDependencies();
 
@@ -100,6 +105,7 @@ class PiggyFactions extends PluginBase
         $this->getServer()->getCommandMap()->register("piggyfactions", new FactionCommand($this, "faction", "The PiggyFactions command", ["f", "factions"]));
 
         $this->getServer()->getPluginManager()->registerEvents(new EventListener($this), $this);
+        $this->getServer()->getPluginManager()->registerEvents(new LogsListener($this), $this);
 
         $this->getScheduler()->scheduleRepeatingTask(new ShowChunksTask($this), 10);
         $this->getScheduler()->scheduleRepeatingTask(new UpdatePowerTask($this), UpdatePowerTask::INTERVAL);
@@ -156,6 +162,11 @@ class PiggyFactions extends PluginBase
     public function getTagManager(): TagManager
     {
         return $this->tagManager;
+    }
+
+    public function getLogsManager(): LogsManager
+    {
+        return $this->logsManager;
     }
 
     public function areFormsEnabled(): bool
