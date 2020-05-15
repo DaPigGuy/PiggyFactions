@@ -17,4 +17,5 @@ class Relations
         Relations::TRUCE,
         Relations::NONE,
         Relations::ENEMY
-    ];}
+    ];
+}

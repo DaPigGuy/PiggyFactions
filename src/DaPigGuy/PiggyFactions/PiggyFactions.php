@@ -112,6 +112,11 @@ class PiggyFactions extends PluginBase
         $this->getServer()->getAsyncPool()->submitTask(new CheckUpdatesTask($this->getDescription()->getVersion(), $this->getDescription()->getCompatibleApis()[0]));
     }
 
+    public function onDisable(): void
+    {
+        if ($this->database !== null) $this->database->close();
+    }
+
     private function checkSoftDependencies(): void
     {
         if ($this->getServer()->getPluginManager()->getPlugin("PiggyCustomEnchants") !== null) {
