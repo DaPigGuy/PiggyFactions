@@ -169,7 +169,7 @@ WHERE chunkX = :chunkX
 -- # { init
 CREATE TABLE IF NOT EXISTS logs
 (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    id INTEGER PRIMARY KEY,
     faction VARCHAR(36),
     action  TEXT,
     timestamp INTEGER,
