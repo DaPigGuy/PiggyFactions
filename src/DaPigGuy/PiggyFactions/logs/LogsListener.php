@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace DaPigGuy\PiggyFactions\logs;
 
 use DaPigGuy\PiggyFactions\event\management\FactionBanEvent;
@@ -11,8 +13,6 @@ use DaPigGuy\PiggyFactions\event\member\FactionLeaveEvent;
 use DaPigGuy\PiggyFactions\event\role\FactionLeadershipTransferEvent;
 use DaPigGuy\PiggyFactions\PiggyFactions;
 use pocketmine\event\Listener;
-
-//This is used instead of logging when the Event is called to account for situations like the event being cancelled
 
 class LogsListener implements Listener
 {
@@ -30,7 +30,7 @@ class LogsListener implements Listener
      */
     public function onBan(FactionBanEvent $event): void
     {
-        if($event->isCancelled()) return;
+        if ($event->isCancelled()) return;
         $factionLog = new FactionLog(FactionLog::BAN, ["bannedBy" => $event->getBannedBy()->getUsername(), "banned" => $event->getMember()->getUsername()]);
         LogsManager::getInstance()->addFactionLog($event->getFaction(), $factionLog);
     }
@@ -41,7 +41,7 @@ class LogsListener implements Listener
      */
     public function onKick(FactionKickEvent $event): void
     {
-        if($event->isCancelled()) return;
+        if ($event->isCancelled()) return;
         $factionLog = new FactionLog(FactionLog::KICK, ["kicker" => $event->getKickedBy()->getUsername(), "kicked" => $event->getMember()->getUsername()]);
         LogsManager::getInstance()->addFactionLog($event->getFaction(), $factionLog);
     }
@@ -52,7 +52,7 @@ class LogsListener implements Listener
      */
     public function onInvite(FactionInviteEvent $event): void
     {
-        if($event->isCancelled()) return;
+        if ($event->isCancelled()) return;
         $factionLog = new FactionLog(FactionLog::INVITE, ["invitedBy" => $event->getInvitedBy()->getUsername(), "invited" => $event->getInvited()->getName()]);
         LogsManager::getInstance()->addFactionLog($event->getFaction(), $factionLog);
     }
@@ -63,7 +63,7 @@ class LogsListener implements Listener
      */
     public function onJoin(FactionJoinEvent $event): void
     {
-        if($event->isCancelled()) return;
+        if ($event->isCancelled()) return;
         $factionLog = new FactionLog(FactionLog::JOIN, ["joined" => $event->getMember()->getUsername()]);
         LogsManager::getInstance()->addFactionLog($event->getFaction(), $factionLog);
     }
@@ -74,7 +74,7 @@ class LogsListener implements Listener
      */
     public function onLeave(FactionLeaveEvent $event): void
     {
-        if($event->isCancelled()) return;
+        if ($event->isCancelled()) return;
         $factionLog = new FactionLog(FactionLog::LEAVE, ["left" => $event->getMember()->getUsername()]);
         LogsManager::getInstance()->addFactionLog($event->getFaction(), $factionLog);
     }
@@ -85,7 +85,7 @@ class LogsListener implements Listener
      */
     public function onLeadershipChange(FactionLeadershipTransferEvent $event): void
     {
-        if($event->isCancelled()) return;
+        if ($event->isCancelled()) return;
         $factionLog = new FactionLog(FactionLog::LEADER_CHANGE, ["new" => $event->getNew()->getUsername(), "old" => $event->getOld()->getUsername()]);
         LogsManager::getInstance()->addFactionLog($event->getFaction(), $factionLog);
     }
@@ -96,7 +96,7 @@ class LogsListener implements Listener
      */
     public function onUnban(FactionUnbanEvent $event): void
     {
-        if($event->isCancelled()) return;
+        if ($event->isCancelled()) return;
         $factionLog = new FactionLog(FactionLog::UNBAN, ["unbannedBy" => $event->getUnbannedBy()->getUsername(), "unbanned" => $event->getMember()->getUsername()]);
         LogsManager::getInstance()->addFactionLog($event->getFaction(), $factionLog);
     }

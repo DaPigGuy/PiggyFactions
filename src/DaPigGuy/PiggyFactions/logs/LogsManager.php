@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace DaPigGuy\PiggyFactions\logs;
 
 use DaPigGuy\PiggyFactions\commands\subcommands\management\LogsSubCommand;
@@ -38,12 +40,12 @@ class LogsManager
             $onSelect = function (array $rows) use ($form, $player, $playerLang): void {
                 $message = $this->parseDataToMessage($rows, $playerLang);
                 $message = str_replace("=>", ":\n", $message);
-                if($message === "") $message = LanguageManager::getInstance()->getMessage($playerLang, "logs.invalid-log");
+                if ($message === "") $message = LanguageManager::getInstance()->getMessage($playerLang, "logs.invalid-log");
                 $form->setContent($message);
                 $player->sendForm($form);
             };
         }
-        if($action === null) {
+        if ($action === null) {
             $psVars = ["faction" => $faction->getId(), "count" => $count, "startpoint" => $offset];
             $this->plugin->getDatabase()->executeSelect("piggyfactions.logs.loadall", $psVars, $onSelect);
         } else {
@@ -87,7 +89,7 @@ class LogsManager
                 $player->sendMessage($message);
             };
         }
-        $psVars = ["action" => $action, "faction" => $faction->getId(), "count" => $count, "startpoint" => $offset]; //someone pls help I cant name variables
+        $psVars = ["action" => $action, "faction" => $faction->getId(), "count" => $count, "startpoint" => $offset];
         $this->plugin->getDatabase()->executeSelect("piggyfactions.logs.load", $psVars, $onSelect);
     }
 

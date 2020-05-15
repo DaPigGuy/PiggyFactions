@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace DaPigGuy\PiggyFactions\logs;
 
 use JsonSerializable;
