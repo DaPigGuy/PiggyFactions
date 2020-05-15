@@ -65,17 +65,17 @@ class LogsSubCommand extends FactionSubCommand
             if ($data !== null) {
                 switch ($data) {
                     case 0:
-                        $this->sendLogsForm($player, $faction, $currentPage + 1, $action);
+                        $this->sendLogsForm($player, $faction, $currentPage + ($currentPage === 0 ? 1 : -1), $action);
                         return;
                     case 1:
-                        if ($currentPage !== 0) $this->sendLogsForm($player, $faction, $currentPage - 1, $action);
+                        if ($currentPage !== 0) $this->sendLogsForm($player, $faction, $currentPage + 1, $action);
                         return;
                 }
             }
         });
 
-        $form->addButton(TextFormat::BOLD . TextFormat::BLUE . "Next");
         if ($currentPage !== 0) $form->addButton(TextFormat::BOLD . TextFormat::BLUE . "Previous");
+        $form->addButton(TextFormat::BOLD . TextFormat::BLUE . "Next");
         $form->addButton(TextFormat::BOLD . TextFormat::RED . "Close");
 
         $offset = $currentPage * LogsSubCommand::ENTRIES_PER_PAGE;
