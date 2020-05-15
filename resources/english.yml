@@ -155,6 +155,7 @@ territory-titles:
   faction-title: "{RELATION}{FACTION}"
   faction-subtitle: "{ITALIC}{DESCRIPTION}"
 logs:
+  page-too-low: "{RED}Page must be greater than zero."
   invalid-log: "{RED}Invalid log type or page number! Do /f logs <kick/ban/invite/join/leave/unban/leader_change> <page>"
   title: "{GOLD}Faction Logs: {AQUA}Page {CURRENTPAGE}/{TOTALPAGES}"
   actions:

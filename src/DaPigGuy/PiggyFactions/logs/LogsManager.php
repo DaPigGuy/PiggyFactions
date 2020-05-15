@@ -34,7 +34,7 @@ class LogsManager
     public function sendLogsForm(Faction $faction, SimpleForm $form, Player $player, int $offset = 0, ?string $action = null, int $count = 10, callable $onSelect = null): void
     {
         $playerLang = LanguageManager::getInstance()->getPlayerLanguage($player);
-        $form->setTitle(LanguageManager::getInstance()->getMessage($playerLang, "logs.title", ["{CURRENTPAGE}" => $offset / LogsSubCommand::ENTRIES_PER_PAGE, "/{TOTALPAGES}" => ""]));
+        $form->setTitle(LanguageManager::getInstance()->getMessage($playerLang, "logs.title", ["{CURRENTPAGE}" => $offset / LogsSubCommand::ENTRIES_PER_PAGE + 1, "/{TOTALPAGES}" => ""]));
 
         if ($onSelect === null) {
             $onSelect = function (array $rows) use ($form, $player, $playerLang): void {
@@ -71,7 +71,7 @@ class LogsManager
         $onSelect = function (array $rows) use ($player, $currentPage): void {
             $totalCount = count($rows);
             $totalPages = ceil($totalCount / LogsSubCommand::ENTRIES_PER_PAGE) - 1;
-            LanguageManager::getInstance()->sendMessage($player, "logs.title", ["{CURRENTPAGE}" => $currentPage, "{TOTALPAGES}" => $totalPages]);
+            LanguageManager::getInstance()->sendMessage($player, "logs.title", ["{CURRENTPAGE}" => $currentPage + 1, "{TOTALPAGES}" => $totalPages]);
         };
         $psVars = ["faction" => $faction->getId()];
         $this->plugin->getDatabase()->executeSelect("piggyfactions.logs.countall", $psVars, $onSelect);
@@ -98,7 +98,7 @@ class LogsManager
         $onSelect = function (array $rows) use ($player, $currentPage): void {
             $totalCount = count($rows);
             $totalPages = ceil($totalCount / LogsSubCommand::ENTRIES_PER_PAGE) - 1;
-            LanguageManager::getInstance()->sendMessage($player, "logs.title", ["{CURRENTPAGE}" => $currentPage, "{TOTALPAGES}" => $totalPages]);
+            LanguageManager::getInstance()->sendMessage($player, "logs.title", ["{CURRENTPAGE}" => $currentPage + 1, "{TOTALPAGES}" => $totalPages]);
         };
         $psVars = ["faction" => $faction->getId(), "action" => $action];
         $this->plugin->getDatabase()->executeSelect("piggyfactions.logs.count", $psVars, $onSelect);
