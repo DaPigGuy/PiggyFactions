@@ -95,7 +95,7 @@ class ClaimsListener implements Listener
                 $newFaction = $newClaim === null ? null : $newClaim->getFaction();
                 if ($oldFaction !== $newFaction) {
                     if ($member->isFlying()) {
-                        if ($newFaction === null || ($newFaction !== $faction && !$faction->isAllied($newFaction))) {
+                        if ($newFaction === null || !$newFaction->hasPermission($member, FactionPermission::FLY)) {
                             $this->plugin->getScheduler()->scheduleRepeatingTask(new DisableFlightTask($player, $member), 20);
                         }
                     }

@@ -54,7 +54,7 @@ class TopSubCommand extends FactionSubCommand
                     "{FACTION}" => $faction->getName(),
                     "{ONLINE}" => count($faction->getOnlineMembers()),
                     "{MEMBERS}" => count($faction->getMembers()),
-                    "{POWER}" => $faction->getPower(),
+                    "{POWER}" => round($faction->getPower(), 2, PHP_ROUND_HALF_DOWN),
                     "{TOTALPOWER}" => count($faction->getMembers()) * $this->plugin->getConfig()->getNested("factions.power.max")
                 ]);
         }

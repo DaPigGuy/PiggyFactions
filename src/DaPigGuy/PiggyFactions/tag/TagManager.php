@@ -71,7 +71,7 @@ class TagManager
 
     public function getFactionPower(?FactionsPlayer $member): ?string
     {
-        return ($faction = $this->getFaction($member)) === null ? null : (string)$faction->getPower();
+        return ($faction = $this->getFaction($member)) === null ? null : (string)round($faction->getPower(), 2, PHP_ROUND_HALF_DOWN);
     }
 
     public function getFactionSizeTotal(?FactionsPlayer $member): ?string
