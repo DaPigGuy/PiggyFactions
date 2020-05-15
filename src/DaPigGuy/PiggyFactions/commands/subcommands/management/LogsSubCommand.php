@@ -23,7 +23,7 @@ class LogsSubCommand extends FactionSubCommand
     public function onNormalRun(Player $sender, ?Faction $faction, FactionsPlayer $member, string $aliasUsed, array $args): void
     {
         $currentPage = ($args["page"] ?? 1) - 1;
-        if (isset($args["action"]) && is_numeric($args["action"])) $currentPage = $args["action"] - 1;
+        if (isset($args["action"]) && is_numeric($args["action"])) $currentPage = (int)$args["action"] - 1;
         if ($currentPage < 0) {
             LanguageManager::getInstance()->sendMessage($sender, "logs.page-too-low");
             return;
