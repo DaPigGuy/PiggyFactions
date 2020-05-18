@@ -29,7 +29,7 @@ class NameSubCommand extends FactionSubCommand
             LanguageManager::getInstance()->sendMessage($sender, "commands.create.name-too-long", ["{NAME}" => $args["name"]]);
             return;
         }
-        $ev = new FactionRenameEvent($faction, $args["name"]);
+        $ev = new FactionRenameEvent($faction, $member, $args["name"]);
         $ev->call();
         if ($ev->isCancelled()) return;
 

@@ -4,18 +4,19 @@ declare(strict_types=1);
 
 namespace DaPigGuy\PiggyFactions\event\management;
 
-use DaPigGuy\PiggyFactions\event\FactionEvent;
+use DaPigGuy\PiggyFactions\event\FactionMemberEvent;
 use DaPigGuy\PiggyFactions\factions\Faction;
+use DaPigGuy\PiggyFactions\players\FactionsPlayer;
 use pocketmine\event\Cancellable;
 
-class FactionMOTDChangeEvent extends FactionEvent implements Cancellable
+class FactionMOTDChangeEvent extends FactionMemberEvent implements Cancellable
 {
     /** @var string */
     private $motd;
 
-    public function __construct(Faction $faction, string $motd)
+    public function __construct(Faction $faction, FactionsPlayer $member, string $motd)
     {
-        parent::__construct($faction);
+        parent::__construct($faction, $member);
         $this->motd = $motd;
     }
 

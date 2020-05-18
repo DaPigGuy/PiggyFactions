@@ -32,7 +32,7 @@ class PromoteSubCommand extends FactionSubCommand
             LanguageManager::getInstance()->sendMessage($sender, "commands.promote.cant-promote-higher", ["{PLAYER}" => $targetMember->getUsername()]);
             return;
         }
-        $ev = new FactionRoleChangeEvent($faction, $targetMember, $currentRole, ($role = array_keys(Roles::ALL)[Roles::ALL[$currentRole]]));
+        $ev = new FactionRoleChangeEvent($faction, $targetMember, $member, $currentRole, ($role = array_keys(Roles::ALL)[Roles::ALL[$currentRole]]));
         $ev->call();
         if ($ev->isCancelled()) return;
         $targetMember->setRole($role);

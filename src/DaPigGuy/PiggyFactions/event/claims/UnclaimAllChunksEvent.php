@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace DaPigGuy\PiggyFactions\event\claims;
 
-use DaPigGuy\PiggyFactions\event\FactionEvent;
+use DaPigGuy\PiggyFactions\event\FactionMemberEvent;
 use pocketmine\event\Cancellable;
 
-class UnclaimAllChunksEvent extends FactionEvent implements Cancellable
+class UnclaimAllChunksEvent extends FactionMemberEvent implements Cancellable
 {
 }

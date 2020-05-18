@@ -17,7 +17,7 @@ class DescriptionSubCommand extends FactionSubCommand
 {
     public function onNormalRun(Player $sender, ?Faction $faction, FactionsPlayer $member, string $aliasUsed, array $args): void
     {
-        $ev = new FactionDescriptionChangeEvent($faction, $args["description"]);
+        $ev = new FactionDescriptionChangeEvent($faction, $member, $args["description"]);
         $ev->call();
         if ($ev->isCancelled()) return;
 

@@ -4,19 +4,20 @@ declare(strict_types=1);
 
 namespace DaPigGuy\PiggyFactions\event\home;
 
-use DaPigGuy\PiggyFactions\event\FactionEvent;
+use DaPigGuy\PiggyFactions\event\FactionMemberEvent;
 use DaPigGuy\PiggyFactions\factions\Faction;
+use DaPigGuy\PiggyFactions\players\FactionsPlayer;
 use pocketmine\event\Cancellable;
 use pocketmine\level\Position;
 
-class FactionSetHomeEvent extends FactionEvent implements Cancellable
+class FactionSetHomeEvent extends FactionMemberEvent implements Cancellable
 {
     /** @var Position */
     private $position;
 
-    public function __construct(Faction $faction, Position $position)
+    public function __construct(Faction $faction, FactionsPlayer $member, Position $position)
     {
-        parent::__construct($faction);
+        parent::__construct($faction, $member);
         $this->position = $position;
     }
 

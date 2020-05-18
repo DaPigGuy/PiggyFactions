@@ -24,7 +24,7 @@ class SetHomeSubCommand extends FactionSubCommand
             }
         }
 
-        $ev = new FactionSetHomeEvent($faction, $sender->asPosition());
+        $ev = new FactionSetHomeEvent($faction, $member, $sender->asPosition());
         $ev->call();
         if ($ev->isCancelled()) return;
 

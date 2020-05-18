@@ -17,7 +17,7 @@ class MotdSubCommand extends FactionSubCommand
 {
     public function onNormalRun(Player $sender, ?Faction $faction, FactionsPlayer $member, string $aliasUsed, array $args): void
     {
-        $ev = new FactionMOTDChangeEvent($faction, $args["motd"]);
+        $ev = new FactionMOTDChangeEvent($faction, $member, $args["motd"]);
         $ev->call();
         if ($ev->isCancelled()) return;
 

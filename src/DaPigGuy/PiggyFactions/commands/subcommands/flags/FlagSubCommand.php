@@ -28,7 +28,7 @@ class FlagSubCommand extends FactionSubCommand
             return;
         }
 
-        $ev = new FactionFlagChangeEvent($faction, $args["flag"], $args["value"] ?? !$faction->getFlag($args["flag"]));
+        $ev = new FactionFlagChangeEvent($faction, $member, $args["flag"], $args["value"] ?? !$faction->getFlag($args["flag"]));
         $ev->call();
         if ($ev->isCancelled()) return;
 

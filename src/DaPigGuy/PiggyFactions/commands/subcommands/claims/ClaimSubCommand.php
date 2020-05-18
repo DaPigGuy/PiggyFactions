@@ -7,6 +7,7 @@ namespace DaPigGuy\PiggyFactions\commands\subcommands\claims;
 use CortexPE\Commando\exception\ArgumentOrderException;
 use DaPigGuy\PiggyFactions\claims\ClaimsManager;
 use DaPigGuy\PiggyFactions\commands\subcommands\FactionSubCommand;
+use DaPigGuy\PiggyFactions\event\claims\ChunkOverclaimEvent;
 use DaPigGuy\PiggyFactions\event\claims\ClaimChunkEvent;
 use DaPigGuy\PiggyFactions\factions\Faction;
 use DaPigGuy\PiggyFactions\language\LanguageManager;
@@ -34,6 +35,10 @@ class ClaimSubCommand extends FactionSubCommand
         $claim = ClaimsManager::getInstance()->getClaim($sender->getLevel(), $sender->getLevel()->getChunkAtPosition($sender));
         if ($claim !== null) {
             if ($this->plugin->getConfig()->getNested("factions.claim.overclaim", true) && $claim->canBeOverClaimed() && $claim->getFaction() !== $faction) {
+                $ev = new ChunkOverclaimEvent($faction, $member, $claim);
+                $ev->call();
+                if ($ev->isCancelled()) return;
+
                 LanguageManager::getInstance()->sendMessage($sender, "commands.claim.over-claimed");
                 $claim->setFaction($faction);
                 return;
@@ -42,7 +47,7 @@ class ClaimSubCommand extends FactionSubCommand
             return;
         }
 
-        $ev = new ClaimChunkEvent($faction, $sender->getLevel()->getChunkAtPosition($sender));
+        $ev = new ClaimChunkEvent($faction, $member, $sender->getLevel()->getChunkAtPosition($sender));
         $ev->call();
         if ($ev->isCancelled()) return;
 

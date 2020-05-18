@@ -33,7 +33,7 @@ class DemoteSubCommand extends FactionSubCommand
             LanguageManager::getInstance()->sendMessage($sender, "commands.demote.already-lowest", ["{PLAYER}" => $targetMember->getUsername()]);
             return;
         }
-        $ev = new FactionRoleChangeEvent($faction, $targetMember, $currentRole, ($role = array_keys(Roles::ALL)[Roles::ALL[$currentRole] - 2]));
+        $ev = new FactionRoleChangeEvent($faction, $targetMember, $member, $currentRole, ($role = array_keys(Roles::ALL)[Roles::ALL[$currentRole] - 2]));
         $ev->call();
         if ($ev->isCancelled()) return;
         $targetMember->setRole($role);

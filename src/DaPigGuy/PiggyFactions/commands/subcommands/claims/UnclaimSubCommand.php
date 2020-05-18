@@ -20,7 +20,7 @@ class UnclaimSubCommand extends FactionSubCommand
     public function onNormalRun(Player $sender, ?Faction $faction, FactionsPlayer $member, string $aliasUsed, array $args): void
     {
         if (($args["type"] ?? null) === "all") {
-            $ev = new UnclaimAllChunksEvent($faction);
+            $ev = new UnclaimAllChunksEvent($faction, $member);
             $ev->call();
             if ($ev->isCancelled()) return;
 
@@ -41,7 +41,7 @@ class UnclaimSubCommand extends FactionSubCommand
             return;
         }
 
-        $ev = new UnclaimChunkEvent($faction, $claim);
+        $ev = new UnclaimChunkEvent($faction, $member, $claim);
         $ev->call();
         if ($ev->isCancelled()) return;
 

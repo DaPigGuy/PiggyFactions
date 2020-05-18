@@ -6,6 +6,7 @@ namespace DaPigGuy\PiggyFactions\commands\subcommands\claims;
 
 use DaPigGuy\PiggyFactions\claims\ClaimsManager;
 use DaPigGuy\PiggyFactions\commands\subcommands\FactionSubCommand;
+use DaPigGuy\PiggyFactions\event\claims\ChunkOverclaimEvent;
 use DaPigGuy\PiggyFactions\event\claims\ClaimChunkEvent;
 use DaPigGuy\PiggyFactions\factions\Faction;
 use DaPigGuy\PiggyFactions\language\LanguageManager;
@@ -36,13 +37,17 @@ abstract class ClaimMultipleSubCommand extends FactionSubCommand
             $claim = ClaimsManager::getInstance()->getClaim($sender->getLevel(), $chunk);
             if ($claim !== null) {
                 if ($this->plugin->getConfig()->getNested("factions.claim.overclaim", true) && ($claim->canBeOverClaimed() || $member->isInAdminMode()) && $claim->getFaction() !== $faction) {
+                    $ev = new ChunkOverclaimEvent($faction, $member, $claim);
+                    $ev->call();
+                    if ($ev->isCancelled()) continue;
+
                     $claim->setFaction($faction);
                     $claimed++;
                     continue;
                 }
             }
 
-            $ev = new ClaimChunkEvent($faction, $chunk);
+            $ev = new ClaimChunkEvent($faction, $member, $chunk);
             $ev->call();
             if ($ev->isCancelled()) continue;
 

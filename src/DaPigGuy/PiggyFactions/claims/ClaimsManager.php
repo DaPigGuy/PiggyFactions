@@ -55,7 +55,7 @@ class ClaimsManager
         });
     }
 
-    public function createClaim(Faction $faction, Level $level, Chunk $chunk): void
+    public function createClaim(Faction $faction, Level $level, Chunk $chunk): Claim
     {
         $args = [
             "faction" => $faction->getId(),
@@ -65,6 +65,7 @@ class ClaimsManager
         ];
         $this->claims[$args["chunkX"] . ":" . $args["chunkZ"] . ":" . $args["level"]] = new Claim(...array_values($args));
         $this->plugin->getDatabase()->executeInsert("piggyfactions.claims.create", $args);
+        return $this->claims[$args["chunkX"] . ":" . $args["chunkZ"] . ":" . $args["level"]];
     }
 
     public function deleteClaim(Claim $claim): void
