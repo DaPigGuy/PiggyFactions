@@ -79,7 +79,7 @@ class ClaimsListener implements Listener
             $newClaim = ClaimsManager::getInstance()->getClaim($player->getLevel(), ($newChunk = $player->getLevel()->getChunkAtPosition($event->getTo())));
             if ($oldChunk !== $newChunk) {
                 if (($faction = $member->getFaction()) !== null && $member->isAutoClaiming()) {
-                    if ($member->isInAdminMode() || floor($faction->getPower() / $this->plugin->getConfig()->getNested("factions.claim.cost", 1)) > ($total = count(ClaimsManager::getInstance()->getFactionClaims($faction)))) {
+                    if (floor($faction->getPower() / $this->plugin->getConfig()->getNested("factions.claim.cost", 1)) > ($total = count(ClaimsManager::getInstance()->getFactionClaims($faction))) || $member->isInAdminMode()) {
                         if ($member->isInAdminMode() || $total < ($max = $this->plugin->getConfig()->getNested("factions.claims.max", -1)) || $max === -1) {
                             if ($newClaim === null) {
                                 $ev = new ClaimChunkEvent($faction, $member, $newChunk);
