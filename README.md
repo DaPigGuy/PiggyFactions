@@ -53,14 +53,14 @@ PiggyFactions is currently in beta. While we have tested quite thoroughly, there
 1. Install the plugin from Poggit.
 2. (Optional) Setup the data provider that PiggyFactions will be using. By default, PiggyFactions will use SQLite3 which requires no additional setup. If you would like to use MySQL instead, change database.type from sqlite to mysql & enter your MySQL credentials under database.mysql. 
 3. (Optional) You may configure certain faction features in the `config.yml` file.
-3. (Optional) You may configure messages in the `messages.yml` file.
-4. (Optional) You may want to setup safezones & warzones
+4. (Optional) You may configure messages in the `messages.yml` file.
+5. (Optional) You may want to setup safezones & warzones
    1. Run the command `/f admin`
    2. Create a faction (preferably named Safezone/Warzone)
    3. Set the appropriate flags (either safezone/warzone) with `/f flag`
    4. Claim chunks for their respective types
    5. Leave the faction
-5. You're done!
+6. You're done!
 
 ## Commands
 | Command | Description | Permissions | Aliases |
