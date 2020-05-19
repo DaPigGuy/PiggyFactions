@@ -46,6 +46,7 @@ class InfoSubCommand extends FactionSubCommand
             "{DESCRIPTION}" => $faction->getDescription(),
             "{POWER}" => round($faction->getPower(), 2, PHP_ROUND_HALF_DOWN),
             "{TOTALPOWER}" => count($faction->getMembers()) * $this->plugin->getConfig()->getNested("factions.power.max"),
+            "{MONEY}" => round($faction->getMoney(), 2, PHP_ROUND_HALF_DOWN),
             "{LEADER}" => ($leader = $faction->getLeader()) === null ? "" : $leader->getUsername(),
             "{ALLIES}" => implode(",", array_map(function (Faction $f): string {
                 return $f->getName();

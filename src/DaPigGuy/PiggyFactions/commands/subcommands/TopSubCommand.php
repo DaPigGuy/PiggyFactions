@@ -34,6 +34,9 @@ class TopSubCommand extends FactionSubCommand
                 return (int)($b->getPower() - $a->getPower());
             }
         ];
+        if ($this->plugin->isFactionBankEnabled()) $types["money"] = function (Faction $a, Faction $b): int {
+            return (int)($b->getMoney() - $a->getMoney());
+        };
         $type = $args["type"] ?? "power";
         $page = ($args["page"] ?? 1) - 1;
         if (!isset($types[$type])) {
@@ -55,7 +58,8 @@ class TopSubCommand extends FactionSubCommand
                     "{ONLINE}" => count($faction->getOnlineMembers()),
                     "{MEMBERS}" => count($faction->getMembers()),
                     "{POWER}" => round($faction->getPower(), 2, PHP_ROUND_HALF_DOWN),
-                    "{TOTALPOWER}" => count($faction->getMembers()) * $this->plugin->getConfig()->getNested("factions.power.max")
+                    "{TOTALPOWER}" => count($faction->getMembers()) * $this->plugin->getConfig()->getNested("factions.power.max"),
+                    "{MONEY}" => round($faction->getMoney(), 2, PHP_ROUND_HALF_DOWN)
                 ]);
         }
         $sender->sendMessage($message);
