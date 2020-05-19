@@ -17,7 +17,7 @@ CREATE TABLE IF NOT EXISTS factions
     home          JSON,
     relations     JSON,
     banned        JSON,
-    money         FLOAT
+    money         FLOAT DEFAULT 0
 );
 -- # }
 

@@ -17,7 +17,7 @@ CREATE TABLE IF NOT EXISTS factions
     home          TEXT,
     relations     TEXT,
     banned        TEXT,
-    money         FLOAT
+    money         FLOAT DEFAULT 0
 );
 -- # }
 
