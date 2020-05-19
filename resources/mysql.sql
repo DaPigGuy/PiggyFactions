@@ -169,11 +169,11 @@ WHERE chunkX = :chunkX
 -- # { init
 CREATE TABLE IF NOT EXISTS logs
 (
-    id INTEGER PRIMARY KEY AUTO_INCREMENT,
-    faction VARCHAR(36),
-    action  TEXT,
+    id        INTEGER PRIMARY KEY AUTO_INCREMENT,
+    faction   VARCHAR(36),
+    action    TEXT,
     timestamp INTEGER,
-    data TEXT
+    data      TEXT
 );
 -- # }
 
@@ -184,8 +184,7 @@ CREATE TABLE IF NOT EXISTS logs
 SELECT data, action, timestamp
 FROM logs
 WHERE faction = :faction
-LIMIT :count
-    OFFSET :startpoint;
+LIMIT :count OFFSET :startpoint;
 -- # }
 
 -- # { countall
@@ -213,8 +212,7 @@ SELECT data, timestamp, action
 FROM logs
 WHERE action = :action
   AND faction = :faction
-LIMIT :count
-    OFFSET :startpoint;
+LIMIT :count OFFSET :startpoint;
 -- # }
 
 -- # { create
@@ -230,7 +228,7 @@ VALUES (:faction, :action, :timestamp, :data);
 -- #    :id int
 DELETE
 FROM logs
-WHERE id = :id
+WHERE id = :id;
 -- # }
 
 -- # }
