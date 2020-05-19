@@ -49,9 +49,11 @@ use DaPigGuy\PiggyFactions\PiggyFactions;
 use DaPigGuy\PiggyFactions\utils\ChatTypes;
 use jojoe77777\FormAPI\SimpleForm;
 use pocketmine\command\CommandSender;
+use pocketmine\command\PluginIdentifiableCommand;
 use pocketmine\Player;
+use pocketmine\plugin\Plugin;
 
-class FactionCommand extends BaseCommand
+class FactionCommand extends BaseCommand implements PluginIdentifiableCommand
 {
     /** @var PiggyFactions */
     private $plugin;
@@ -60,6 +62,11 @@ class FactionCommand extends BaseCommand
     {
         $this->plugin = $plugin;
         parent::__construct($name, $description, $aliases);
+    }
+
+    public function getPlugin(): Plugin
+    {
+        return $this->plugin;
     }
 
     public function onRun(CommandSender $sender, string $aliasUsed, array $args): void
