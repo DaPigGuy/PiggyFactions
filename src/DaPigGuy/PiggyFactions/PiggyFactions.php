@@ -7,6 +7,8 @@ namespace DaPigGuy\PiggyFactions;
 use CortexPE\Commando\BaseCommand;
 use CortexPE\Commando\exception\HookAlreadyRegistered;
 use CortexPE\Commando\PacketHooker;
+use DaPigGuy\libPiggyEconomy\libPiggyEconomy;
+use DaPigGuy\libPiggyEconomy\providers\EconomyProvider;
 use DaPigGuy\PiggyCustomEnchants\utils\AllyChecks;
 use DaPigGuy\PiggyFactions\claims\ClaimsManager;
 use DaPigGuy\PiggyFactions\commands\FactionCommand;
@@ -25,17 +27,21 @@ use jojoe77777\FormAPI\Form;
 use pocketmine\entity\Entity;
 use pocketmine\Player;
 use pocketmine\plugin\PluginBase;
+use pocketmine\utils\Config;
 use poggit\libasynql\DataConnector;
 use poggit\libasynql\libasynql;
 
 class PiggyFactions extends PluginBase
 {
+    const CURRENT_DB_VERSION = 1;
+
     /** @var self */
     private static $instance;
 
     /** @var DataConnector */
     private $database;
-    //private $economyProvider;
+    /** @var EconomyProvider */
+    private $economyProvider;
 
     /** @var FactionsManager */
     private $factionsManager;
@@ -74,14 +80,12 @@ class PiggyFactions extends PluginBase
 
         $this->saveDefaultConfig();
         $this->initDatabase();
-        /*
         libPiggyEconomy::init();
         try {
             if ($this->getConfig()->getNested("economy.enabled", false)) $this->economyProvider = libPiggyEconomy::getProvider($this->getConfig()->get("economy"));
         } catch (\Exception $exception) {
             $this->getLogger()->error($exception->getMessage());
         }
-        */
 
         PermissionFactory::init();
         FlagFactory::init();
@@ -127,6 +131,16 @@ class PiggyFactions extends PluginBase
         $this->database->executeGeneric("piggyfactions.claims.init");
         $this->database->executeGeneric("piggyfactions.logs.init");
         $this->database->waitAll();
+
+        $this->saveResource("internals.yml");
+        $config = new Config($this->getDataFolder() . "internals.yml");
+        for ($i = $config->get("database-version", 0); $i < self::CURRENT_DB_VERSION; $i++) {
+            $this->database->executeGeneric("piggyfactions.patches." . $i, [], null, function (): void {
+            });
+        }
+        $this->database->waitAll();
+        $config->set("database-version", self::CURRENT_DB_VERSION);
+        $config->save();
     }
 
     private function checkSoftDependencies(): void
@@ -149,12 +163,10 @@ class PiggyFactions extends PluginBase
         return $this->database;
     }
 
-    /*
     public function getEconomyProvider(): EconomyProvider
     {
         return $this->economyProvider;
     }
-    */
 
     public function getFactionsManager(): FactionsManager
     {
@@ -189,5 +201,10 @@ class PiggyFactions extends PluginBase
     public function areFormsEnabled(): bool
     {
         return $this->getConfig()->get("forms", true);
+    }
+
+    public function isFactionBankEnabled(): bool
+    {
+        return $this->economyProvider !== null && $this->getConfig()->getNested("economy.faction-bank.enabled", true);
     }
 }

@@ -55,6 +55,8 @@ commands:
     already-lowest: "{RED}{PLAYER} is already at the lowest rank."
     success: "{GREEN}{PLAYER} has been demoted to {ROLE}."
     demoted: "{RED}You have been demoted to {ROLE}."
+  deposit:
+    success: "{GREEN}${MONEY} has been deposited into the faction bank."
   description:
     success: "{GREEN}Faction description has been set to {DESCRIPTION}"
   disband:
@@ -100,6 +102,8 @@ commands:
     success: "{YELLOW}You have left your faction."
   map:
     header: "{GOLD}____________.[ {GREEN}({X},{Z}) {FACTION} {GOLD}].____________"
+  money:
+    balance: "{GREEN}Faction Balance: ${MONEY}"
   motd:
     success: "{GREEN}Faction MOTD has been set to {MOTD}"
   name:
@@ -147,8 +151,13 @@ commands:
     success: "{GREEN}This chunk has been unclaimed."
     all:
       success: "{GREEN}All {FACTION} claims have been unclaimed."
+  withdraw:
+    success: "{GREEN}${MONEY} has been withdrawn from the faction bank."
 death:
   power: "{RED}Your power is now {POWER}."
+economy:
+  not-enough-money: "{RED}Not enough money. Missing ${DIFFERENCE}."
+  negative-money: "{RED}Negative amount of money provided."
 forms:
   title: "PiggyFactions UI"
 motd: "{GOLD}____________.[{DARK_GREEN}{FACTION} MOTD{GOLD}].____________\n{WHITE}{MOTD}"

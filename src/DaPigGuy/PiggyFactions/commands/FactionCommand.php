@@ -31,6 +31,9 @@ use DaPigGuy\PiggyFactions\commands\subcommands\management\LogsSubCommand;
 use DaPigGuy\PiggyFactions\commands\subcommands\management\MotdSubCommand;
 use DaPigGuy\PiggyFactions\commands\subcommands\management\NameSubCommand;
 use DaPigGuy\PiggyFactions\commands\subcommands\management\UnbanSubCommand;
+use DaPigGuy\PiggyFactions\commands\subcommands\money\DepositSubCommand;
+use DaPigGuy\PiggyFactions\commands\subcommands\money\MoneySubCommand;
+use DaPigGuy\PiggyFactions\commands\subcommands\money\WithdrawSubCommand;
 use DaPigGuy\PiggyFactions\commands\subcommands\relations\AllySubCommand;
 use DaPigGuy\PiggyFactions\commands\subcommands\relations\EnemySubCommand;
 use DaPigGuy\PiggyFactions\commands\subcommands\relations\NeutralSubCommand;
@@ -93,6 +96,7 @@ class FactionCommand extends BaseCommand
         $this->registerSubCommand(new CreateSubCommand($this->plugin, "create", "Create a faction"));
         $this->registerSubCommand(new DescriptionSubCommand($this->plugin, "description", "Set faction description", ["desc"]));
         $this->registerSubCommand(new DemoteSubCommand($this->plugin, "demote", "Demote a faction member"));
+        if ($this->plugin->isFactionBankEnabled()) $this->registerSubCommand(new DepositSubCommand($this->plugin, "deposit", "Deposit money into faction bank"));
         $this->registerSubCommand(new DisbandSubCommand($this->plugin, "disband", "Disband your faction"));
         $this->registerSubCommand(new EnemySubCommand($this->plugin, "enemy", "Mark faction as an enemy"));
         $this->registerSubCommand(new FlagSubCommand($this->plugin, "flag", "Manage faction flags"));
@@ -107,6 +111,7 @@ class FactionCommand extends BaseCommand
         $this->registerSubCommand(new LeaveSubCommand($this->plugin, "leave", "Leave your faction"));
         $this->registerSubCommand(new LogsSubCommand($this->plugin, "logs", "View your Factions logs!"));
         $this->registerSubCommand(new MapSubCommand($this->plugin, "map", "View map of area"));
+        if ($this->plugin->isFactionBankEnabled()) $this->registerSubCommand(new MoneySubCommand($this->plugin, "money", "View faction bank balance"));
         $this->registerSubCommand(new MotdSubCommand($this->plugin, "motd", "Set faction MOTD"));
         $this->registerSubCommand(new NameSubCommand($this->plugin, "name", "Rename your faction"));
         $this->registerSubCommand(new NeutralSubCommand($this->plugin, "neutral", "Reset relation with another faction"));
@@ -120,5 +125,6 @@ class FactionCommand extends BaseCommand
         $this->registerSubCommand(new UnallySubCommand($this->plugin, "unally", "End faction alliance"));
         $this->registerSubCommand(new UnbanSubCommand($this->plugin, "unban", "Unban a member from your faction"));
         $this->registerSubCommand(new UnclaimSubCommand($this->plugin, "unclaim", "Unclaim a chunk"));
+        if ($this->plugin->isFactionBankEnabled()) $this->registerSubCommand(new WithdrawSubCommand($this->plugin, "withdraw", "Withdraw money from faction bank"));
     }
 }

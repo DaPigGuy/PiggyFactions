@@ -48,10 +48,13 @@ class Faction
     /** @var array */
     private $banned;
 
+    /** @var float */
+    private $money;
+
     /** @var array */
     private $invitedPlayers;
 
-    public function __construct(string $id, string $name, int $creationTime, ?string $description, ?string $motd, array $members, array $permissions, array $flags, ?Position $home, array $relations, array $banned)
+    public function __construct(string $id, string $name, int $creationTime, ?string $description, ?string $motd, array $members, array $permissions, array $flags, ?Position $home, array $relations, array $banned, float $money)
     {
         $this->id = $id;
         $this->name = $name;
@@ -74,6 +77,7 @@ class Faction
         $this->home = $home;
         $this->relations = $relations;
         $this->banned = $banned;
+        $this->money = $money;
     }
 
     public function getId(): string
@@ -365,6 +369,29 @@ class Faction
         if ($key !== false) unset($this->banned[$key]);
     }
 
+    public function getMoney(): float
+    {
+        return $this->money;
+    }
+
+    public function setMoney(float $money): void
+    {
+        $this->money = $money;
+        $this->update();
+    }
+
+    public function addMoney(float $money): void
+    {
+        $this->money += $money;
+        $this->update();
+    }
+
+    public function removeMoney(float $money): void
+    {
+        $this->money -= $money;
+        $this->update();
+    }
+
     public function disband(): void
     {
         foreach ($this->getMembers() as $member) {
@@ -402,7 +429,8 @@ class Faction
                 "level" => $this->home->level->getFolderName()
             ]),
             "relations" => json_encode($this->relations),
-            "banned" => json_encode($this->banned)
+            "banned" => json_encode($this->banned),
+            "money" => $this->money
         ]);
     }
 }

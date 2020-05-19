@@ -16,7 +16,8 @@ CREATE TABLE IF NOT EXISTS factions
     flags         TEXT,
     home          TEXT,
     relations     TEXT,
-    banned        TEXT
+    banned        TEXT,
+    money         FLOAT
 );
 -- # }
 
@@ -53,6 +54,7 @@ WHERE id = :id;
 -- #    :home ?string
 -- #    :relations string
 -- #    :banned string
+-- #    :money float
 UPDATE factions
 SET name=:name,
     description=:description,
@@ -62,7 +64,8 @@ SET name=:name,
     flags=:flags,
     home=:home,
     relations=:relations,
-    banned=:banned
+    banned=:banned,
+    money=:money
 WHERE id = :id;
 -- # }
 
@@ -229,6 +232,15 @@ VALUES (:faction, :action, :timestamp, :data);
 DELETE
 FROM logs
 WHERE id = :id;
+-- # }
+
+-- # }
+
+-- # { patches
+
+-- # { 0
+ALTER TABLE factions
+    ADD money FLOAT DEFAULT 0;
 -- # }
 
 -- # }
