@@ -23,7 +23,6 @@ class LogsManager
     {
         self::$instance = $this;
         $this->plugin = $plugin;
-        $plugin->getDatabase()->executeGeneric("piggyfactions.logs.init");
     }
 
     public static function getInstance(): LogsManager

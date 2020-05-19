@@ -25,7 +25,6 @@ class PlayerManager
         self::$instance = $this;
 
         $this->plugin = $plugin;
-        $plugin->getDatabase()->executeGeneric("piggyfactions.players.init");
         $plugin->getDatabase()->executeSelect("piggyfactions.players.load", [], function (array $rows): void {
             foreach ($rows as $row) {
                 $this->players[$row["uuid"]] = new FactionsPlayer(UUID::fromString($row["uuid"]), $row["username"], $row["faction"], $row["role"], $row["power"]);

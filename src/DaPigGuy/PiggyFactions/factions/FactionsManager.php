@@ -29,7 +29,6 @@ class FactionsManager
         self::$instance = $this;
 
         $this->plugin = $plugin;
-        $plugin->getDatabase()->executeGeneric("piggyfactions.factions.init");
         $plugin->getDatabase()->executeSelect("piggyfactions.factions.load", [], function (array $rows): void {
             foreach ($rows as $row) {
                 if ($row["home"] !== null) {

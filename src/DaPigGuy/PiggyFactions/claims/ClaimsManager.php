@@ -26,7 +26,6 @@ class ClaimsManager
 
         $this->plugin = $plugin;
         $plugin->getServer()->getPluginManager()->registerEvents(new ClaimsListener($plugin, $this), $plugin);
-        $plugin->getDatabase()->executeGeneric("piggyfactions.claims.init");
         $plugin->getDatabase()->executeSelect("piggyfactions.claims.load", [], function (array $rows): void {
             foreach ($rows as $row) {
                 $this->claims[$row["chunkX"] . ":" . $row["chunkZ"] . ":" . $row["level"]] = new Claim($row["faction"], $row["chunkX"], $row["chunkZ"], $row["level"]);

@@ -73,12 +73,7 @@ class PiggyFactions extends PluginBase
         self::$instance = $this;
 
         $this->saveDefaultConfig();
-
-        $this->database = libasynql::create($this, $this->getConfig()->get("database"), [
-            "sqlite" => "sqlite.sql",
-            "mysql" => "mysql.sql"
-        ]);
-
+        $this->initDatabase();
         /*
         libPiggyEconomy::init();
         try {
@@ -94,10 +89,10 @@ class PiggyFactions extends PluginBase
         $this->factionsManager = new FactionsManager($this);
         $this->claimsManager = new ClaimsManager($this);
         $this->playerManager = new PlayerManager($this);
+        $this->logsManager = new LogsManager($this);
 
         $this->languageManager = new LanguageManager($this);
         $this->tagManager = new TagManager($this);
-        $this->logsManager = new LogsManager($this);
 
         $this->checkSoftDependencies();
 
@@ -114,7 +109,24 @@ class PiggyFactions extends PluginBase
 
     public function onDisable(): void
     {
-        if ($this->database !== null) $this->database->close();
+        if ($this->database !== null) {
+            $this->database->waitAll();
+            $this->database->close();
+        }
+    }
+
+    private function initDatabase(): void
+    {
+        $this->database = libasynql::create($this, $this->getConfig()->get("database"), [
+            "sqlite" => "sqlite.sql",
+            "mysql" => "mysql.sql"
+        ]);
+
+        $this->database->executeGeneric("piggyfactions.factions.init");
+        $this->database->executeGeneric("piggyfactions.players.init");
+        $this->database->executeGeneric("piggyfactions.claims.init");
+        $this->database->executeGeneric("piggyfactions.logs.init");
+        $this->database->waitAll();
     }
 
     private function checkSoftDependencies(): void
