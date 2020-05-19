@@ -3,7 +3,7 @@ main: DaPigGuy\PiggyFactions\PiggyFactions
 version: 1.0.4
 api: 3.2.0
 author: DaPigGuy
-softdepend: [PiggyCustomEnchants]
+softdepend: [PiggyCustomEnchants, HRKChat]
 website: "https://github.com/DaPigGuy/PiggyFactions"
 permissions:
   piggyfactions:
