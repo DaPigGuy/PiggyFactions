@@ -56,8 +56,10 @@ class Claim
     public function canBeOverClaimed(): bool
     {
         $faction = $this->getFaction();
-        if ($faction === null) return false;
-        if ($faction->getFlag(Flag::WARZONE) || $faction->getFlag(Flag::SAFEZONE)) return false;
-        return $faction->getPower() / PiggyFactions::getInstance()->getConfig()->getNested("factions.claim.cost", 1) < count(ClaimsManager::getInstance()->getFactionClaims($faction));
+        return PiggyFactions::getInstance()->getConfig()->getNested("factions.claim.overclaim", true) &&
+            $faction !== null &&
+            !$faction->getFlag(Flag::WARZONE) &&
+            !$faction->getFlag(Flag::SAFEZONE) &&
+            $faction->getPower() / PiggyFactions::getInstance()->getConfig()->getNested("factions.claim.cost", 1) < count(ClaimsManager::getInstance()->getFactionClaims($faction));
     }
 }

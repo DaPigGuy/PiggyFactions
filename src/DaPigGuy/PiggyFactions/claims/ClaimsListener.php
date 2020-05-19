@@ -86,7 +86,7 @@ class ClaimsListener implements Listener
                                 $ev->call();
                                 if (!$ev->isCancelled()) $newClaim = $this->plugin->getClaimsManager()->createClaim($faction, $player->getLevel(), $newChunk);
                             } else {
-                                if ($this->plugin->getConfig()->getNested("factions.claim.overclaim", true) && $newClaim->canBeOverClaimed() && $newClaim->getFaction()->getId() !== $faction->getId()) {
+                                if ($newClaim->canBeOverClaimed() && $newClaim->getFaction()->getId() !== $faction->getId()) {
                                     $ev = new ChunkOverclaimEvent($faction, $member, $newClaim);
                                     $ev->call();
                                     if (!$ev->isCancelled()) $newClaim->setFaction($faction);

@@ -34,7 +34,7 @@ class ClaimSubCommand extends FactionSubCommand
         }
         $claim = ClaimsManager::getInstance()->getClaim($sender->getLevel(), $sender->getLevel()->getChunkAtPosition($sender));
         if ($claim !== null) {
-            if ($this->plugin->getConfig()->getNested("factions.claim.overclaim", true) && $claim->canBeOverClaimed() && $claim->getFaction() !== $faction) {
+            if ($claim->canBeOverClaimed() && $claim->getFaction() !== $faction) {
                 $ev = new ChunkOverclaimEvent($faction, $member, $claim);
                 $ev->call();
                 if ($ev->isCancelled()) return;

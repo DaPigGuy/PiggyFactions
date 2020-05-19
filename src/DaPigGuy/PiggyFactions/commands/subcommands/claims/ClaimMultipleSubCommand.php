@@ -36,7 +36,7 @@ abstract class ClaimMultipleSubCommand extends FactionSubCommand
             }
             $claim = ClaimsManager::getInstance()->getClaim($sender->getLevel(), $chunk);
             if ($claim !== null) {
-                if ($this->plugin->getConfig()->getNested("factions.claim.overclaim", true) && ($claim->canBeOverClaimed() || $member->isInAdminMode()) && $claim->getFaction() !== $faction) {
+                if (($claim->canBeOverClaimed() || $member->isInAdminMode()) && $claim->getFaction() !== $faction) {
                     $ev = new ChunkOverclaimEvent($faction, $member, $claim);
                     $ev->call();
                     if ($ev->isCancelled()) continue;
