@@ -42,9 +42,10 @@ class LanguageManager
 
         $this->plugin = $plugin;
         foreach (self::LANGUAGES as $language) {
-            $plugin->saveResource($language . ".yml");
+            $file = "languages/" . $language . ".yml";
+            $plugin->saveResource($file);
 
-            $this->messages[$language] = new Config($plugin->getDataFolder() . $language . ".yml");
+            $this->messages[$language] = new Config($plugin->getDataFolder() . $file);
         }
         foreach ((new ReflectionClass(TextFormat::class))->getConstants() as $color => $code) {
             $this->colorTags["{" . $color . "}"] = $code;
