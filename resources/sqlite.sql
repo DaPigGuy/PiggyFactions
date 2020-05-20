@@ -80,7 +80,8 @@ CREATE TABLE IF NOT EXISTS players
     username VARCHAR(16),
     faction  VARCHAR(36),
     role     TEXT,
-    power    FLOAT
+    power    FLOAT,
+    language VARCHAR(255) DEFAULT 'english'
 );
 -- # }
 
@@ -241,6 +242,11 @@ WHERE id = :id;
 -- # { 0
 ALTER TABLE factions
     ADD money FLOAT DEFAULT 0;
+-- # }
+
+-- # { 1
+ALTER TABLE players
+    ADD language VARCHAR(255) DEFAULT 'english';
 -- # }
 
 -- # }
