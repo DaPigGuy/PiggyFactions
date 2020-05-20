@@ -96,7 +96,7 @@ class ClaimsListener implements Listener
                     }
                 }
 
-                $language = LanguageManager::getInstance()->getPlayerLanguage($player);
+                $language = $member->getLanguage();
                 $oldFaction = $oldClaim === null ? null : $oldClaim->getFaction();
                 $newFaction = $newClaim === null ? null : $newClaim->getFaction();
                 if ($oldFaction !== $newFaction) {

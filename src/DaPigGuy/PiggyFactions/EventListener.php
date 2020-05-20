@@ -50,11 +50,11 @@ class EventListener implements Listener
                     $event->setRecipients(array_merge($faction->getOnlineMembers(), ...array_map(function (Faction $ally): array {
                         return $ally->getOnlineMembers();
                     }, $faction->getAllies())));
-                    $event->setFormat(LanguageManager::getInstance()->getMessage(LanguageManager::DEFAULT_LANGUAGE, "chat.ally", $placeholders));
+                    $event->setFormat(LanguageManager::getInstance()->getMessage(LanguageManager::getInstance()->getDefaultLanguage(), "chat.ally", $placeholders));
                     break;
                 case ChatTypes::FACTION:
                     $event->setRecipients($faction->getOnlineMembers());
-                    $event->setFormat(LanguageManager::getInstance()->getMessage(LanguageManager::DEFAULT_LANGUAGE, "chat.faction", $placeholders));
+                    $event->setFormat(LanguageManager::getInstance()->getMessage(LanguageManager::getInstance()->getDefaultLanguage(), "chat.faction", $placeholders));
                     break;
             }
         }

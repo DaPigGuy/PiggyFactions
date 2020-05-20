@@ -33,7 +33,7 @@ class DisableFlightTask extends Task
             $this->getHandler()->cancel();
             return;
         }
-        $this->player->sendTip(LanguageManager::getInstance()->getMessage(LanguageManager::getInstance()->getPlayerLanguage($this->player), "claims.flight-disable-warning", ["{AMOUNT}" => $this->duration]));
+        $this->player->sendTip(LanguageManager::getInstance()->getMessage($this->member->getLanguage(), "claims.flight-disable-warning", ["{AMOUNT}" => $this->duration]));
         $this->duration--;
         if ($this->duration === 0) {
             $this->getHandler()->cancel();
