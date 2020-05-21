@@ -33,7 +33,7 @@ use poggit\libasynql\libasynql;
 
 class PiggyFactions extends PluginBase
 {
-    const CURRENT_DB_VERSION = 1;
+    const CURRENT_DB_VERSION = 2;
 
     /** @var self */
     private static $instance;

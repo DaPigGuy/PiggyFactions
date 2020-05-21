@@ -110,7 +110,7 @@ class LogsManager
         $this->plugin->getDatabase()->executeInsert("piggyfactions.logs.create", $psVars);
     }
 
-    private function parseDataToMessage(array $rows, string $language = LanguageManager::DEFAULT_LANGUAGE): string
+    private function parseDataToMessage(array $rows, string $language): string
     {
         $message = "";
         foreach ($rows as $row) {

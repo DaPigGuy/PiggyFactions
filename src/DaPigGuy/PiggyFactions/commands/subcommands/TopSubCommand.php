@@ -48,7 +48,7 @@ class TopSubCommand extends FactionSubCommand
         });
         usort($factions, $types[$type]);
 
-        $language = $sender instanceof Player ? LanguageManager::getInstance()->getPlayerLanguage($sender) : LanguageManager::DEFAULT_LANGUAGE;
+        $language = $sender instanceof Player ? LanguageManager::getInstance()->getPlayerLanguage($sender) : LanguageManager::getInstance()->getDefaultLanguage();
         $message = LanguageManager::getInstance()->getMessage($language, "commands.top.header", ["{PAGE}" => $page + 1, "{TOTALPAGES}" => ceil(count($factions) / self::PAGE_LENGTH), "{CATEGORY}" => ucfirst($type)]);
         foreach (array_slice($factions, $page * self::PAGE_LENGTH, self::PAGE_LENGTH) as $rank => $faction) {
             $message .= TextFormat::EOL . LanguageManager::getInstance()->getMessage($language, "commands.top.line." . $type, [

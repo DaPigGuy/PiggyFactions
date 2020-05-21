@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace DaPigGuy\PiggyFactions\players;
 
 use DaPigGuy\PiggyFactions\factions\Faction;
+use DaPigGuy\PiggyFactions\language\LanguageManager;
 use DaPigGuy\PiggyFactions\PiggyFactions;
 use pocketmine\Player;
 use pocketmine\utils\UUID;
@@ -27,7 +28,7 @@ class PlayerManager
         $this->plugin = $plugin;
         $plugin->getDatabase()->executeSelect("piggyfactions.players.load", [], function (array $rows): void {
             foreach ($rows as $row) {
-                $this->players[$row["uuid"]] = new FactionsPlayer(UUID::fromString($row["uuid"]), $row["username"], $row["faction"], $row["role"], $row["power"]);
+                $this->players[$row["uuid"]] = new FactionsPlayer(UUID::fromString($row["uuid"]), $row["username"], $row["faction"], $row["role"], $row["power"], $row["language"]);
             }
             $this->plugin->getLogger()->debug("Loaded " . count($rows) . " players");
         });
@@ -45,9 +46,10 @@ class PlayerManager
             "username" => $player->getName(),
             "faction" => null,
             "role" => null,
-            "power" => PiggyFactions::getInstance()->getConfig()->getNested("factions.power.default", 20)
+            "power" => PiggyFactions::getInstance()->getConfig()->getNested("factions.power.default", 20),
+            "language" => LanguageManager::LOCALE_CODE_TABLE[$player->getLocale()] ?? LanguageManager::getInstance()->getDefaultLanguage()
         ]);
-        $this->players[$player->getUniqueId()->toString()] = new FactionsPlayer($player->getUniqueId(), $player->getName(), null, null, PiggyFactions::getInstance()->getConfig()->getNested("factions.power.default", 20));
+        $this->players[$player->getUniqueId()->toString()] = new FactionsPlayer($player->getUniqueId(), $player->getName(), null, null, PiggyFactions::getInstance()->getConfig()->getNested("factions.power.default", 20), LanguageManager::LOCALE_CODE_TABLE[$player->getLocale()] ?? LanguageManager::getInstance()->getDefaultLanguage());
         return $this->players[$player->getUniqueId()->toString()];
     }
 

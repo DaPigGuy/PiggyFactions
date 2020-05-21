@@ -23,6 +23,9 @@ class FactionsPlayer
     /** @var float */
     private $power;
 
+    /** @var string */
+    private $language;
+
     /** @var bool */
     private $canSeeChunks = false;
     /** @var bool */
@@ -36,14 +39,14 @@ class FactionsPlayer
     /** @var bool */
     private $adminMode = false;
 
-    public function __construct(UUID $uuid, string $username, ?string $faction, ?string $role, float $power)
+    public function __construct(UUID $uuid, string $username, ?string $faction, ?string $role, float $power, string $language)
     {
-
         $this->uuid = $uuid;
         $this->username = $username;
         $this->faction = $faction;
         $this->role = $role;
         $this->power = $power;
+        $this->language = $language;
     }
 
     public function getUuid(): UUID
@@ -94,6 +97,17 @@ class FactionsPlayer
         $this->power = $power;
         if ($this->power < ($min = PiggyFactions::getInstance()->getConfig()->getNested("factions.power.min", 0))) $this->power = $min;
         if ($this->power > ($max = PiggyFactions::getInstance()->getConfig()->getNested("factions.power.max", 10))) $this->power = $max;
+        $this->update();
+    }
+
+    public function getLanguage(): string
+    {
+        return $this->language;
+    }
+
+    public function setLanguage(string $language): void
+    {
+        $this->language = $language;
         $this->update();
     }
 
@@ -154,7 +168,8 @@ class FactionsPlayer
             "username" => $this->username,
             "faction" => $this->faction,
             "role" => $this->role,
-            "power" => $this->power
+            "power" => $this->power,
+            "language" => $this->language
         ]);
     }
 }

@@ -50,11 +50,11 @@ class EventListener implements Listener
                     $event->setRecipients(array_merge($faction->getOnlineMembers(), ...array_map(function (Faction $ally): array {
                         return $ally->getOnlineMembers();
                     }, $faction->getAllies())));
-                    $event->setFormat(LanguageManager::getInstance()->getMessage(LanguageManager::DEFAULT_LANGUAGE, "chat.ally", $placeholders));
+                    $event->setFormat(LanguageManager::getInstance()->getMessage(LanguageManager::getInstance()->getDefaultLanguage(), "chat.ally", $placeholders));
                     break;
                 case ChatTypes::FACTION:
                     $event->setRecipients($faction->getOnlineMembers());
-                    $event->setFormat(LanguageManager::getInstance()->getMessage(LanguageManager::DEFAULT_LANGUAGE, "chat.faction", $placeholders));
+                    $event->setFormat(LanguageManager::getInstance()->getMessage(LanguageManager::getInstance()->getDefaultLanguage(), "chat.faction", $placeholders));
                     break;
             }
         }
@@ -119,7 +119,6 @@ class EventListener implements Listener
         $player = $event->getPlayer();
         if (($member = PlayerManager::getInstance()->getPlayer($player->getUniqueId())) === null) $member = PlayerManager::getInstance()->createPlayer($player);
         if ($member->getUsername() !== $player->getName()) $member->setUsername($player->getName());
-        LanguageManager::getInstance()->setPlayerLanguage($player, LanguageManager::LANGUAGES[$player->getLocale()] ?? LanguageManager::DEFAULT_LANGUAGE);
         if (($faction = $member->getFaction()) !== null) {
             if (($motd = $faction->getMotd()) !== null) LanguageManager::getInstance()->sendMessage($player, "motd", ["{MOTD}" => $motd]);
         }

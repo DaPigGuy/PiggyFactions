@@ -80,7 +80,8 @@ CREATE TABLE IF NOT EXISTS players
     username VARCHAR(16),
     faction  VARCHAR(36),
     role     TEXT,
-    power    FLOAT
+    power    FLOAT,
+    language VARCHAR(255) DEFAULT 'english'
 );
 -- # }
 
@@ -95,8 +96,9 @@ FROM players;
 -- #    :faction ?string
 -- #    :role ?string
 -- #    :power float
-INSERT INTO players (uuid, username, faction, role, power)
-VALUES (:uuid, :username, :faction, :role, :power);
+-- #    :language string
+INSERT INTO players (uuid, username, faction, role, power, language)
+VALUES (:uuid, :username, :faction, :role, :power, :language);
 -- # }
 
 -- # { update
@@ -105,11 +107,13 @@ VALUES (:uuid, :username, :faction, :role, :power);
 -- #    :faction ?string
 -- #    :role ?string
 -- #    :power float
+-- #    :language string
 UPDATE players
 SET username=:username,
     faction=:faction,
     role=:role,
-    power=:power
+    power=:power,
+    language=:language
 WHERE uuid = :uuid;
 -- # }
 
@@ -241,6 +245,11 @@ WHERE id = :id;
 -- # { 0
 ALTER TABLE factions
     ADD money FLOAT DEFAULT 0;
+-- # }
+
+-- # { 1
+ALTER TABLE players
+    ADD language VARCHAR(255) DEFAULT 'english';
 -- # }
 
 -- # }

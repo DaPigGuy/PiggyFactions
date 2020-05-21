@@ -41,7 +41,7 @@ class HelpSubCommand extends FactionSubCommand
         $page = $page > $maxPages ? $maxPages : $page;
         $pageCommands = array_slice($subcommands, $commandsPerPage * ($page - 1), $commandsPerPage);
 
-        $language = $sender instanceof Player ? LanguageManager::getInstance()->getPlayerLanguage($sender) : LanguageManager::DEFAULT_LANGUAGE;
+        $language = $sender instanceof Player ? LanguageManager::getInstance()->getPlayerLanguage($sender) : LanguageManager::getInstance()->getDefaultLanguage();
         $message = LanguageManager::getInstance()->getMessage($language, "commands.help.header", ["{PAGE}" => $page, "{MAXPAGE}" => $maxPages]);
         foreach ($pageCommands as $pageCommand) {
             $message .= LanguageManager::getInstance()->getMessage($language, "commands.help.command", ["{COMMAND}" => $pageCommand->getName(), "{DESCRIPTION}" => $pageCommand->getDescription()]);

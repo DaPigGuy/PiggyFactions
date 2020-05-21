@@ -16,8 +16,10 @@ use ReflectionClass;
 
 class LanguageManager
 {
-    const DEFAULT_LANGUAGE = "english";
     const LANGUAGES = [
+        "english"
+    ];
+    const LOCALE_CODE_TABLE = [
         "en_US" => "english",
         "en_GB" => "english"
     ];
@@ -28,11 +30,11 @@ class LanguageManager
     /** @var PiggyFactions */
     private $plugin;
 
+    /** @var string */
+    private $defaultLanguage;
+
     /** @var Config[] */
     private $messages;
-    /** @var array */
-    private $playerLanguage;
-
     /** @var array */
     private $colorTags;
 
@@ -41,6 +43,7 @@ class LanguageManager
         self::$instance = $this;
 
         $this->plugin = $plugin;
+        $this->defaultLanguage = $plugin->getConfig()->getNested("languages.default", "english");
         foreach (self::LANGUAGES as $language) {
             $file = "languages/" . $language . ".yml";
             $plugin->saveResource($file);
@@ -57,9 +60,21 @@ class LanguageManager
         return self::$instance;
     }
 
+    public function getDefaultLanguage(): string
+    {
+        return $this->defaultLanguage;
+    }
+
+    public function getPlayerLanguage(Player $player): string
+    {
+        $member = PlayerManager::getInstance()->getPlayer($player->getUniqueId());
+        if ($member === null) return $this->defaultLanguage;
+        return $member->getLanguage();
+    }
+
     public function getMessage(string $language, string $message, array $extraTags = []): string
     {
-        $message = $this->messages[$language]->getNested($message, $this->messages[self::DEFAULT_LANGUAGE]->getNested($message, $message));
+        $message = $this->messages[$language]->getNested($message, $this->messages[$this->defaultLanguage]->getNested($message, $message));
         $message = $this->translateColorTags($message);
         $message = str_replace(array_keys($extraTags), $extraTags, $message);
         return $message;
@@ -67,7 +82,7 @@ class LanguageManager
 
     public function sendMessage(CommandSender $commandSender, string $message, array $extraTags = []): void
     {
-        $language = $commandSender instanceof Player ? $this->getPlayerLanguage($commandSender) : self::DEFAULT_LANGUAGE;
+        $language = $commandSender instanceof Player ? $this->getPlayerLanguage($commandSender) : $this->defaultLanguage;
         $message = $this->getMessage($language, $message, $extraTags);
         if ($commandSender instanceof Player) {
             $faction = $this->plugin->getPlayerManager()->getPlayerFaction($commandSender->getUniqueId());
@@ -103,15 +118,5 @@ class LanguageManager
     public function translateColorTags(string $message): string
     {
         return str_replace(array_keys($this->colorTags), $this->colorTags, TextFormat::colorize($message));
-    }
-
-    public function getPlayerLanguage(Player $player): string
-    {
-        return $this->playerLanguage[$player->getName()] ?? self::DEFAULT_LANGUAGE;
-    }
-
-    public function setPlayerLanguage(Player $player, string $language): void
-    {
-        $this->playerLanguage[$player->getName()] = $language;
     }
 }
