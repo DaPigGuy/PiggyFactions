@@ -27,9 +27,10 @@ If you wish to help translate PiggyFactions, you must:
     * After we approve you, you will be able to start translating.
 * While translating, please keep the following in mind:
     * Any words wrapped in `{ }`, `< >`, or `[ ]` should not be translated.
+    * Any commands (i.e. `/f ally`) should not be translated.
     * No colors or text formats should be modified.
     * Stay consistent with translated words.
         * If you chose a word to translate `Member`, use the same word throughout the entire file.
     * If you are unsure about anything, please ask in the `#translation` channel once you've received your role.
 
-<i>Last updated: Wednesday, May 20, 2020.</i>
+<i>Last updated: Thursday, May 21, 2020.</i>
