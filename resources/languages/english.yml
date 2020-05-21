@@ -22,7 +22,7 @@ commands:
     self: "{RED}You can not ally with yourself."
     already-allied: "{RED}You are already allied!"
     request: "{GREEN}{FACTION} has sent an ally request. Do /f ally {FACTION} to accept."
-    allied: "{GREEN}Your faction is now allied with {ALLY}"
+    allied: "{GREEN}Your faction is now allied with {ALLY}."
     success: "{GREEN}An ally request has been sent to {FACTION}."
   ban:
     cant-ban-higher: "{RED}You can not ban members of higher rank."
