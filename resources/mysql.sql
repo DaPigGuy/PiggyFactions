@@ -96,8 +96,9 @@ FROM players;
 -- #    :faction ?string
 -- #    :role ?string
 -- #    :power float
-INSERT INTO players (uuid, username, faction, role, power)
-VALUES (:uuid, :username, :faction, :role, :power);
+-- #    :language string
+INSERT INTO players (uuid, username, faction, role, power, language)
+VALUES (:uuid, :username, :faction, :role, :power, :language);
 -- # }
 
 -- # { update
@@ -106,11 +107,13 @@ VALUES (:uuid, :username, :faction, :role, :power);
 -- #    :faction ?string
 -- #    :role ?string
 -- #    :power float
+-- #    :language string
 UPDATE players
 SET username=:username,
     faction=:faction,
     role=:role,
-    power=:power
+    power=:power,
+    language=:language
 WHERE uuid = :uuid;
 -- # }
 

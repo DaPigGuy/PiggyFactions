@@ -109,6 +109,7 @@ class FactionsPlayer
     public function setLanguage(string $language): void
     {
         $this->language = $language;
+        $this->update();
     }
 
     public function canSeeChunks(): bool
@@ -168,7 +169,8 @@ class FactionsPlayer
             "username" => $this->username,
             "faction" => $this->faction,
             "role" => $this->role,
-            "power" => $this->power
+            "power" => $this->power,
+            "language" => $this->language
         ]);
     }
 }
