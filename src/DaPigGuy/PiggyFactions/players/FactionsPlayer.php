@@ -41,7 +41,6 @@ class FactionsPlayer
 
     public function __construct(UUID $uuid, string $username, ?string $faction, ?string $role, float $power, string $language)
     {
-
         $this->uuid = $uuid;
         $this->username = $username;
         $this->faction = $faction;
