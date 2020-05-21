@@ -20,6 +20,7 @@ use DaPigGuy\PiggyFactions\commands\subcommands\homes\HomeSubCommand;
 use DaPigGuy\PiggyFactions\commands\subcommands\homes\SetHomeSubCommand;
 use DaPigGuy\PiggyFactions\commands\subcommands\InfoSubCommand;
 use DaPigGuy\PiggyFactions\commands\subcommands\JoinSubCommand;
+use DaPigGuy\PiggyFactions\commands\subcommands\LanguageSubCommand;
 use DaPigGuy\PiggyFactions\commands\subcommands\LeaveSubCommand;
 use DaPigGuy\PiggyFactions\commands\subcommands\management\BanSubCommand;
 use DaPigGuy\PiggyFactions\commands\subcommands\management\CreateSubCommand;
@@ -114,6 +115,7 @@ class FactionCommand extends BaseCommand implements PluginIdentifiableCommand
         $this->registerSubCommand(new InviteSubCommand($this->plugin, "invite", "Invite a player to your faction"));
         $this->registerSubCommand(new JoinSubCommand($this->plugin, "join", "Join a faction"));
         $this->registerSubCommand(new KickSubCommand($this->plugin, "kick", "Kick a member from your faction"));
+        $this->registerSubCommand(new LanguageSubCommand($this->plugin, "language", "Change personal language for PiggyFactions", ["lang"]));
         $this->registerSubCommand(new LeaderSubCommand($this->plugin, "leader", "Transfer leadership of your faction"));
         $this->registerSubCommand(new LeaveSubCommand($this->plugin, "leave", "Leave your faction"));
         $this->registerSubCommand(new LogsSubCommand($this->plugin, "logs", "View your Factions logs!"));

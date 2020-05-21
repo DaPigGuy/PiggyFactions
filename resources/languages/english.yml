@@ -93,6 +93,9 @@ commands:
     cant-kick-higher: "{RED}You can not kick members of higher rank."
     announcement: "{YELLOW}{PLAYER} was kicked from the faction."
     kicked: "{RED}You were kicked from the faction."
+  language:
+    invalid-language: "{RED}Language not found."
+    success: "{GREEN}Language has been changed to english."
   leader:
     offline: "{RED}Player must be online for leadership transfer."
     recipient: "{GREEN}You are now the leader of your faction."
