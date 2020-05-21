@@ -17,11 +17,13 @@ use ReflectionClass;
 class LanguageManager
 {
     const LANGUAGES = [
-        "english"
+        "english",
+        "german"
     ];
     const LOCALE_CODE_TABLE = [
         "en_US" => "english",
-        "en_GB" => "english"
+        "en_GB" => "english",
+        "de_DE" => "german"
     ];
 
     /** @var self */
