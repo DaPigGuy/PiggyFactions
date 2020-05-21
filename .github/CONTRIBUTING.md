@@ -17,4 +17,19 @@ If you are submitting a pull request, you must:
 * Unless it is a minor code modification, you must use an IDE.
 * Have a detailed title.
 
-<i>Last updated: Sunday, March 15, 2020.</i>
+### Translations
+If you wish to help translate PiggyFactions, you must:
+* Join the [Piggy Hangouts](https://discord.gg/qmnDsSD) discord server.
+* Sign up with Transifex by clicking the "Help Translate" button [here](https://www.transifex.com/piggyplugins/piggyfactions/).
+    * Once you've created an account...
+        * Notify DaPigGuy#4580 about your Transifex account w/ image proof of account ownership.
+        * You will receive the "Translator" role on our discord server.
+    * After we approve you, you will be able to start translating.
+* While translating, please keep the following in mind:
+    * Any words wrapped in `{ }`, `< >`, or `[ ]` should not be translated.
+    * No colors or text formats should be modified.
+    * Stay consistent with translated words.
+        * If you chose a word to translate `Member`, use the same word throughout the entire file.
+    * If you are unsure about anything, please ask in the `#translation` channel once you've received your role.
+
+<i>Last updated: Wednesday, May 20, 2020.</i>
