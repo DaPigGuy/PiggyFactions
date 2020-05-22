@@ -8,7 +8,6 @@ use CortexPE\Commando\args\RawStringArgument;
 use DaPigGuy\PiggyFactions\commands\subcommands\FactionSubCommand;
 use DaPigGuy\PiggyFactions\event\management\FactionBanEvent;
 use DaPigGuy\PiggyFactions\factions\Faction;
-use DaPigGuy\PiggyFactions\language\LanguageManager;
 use DaPigGuy\PiggyFactions\players\FactionsPlayer;
 use DaPigGuy\PiggyFactions\players\PlayerManager;
 use DaPigGuy\PiggyFactions\utils\Roles;
@@ -20,15 +19,15 @@ class BanSubCommand extends FactionSubCommand
     {
         $target = PlayerManager::getInstance()->getPlayerByName($args["name"]);
         if ($target === null) {
-            LanguageManager::getInstance()->sendMessage($sender, "commands.invalid-player", ["{PLAYER}" => $args["name"]]);
+            $member->sendMessage("commands.invalid-player", ["{PLAYER}" => $args["name"]]);
             return;
         }
         if (Roles::ALL[$target->getRole()] >= Roles::ALL[$member->getRole()] && $target->getRole() !== Roles::LEADER && !$member->isInAdminMode()) {
-            LanguageManager::getInstance()->sendMessage($sender, "commands.ban.cant-ban-higher", ["{PLAYER}" => $target->getUsername()]);
+            $member->sendMessage("commands.ban.cant-ban-higher", ["{PLAYER}" => $target->getUsername()]);
             return;
         }
         if ($faction->isBanned($target->getUuid())) {
-            LanguageManager::getInstance()->sendMessage($sender, "commands.ban.already-banned", ["{PLAYER}" => $target->getUsername()]);
+            $member->sendMessage("commands.ban.already-banned", ["{PLAYER}" => $target->getUsername()]);
             return;
         }
         $ev = new FactionBanEvent($faction, $target, $member);
@@ -39,9 +38,7 @@ class BanSubCommand extends FactionSubCommand
         $faction->broadcastMessage("commands.ban.announcement", ["{PLAYER}" => $target->getUsername()]);
         if ($faction->getId() === $target->getFaction()->getId()) {
             $faction->removeMember($target->getUuid());
-            if (($p = $this->plugin->getServer()->getPlayerByUUID($target->getUuid())) instanceof Player) {
-                LanguageManager::getInstance()->sendMessage($p, "commands.ban.banned");
-            }
+            $target->sendMessage("commands.ban.banned");
         }
     }
 

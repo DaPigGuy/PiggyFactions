@@ -11,7 +11,6 @@ use DaPigGuy\PiggyFactions\event\relation\FactionRelationEvent;
 use DaPigGuy\PiggyFactions\event\relation\FactionRelationWishEvent;
 use DaPigGuy\PiggyFactions\factions\Faction;
 use DaPigGuy\PiggyFactions\factions\FactionsManager;
-use DaPigGuy\PiggyFactions\language\LanguageManager;
 use DaPigGuy\PiggyFactions\players\FactionsPlayer;
 use DaPigGuy\PiggyFactions\utils\Relations;
 use pocketmine\Player;
@@ -22,15 +21,15 @@ class TruceSubCommand extends FactionSubCommand
     {
         $targetFaction = FactionsManager::getInstance()->getFactionByName($args["faction"]);
         if ($targetFaction === null) {
-            LanguageManager::getInstance()->sendMessage($sender, "commands.invalid-faction", ["{FACTION}" => $args["faction"]]);
+            $member->sendMessage("commands.invalid-faction", ["{FACTION}" => $args["faction"]]);
             return;
         }
         if ($targetFaction->getId() === $faction->getId()) {
-            LanguageManager::getInstance()->sendMessage($sender, "commands.truce.self");
+            $member->sendMessage("commands.truce.self");
             return;
         }
         if ($targetFaction->isTruced($faction)) {
-            LanguageManager::getInstance()->sendMessage($sender, "already-truced");
+            $member->sendMessage("already-truced");
             return;
         }
         if ($targetFaction->getRelationWish($faction) === Relations::TRUCE) {
@@ -50,7 +49,7 @@ class TruceSubCommand extends FactionSubCommand
         if ($ev->isCancelled()) return;
 
         $faction->setRelationWish($targetFaction, Relations::TRUCE);
-        LanguageManager::getInstance()->sendMessage($sender, "commands.truce.success", ["{FACTION}" => $targetFaction->getName()]);
+        $member->sendMessage("commands.truce.success", ["{FACTION}" => $targetFaction->getName()]);
         $targetFaction->broadcastMessage("commands.truce.request", ["{FACTION}" => $faction->getName()]);
     }
 

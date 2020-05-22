@@ -9,7 +9,6 @@ use CortexPE\Commando\exception\ArgumentOrderException;
 use DaPigGuy\PiggyFactions\commands\subcommands\FactionSubCommand;
 use DaPigGuy\PiggyFactions\event\management\FactionDescriptionChangeEvent;
 use DaPigGuy\PiggyFactions\factions\Faction;
-use DaPigGuy\PiggyFactions\language\LanguageManager;
 use DaPigGuy\PiggyFactions\players\FactionsPlayer;
 use pocketmine\Player;
 
@@ -22,7 +21,7 @@ class DescriptionSubCommand extends FactionSubCommand
         if ($ev->isCancelled()) return;
 
         $faction->setDescription($ev->getDescription());
-        LanguageManager::getInstance()->sendMessage($sender, "commands.description.success", ["{DESCRIPTION}" => $ev->getDescription()]);
+        $member->sendMessage("commands.description.success", ["{DESCRIPTION}" => $ev->getDescription()]);
     }
 
     /**

@@ -11,7 +11,6 @@ use CortexPE\Commando\args\IntegerArgument;
 use CortexPE\Commando\args\StringEnumArgument;
 use CortexPE\Commando\BaseSubCommand;
 use DaPigGuy\PiggyFactions\factions\Faction;
-use DaPigGuy\PiggyFactions\language\LanguageManager;
 use DaPigGuy\PiggyFactions\permissions\PermissionFactory;
 use DaPigGuy\PiggyFactions\PiggyFactions;
 use DaPigGuy\PiggyFactions\players\FactionsPlayer;
@@ -52,7 +51,7 @@ abstract class FactionSubCommand extends BaseSubCommand
 
         if ($this->requiresFaction && $this->requiresPlayer) {
             if ($faction === null) {
-                LanguageManager::getInstance()->sendMessage($sender, "commands.not-in-faction");
+                $member->sendMessage("commands.not-in-faction");
                 return;
             }
 
@@ -69,7 +68,7 @@ abstract class FactionSubCommand extends BaseSubCommand
             if ($permission !== false) {
                 if (PermissionFactory::getPermission($permission) !== null) {
                     if (!$faction->hasPermission($member, $permission)) {
-                        LanguageManager::getInstance()->sendMessage($sender, "commands.no-permission");
+                        $member->sendMessage("commands.no-permission");
                         return;
                     }
                 }

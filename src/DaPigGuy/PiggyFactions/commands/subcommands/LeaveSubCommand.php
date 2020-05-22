@@ -6,7 +6,6 @@ namespace DaPigGuy\PiggyFactions\commands\subcommands;
 
 use DaPigGuy\PiggyFactions\event\member\FactionLeaveEvent;
 use DaPigGuy\PiggyFactions\factions\Faction;
-use DaPigGuy\PiggyFactions\language\LanguageManager;
 use DaPigGuy\PiggyFactions\players\FactionsPlayer;
 use DaPigGuy\PiggyFactions\utils\Roles;
 use pocketmine\Player;
@@ -16,7 +15,7 @@ class LeaveSubCommand extends FactionSubCommand
     public function onNormalRun(Player $sender, ?Faction $faction, FactionsPlayer $member, string $aliasUsed, array $args): void
     {
         if (!$member->isInAdminMode() && $member->getRole() === Roles::LEADER) {
-            LanguageManager::getInstance()->sendMessage($sender, "commands.leave.is-leader");
+            $member->sendMessage("commands.leave.is-leader");
             return;
         }
         $ev = new FactionLeaveEvent($faction, $member);
@@ -24,6 +23,6 @@ class LeaveSubCommand extends FactionSubCommand
         if ($ev->isCancelled()) return;
 
         $faction->removeMember($sender->getUniqueId());
-        LanguageManager::getInstance()->sendMessage($sender, "commands.leave.success");
+        $member->sendMessage("commands.leave.success");
     }
 }

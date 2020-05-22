@@ -9,7 +9,6 @@ use CortexPE\Commando\exception\ArgumentOrderException;
 use DaPigGuy\PiggyFactions\commands\subcommands\FactionSubCommand;
 use DaPigGuy\PiggyFactions\event\management\FactionMOTDChangeEvent;
 use DaPigGuy\PiggyFactions\factions\Faction;
-use DaPigGuy\PiggyFactions\language\LanguageManager;
 use DaPigGuy\PiggyFactions\players\FactionsPlayer;
 use pocketmine\Player;
 
@@ -22,7 +21,7 @@ class MotdSubCommand extends FactionSubCommand
         if ($ev->isCancelled()) return;
 
         $faction->setMotd($ev->getMotd());
-        LanguageManager::getInstance()->sendMessage($sender, "commands.motd.success", ["{MOTD}" => $ev->getMotd()]);
+        $member->sendMessage("commands.motd.success", ["{MOTD}" => $ev->getMotd()]);
     }
 
     /**

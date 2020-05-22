@@ -6,8 +6,11 @@ namespace DaPigGuy\PiggyFactions\players;
 
 use DaPigGuy\PiggyFactions\factions\Faction;
 use DaPigGuy\PiggyFactions\factions\FactionsManager;
+use DaPigGuy\PiggyFactions\language\LanguageManager;
 use DaPigGuy\PiggyFactions\PiggyFactions;
 use DaPigGuy\PiggyFactions\utils\ChatTypes;
+use pocketmine\Player;
+use pocketmine\Server;
 use pocketmine\utils\UUID;
 
 class FactionsPlayer
@@ -109,6 +112,16 @@ class FactionsPlayer
     {
         $this->language = $language;
         $this->update();
+    }
+
+    public function sendMessage(string $message, array $extraTags = []): bool
+    {
+        $player = Server::getInstance()->getPlayerByUUID($this->getUuid());
+        if ($player instanceof Player) {
+            LanguageManager::getInstance()->sendMessage($player, $message, $extraTags);
+            return true;
+        }
+        return false;
     }
 
     public function canSeeChunks(): bool

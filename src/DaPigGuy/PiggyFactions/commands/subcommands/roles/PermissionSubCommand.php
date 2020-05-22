@@ -11,7 +11,6 @@ use DaPigGuy\PiggyFactions\commands\arguments\PermissionEnumArgument;
 use DaPigGuy\PiggyFactions\commands\subcommands\FactionSubCommand;
 use DaPigGuy\PiggyFactions\event\role\FactionPermissionChangeEvent;
 use DaPigGuy\PiggyFactions\factions\Faction;
-use DaPigGuy\PiggyFactions\language\LanguageManager;
 use DaPigGuy\PiggyFactions\permissions\PermissionFactory;
 use DaPigGuy\PiggyFactions\players\FactionsPlayer;
 use DaPigGuy\PiggyFactions\utils\Relations;
@@ -23,15 +22,15 @@ class PermissionSubCommand extends FactionSubCommand
     public function onNormalRun(Player $sender, ?Faction $faction, FactionsPlayer $member, string $aliasUsed, array $args): void
     {
         if ($member->getRole() !== Roles::LEADER && !$member->isInAdminMode()) {
-            LanguageManager::getInstance()->sendMessage($sender, "commands.not-leader");
+            $member->sendMessage("commands.not-leader");
             return;
         }
         if (PermissionFactory::getPermission($args["permission"]) === null) {
-            LanguageManager::getInstance()->sendMessage($sender, "commands.permission.permission-not-found");
+            $member->sendMessage("commands.permission.permission-not-found");
             return;
         }
         if (!isset(Roles::ALL[$args["role"]]) && !in_array($args["role"], Relations::ALL)) {
-            LanguageManager::getInstance()->sendMessage($sender, "commands.permission.role-not-found");
+            $member->sendMessage("commands.permission.role-not-found");
             return;
         }
 
@@ -40,7 +39,7 @@ class PermissionSubCommand extends FactionSubCommand
         if ($ev->isCancelled()) return;
 
         $faction->setPermission($args["role"], $args["permission"], $ev->getValue());
-        LanguageManager::getInstance()->sendMessage($sender, "commands.permission.success", ["{PERMISSION}" => $args["permission"], "{ROLE}" => $args["role"], "{TOGGLED}" => $ev->getValue() ? "enabled" : "disabled"]);
+        $member->sendMessage("commands.permission.success", ["{PERMISSION}" => $args["permission"], "{ROLE}" => $args["role"], "{TOGGLED}" => $ev->getValue() ? "enabled" : "disabled"]);
     }
 
     /**

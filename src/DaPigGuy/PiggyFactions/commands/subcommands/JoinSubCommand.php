@@ -9,7 +9,6 @@ use CortexPE\Commando\exception\ArgumentOrderException;
 use DaPigGuy\PiggyFactions\event\member\FactionJoinEvent;
 use DaPigGuy\PiggyFactions\factions\Faction;
 use DaPigGuy\PiggyFactions\flags\Flag;
-use DaPigGuy\PiggyFactions\language\LanguageManager;
 use DaPigGuy\PiggyFactions\players\FactionsPlayer;
 use pocketmine\Player;
 
@@ -22,24 +21,24 @@ class JoinSubCommand extends FactionSubCommand
     {
         $targetFaction = $this->plugin->getFactionsManager()->getFactionByName($args["faction"]);
         if ($targetFaction === null) {
-            LanguageManager::getInstance()->sendMessage($sender, "commands.invalid-faction", ["{FACTION}" => $args["faction"]]);
+            $member->sendMessage("commands.invalid-faction", ["{FACTION}" => $args["faction"]]);
             return;
         }
         if (!$targetFaction->hasInvite($sender) && !$targetFaction->getFlag(Flag::OPEN) && !$member->isInAdminMode()) {
-            LanguageManager::getInstance()->sendMessage($sender, "commands.join.no-invite", ["{FACTION}" => $targetFaction->getName()]);
+            $member->sendMessage("commands.join.no-invite", ["{FACTION}" => $targetFaction->getName()]);
             return;
         }
         if ($faction !== null) {
-            LanguageManager::getInstance()->sendMessage($sender, "commands.already-in-faction");
+            $member->sendMessage("commands.already-in-faction");
             return;
         }
         if (!$member->isInAdminMode()) {
             if ($targetFaction->isBanned($sender->getUniqueId())) {
-                LanguageManager::getInstance()->sendMessage($sender, "commands.you-are-banned");
+                $member->sendMessage("commands.you-are-banned");
                 return;
             }
             if (count($targetFaction->getMembers()) >= ($maxPlayers = $this->plugin->getConfig()->getNested("factions.max-players", -1)) && $maxPlayers !== -1) {
-                LanguageManager::getInstance()->sendMessage($sender, "commands.faction-full");
+                $member->sendMessage("commands.faction-full");
                 return;
             }
         }

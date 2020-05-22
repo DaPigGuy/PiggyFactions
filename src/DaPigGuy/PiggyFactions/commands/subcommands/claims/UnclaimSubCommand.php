@@ -11,7 +11,6 @@ use DaPigGuy\PiggyFactions\commands\subcommands\FactionSubCommand;
 use DaPigGuy\PiggyFactions\event\claims\UnclaimAllChunksEvent;
 use DaPigGuy\PiggyFactions\event\claims\UnclaimChunkEvent;
 use DaPigGuy\PiggyFactions\factions\Faction;
-use DaPigGuy\PiggyFactions\language\LanguageManager;
 use DaPigGuy\PiggyFactions\players\FactionsPlayer;
 use pocketmine\Player;
 
@@ -27,17 +26,17 @@ class UnclaimSubCommand extends FactionSubCommand
             foreach (ClaimsManager::getInstance()->getFactionClaims($faction) as $claim) {
                 ClaimsManager::getInstance()->deleteClaim($claim);
             }
-            LanguageManager::getInstance()->sendMessage($sender, "commands.unclaim.all.success");
+            $member->sendMessage("commands.unclaim.all.success");
             return;
         }
 
         $claim = ClaimsManager::getInstance()->getClaim($sender->getLevel(), $sender->getLevel()->getChunkAtPosition($sender));
         if ($claim === null) {
-            LanguageManager::getInstance()->sendMessage($sender, "commands.unclaim.not-claimed");
+            $member->sendMessage("commands.unclaim.not-claimed");
             return;
         }
         if ($claim->getFaction() !== $faction && !$member->isInAdminMode()) {
-            LanguageManager::getInstance()->sendMessage($sender, "commands.unclaim.other-faction");
+            $member->sendMessage("commands.unclaim.other-faction");
             return;
         }
 
@@ -46,7 +45,7 @@ class UnclaimSubCommand extends FactionSubCommand
         if ($ev->isCancelled()) return;
 
         ClaimsManager::getInstance()->deleteClaim($claim);
-        LanguageManager::getInstance()->sendMessage($sender, "commands.unclaim.success");
+        $member->sendMessage("commands.unclaim.success");
     }
 
     /**

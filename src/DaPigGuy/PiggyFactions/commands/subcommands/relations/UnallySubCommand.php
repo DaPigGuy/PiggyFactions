@@ -10,7 +10,6 @@ use DaPigGuy\PiggyFactions\commands\subcommands\FactionSubCommand;
 use DaPigGuy\PiggyFactions\event\relation\FactionRelationEvent;
 use DaPigGuy\PiggyFactions\factions\Faction;
 use DaPigGuy\PiggyFactions\factions\FactionsManager;
-use DaPigGuy\PiggyFactions\language\LanguageManager;
 use DaPigGuy\PiggyFactions\players\FactionsPlayer;
 use DaPigGuy\PiggyFactions\utils\Relations;
 use pocketmine\Player;
@@ -21,11 +20,11 @@ class UnallySubCommand extends FactionSubCommand
     {
         $targetFaction = FactionsManager::getInstance()->getFactionByName($args["faction"]);
         if ($targetFaction === null) {
-            LanguageManager::getInstance()->sendMessage($sender, "commands.invalid-faction", ["{FACTION}" => $args["faction"]]);
+            $member->sendMessage("commands.invalid-faction", ["{FACTION}" => $args["faction"]]);
             return;
         }
         if (!$targetFaction->isAllied($faction)) {
-            LanguageManager::getInstance()->sendMessage($sender, "commands.unally.not-allied", ["{FACTION}" => $targetFaction->getName()]);
+            $member->sendMessage("commands.unally.not-allied", ["{FACTION}" => $targetFaction->getName()]);
             return;
         }
         $ev = new FactionRelationEvent([$faction, $targetFaction], Relations::NONE);

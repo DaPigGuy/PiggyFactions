@@ -15,11 +15,11 @@ class LanguageSubCommand extends FactionSubCommand
     public function onNormalRun(Player $sender, ?Faction $faction, FactionsPlayer $member, string $aliasUsed, array $args): void
     {
         if (!in_array($args["language"], LanguageManager::LANGUAGES)) {
-            LanguageManager::getInstance()->sendMessage($sender, "commands.language.invalid-language");
+            $member->sendMessage("commands.language.invalid-language");
             return;
         }
         $member->setLanguage($args["language"]);
-        LanguageManager::getInstance()->sendMessage($sender, "commands.language.success");
+        $member->sendMessage("commands.language.success");
     }
 
     protected function prepare(): void

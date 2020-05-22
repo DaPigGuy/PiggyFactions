@@ -7,7 +7,6 @@ namespace DaPigGuy\PiggyFactions\commands\subcommands\management;
 use DaPigGuy\PiggyFactions\commands\subcommands\FactionSubCommand;
 use DaPigGuy\PiggyFactions\event\management\FactionDisbandEvent;
 use DaPigGuy\PiggyFactions\factions\Faction;
-use DaPigGuy\PiggyFactions\language\LanguageManager;
 use DaPigGuy\PiggyFactions\players\FactionsPlayer;
 use DaPigGuy\PiggyFactions\utils\Roles;
 use pocketmine\Player;
@@ -17,7 +16,7 @@ class DisbandSubCommand extends FactionSubCommand
     public function onNormalRun(Player $sender, ?Faction $faction, FactionsPlayer $member, string $aliasUsed, array $args): void
     {
         if ($member->getRole() !== Roles::LEADER && !$member->isInAdminMode()) {
-            LanguageManager::getInstance()->sendMessage($sender, "commands.not-leader");
+            $member->sendMessage("commands.not-leader");
             return;
         }
         $ev = new FactionDisbandEvent($faction);
@@ -25,6 +24,6 @@ class DisbandSubCommand extends FactionSubCommand
         if ($ev->isCancelled()) return;
 
         $faction->disband();
-        LanguageManager::getInstance()->sendMessage($sender, "commands.disband.success");
+        $member->sendMessage("commands.disband.success");
     }
 }

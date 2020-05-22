@@ -111,7 +111,7 @@ class EventListener implements Listener
         $ev->call();
         if ($ev->isCancelled()) return;
         $member->setPower($ev->getPower());
-        LanguageManager::getInstance()->sendMessage($player, "death.power", ["{POWER}" => round($member->getPower(), 2, PHP_ROUND_HALF_DOWN)]);
+        $member->sendMessage("death.power", ["{POWER}" => round($member->getPower(), 2, PHP_ROUND_HALF_DOWN)]);
 
         $cause = $player->getLastDamageCause();
         if ($cause instanceof EntityDamageByEntityEvent) {
@@ -133,7 +133,7 @@ class EventListener implements Listener
         if (($member = PlayerManager::getInstance()->getPlayer($player->getUniqueId())) === null) $member = PlayerManager::getInstance()->createPlayer($player);
         if ($member->getUsername() !== $player->getName()) $member->setUsername($player->getName());
         if (($faction = $member->getFaction()) !== null) {
-            if (($motd = $faction->getMotd()) !== null) LanguageManager::getInstance()->sendMessage($player, "motd", ["{MOTD}" => $motd]);
+            if (($motd = $faction->getMotd()) !== null) $member->sendMessage("motd", ["{MOTD}" => $motd]);
         }
     }
 

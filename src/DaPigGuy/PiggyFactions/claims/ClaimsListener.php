@@ -57,7 +57,7 @@ class ClaimsListener implements Listener
             if (substr($message, 0, 1) === "/") {
                 $command = substr(explode(" ", $message)[0], 1);
                 if (in_array($command, $this->plugin->getConfig()->getNested("factions.claims.denied-commands." . $relation, []))) {
-                    LanguageManager::getInstance()->sendMessage($player, "claims.command-denied", ["{COMMAND}" => $command, "{RELATION}" => $relation === "none" ? "neutral" : $relation]);
+                    $member->sendMessage("claims.command-denied", ["{COMMAND}" => $command, "{RELATION}" => $relation === "none" ? "neutral" : $relation]);
                     $event->setCancelled();
                 }
             }

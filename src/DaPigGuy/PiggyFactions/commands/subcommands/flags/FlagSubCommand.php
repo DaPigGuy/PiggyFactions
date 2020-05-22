@@ -11,7 +11,6 @@ use DaPigGuy\PiggyFactions\commands\subcommands\FactionSubCommand;
 use DaPigGuy\PiggyFactions\event\flags\FactionFlagChangeEvent;
 use DaPigGuy\PiggyFactions\factions\Faction;
 use DaPigGuy\PiggyFactions\flags\FlagFactory;
-use DaPigGuy\PiggyFactions\language\LanguageManager;
 use DaPigGuy\PiggyFactions\players\FactionsPlayer;
 use pocketmine\Player;
 
@@ -20,11 +19,11 @@ class FlagSubCommand extends FactionSubCommand
     public function onNormalRun(Player $sender, ?Faction $faction, FactionsPlayer $member, string $aliasUsed, array $args): void
     {
         if (($flag = FlagFactory::getFlag($args["flag"])) === null) {
-            LanguageManager::getInstance()->sendMessage($sender, "commands.flag.invalid-flag", ["{FLAG}" => $args["flag"]]);
+            $member->sendMessage("commands.flag.invalid-flag", ["{FLAG}" => $args["flag"]]);
             return;
         }
         if (!$flag->isEditable() && !$member->isInAdminMode()) {
-            LanguageManager::getInstance()->sendMessage($sender, "commands.flag.not-editable", ["{FLAG}" => $args["flag"]]);
+            $member->sendMessage("commands.flag.not-editable", ["{FLAG}" => $args["flag"]]);
             return;
         }
 
@@ -33,7 +32,7 @@ class FlagSubCommand extends FactionSubCommand
         if ($ev->isCancelled()) return;
 
         $faction->setFlag($args["flag"], $ev->getValue());
-        LanguageManager::getInstance()->sendMessage($sender, "commands.flag.toggled" . ($ev->getValue() ? "" : "-off"), ["{FLAG}" => $args["flag"]]);
+        $member->sendMessage("commands.flag.toggled" . ($ev->getValue() ? "" : "-off"), ["{FLAG}" => $args["flag"]]);
     }
 
     /**
