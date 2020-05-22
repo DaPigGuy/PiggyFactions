@@ -30,6 +30,7 @@ factions:
     max: 10
     per:
       death: -2
+      kill: 1
       hour: 2
   homes:
     within-territory: true

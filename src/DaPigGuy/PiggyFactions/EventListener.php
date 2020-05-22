@@ -112,6 +112,19 @@ class EventListener implements Listener
         if ($ev->isCancelled()) return;
         $member->setPower($ev->getPower());
         LanguageManager::getInstance()->sendMessage($player, "death.power", ["{POWER}" => round($member->getPower(), 2, PHP_ROUND_HALF_DOWN)]);
+
+        $cause = $player->getLastDamageCause();
+        if ($cause instanceof EntityDamageByEntityEvent) {
+            $damager = $cause->getDamager();
+            if ($damager instanceof Player) {
+                $damagerMember = PlayerManager::getInstance()->getPlayer($damager->getUniqueId());
+
+                $ev = new PowerChangeEvent($damagerMember, PowerChangeEvent::CAUSE_KILL, $damagerMember->getPower() + $this->plugin->getConfig()->getNested("factions.power.per.kill", 1));
+                $ev->call();
+                if ($ev->isCancelled()) return;
+                $damagerMember->setPower($ev->getPower());
+            }
+        }
     }
 
     public function onJoin(PlayerJoinEvent $event): void

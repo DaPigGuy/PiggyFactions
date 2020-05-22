@@ -12,7 +12,8 @@ class PowerChangeEvent extends Event implements Cancellable
 {
     const CAUSE_TIME = 0;
     const CAUSE_DEATH = 1;
-    const CAUSE_ADMIN = 2;
+    const CAUSE_KILL = 2;
+    const CAUSE_ADMIN = 3;
 
     /** @var FactionsPlayer */
     private $member;
