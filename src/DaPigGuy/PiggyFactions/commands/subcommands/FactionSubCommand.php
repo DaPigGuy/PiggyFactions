@@ -6,6 +6,8 @@ namespace DaPigGuy\PiggyFactions\commands\subcommands;
 
 use CortexPE\Commando\args\BaseArgument;
 use CortexPE\Commando\args\BooleanArgument;
+use CortexPE\Commando\args\FloatArgument;
+use CortexPE\Commando\args\IntegerArgument;
 use CortexPE\Commando\args\StringEnumArgument;
 use CortexPE\Commando\BaseSubCommand;
 use DaPigGuy\PiggyFactions\factions\Faction;
@@ -122,7 +124,16 @@ abstract class FactionSubCommand extends BaseSubCommand
                 foreach ($this->getArgumentList() as $position => $arguments) {
                     /** @var PiggyArgument $argument */
                     foreach ($arguments as $argument) {
-                        $args[$argument->getName()] = (($enum = $argument->getWrappedArgument()) instanceof StringEnumArgument && !$enum instanceof BooleanArgument) ? $enums[$position][$data[$position]] : $data[$position];
+                        $wrappedArgument = $argument->getWrappedArgument();
+                        if ($wrappedArgument instanceof StringEnumArgument && !$wrappedArgument instanceof BooleanArgument) {
+                            $args[$argument->getName()] = $enums[$position][$data[$position]];
+                        } elseif ($wrappedArgument instanceof IntegerArgument) {
+                            $args[$argument->getName()] = (int)$data[$position];
+                        } elseif ($wrappedArgument instanceof FloatArgument) {
+                            $args[$argument->getName()] = (float)$data[$position];
+                        } else {
+                            $args[$argument->getName()] = $data[$position];
+                        }
                     }
                 }
                 $this->onRun($player, $this->getName(), $args);
