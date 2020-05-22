@@ -37,9 +37,7 @@ class EnemySubCommand extends FactionSubCommand
         if ($ev->isCancelled()) return;
 
         $faction->setRelation($targetFaction, Relations::ENEMY);
-        foreach ($faction->getOnlineMembers() as $p) {
-            LanguageManager::getInstance()->sendMessage($p, "commands.enemy.success", ["{FACTION}" => $targetFaction->getName()]);
-        }
+        $faction->broadcastMessage("commands.enemy.success", ["{FACTION}" => $targetFaction->getName()]);
     }
 
     /**

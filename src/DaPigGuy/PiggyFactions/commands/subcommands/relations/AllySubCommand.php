@@ -41,12 +41,8 @@ class AllySubCommand extends FactionSubCommand
             $targetFaction->revokeRelationWish($faction);
             $faction->setRelation($targetFaction, Relations::ALLY);
             $targetFaction->setRelation($faction, Relations::ALLY);
-            foreach ($faction->getOnlineMembers() as $p) {
-                LanguageManager::getInstance()->sendMessage($p, "commands.ally.allied", ["{ALLY}" => $targetFaction->getName()]);
-            }
-            foreach ($targetFaction->getOnlineMembers() as $p) {
-                LanguageManager::getInstance()->sendMessage($p, "commands.ally.allied", ["{ALLY}" => $faction->getName()]);
-            }
+            $faction->broadcastMessage("commands.ally.allied", ["{ALLY}" => $targetFaction->getName()]);
+            $targetFaction->broadcastMessage("commands.ally.allied", ["{ALLY}" => $faction->getName()]);
             return;
         }
         $ev = new FactionRelationWishEvent($faction, $targetFaction, Relations::ALLY);
@@ -55,9 +51,7 @@ class AllySubCommand extends FactionSubCommand
 
         $faction->setRelationWish($targetFaction, Relations::ALLY);
         LanguageManager::getInstance()->sendMessage($sender, "commands.ally.success", ["{FACTION}" => $targetFaction->getName()]);
-        foreach ($targetFaction->getOnlineMembers() as $p) {
-            LanguageManager::getInstance()->sendMessage($p, "commands.ally.request", ["{FACTION}" => $faction->getName()]);
-        }
+        $targetFaction->broadcastMessage("commands.ally.request", ["{FACTION}" => $faction->getName()]);
     }
 
     /**

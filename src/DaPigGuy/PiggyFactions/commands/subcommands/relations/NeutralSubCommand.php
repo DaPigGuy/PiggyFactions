@@ -33,13 +33,9 @@ class NeutralSubCommand extends FactionSubCommand
         if ($ev->isCancelled()) return;
 
         $faction->setRelation($targetFaction, Relations::NONE);
-        foreach ($faction->getOnlineMembers() as $m) {
-            LanguageManager::getInstance()->sendMessage($m, "commands.neutral.success", ["{FACTION}" => $targetFaction->getName()]);
-        }
+        $faction->broadcastMessage("commands.neutral.success", ["{FACTION}" => $targetFaction->getName()]);
         if ($targetFaction->isAllied($faction) || $targetFaction->isTruced($faction)) {
-            foreach ($targetFaction->getOnlineMembers() as $m) {
-                LanguageManager::getInstance()->sendMessage($m, "commands.neutral.success", ["{FACTION}" => $faction->getName()]);
-            }
+            $targetFaction->broadcastMessage("commands.neutral.success", ["{FACTION}" => $faction->getName()]);
             $targetFaction->setRelation($faction, Relations::NONE);
         }
     }

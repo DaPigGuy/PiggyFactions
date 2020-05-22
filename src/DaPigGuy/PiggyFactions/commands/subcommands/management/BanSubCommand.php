@@ -36,9 +36,7 @@ class BanSubCommand extends FactionSubCommand
         if ($ev->isCancelled()) return;
 
         $faction->banPlayer($target->getUuid());
-        foreach ($faction->getOnlineMembers() as $online) {
-            LanguageManager::getInstance()->sendMessage($online, "commands.ban.announcement", ["{PLAYER}" => $target->getUsername()]);
-        }
+        $faction->broadcastMessage("commands.ban.announcement", ["{PLAYER}" => $target->getUsername()]);
         if ($faction->getId() === $target->getFaction()->getId()) {
             $faction->removeMember($target->getUuid());
             if (($p = $this->plugin->getServer()->getPlayerByUUID($target->getUuid())) instanceof Player) {

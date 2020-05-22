@@ -32,9 +32,7 @@ class KickSubCommand extends FactionSubCommand
         if ($ev->isCancelled()) return;
 
         $faction->removeMember($target->getUuid());
-        foreach ($faction->getOnlineMembers() as $online) {
-            LanguageManager::getInstance()->sendMessage($online, "commands.kick.announcement", ["{PLAYER}" => $target->getUsername()]);
-        }
+        $faction->broadcastMessage("commands.kick.announcement", ["{PLAYER}" => $target->getUsername()]);
         if (($p = $this->plugin->getServer()->getPlayerByUUID($target->getUuid())) instanceof Player) {
             LanguageManager::getInstance()->sendMessage($p, "commands.kick.kicked");
         }

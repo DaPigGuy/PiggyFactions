@@ -41,12 +41,8 @@ class TruceSubCommand extends FactionSubCommand
             $targetFaction->revokeRelationWish($faction);
             $faction->setRelation($targetFaction, Relations::TRUCE);
             $targetFaction->setRelation($faction, Relations::TRUCE);
-            foreach ($faction->getOnlineMembers() as $p) {
-                LanguageManager::getInstance()->sendMessage($p, "commands.truce.truced", ["{TRUCED}" => $targetFaction->getName()]);
-            }
-            foreach ($targetFaction->getOnlineMembers() as $p) {
-                LanguageManager::getInstance()->sendMessage($p, "commands.truce.truced", ["{TRUCED}" => $faction->getName()]);
-            }
+            $faction->broadcastMessage("commands.truce.truced", ["{TRUCED}" => $targetFaction->getName()]);
+            $targetFaction->broadcastMessage("commands.truce.truced", ["{TRUCED}" => $faction->getName()]);
             return;
         }
         $ev = new FactionRelationWishEvent($faction, $targetFaction, Relations::TRUCE);
@@ -55,9 +51,7 @@ class TruceSubCommand extends FactionSubCommand
 
         $faction->setRelationWish($targetFaction, Relations::TRUCE);
         LanguageManager::getInstance()->sendMessage($sender, "commands.truce.success", ["{FACTION}" => $targetFaction->getName()]);
-        foreach ($targetFaction->getOnlineMembers() as $p) {
-            LanguageManager::getInstance()->sendMessage($p, "commands.truce.request", ["{FACTION}" => $faction->getName()]);
-        }
+        $targetFaction->broadcastMessage("commands.truce.request", ["{FACTION}" => $faction->getName()]);
     }
 
     /**

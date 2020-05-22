@@ -154,6 +154,13 @@ class Faction
         return $online;
     }
 
+    public function broadcastMessage(string $message, array $extraTags = []): void
+    {
+        foreach ($this->getOnlineMembers() as $player) {
+            LanguageManager::getInstance()->sendMessage($player, $message, $extraTags);
+        }
+    }
+
     public function getMember(string $member): ?FactionsPlayer
     {
         foreach ($this->getMembers() as $m) {
@@ -175,9 +182,7 @@ class Faction
         $this->members[] = $member->getUniqueId();
         PlayerManager::getInstance()->getPlayer($member->getUniqueId())->setFaction($this);
         PlayerManager::getInstance()->getPlayer($member->getUniqueId())->setRole(Roles::RECRUIT);
-        foreach ($this->getOnlineMembers() as $online) {
-            LanguageManager::getInstance()->sendMessage($online, "commands.join.joined", ["{PLAYER}" => $member->getName()]);
-        }
+        $this->broadcastMessage("commands.join.joined", ["{PLAYER}" => $member->getName()]);
         $this->update();
     }
 

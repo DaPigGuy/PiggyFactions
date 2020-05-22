@@ -34,12 +34,8 @@ class UnallySubCommand extends FactionSubCommand
 
         $faction->setRelation($targetFaction, Relations::NONE);
         $targetFaction->setRelation($faction, Relations::NONE);
-        foreach ($faction->getOnlineMembers() as $p) {
-            LanguageManager::getInstance()->sendMessage($p, "commands.unally.unallied", ["{FACTION}" => $targetFaction->getName()]);
-        }
-        foreach ($targetFaction->getOnlineMembers() as $p) {
-            LanguageManager::getInstance()->sendMessage($p, "commands.unally.unallied", ["{FACTION}" => $faction->getName()]);
-        }
+        $faction->broadcastMessage("commands.unally.unallied", ["{FACTION}" => $targetFaction->getName()]);
+        $targetFaction->broadcastMessage("commands.unally.unallied", ["{FACTION}" => $faction->getName()]);
     }
 
     /**

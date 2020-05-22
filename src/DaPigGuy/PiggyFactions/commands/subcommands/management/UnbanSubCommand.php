@@ -31,9 +31,7 @@ class UnbanSubCommand extends FactionSubCommand
         if ($ev->isCancelled()) return;
 
         $faction->unbanPlayer($target->getUuid());
-        foreach ($faction->getOnlineMembers() as $online) {
-            LanguageManager::getInstance()->sendMessage($online, "commands.unban.announcement", ["{PLAYER}" => $target->getUsername()]);
-        }
+        $faction->broadcastMessage("commands.unban.announcement", ["{PLAYER}" => $target->getUsername()]);
     }
 
     protected function prepare(): void
