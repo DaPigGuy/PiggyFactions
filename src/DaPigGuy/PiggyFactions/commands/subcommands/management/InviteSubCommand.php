@@ -9,6 +9,7 @@ use CortexPE\Commando\exception\ArgumentOrderException;
 use DaPigGuy\PiggyFactions\commands\subcommands\FactionSubCommand;
 use DaPigGuy\PiggyFactions\event\management\FactionInviteEvent;
 use DaPigGuy\PiggyFactions\factions\Faction;
+use DaPigGuy\PiggyFactions\language\LanguageManager;
 use DaPigGuy\PiggyFactions\players\FactionsPlayer;
 use pocketmine\Player;
 
@@ -44,7 +45,7 @@ class InviteSubCommand extends FactionSubCommand
 
         $faction->invitePlayer($target);
         $member->sendMessage("commands.invite.success", ["{PLAYER}" => $target->getName()]);
-        $target->sendMessage("commands.invite.invited", ["{FACTION}" => $faction->getName()]);
+        LanguageManager::getInstance()->sendMessage($target, "commands.invite.invited", ["{FACTION}" => $faction->getName()]);
     }
 
     /**
