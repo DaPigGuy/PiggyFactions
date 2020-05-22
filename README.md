@@ -71,8 +71,9 @@ PiggyFactions is currently in beta. While we have tested quite thoroughly, there
 | `/f allychat` | Toggle ally chat | `piggyfactions.command.faction.allychat` | `/f ac` |
 | `/f ban <player>` | Ban a member from your faction | `piggyfactions.command.faction.ban` |
 | `/f chat` | Toggle faction chat | `piggyfactions.command.faction.chat` | `/f c` |
-| `/f claim [auto]` | Claim a chunk | `piggyfactions.command.faction.claim` |
+| `/f claim` | Claim a chunk | `piggyfactions.command.faction.claim` |
 | `/f create <name>` | Create a faction | `piggyfactions.command.faction.create` |
+| `/f deposit <money>` | Deposit money into faction bank | `piggyfactions.command.faction.deposit` |
 | `/f description <description>` | Set faction description | `piggyfactions.command.faction.description` | `/f desc` |
 | `/f demote <player>` | Demote a faction member | `piggyfactions.command.faction.demote` |
 | `/f disband` | Disband your faction | `piggyfactions.command.faction.disband` |
@@ -85,23 +86,26 @@ PiggyFactions is currently in beta. While we have tested quite thoroughly, there
 | `/f invite <player>` | Invite a player to your faction | `piggyfactions.command.faction.invite` |
 | `/f join <faction>` | Join a faction | `piggyfactions.command.faction.join` |
 | `/f kick <player>` | Kick a member from your faction | `piggyfactions.command.faction.kick` |
+| `/f language <language>` | Change personal language for PiggyFactions | `piggyfactions.command.faction.language` | `/f lang` |
 | `/f leader <player>` | Transfer leadership of your faction | `piggyfactions.command.faction.leader` |
 | `/f leave` | Leave your faction | `piggyfactions.command.faction.leave` |
 | `/f logs` | View your faction logs | `piggyfactions.command.faction.logs` |
 | `/f map` | View map of area | `piggyfactions.command.faction.map` |
+| `/f money` | View faction bank balance | `piggyfactions.command.faction.money` |
 | `/f motd <motd>` | Set faction MOTD | `piggyfactions.command.faction.motd` |
 | `/f name <name>` | Rename your faction | `piggyfactions.command.faction.name` |
 | `/f neutral <faction>` | Reset relation with another faction | `piggyfactions.command.faction.neutral` |
-| `/f permission <role> <permission> [value]` | Set faction role permissions | `piggyfactions.command.faction.permission` | `/f perms`
+| `/f permission <role> <permission> [value]` | Set faction role permissions | `piggyfactions.command.faction.permission` | `/f perms` |
 | `/f promote <player>` | Promote a faction member | `piggyfactions.command.faction.promote` |
 | `/f seechunk` | Toggle chunk visualizer | `piggyfactions.command.faction.seechunk` | `/f sc` |
 | `/f sethome` | Set faction home | `piggyfactions.command.faction.sethome` |
 | `/f setpower` | Set player power | `piggyfactions.command.faction.setpower` |
-| `/f top [page]` | Display top factions | `piggyfactions.command.faction.top` |
+| `/f top [type] [page]` | Display top factions | `piggyfactions.command.faction.top` |
 | `/f truce <faction>` | Truce with other factions | `piggyfactions.command.faction.truce` |
 | `/f unally <faction>` | End faction alliance | `piggyfactions.command.faction.unally` |
 | `/f unban <player>` | Unban a member from your faction | `piggyfactions.command.faction.unban` |
-| `/f unclaim [all]` | Unclaim a chunk | `piggyfactions.command.faction.unclaim` |
+| `/f unclaim` | Unclaim a chunk | `piggyfactions.command.faction.unclaim` |
+| `/f withdraw <money>` | Withdraw money from faction bank | `piggyfactions.command.faction.withdraw` |
 
 ## Permissions
 | Permissions | Description | Default |
@@ -118,6 +122,7 @@ PiggyFactions is currently in beta. While we have tested quite thoroughly, there
 | `piggyfactions.command.faction.claim` | Allow usage of /f claim | `true` |
 | `piggyfactions.command.faction.create` | Allow usage of /f create | `true` |
 | `piggyfactions.command.faction.demote` | Allow usage of /f demote | `true` |
+| `piggyfactions.command.faction.deposit` | Allow usage of /f deposit | `true` |
 | `piggyfactions.command.faction.description` | Allow usage of /f description | `true` |
 | `piggyfactions.command.faction.disband` | Allow usage of /f disband | `true` |
 | `piggyfactions.command.faction.enemy` | Allow usage of /f enemy | `true` |
@@ -129,10 +134,12 @@ PiggyFactions is currently in beta. While we have tested quite thoroughly, there
 | `piggyfactions.command.faction.invite` | Allow usage of /f invite | `true` |
 | `piggyfactions.command.faction.join` | Allow usage of /f join | `true` |
 | `piggyfactions.command.faction.kick` | Allow usage of /f kick | `true` |
+| `piggyfactions.command.faction.language` | Allow usage of /f language | `true` |
 | `piggyfactions.command.faction.leader` | Allow usage of /f leader | `true` |
 | `piggyfactions.command.faction.leave` | Allow usage of /f leave | `true` |
 | `piggyfactions.command.faction.logs` | Allow usage of /f logs | `true` |
 | `piggyfactions.command.faction.map` | Allow usage of /f map | `true` |
+| `piggyfactions.command.faction.money` | Allow usage of /f money | `true` |
 | `piggyfactions.command.faction.motd` | Allow usage of /f motd | `true` |
 | `piggyfactions.command.faction.name` | Allow usage of /f name | `true` |
 | `piggyfactions.command.faction.neutral` | Allow usage of /f neutral | `true` |
@@ -146,6 +153,7 @@ PiggyFactions is currently in beta. While we have tested quite thoroughly, there
 | `piggyfactions.command.faction.unally` | Allow usage of /f unally | `true` |
 | `piggyfactions.command.faction.unban` | Allow usage of /f unban | `true` |
 | `piggyfactions.command.faction.unclaim` | Allow usage of /f unclaim | `true` |
+| `piggyfactions.command.faction.withdraw` | Allow usage of /f withdraw | `true` |
 
 ## Flags
 | Flag | Description |

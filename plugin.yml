@@ -45,6 +45,9 @@ permissions:
               piggyfactions.command.faction.demote:
                 default: true
                 description: "Allow usage of /f demote"
+              piggyfactions.command.faction.deposit:
+                default: true
+                description: "Allow usage of /f deposit"
               piggyfactions.command.faction.description:
                 default: true
                 description: "Allow usage of /f description"
@@ -78,6 +81,9 @@ permissions:
               piggyfactions.command.faction.kick:
                 default: true
                 description: "Allow usage of /f kick"
+              piggyfactions.command.faction.language:
+                default: true
+                description: "Allow usage of /f language"
               piggyfactions.command.faction.leader:
                 default: true
                 description: "Allow usage of /f leader"
@@ -90,6 +96,9 @@ permissions:
               piggyfactions.command.faction.map:
                 default: true
                 description: "Allow usage of /f map"
+              piggyfactions.command.faction.money:
+                default: true
+                description: "Allow usage of /f money"
               piggyfactions.command.faction.motd:
                 default: true
                 description: "Allow usage of /f motd"
@@ -129,3 +138,6 @@ permissions:
               piggyfactions.command.faction.unclaim:
                 default: true
                 description: "Allow usage of /f unclaim"
+              piggyfactions.command.faction.withdraw:
+                default: true
+                description: "Allow usage of /f withdraw"
