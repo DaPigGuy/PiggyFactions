@@ -108,7 +108,7 @@ class PiggyFactions extends PluginBase
 
         $this->getScheduler()->scheduleRepeatingTask(new ShowChunksTask($this), 10);
         $this->getScheduler()->scheduleRepeatingTask(new UpdatePowerTask($this), UpdatePowerTask::INTERVAL);
-        $this->getServer()->getAsyncPool()->submitTask(new CheckUpdatesTask($this->getDescription()->getVersion(), $this->getDescription()->getCompatibleApis()[0]));
+        $this->getServer()->getAsyncPool()->submitTask(new CheckUpdatesTask());
     }
 
     public function onDisable(): void
