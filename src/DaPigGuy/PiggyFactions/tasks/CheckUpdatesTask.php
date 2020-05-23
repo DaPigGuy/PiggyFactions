@@ -30,7 +30,7 @@ class CheckUpdatesTask extends AsyncTask
             }
         } catch (\Exception $exception) {
             $plugin->getLogger()->warning("Auto-update check failed.");
-            $plugin->getLogger()->debug($exception);
+            $plugin->getLogger()->debug((string)$exception);
         }
     }
 }
