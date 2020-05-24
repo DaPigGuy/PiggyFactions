@@ -28,18 +28,17 @@ PiggyFactions is currently in beta. While we have tested quite thoroughly, there
 * Basic knowledge on how to install plugins from Poggit Releases and/or Poggit CI
 * PMMP 3.2.0 or greater
 * mysql & sqlite3 PHP extensions (should already exist within your PHP binaries)
-<!-- Not quite a requirement yet :l
 * Economy type supported by libPiggyEconomy:
   * [EconomyAPI](https://github.com/onebone/EconomyS/tree/3.x/EconomyAPI) by onebone
   * [MultiEconomy](https://github.com/TwistedAsylumMC/MultiEconomy) by TwistedAsylumMC
   * PMMP Player EXP
--->
 
 ## Features
 | Feature | PiggyFactions | FactionsPro |
 | --- | :-: | :-: |
 | PiggyCE Integration | ✔ | ❌ |
 | Hierarchy/HRKChat Integration | ✔ | ❌ |
+| Economy Integration | ✔ | ❌ |
 | Saves Players by UUID | ✔ | ❌ |
 | Per Faction Permissions | ✔ | ❌ |
 | SQLite3 Support | ✔ | ✔ |

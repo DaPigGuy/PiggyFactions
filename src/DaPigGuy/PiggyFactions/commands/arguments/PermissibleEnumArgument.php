@@ -24,7 +24,7 @@ class PermissibleEnumArgument extends StringEnumArgument
 
     public function parse(string $argument, CommandSender $sender): string
     {
-        return $argument;
+        return $this->getValue($argument);
     }
 
     public function getTypeName(): string
