@@ -178,7 +178,7 @@ logs:
   invalid-log: "{RED}Invalid log type or page number! \nUsage: /f logs <kick|ban|invite|join|leave|unban|leader_change> <page>"
   title: "{GOLD}Faction Logs: {AQUA}Page {CURRENTPAGE}/{TOTALPAGES}"
   actions:
-    kick: "{GOLD}{TIME} => {GREEN}{KICKED}{AQUA}was kicked by {GREEN}{KICKER}."
+    kick: "{GOLD}{TIME} => {GREEN}{KICKED} {AQUA}was kicked by {GREEN}{KICKER}."
     ban: "{GOLD}{TIME} => {GREEN}{BANNED} {AQUA}was banned by {GREEN}{BANNEDBY}."
     join: "{GOLD}{TIME} => {GREEN}{JOINED} {AQUA}has joined."
     leave: "{GOLD}{TIME} => {GREEN}{LEFT} {AQUA}has left."

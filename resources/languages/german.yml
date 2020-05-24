@@ -178,7 +178,7 @@ logs:
   invalid-log: "{RED}Ungültiger Protokolltyp oder Seitennummer! \nBenutzung: /f logs <kick|ban|invite|join|leave|unban|leader_change> <page>"
   title: "{GOLD}Faktionsprotokoll: {AQUA}Seite {CURRENTPAGE}/{TOTALPAGES}"
   actions:
-    kick: "{GOLD}{TIME} => {GREEN}{KICKED}{AQUA}wurde rausgeworfen von {GREEN}{KICKER}."
+    kick: "{GOLD}{TIME} => {GREEN}{KICKED} {AQUA}wurde rausgeworfen von {GREEN}{KICKER}."
     ban: "{GOLD}{TIME} => {GREEN}{BANNED} {AQUA}wurde verwiesen von {GREEN}{BANNEDBY}."
     join: "{GOLD}{TIME} => {GREEN}{JOINED} {AQUA}ist beigetreten."
     leave: "{GOLD}{TIME} => {GREEN}{LEFT} {AQUA}hat verlassen."
