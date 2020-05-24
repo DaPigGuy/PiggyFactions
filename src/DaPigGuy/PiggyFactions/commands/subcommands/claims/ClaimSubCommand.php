@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace DaPigGuy\PiggyFactions\commands\subcommands\claims;
 
-use CortexPE\Commando\exception\ArgumentOrderException;
 use DaPigGuy\PiggyFactions\claims\ClaimsManager;
 use DaPigGuy\PiggyFactions\commands\subcommands\FactionSubCommand;
 use DaPigGuy\PiggyFactions\event\claims\ChunkOverclaimEvent;
@@ -54,9 +53,6 @@ class ClaimSubCommand extends FactionSubCommand
         $member->sendMessage("commands.claim.success");
     }
 
-    /**
-     * @throws ArgumentOrderException
-     */
     protected function prepare(): void
     {
         $this->registerSubCommand(new ClaimAutoSubCommand($this->plugin, "auto"));

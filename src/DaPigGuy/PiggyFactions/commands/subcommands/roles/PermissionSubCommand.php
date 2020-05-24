@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace DaPigGuy\PiggyFactions\commands\subcommands\roles;
 
 use CortexPE\Commando\args\BooleanArgument;
-use CortexPE\Commando\exception\ArgumentOrderException;
 use DaPigGuy\PiggyFactions\commands\arguments\PermissibleEnumArgument;
 use DaPigGuy\PiggyFactions\commands\arguments\PermissionEnumArgument;
 use DaPigGuy\PiggyFactions\commands\subcommands\FactionSubCommand;
@@ -42,9 +41,6 @@ class PermissionSubCommand extends FactionSubCommand
         $member->sendMessage("commands.permission.success", ["{PERMISSION}" => $args["permission"], "{ROLE}" => $args["role"], "{TOGGLED}" => $ev->getValue() ? "enabled" : "disabled"]);
     }
 
-    /**
-     * @throws ArgumentOrderException
-     */
     protected function prepare(): void
     {
         $this->registerArgument(0, new PermissibleEnumArgument("role"));

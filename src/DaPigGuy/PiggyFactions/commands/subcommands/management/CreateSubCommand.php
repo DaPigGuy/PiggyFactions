@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace DaPigGuy\PiggyFactions\commands\subcommands\management;
 
 use CortexPE\Commando\args\TextArgument;
-use CortexPE\Commando\exception\ArgumentOrderException;
 use DaPigGuy\PiggyFactions\commands\subcommands\FactionSubCommand;
 use DaPigGuy\PiggyFactions\event\management\FactionCreateEvent;
 use DaPigGuy\PiggyFactions\factions\Faction;
@@ -45,9 +44,6 @@ class CreateSubCommand extends FactionSubCommand
         $member->sendMessage("commands.create.success", ["{NAME}" => $args["name"]]);
     }
 
-    /**
-     * @throws ArgumentOrderException
-     */
     public function prepare(): void
     {
         $this->registerArgument(0, new TextArgument("name"));

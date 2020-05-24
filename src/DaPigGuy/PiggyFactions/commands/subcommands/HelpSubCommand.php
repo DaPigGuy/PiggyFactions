@@ -6,7 +6,6 @@ namespace DaPigGuy\PiggyFactions\commands\subcommands;
 
 use CortexPE\Commando\args\IntegerArgument;
 use CortexPE\Commando\BaseSubCommand;
-use CortexPE\Commando\exception\ArgumentOrderException;
 use DaPigGuy\PiggyFactions\commands\FactionCommand;
 use DaPigGuy\PiggyFactions\language\LanguageManager;
 use DaPigGuy\PiggyFactions\PiggyFactions;
@@ -49,9 +48,6 @@ class HelpSubCommand extends FactionSubCommand
         $sender->sendMessage($message);
     }
 
-    /**
-     * @throws ArgumentOrderException
-     */
     public function prepare(): void
     {
         $this->registerArgument(0, new IntegerArgument("page", true));

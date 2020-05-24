@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace DaPigGuy\PiggyFactions\commands\subcommands\management;
 
 use CortexPE\Commando\args\TextArgument;
-use CortexPE\Commando\exception\ArgumentOrderException;
 use DaPigGuy\PiggyFactions\commands\subcommands\FactionSubCommand;
 use DaPigGuy\PiggyFactions\event\management\FactionKickEvent;
 use DaPigGuy\PiggyFactions\factions\Faction;
@@ -35,9 +34,6 @@ class KickSubCommand extends FactionSubCommand
         $target->sendMessage("commands.kick.kicked");
     }
 
-    /**
-     * @throws ArgumentOrderException
-     */
     public function prepare(): void
     {
         $this->registerArgument(0, new TextArgument("name"));

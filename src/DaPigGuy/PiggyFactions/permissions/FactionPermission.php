@@ -5,8 +5,9 @@ declare(strict_types=1);
 namespace DaPigGuy\PiggyFactions\permissions;
 
 use DaPigGuy\PiggyFactions\utils\Roles;
+use JsonSerializable;
 
-class FactionPermission implements \JsonSerializable
+class FactionPermission implements JsonSerializable
 {
     const ALLY = "ally";
     const BAN = "ban";

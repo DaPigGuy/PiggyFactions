@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace DaPigGuy\PiggyFactions\commands\subcommands\flags;
 
 use CortexPE\Commando\args\BooleanArgument;
-use CortexPE\Commando\exception\ArgumentOrderException;
 use DaPigGuy\PiggyFactions\commands\arguments\FlagEnumArgument;
 use DaPigGuy\PiggyFactions\commands\subcommands\FactionSubCommand;
 use DaPigGuy\PiggyFactions\event\flags\FactionFlagChangeEvent;
@@ -35,9 +34,6 @@ class FlagSubCommand extends FactionSubCommand
         $member->sendMessage("commands.flag.toggled" . ($ev->getValue() ? "" : "-off"), ["{FLAG}" => $args["flag"]]);
     }
 
-    /**
-     * @throws ArgumentOrderException
-     */
     protected function prepare(): void
     {
         $this->registerArgument(0, new FlagEnumArgument("flag"));

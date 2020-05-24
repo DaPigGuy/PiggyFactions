@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace DaPigGuy\PiggyFactions\tasks;
 
 use DaPigGuy\PiggyFactions\PiggyFactions;
+use Exception;
 use pocketmine\scheduler\AsyncTask;
 use pocketmine\Server;
 use pocketmine\utils\Internet;
@@ -28,7 +29,7 @@ class CheckUpdatesTask extends AsyncTask
                     }
                 }
             }
-        } catch (\Exception $exception) {
+        } catch (Exception $exception) {
             $plugin->getLogger()->warning("Auto-update check failed.");
             $plugin->getLogger()->debug((string)$exception);
         }

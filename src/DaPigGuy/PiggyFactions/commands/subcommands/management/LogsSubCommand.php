@@ -6,7 +6,6 @@ namespace DaPigGuy\PiggyFactions\commands\subcommands\management;
 
 use CortexPE\Commando\args\IntegerArgument;
 use CortexPE\Commando\args\RawStringArgument;
-use CortexPE\Commando\exception\ArgumentOrderException;
 use DaPigGuy\PiggyFactions\commands\subcommands\FactionSubCommand;
 use DaPigGuy\PiggyFactions\factions\Faction;
 use DaPigGuy\PiggyFactions\logs\LogsManager;
@@ -49,9 +48,6 @@ class LogsSubCommand extends FactionSubCommand
         LogsManager::getInstance()->sendLogsByAction($faction, $sender, $action, $offset);
     }
 
-    /**
-     * @throws ArgumentOrderException
-     */
     public function prepare(): void
     {
         $this->registerArgument(0, new RawStringArgument("action", true));

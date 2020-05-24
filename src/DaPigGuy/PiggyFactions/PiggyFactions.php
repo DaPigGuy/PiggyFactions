@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace DaPigGuy\PiggyFactions;
 
 use CortexPE\Commando\BaseCommand;
-use CortexPE\Commando\exception\HookAlreadyRegistered;
 use CortexPE\Commando\PacketHooker;
 use DaPigGuy\libPiggyEconomy\libPiggyEconomy;
 use DaPigGuy\libPiggyEconomy\providers\EconomyProvider;
@@ -23,6 +22,7 @@ use DaPigGuy\PiggyFactions\tag\TagManager;
 use DaPigGuy\PiggyFactions\tasks\CheckUpdatesTask;
 use DaPigGuy\PiggyFactions\tasks\ShowChunksTask;
 use DaPigGuy\PiggyFactions\tasks\UpdatePowerTask;
+use Exception;
 use jojoe77777\FormAPI\Form;
 use pocketmine\entity\Entity;
 use pocketmine\Player;
@@ -57,9 +57,6 @@ class PiggyFactions extends PluginBase
     /** @var LogsManager */
     private $logsManager;
 
-    /**
-     * @throws HookAlreadyRegistered
-     */
     public function onEnable(): void
     {
         foreach (
@@ -83,7 +80,7 @@ class PiggyFactions extends PluginBase
         libPiggyEconomy::init();
         try {
             if ($this->getConfig()->getNested("economy.enabled", false)) $this->economyProvider = libPiggyEconomy::getProvider($this->getConfig()->get("economy"));
-        } catch (\Exception $exception) {
+        } catch (Exception $exception) {
             $this->getLogger()->error($exception->getMessage());
         }
 

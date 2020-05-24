@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace DaPigGuy\PiggyFactions\commands\subcommands\roles;
 
 use CortexPE\Commando\args\TextArgument;
-use CortexPE\Commando\exception\ArgumentOrderException;
 use DaPigGuy\PiggyFactions\commands\subcommands\FactionSubCommand;
 use DaPigGuy\PiggyFactions\event\role\FactionRoleChangeEvent;
 use DaPigGuy\PiggyFactions\factions\Faction;
@@ -40,9 +39,6 @@ class DemoteSubCommand extends FactionSubCommand
         $targetMember->sendMessage("commands.demote.demoted", ["{ROLE}" => $role]);
     }
 
-    /**
-     * @throws ArgumentOrderException
-     */
     protected function prepare(): void
     {
         $this->registerArgument(0, new TextArgument("name"));

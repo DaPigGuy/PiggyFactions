@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace DaPigGuy\PiggyFactions\commands\subcommands\relations;
 
 use CortexPE\Commando\args\TextArgument;
-use CortexPE\Commando\exception\ArgumentOrderException;
 use DaPigGuy\PiggyFactions\commands\subcommands\FactionSubCommand;
 use DaPigGuy\PiggyFactions\event\relation\FactionRelationEvent;
 use DaPigGuy\PiggyFactions\factions\Faction;
@@ -37,9 +36,6 @@ class UnallySubCommand extends FactionSubCommand
         $targetFaction->broadcastMessage("commands.unally.unallied", ["{FACTION}" => $faction->getName()]);
     }
 
-    /**
-     * @throws ArgumentOrderException
-     */
     protected function prepare(): void
     {
         $this->registerArgument(0, new TextArgument("faction"));

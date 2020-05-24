@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace DaPigGuy\PiggyFactions\commands\subcommands;
 
 use CortexPE\Commando\args\TextArgument;
-use CortexPE\Commando\exception\ArgumentOrderException;
 use DaPigGuy\PiggyFactions\factions\Faction;
 use DaPigGuy\PiggyFactions\factions\FactionsManager;
 use DaPigGuy\PiggyFactions\language\LanguageManager;
@@ -63,9 +62,6 @@ class InfoSubCommand extends FactionSubCommand
         ]);
     }
 
-    /**
-     * @throws ArgumentOrderException
-     */
     protected function prepare(): void
     {
         $this->registerArgument(0, new TextArgument("faction", true));

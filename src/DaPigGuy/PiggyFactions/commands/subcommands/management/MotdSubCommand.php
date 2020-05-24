@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace DaPigGuy\PiggyFactions\commands\subcommands\management;
 
 use CortexPE\Commando\args\TextArgument;
-use CortexPE\Commando\exception\ArgumentOrderException;
 use DaPigGuy\PiggyFactions\commands\subcommands\FactionSubCommand;
 use DaPigGuy\PiggyFactions\event\management\FactionMOTDChangeEvent;
 use DaPigGuy\PiggyFactions\factions\Faction;
@@ -24,9 +23,6 @@ class MotdSubCommand extends FactionSubCommand
         $member->sendMessage("commands.motd.success", ["{MOTD}" => $ev->getMotd()]);
     }
 
-    /**
-     * @throws ArgumentOrderException
-     */
     protected function prepare(): void
     {
         $this->registerArgument(0, new TextArgument("motd"));

@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace DaPigGuy\PiggyFactions\commands\subcommands\management;
 
 use CortexPE\Commando\args\TextArgument;
-use CortexPE\Commando\exception\ArgumentOrderException;
 use DaPigGuy\PiggyFactions\commands\subcommands\FactionSubCommand;
 use DaPigGuy\PiggyFactions\event\management\FactionRenameEvent;
 use DaPigGuy\PiggyFactions\factions\Faction;
@@ -36,9 +35,6 @@ class NameSubCommand extends FactionSubCommand
         $member->sendMessage("commands.name.success");
     }
 
-    /**
-     * @throws ArgumentOrderException
-     */
     protected function prepare(): void
     {
         $this->registerArgument(0, new TextArgument("name"));

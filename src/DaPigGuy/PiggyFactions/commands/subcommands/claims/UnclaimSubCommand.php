@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace DaPigGuy\PiggyFactions\commands\subcommands\claims;
 
 use CortexPE\Commando\args\RawStringArgument;
-use CortexPE\Commando\exception\ArgumentOrderException;
 use DaPigGuy\PiggyFactions\claims\ClaimsManager;
 use DaPigGuy\PiggyFactions\commands\subcommands\FactionSubCommand;
 use DaPigGuy\PiggyFactions\event\claims\UnclaimAllChunksEvent;
@@ -48,9 +47,6 @@ class UnclaimSubCommand extends FactionSubCommand
         $member->sendMessage("commands.unclaim.success");
     }
 
-    /**
-     * @throws ArgumentOrderException
-     */
     protected function prepare(): void
     {
         $this->registerArgument(0, new RawStringArgument("type", true));
