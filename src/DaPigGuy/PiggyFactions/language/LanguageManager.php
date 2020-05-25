@@ -17,13 +17,18 @@ use ReflectionClass;
 class LanguageManager
 {
     const LANGUAGES = [
+        "chinese_traditional",
         "english",
-        "german"
+        "german",
+        "spanish"
     ];
     const LOCALE_CODE_TABLE = [
         "en_US" => "english",
         "en_GB" => "english",
-        "de_DE" => "german"
+        "es_ES" => "spanish",
+        "es_MX" => "spanish",
+        "de_DE" => "german",
+        "zh_TW" => "chinese_traditional"
     ];
 
     /** @var self */

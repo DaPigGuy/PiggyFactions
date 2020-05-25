@@ -1,0 +1,187 @@
+chat:
+  ally: "{BOLD}{GOLD}ALIADO {RESET}{LIGHT_PURPLE}{RANK_SYMBOL}{FACTION} {RESET}{PLAYER}: {MESSAGE}"
+  faction: "{BOLD}{GOLD}FACCIÓN {RESET}{RANK_SYMBOL}{PLAYER}: {MESSAGE}"
+claims:
+  command-denied: "{RED}No puedes usar {COMMAND} en {RELATION} territorio."
+  flight-disable-warning: "{RED}No está dentro del territorio de facción. Inhabilitando el vuelo en {AMOUNT}..."
+commands:
+  invalid-player: "{RED}Jugador {PLAYER} no encontrado."
+  invalid-faction: "{RED}Facción {FACTION} no encontrada."
+  member-not-found: "{RED}Miembro {PLAYER} no encontrado."
+  not-in-faction: "{RED}No estas en ninguna facción."
+  already-in-faction: "{RED}Actualmente estas en una facción."
+  not-leader: "{RED}No eres el lider de la facción!"
+  no-permission: "{RED}No tienes permiso para hacer eso."
+  player-is-banned: "{RED}{PLAYER} esta baneado de tu facción."
+  you-are-banned: "{RED}Estas baneado de esta facción."
+  faction-full: "{RED}La facción esta llena."
+  admin:
+    toggled: "{GREEN}Ahora estas en modo administrador."
+    toggled-off: "{RED}Ya no estas en modo administrador."
+  ally:
+    self: "{RED}No puedes aliarte contigo mismo."
+    already-allied: "{RED}Ya estas aliado!"
+    request: "{GREEN}{FACTION} ha enviado una solicitud de aliado. Pon /f ally {FACTION} para aceptarlo."
+    allied: "{GREEN}Tu facción no esta aliada con {ALLY}."
+    success: "{GREEN}Se ha enviado una solicitud de aliado a {FACTION}."
+  ban:
+    cant-ban-higher: "{RED}No puedes prohibir a miembros de rango superior."
+    already-banned: "{RED}{PLAYER} esta actualmente baneado."
+    announcement: "{YELLOW}{PLAYER} fue prohibido de la facción."
+    banned: "{RED}Te expulsaron de tu facción."
+  chat:
+    already-in-chat: "{RED}Estas actualmente en este chat!"
+    toggled: "{GREEN}Ahora estas actualmente {CHAT} chat."
+    toggled-off: "{RED}Ya no estás en el chat de {CHAT}."
+  claim:
+    blacklisted-world: "{RED}Reclamar no está permitido en este mundo."
+    max-claimed: "{RED}No puedes reclamar más tierras."
+    already-claimed: "{RED}Esta trozo ya está reclamado."
+    no-power: "{RED}Tu facción tiene una cantidad de poder insuficiente."
+    radius-less-than-one: "{RED}El radio debe ser mayor que uno."
+    over-claimed: "{GREEN}Esta trozo ha sido reclamado en exceso."
+    success: "{GREEN} Este trozo ha sido reclamado."
+    claimed-multiple: "{GREEN}{AMOUNT} trozos reclamados por {COMMAND}."
+    auto:
+      toggled: "{GREEN}Ahora estás reclamando automáticamente."
+      toggled-off: "{RED} Ya no estás reclamando automáticamente."
+  create:
+    name-taken: "{RED} Ya existe una facción con el nombre {NAME}."
+    name-blacklisted: "{RED}El nombre {NAME} esta en la lista negra."
+    name-too-long: "{RED}El nombre {NAME} excede el límite máximo de caracteres."
+    success: "{GREEN} La facción {NAME} ha sido creada."
+  demote:
+    cant-demote-higher: "{RED}No puedes degradar a miembros de rango superior."
+    already-lowest: "{RED}{PLAYER} ya está en el rango más bajo."
+    success: "{GREEN}{PLAYER} ha sido degradado a {ROLE}."
+    demoted: "{RED}Has sido degradado a {ROLE}."
+  deposit:
+    success: "{GREEN}${MONEY} ha sido depositado en el banco de facciones."
+  description:
+    success: "{GREEN}La descripción de la facción se ha establecido en {DESCRIPTION}"
+  disband:
+    success: "{YELLOW}Tu facción ha sido disuelta!"
+  enemy:
+    self: "{RED}No puedes marcarte como enemigo."
+    already-enemy: "{RED}{FACTION} ya es un enemigo!"
+    success: "{GREEN}{FACTION} ha sido marcado como enemigo."
+  flag:
+    invalid-flag: "{RED}Bandera {FLAG} no encontrada."
+    not-editable: "{RED}Bandera {FLAG} no es editable."
+    toggled: "{GREEN}Bandera {FLAG} ha sido habilitada."
+    toggled-off: "{GREEN}Bandera {FLAG} ha sido deshabilitada."
+  fly:
+    not-allowed: "{ROJO}No tienes permitido volar aquí."
+    toggled: "{GREEN}Se ha habilitado el vuelo."
+    toggled-off: "{RED}El vuelo ha sido deshabilitado."
+  help:
+    header: "{GOLD}____________.[{DARK_GREEN}Ayuda de facción ({PAGE}/{MAXPAGE}){GOLD}].____________"
+    command: "\n{GREEN}/f {COMMAND} - {RESET}{DESCRIPTION}"
+  home:
+    not-set: "{RED}El hogar de la facción no está establecido."
+  info:
+    message: "{GOLD}____________.[{DARK_GREEN}Facción {FACTION}{GOLD}].____________\n{GOLD}Descripción: {YELLOW}{DESCRIPTION}\n{GOLD}Poder: {YELLOW}{POWER}/{TOTALPOWER}\n{GOLD}En linea: {YELLOW}{ONLINECOUNT}/{TOTALPLAYERS}\n{GOLD}Líder: {YELLOW}{LEADER}\n{GOLD}Aliados: {DARK_PURPLE}{ALLIES}\n{GOLD}Enemigos: {RED}{ENEMIES}\n{GOLD}Miembros: {YELLOW}{PLAYERS}"
+  invite:
+    already-in-faction: "{RED} {PLAYER} ya está en una facción."
+    already-sent: "{RED}Ya se envió una invitación a {PLAYER}."
+    success: "{GREEN} La invitación se ha enviado a {PLAYER}."
+    invited: "{GREEN}Has sido invitado a unirte a {FACTION}. Ejecute / f join {FACTION} para unirse."
+  join:
+    no-invite: "{RED}No tienes una invitación de {FACTION}."
+    joined: "{GREEN}{PLAYER} se ha unido a la facción!"
+  kick:
+    cant-kick-higher: "{RED} No puedes expulsar a miembros de mayor rango."
+    announcement: "{YELLOW}{PLAYER} fue expulsado de la facción."
+    kicked: "{RED}Fuiste expulsado de la facción."
+  language:
+    invalid-language: "{RED}Idioma no encontrado."
+    success: "{GREEN}El idioma se ha cambiado al inglés."
+  leader:
+    offline: "{RED}El jugador debe estar en línea para la transferencia de liderazgo."
+    recipient: "{GREEN}Ahora eres el líder de tu facción."
+    success: "{GREEN}La facción ha sido transferida a {PLAYER}."
+  leave:
+    is-leader: "{RED}Eres el líder de tu facción."
+    success: "{YELLOW}Has dejado tu facción."
+  map:
+    header: "{GOLD}____________.[ {GREEN}({X},{Z}) {FACTION} {GOLD}].____________"
+  money:
+    balance: "{GREEN}Dinero de la facción: ${MONEY}"
+  motd:
+    success: "{GREEN}El MOTD de la facción se ha establecido en {MOTD}"
+  name:
+    success: "{GREEN}Se ha cambiado el nombre de la facción a {FACTION}."
+  neutral:
+    already-neutral: "{RED}Tu facción no está en relación con {FACTION}."
+    success: "{GREEN}Tu facción ahora es neutral con {FACTION}."
+  permission:
+    role-not-found: "{RED}Rol no encontrado."
+    permission-not-found: "{RED}Permiso no encontrado."
+    success: "{GREEN}El permiso {PERMISSION} has sido {TOGGLED} para el rol {ROLE}."
+  promote:
+    cant-promote-higher: "{RED}Tu no puedes promover debido a tu rango."
+    already-maxed: "{RED}{PLAYER} ya está en el rango máximo."
+    success: "{GREEN}{PLAYER} ha sido promovido a {ROLE}."
+    promoted: "{GREEN}Te ascendieron a {ROLE}."
+  sethome:
+    not-within-territory: "{RED}El hogar de facciones debe estar dentro del territorio de la facción."
+    success: "{GREEN}Se ha establecido el hogar de la facción."
+  setpower:
+    success: "{GREEN}El poder de {PLAYER} se ha establecido en {POWER}."
+    power-set: "{GREEN}Tu poder se ha establecido en {POWER}."
+  top:
+    header: "{GOLD}____________.[{DARK_GREEN}Facciones principales por {CATEGORY} ({PAGE}/{TOTALPAGES}){GOLD}].____________"
+    line:
+      online: "{GOLD}#{RANK} {RELATIONCOLOR}{FACTION}{GOLD} -{YELLOW} {ONLINE}"
+      members: "{GOLD}#{RANK} {RELATIONCOLOR}{FACTION}{GOLD} -{YELLOW} {MEMBERS}"
+      power: "{GOLD}#{RANK} {RELATIONCOLOR}{FACTION}{GOLD} -{YELLOW} {POWER}/{TOTALPOWER}"
+      money: "{GOLD}#{RANK} {RELATIONCOLOR}{FACTION}{GOLD} -{YELLOW} ${MONEY}"
+  truce:
+    self: "{RED}No puedes hacer una tregua contigo mismo."
+    already-truced: "{RED}¡Ya estás en tregua!"
+    request: "{GREEN}{FACTION} ha enviado una petición de tregua. Do /f truce {FACTION} para aceptarla."
+    truced: "{GREEN}Su facción está ahora en tregua con {TRUCED}."
+    success: "{GREEN}Se ha enviado una solicitud de tregua a {FACTION}."
+  unally:
+    not-allied: "{RED}No estás aliado con {FACTION}."
+    unallied: "{RED}Tu facción ya no está aliada con {FACTION}."
+  unban:
+    not-banned: "{RED}{PLAYER} no esta bloqueado."
+    announcement: "{YELLOW}{PLAYER} Fue desbloqueado de la facción."
+  unclaim:
+    not-claimed: "{RED} Este trozo no esta reclamado."
+    other-faction: "{RED}Este trozo esta reclamado por otra facción."
+    success: "{GREEN}Este trozo ya no esta reclamado."
+    all:
+      success: "{GREEN}Todas las reclamaciones de {FACTION} se han eliminado."
+  withdraw:
+    success: "{GREEN}Se ha retirado {MONEY}$ del banco de facciones."
+death:
+  power: "{RED}Tu poder es ahora {POWER}."
+economy:
+  not-enough-money: "{RED}No hay suficiente dinero. Falta $ {DIFFERENCE}."
+  negative-money: "{RED}Cantidad negativa de dinero proporcionada."
+forms:
+  title: "PiggyFactions UI"
+motd: "{GOLD}____________.[{DARK_GREEN}{FACTION} MOTD{GOLD}].____________\n{WHITE}{MOTD}"
+pvp:
+  attacker-factionless: "{ROJO}No puedes dañar a otros jugadores hasta que te hayas unido a una facción."
+  target-factionless: "{RED}No puedes dañar a jugadores que no están actualmente en una facción."
+  cant-attack-in-territory: "{RED}No puedes dañar a {PLAYER} en su propio territorio a menos que los declares como enemigos."
+territory-titles:
+  wilderness-title: "{DARK_GREEN}Naturaleza"
+  wilderness-subtitle: "{YELLOW}Es peligroso ir solo."
+  faction-title: "{RELATION}{FACTION}"
+  faction-subtitle: "{ITALIC}{DESCRIPTION}"
+logs:
+  page-too-low: "{RED}La página debe ser mayor que cero."
+  invalid-log: "{RED}Tipo de registro o número de página no válido!\nUsa: /f logs <kick|ban|invite|join|leave|unban|leader_change> <page>"
+  title: "{GOLD}Registros de facciones: {AQUA}Página {CURRENTPAGE}/{TOTALPAGES}"
+  actions:
+    kick: "{GOLD}{TIME} => {GREEN}{KICKED} {AQUA}fue expulsado por {GREEN} {KICKER}."
+    ban: "{GOLD}{TIME} => {GREEN}{BANNED}{AQUA}fue prohibido por {GREEN} {BANNEDBY}."
+    join: "{GOLD}{TIME} => {GREEN}{JOINED}{AQUA}se ha unido."
+    leave: "{GOLD}{TIME} => {GREEN}{LEFT} {AQUA}se ha ido."
+    unban: "{GOLD}{TIME} => {GREEN}{UNBANNED} {AQUA} ha sido desbloqueado por {GREEN}{UNBANNEDBY}."
+    invite: "{GOLD}{TIME} => {GREEN}{INVITED} {AQUA} fue invitado por {GREEN}{INVITEDBY}."
+    leader_change: "{GOLD}{TIME} => {AQUA}El liderazgo se ha transferido de {GREEN}{OLD} {AQUA} a {GREEN}{NEW}."

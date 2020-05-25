@@ -203,6 +203,20 @@ An addon for [JackMD's ScoreHud](https://github.com/JackMD/ScoreHud) can be foun
     * **Unless you know what you are doing, use the pre-compiled phar from [Poggit-CI](https://poggit.pmmp.io/ci/DaPigGuy/PiggyFactions/~) and not GitHub.**
     * If you wish to run it via source, check out [DEVirion](https://github.com/poggit/devirion).
 
+## Translators
+Translations for PiggyFactions are powered by our community translators:
+<!-- **Chinese (Simplified)** - @Aericio, TGPNG, prprprprprprpr -->
+* **Chinese (Traditional)** - @Taylarity
+<!-- **Dutch** - @KingOfTurkey38 -->
+<!-- **French** - Thouv (@adeynes), @ItsMax123 -->
+* **German** - @SalmonDE
+<!-- **Indonesian** - @SillierShark195 -->
+<!-- **Korean** - @Nabibobettau -->
+<!-- **Romanian** - @Gabitzuu -->
+<!-- **Serbian** - yuriiscute53925 -->
+* **Spanish** - @UnEnanoMas
+<!-- **Turkish** - @KingOfTurkey38 -->
+
 ## License
 ```
    Copyright 2020 DaPigGuy
