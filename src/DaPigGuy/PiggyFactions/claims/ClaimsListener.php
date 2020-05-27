@@ -14,6 +14,7 @@ use DaPigGuy\PiggyFactions\tasks\DisableFlightTask;
 use DaPigGuy\PiggyFactions\utils\Relations;
 use pocketmine\event\block\BlockBreakEvent;
 use pocketmine\event\block\BlockPlaceEvent;
+use pocketmine\event\entity\EntityTeleportEvent;
 use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerCommandPreprocessEvent;
 use pocketmine\event\player\PlayerInteractEvent;
@@ -43,6 +44,27 @@ class ClaimsListener implements Listener
     public function onPlace(BlockPlaceEvent $event): void
     {
         if (!$this->canAffectArea($event->getPlayer(), $event->getBlock())) $event->setCancelled();
+    }
+
+    public function onEntityTeleport(EntityTeleportEvent $event): void
+    {
+        $entity = $event->getEntity();
+        if ($entity instanceof Player) {
+            $member = PlayerManager::getInstance()->getPlayer($entity->getUniqueId());
+            if ($member !== null) {
+                $oldClaim = ClaimsManager::getInstance()->getClaim($event->getFrom()->getLevel(), ($oldChunk = $entity->getLevel()->getChunkAtPosition($event->getFrom())));
+                $newClaim = ClaimsManager::getInstance()->getClaim($event->getTo()->getLevel(), ($newChunk = $entity->getLevel()->getChunkAtPosition($event->getTo())));
+                $oldFaction = $oldClaim === null ? null : $oldClaim->getFaction();
+                $newFaction = $newClaim === null ? null : $newClaim->getFaction();
+                if ($oldFaction !== $newFaction) {
+                    if ($member->isFlying()) {
+                        if ($newFaction === null || !$newFaction->hasPermission($member, FactionPermission::FLY)) {
+                            $this->plugin->getScheduler()->scheduleRepeatingTask(new DisableFlightTask($entity, $member), 20);
+                        }
+                    }
+                }
+            }
+        }
     }
 
     public function onCommandPreprocess(PlayerCommandPreprocessEvent $event): void
