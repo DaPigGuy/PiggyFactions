@@ -56,13 +56,10 @@ use pocketmine\plugin\Plugin;
 
 class FactionCommand extends BaseCommand implements PluginIdentifiableCommand
 {
-    /** @var PiggyFactions */
-    private $plugin;
-
     public function __construct(PiggyFactions $plugin, string $name, string $description = "", array $aliases = [])
     {
-        $this->plugin = $plugin;
-        parent::__construct($name, $description, $aliases);
+        $this->plugin = $plugin; // this is here to keep phpstorm mouth shut
+        parent::__construct($plugin, $name, $description, $aliases);
     }
 
     public function getPlugin(): Plugin
