@@ -23,6 +23,8 @@ use pocketmine\utils\TextFormat;
 
 abstract class FactionSubCommand extends BaseSubCommand
 {
+	/** @var PiggyFactions */
+	protected $plugin;
     /** @var bool */
     protected $requiresPlayer = true;
     /** @var bool */
