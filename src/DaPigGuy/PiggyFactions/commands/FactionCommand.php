@@ -50,25 +50,12 @@ use DaPigGuy\PiggyFactions\PiggyFactions;
 use DaPigGuy\PiggyFactions\utils\ChatTypes;
 use jojoe77777\FormAPI\SimpleForm;
 use pocketmine\command\CommandSender;
-use pocketmine\command\PluginIdentifiableCommand;
 use pocketmine\Player;
-use pocketmine\plugin\Plugin;
 
-class FactionCommand extends BaseCommand implements PluginIdentifiableCommand
+class FactionCommand extends BaseCommand
 {
-	/** @var PiggyFactions */
-	protected $plugin;
-
-    public function __construct(PiggyFactions $plugin, string $name, string $description = "", array $aliases = [])
-    {
-        $this->plugin = $plugin; // this is here to keep phpstorm mouth shut
-        parent::__construct($plugin, $name, $description, $aliases);
-    }
-
-    public function getPlugin(): Plugin
-    {
-        return $this->plugin;
-    }
+    /** @var PiggyFactions */
+    protected $plugin;
 
     public function onRun(CommandSender $sender, string $aliasUsed, array $args): void
     {

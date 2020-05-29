@@ -23,8 +23,8 @@ use pocketmine\utils\TextFormat;
 
 abstract class FactionSubCommand extends BaseSubCommand
 {
-	/** @var PiggyFactions */
-	protected $plugin;
+    /** @var PiggyFactions */
+    protected $plugin;
     /** @var bool */
     protected $requiresPlayer = true;
     /** @var bool */
@@ -34,7 +34,6 @@ abstract class FactionSubCommand extends BaseSubCommand
 
     public function __construct(PiggyFactions $plugin, string $name, string $description = "", array $aliases = [])
     {
-	    $this->plugin = $plugin; // this is here to keep phpstorm mouth shut
         $this->setPermission("piggyfactions.command.faction." . $name);
         parent::__construct($plugin, $name, $description, $aliases);
     }
