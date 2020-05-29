@@ -7,7 +7,7 @@ projects:
     icon: "resources/img/PiggyFactions-icon.png"
     libs:
       - src: ParoxityTeam/Commando/Commando
-        version: ^1.0.1
+        version: ^2.1.0
       - src: poggit/libasynql/libasynql
         version: ^3.3.0
       - src: jojoe77777/FormAPI/libFormAPI

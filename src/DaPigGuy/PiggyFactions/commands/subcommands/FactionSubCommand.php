@@ -34,9 +34,8 @@ abstract class FactionSubCommand extends BaseSubCommand
 
     public function __construct(PiggyFactions $plugin, string $name, string $description = "", array $aliases = [])
     {
-        $this->plugin = $plugin;
         $this->setPermission("piggyfactions.command.faction." . $name);
-        parent::__construct($name, $description, $aliases);
+        parent::__construct($plugin, $name, $description, $aliases);
     }
 
     public function onRun(CommandSender $sender, string $aliasUsed, array $args): void
