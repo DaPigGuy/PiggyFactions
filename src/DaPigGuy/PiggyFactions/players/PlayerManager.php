@@ -68,7 +68,7 @@ class PlayerManager
 
     public function getPlayerFaction(UUID $uuid): ?Faction
     {
-        return $this->getPlayer($uuid)->getFaction();
+        return ($player = $this->getPlayer($uuid)) === null ? null : $player->getFaction();
     }
 
     public function areAlliedOrTruced(Player $a, Player $b): bool

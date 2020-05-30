@@ -36,26 +36,28 @@ class EventListener implements Listener
     {
         $player = $event->getPlayer();
         $member = PlayerManager::getInstance()->getPlayer($player->getUniqueId());
-        $faction = $member->getFaction();
-        if ($faction !== null) {
-            $placeholders = [
-                "{PLAYER}" => $player->getDisplayName(),
-                "{FACTION}" => $faction->getName(),
-                "{RANK_NAME}" => $this->plugin->getTagManager()->getPlayerRankName($member),
-                "{RANK_SYMBOL}" => $this->plugin->getTagManager()->getPlayerRankSymbol($member),
-                "{MESSAGE}" => $event->getMessage()
-            ];
-            switch ($member->getCurrentChat()) {
-                case ChatTypes::ALLY:
-                    $event->setRecipients(array_merge($faction->getOnlineMembers(), ...array_map(function (Faction $ally): array {
-                        return $ally->getOnlineMembers();
-                    }, $faction->getAllies())));
-                    $event->setFormat(LanguageManager::getInstance()->getMessage(LanguageManager::getInstance()->getDefaultLanguage(), "chat.ally", $placeholders));
-                    break;
-                case ChatTypes::FACTION:
-                    $event->setRecipients($faction->getOnlineMembers());
-                    $event->setFormat(LanguageManager::getInstance()->getMessage(LanguageManager::getInstance()->getDefaultLanguage(), "chat.faction", $placeholders));
-                    break;
+        if ($member !== null) {
+            $faction = $member->getFaction();
+            if ($faction !== null) {
+                $placeholders = [
+                    "{PLAYER}" => $player->getDisplayName(),
+                    "{FACTION}" => $faction->getName(),
+                    "{RANK_NAME}" => $this->plugin->getTagManager()->getPlayerRankName($member),
+                    "{RANK_SYMBOL}" => $this->plugin->getTagManager()->getPlayerRankSymbol($member),
+                    "{MESSAGE}" => $event->getMessage()
+                ];
+                switch ($member->getCurrentChat()) {
+                    case ChatTypes::ALLY:
+                        $event->setRecipients(array_merge($faction->getOnlineMembers(), ...array_map(function (Faction $ally): array {
+                            return $ally->getOnlineMembers();
+                        }, $faction->getAllies())));
+                        $event->setFormat(LanguageManager::getInstance()->getMessage(LanguageManager::getInstance()->getDefaultLanguage(), "chat.ally", $placeholders));
+                        break;
+                    case ChatTypes::FACTION:
+                        $event->setRecipients($faction->getOnlineMembers());
+                        $event->setFormat(LanguageManager::getInstance()->getMessage(LanguageManager::getInstance()->getDefaultLanguage(), "chat.faction", $placeholders));
+                        break;
+                }
             }
         }
     }
@@ -107,11 +109,13 @@ class EventListener implements Listener
         $player = $event->getPlayer();
         $member = PlayerManager::getInstance()->getPlayer($player->getUniqueId());
 
-        $ev = new PowerChangeEvent($member, PowerChangeEvent::CAUSE_DEATH, $member->getPower() + $this->plugin->getConfig()->getNested("factions.power.per.death", -2));
-        $ev->call();
-        if ($ev->isCancelled()) return;
-        $member->setPower($ev->getPower());
-        $member->sendMessage("death.power", ["{POWER}" => round($member->getPower(), 2, PHP_ROUND_HALF_DOWN)]);
+        if ($member !== null) {
+            $ev = new PowerChangeEvent($member, PowerChangeEvent::CAUSE_DEATH, $member->getPower() + $this->plugin->getConfig()->getNested("factions.power.per.death", -2));
+            $ev->call();
+            if ($ev->isCancelled()) return;
+            $member->setPower($ev->getPower());
+            $member->sendMessage("death.power", ["{POWER}" => round($member->getPower(), 2, PHP_ROUND_HALF_DOWN)]);
+        }
 
         $cause = $player->getLastDamageCause();
         if ($cause instanceof EntityDamageByEntityEvent) {
@@ -119,10 +123,12 @@ class EventListener implements Listener
             if ($damager instanceof Player) {
                 $damagerMember = PlayerManager::getInstance()->getPlayer($damager->getUniqueId());
 
-                $ev = new PowerChangeEvent($damagerMember, PowerChangeEvent::CAUSE_KILL, $damagerMember->getPower() + $this->plugin->getConfig()->getNested("factions.power.per.kill", 1));
-                $ev->call();
-                if ($ev->isCancelled()) return;
-                $damagerMember->setPower($ev->getPower());
+                if ($damagerMember !== null) {
+                    $ev = new PowerChangeEvent($damagerMember, PowerChangeEvent::CAUSE_KILL, $damagerMember->getPower() + $this->plugin->getConfig()->getNested("factions.power.per.kill", 1));
+                    $ev->call();
+                    if ($ev->isCancelled()) return;
+                    $damagerMember->setPower($ev->getPower());
+                }
             }
         }
     }

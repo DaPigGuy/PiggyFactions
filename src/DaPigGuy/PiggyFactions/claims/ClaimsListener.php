@@ -72,15 +72,17 @@ class ClaimsListener implements Listener
         $player = $event->getPlayer();
         $message = $event->getMessage();
         $member = PlayerManager::getInstance()->getPlayer($player->getUniqueId());
-        $faction = $member->getFaction();
-        $claim = ClaimsManager::getInstance()->getClaim($player->getLevel(), $player->getLevel()->getChunkAtPosition($player));
-        if (!$member->isInAdminMode() && $claim !== null && $claim->getFaction() !== $faction) {
-            $relation = $faction === null ? Relations::NONE : $faction->getRelation($claim->getFaction());
-            if (substr($message, 0, 1) === "/") {
-                $command = substr(explode(" ", $message)[0], 1);
-                if (in_array($command, $this->plugin->getConfig()->getNested("factions.claims.denied-commands." . $relation, []))) {
-                    $member->sendMessage("claims.command-denied", ["{COMMAND}" => $command, "{RELATION}" => $relation === "none" ? "neutral" : $relation]);
-                    $event->setCancelled();
+        if ($member !== null) {
+            $faction = $member->getFaction();
+            $claim = ClaimsManager::getInstance()->getClaim($player->getLevel(), $player->getLevel()->getChunkAtPosition($player));
+            if (!$member->isInAdminMode() && $claim !== null && $claim->getFaction() !== $faction) {
+                $relation = $faction === null ? Relations::NONE : $faction->getRelation($claim->getFaction());
+                if (substr($message, 0, 1) === "/") {
+                    $command = substr(explode(" ", $message)[0], 1);
+                    if (in_array($command, $this->plugin->getConfig()->getNested("factions.claims.denied-commands." . $relation, []))) {
+                        $member->sendMessage("claims.command-denied", ["{COMMAND}" => $command, "{RELATION}" => $relation === "none" ? "neutral" : $relation]);
+                        $event->setCancelled();
+                    }
                 }
             }
         }
@@ -149,7 +151,7 @@ class ClaimsListener implements Listener
         $member = PlayerManager::getInstance()->getPlayer($player->getUniqueId());
         $claim = ($chunk = $position->getLevel()->getChunkAtPosition($position)) === null ? null : $this->manager->getClaim($position->getLevel(), $chunk);
         if ($claim !== null) {
-            return $claim->getFaction()->hasPermission($member, $type);
+            return $member === null ? false : $claim->getFaction()->hasPermission($member, $type);
         }
         return true;
     }
