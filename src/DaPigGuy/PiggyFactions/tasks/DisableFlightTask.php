@@ -28,8 +28,7 @@ class DisableFlightTask extends Task
 
     public function onRun(int $currentTick): void
     {
-        $claim = ClaimsManager::getInstance()->getClaim($this->player->getLevel(), $this->player->getLevel()->getChunkAtPosition($this->player));
-        if (($claim !== null && $claim->getFaction()->hasPermission($this->member, FactionPermission::FLY)) || !$this->player->isOnline()) {
+        if (!$this->player->isOnline() || (($claim = ClaimsManager::getInstance()->getClaim($this->player->getLevel(), $this->player->getLevel()->getChunkAtPosition($this->player))) !== null && $claim->getFaction()->hasPermission($this->member, FactionPermission::FLY))) {
             $this->getHandler()->cancel();
             return;
         }
