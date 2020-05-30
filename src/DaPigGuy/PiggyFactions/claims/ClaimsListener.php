@@ -53,7 +53,7 @@ class ClaimsListener implements Listener
             $member = PlayerManager::getInstance()->getPlayer($entity->getUniqueId());
             if ($member !== null) {
                 $oldClaim = ClaimsManager::getInstance()->getClaim($event->getFrom()->getLevel(), ($oldChunk = $entity->getLevel()->getChunkAtPosition($event->getFrom())));
-                $newClaim = ClaimsManager::getInstance()->getClaim($event->getTo()->getLevel(), ($newChunk = $entity->getLevel()->getChunkAtPosition($event->getTo())));
+                $newClaim = ClaimsManager::getInstance()->getClaim($event->getTo()->getLevel(), ($newChunk = $entity->getLevel()->getChunkAtPosition($event->getTo(), true)));
                 $oldFaction = $oldClaim === null ? null : $oldClaim->getFaction();
                 $newFaction = $newClaim === null ? null : $newClaim->getFaction();
                 if ($oldFaction !== $newFaction) {
