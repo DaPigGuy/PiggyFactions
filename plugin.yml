@@ -1,6 +1,6 @@
 name: PiggyFactions
 main: DaPigGuy\PiggyFactions\PiggyFactions
-version: 1.0.7
+version: 1.0.8
 api: 3.2.0
 author: DaPigGuy
 softdepend: [EconomyAPI, MultiEconomy, PiggyCustomEnchants, HRKChat]
