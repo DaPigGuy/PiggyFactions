@@ -10,6 +10,7 @@ use DaPigGuy\PiggyFactions\event\claims\ChunkOverclaimEvent;
 use DaPigGuy\PiggyFactions\event\claims\ClaimChunkEvent;
 use DaPigGuy\PiggyFactions\factions\Faction;
 use DaPigGuy\PiggyFactions\players\FactionsPlayer;
+use pocketmine\level\format\Chunk;
 use pocketmine\Player;
 
 class ClaimSubCommand extends FactionSubCommand
@@ -33,18 +34,25 @@ class ClaimSubCommand extends FactionSubCommand
         $claim = ClaimsManager::getInstance()->getClaim($sender->getLevel(), $sender->getLevel()->getChunkAtPosition($sender));
         if ($claim !== null) {
             if ($claim->canBeOverClaimed() && $claim->getFaction() !== $faction) {
-                $ev = new ChunkOverclaimEvent($faction, $member, $claim);
-                $ev->call();
-                if ($ev->isCancelled()) return;
+                $adjacentChunks = $sender->getLevel()->getAdjacentChunks($claim->getChunk()->getX(), $claim->getChunk()->getZ());
+                foreach ($adjacentChunks as $chunk) {
+                    if ($chunk instanceof Chunk) {
+                        $adjacentClaim = ClaimsManager::getInstance()->getClaim($sender->getLevel(), $sender->getLevel()->getChunk($chunk->getX(), $chunk->getZ()));
+                        if ($adjacentClaim !== null && $adjacentClaim->getFaction() === $faction) {
+                            $ev = new ChunkOverclaimEvent($faction, $member, $claim);
+                            $ev->call();
+                            if ($ev->isCancelled()) return;
 
-                $member->sendMessage("commands.claim.over-claimed");
-                $claim->setFaction($faction);
-                return;
+                            $member->sendMessage("commands.claim.over-claimed");
+                            $claim->setFaction($faction);
+                            return;
+                        }
+                    }
+                }
             }
             $member->sendMessage("commands.claim.already-claimed");
             return;
         }
-
         $ev = new ClaimChunkEvent($faction, $member, $sender->getLevel()->getChunkAtPosition($sender));
         $ev->call();
         if ($ev->isCancelled()) return;
