@@ -52,14 +52,16 @@ class ClaimsListener implements Listener
         if ($entity instanceof Player) {
             $member = PlayerManager::getInstance()->getPlayer($entity->getUniqueId());
             if ($member !== null) {
-                $oldClaim = ClaimsManager::getInstance()->getClaim($event->getFrom()->getLevel(), ($oldChunk = $entity->getLevel()->getChunkAtPosition($event->getFrom())));
-                $newClaim = ClaimsManager::getInstance()->getClaim($event->getTo()->getLevel(), ($newChunk = $entity->getLevel()->getChunkAtPosition($event->getTo(), true)));
-                $oldFaction = $oldClaim === null ? null : $oldClaim->getFaction();
-                $newFaction = $newClaim === null ? null : $newClaim->getFaction();
-                if ($oldFaction !== $newFaction) {
-                    if ($member->isFlying()) {
-                        if ($newFaction === null || !$newFaction->hasPermission($member, FactionPermission::FLY)) {
-                            $this->plugin->getScheduler()->scheduleRepeatingTask(new DisableFlightTask($entity, $member), 20);
+                if ($event->getTo()->getLevel() !== null) {
+                    $oldClaim = ClaimsManager::getInstance()->getClaim($event->getFrom()->getLevel(), ($oldChunk = $entity->getLevel()->getChunkAtPosition($event->getFrom())));
+                    $newClaim = ClaimsManager::getInstance()->getClaim($event->getTo()->getLevel(), ($newChunk = $entity->getLevel()->getChunkAtPosition($event->getTo(), true)));
+                    $oldFaction = $oldClaim === null ? null : $oldClaim->getFaction();
+                    $newFaction = $newClaim === null ? null : $newClaim->getFaction();
+                    if ($oldFaction !== $newFaction) {
+                        if ($member->isFlying()) {
+                            if ($newFaction === null || !$newFaction->hasPermission($member, FactionPermission::FLY)) {
+                                $this->plugin->getScheduler()->scheduleRepeatingTask(new DisableFlightTask($entity, $member), 20);
+                            }
                         }
                     }
                 }
