@@ -158,11 +158,16 @@ commands:
     not-banned: "{RED}{PLAYER} is not banned."
     announcement: "{YELLOW}{PLAYER} was unbanned from the faction."
   unclaim:
+    blacklisted-world: "{RED}Unclaiming is not allowed in this world."
     not-claimed: "{RED}This chunk is not claimed."
     other-faction: "{RED}This chunk is claimed by another faction."
     success: "{GREEN}This chunk has been unclaimed."
+    claimed-multiple: "{GREEN}{AMOUNT} chunks unclaimed by {COMMAND}."
     all:
       success: "{GREEN}All {FACTION} claims have been unclaimed."
+    auto:
+      toggled: "{GREEN}You are now auto-unclaiming."
+      toggled-off: "{RED}You are no longer auto-unclaiming."
   withdraw:
     success: "{GREEN}${MONEY} has been withdrawn from the faction bank."
 death:

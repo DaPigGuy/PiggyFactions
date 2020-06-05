@@ -2,12 +2,10 @@
 
 declare(strict_types=1);
 
-namespace DaPigGuy\PiggyFactions\commands\subcommands\claims;
+namespace DaPigGuy\PiggyFactions\commands\subcommands\claims\unclaim;
 
-use CortexPE\Commando\args\RawStringArgument;
 use DaPigGuy\PiggyFactions\claims\ClaimsManager;
 use DaPigGuy\PiggyFactions\commands\subcommands\FactionSubCommand;
-use DaPigGuy\PiggyFactions\event\claims\UnclaimAllChunksEvent;
 use DaPigGuy\PiggyFactions\event\claims\UnclaimChunkEvent;
 use DaPigGuy\PiggyFactions\factions\Faction;
 use DaPigGuy\PiggyFactions\players\FactionsPlayer;
@@ -17,18 +15,6 @@ class UnclaimSubCommand extends FactionSubCommand
 {
     public function onNormalRun(Player $sender, ?Faction $faction, FactionsPlayer $member, string $aliasUsed, array $args): void
     {
-        if (($args["type"] ?? null) === "all") {
-            $ev = new UnclaimAllChunksEvent($faction, $member);
-            $ev->call();
-            if ($ev->isCancelled()) return;
-
-            foreach (ClaimsManager::getInstance()->getFactionClaims($faction) as $claim) {
-                ClaimsManager::getInstance()->deleteClaim($claim);
-            }
-            $member->sendMessage("commands.unclaim.all.success");
-            return;
-        }
-
         $claim = ClaimsManager::getInstance()->getClaim($sender->getLevel(), $sender->getLevel()->getChunkAtPosition($sender));
         if ($claim === null) {
             $member->sendMessage("commands.unclaim.not-claimed");
@@ -49,6 +35,9 @@ class UnclaimSubCommand extends FactionSubCommand
 
     protected function prepare(): void
     {
-        $this->registerArgument(0, new RawStringArgument("type", true));
+        $this->registerSubCommand(new UnclaimAllSubCommand($this->plugin, "all"));
+        $this->registerSubCommand(new UnclaimAutoSubCommand($this->plugin, "auto"));
+        $this->registerSubCommand(new UnclaimCircleSubCommand($this->plugin, "circle"));
+        $this->registerSubCommand(new UnclaimSquareSubCommand($this->plugin, "square"));
     }
 }

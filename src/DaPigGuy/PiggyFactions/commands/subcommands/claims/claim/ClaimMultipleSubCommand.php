@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace DaPigGuy\PiggyFactions\commands\subcommands\claims;
+namespace DaPigGuy\PiggyFactions\commands\subcommands\claims\claim;
 
 use DaPigGuy\PiggyFactions\claims\ClaimsManager;
 use DaPigGuy\PiggyFactions\commands\subcommands\FactionSubCommand;

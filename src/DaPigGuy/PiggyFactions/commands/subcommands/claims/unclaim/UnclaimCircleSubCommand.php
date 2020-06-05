@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace DaPigGuy\PiggyFactions\commands\subcommands\claims;
+namespace DaPigGuy\PiggyFactions\commands\subcommands\claims\unclaim;
 
 use CortexPE\Commando\args\IntegerArgument;
 use DaPigGuy\PiggyFactions\language\LanguageManager;
 use pocketmine\level\format\Chunk;
 use pocketmine\Player;
 
-class ClaimSquareSubCommand extends ClaimMultipleSubCommand
+class UnclaimCircleSubCommand extends UnclaimMultipleSubCommand
 {
     /**
      * @return Chunk[]
@@ -26,6 +26,7 @@ class ClaimSquareSubCommand extends ClaimMultipleSubCommand
         $chunks = [];
         for ($dx = -$radius; $dx <= $radius; $dx++) {
             for ($dz = -$radius; $dz <= $radius; $dz++) {
+                if ($dx * $dx + $dz * $dz > $radius * $radius) continue;
                 $chunks[] = $player->getLevel()->getChunk($center->getX() + $dx, $center->getZ() + $dz);
             }
         }
@@ -35,5 +36,7 @@ class ClaimSquareSubCommand extends ClaimMultipleSubCommand
     protected function prepare(): void
     {
         $this->registerArgument(0, new IntegerArgument("radius"));
+        $this->setDescription("Unclaim chunks in a circle radius");
+        $this->setAliases(["c"]);
     }
 }

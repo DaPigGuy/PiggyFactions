@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace DaPigGuy\PiggyFactions\commands\subcommands\claims;
+namespace DaPigGuy\PiggyFactions\commands\subcommands\claims\claim;
 
 use CortexPE\Commando\args\IntegerArgument;
 use DaPigGuy\PiggyFactions\language\LanguageManager;
@@ -36,5 +36,7 @@ class ClaimCircleSubCommand extends ClaimMultipleSubCommand
     protected function prepare(): void
     {
         $this->registerArgument(0, new IntegerArgument("radius"));
+        $this->setDescription("Claim chunks in a circle radius");
+        $this->setAliases(["c"]);
     }
 }

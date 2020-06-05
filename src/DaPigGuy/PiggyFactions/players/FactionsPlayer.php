@@ -36,6 +36,8 @@ class FactionsPlayer
     /** @var bool */
     private $isAutoClaiming = false;
     /** @var bool */
+    private $isAutoUnclaiming = false;
+    /** @var bool */
     private $flying = false;
 
     /** @var string */
@@ -161,6 +163,16 @@ class FactionsPlayer
     public function setAutoClaiming(bool $value): void
     {
         $this->isAutoClaiming = $value;
+    }
+
+    public function isAutoUnclaiming(): bool
+    {
+        return $this->isAutoUnclaiming;
+    }
+
+    public function setAutoUnclaiming(bool $value): void
+    {
+        $this->isAutoUnclaiming = $value;
     }
 
     public function isFlying(): bool
