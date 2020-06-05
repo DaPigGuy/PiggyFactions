@@ -1,0 +1,187 @@
+chat:
+  ally: "{BOLD}{GOLD}SAVEZNIK {RESET}{LIGHT_PURPLE}{RANK_SYMBOL}{FACTION} {RESET}{PLAYER}: {MESSAGE}"
+  faction: "{BOLD}{GOLD}FRAKCIJA {RESET}{RANK_SYMBOL}{PLAYER}: {MESSAGE}"
+claims:
+  command-denied: "{RED}Ne mozeš koristiti {COMMAND} u {RELATION} teritoriji."
+  flight-disable-warning: "{RED}Nisi u frakcijinoj territoriji. Zaustavljanje leta za {AMOUNT}..."
+commands:
+  invalid-player: "{RED}Igrač {PLAYER} nije pronadjen."
+  invalid-faction: "{RED}Frakcija {FACTION} nije pronadjena."
+  member-not-found: "{RED}Member {PLAYER} nije pronadjen."
+  not-in-faction: "{RED}Ti Nisi u frakciji."
+  already-in-faction: "{RED}Ti si Već u frakciji."
+  not-leader: "{RED}Ti nisi vodja frakcije!"
+  no-permission: "{RED}Nije ti dozvoljeno da ovo radiš."
+  player-is-banned: "{RED}{PLAYER} je banovan iz tvoje frakcije."
+  you-are-banned: "{RED}Banovan si iz ove frakcije."
+  faction-full: "{RED}Frakcija je puna."
+  admin:
+    toggled: "{GREEN}Ti si sad u režimu admina."
+    toggled-off: "{RED}Nisi više u režimu admina."
+  ally:
+    self: "{RED}Ne možes biti saveznik sa sobom."
+    already-allied: "{RED}Već ste Saveznici!"
+    request: "{GREEN}{FACTION} je poslao zahtev za savezništvo. Uradi /f ally {FACTION} da prihvatiš."
+    allied: "{GREEN}Tvoja frakcija je sad saveznik sa {ALLY}."
+    success: "{GREEN}Zahtev za savezništvo poslato je {FACTION}."
+  ban:
+    cant-ban-higher: "{RED}Ne možes banovati membera sa većim rankom."
+    already-banned: "{RED}{PLAYER} je već banovan."
+    announcement: "{YELLOW}{PLAYER} je banovan iz frakcije."
+    banned: "{RED}Ti si banovan iz tvoje frakcije."
+  chat:
+    already-in-chat: "{RED}Ti si več u ovom četu!"
+    toggled: "{GREEN}Ti si u {CHAT} četu."
+    toggled-off: "{RED}Nisi više u {CHAT} ćetu."
+  claim:
+    blacklisted-world: "{RED}Uzimanje zemlje je zabranjeno u ovom svetu."
+    max-claimed: "{RED}Ne mozeš uzeti vise zemlje."
+    already-claimed: "{RED}Ovaj komad je već uzet."
+    no-power: "{RED}Tvoja frakcija nema dovoljno moći."
+    radius-less-than-one: "{RED}Radijus mora biti veći od jedan."
+    over-claimed: "{GREEN}Ovaj komad je preuzet."
+    success: "{GREEN}Ovaj komad je sad uzet."
+    claimed-multiple: "{GREEN}{AMOUNT} komada zemje uzeto od strane {COMMAND}."
+    auto:
+      toggled: "{GREEN}Ti sad uzimas zemlju automatski."
+      toggled-off: "{RED}Više ne uzimas zemlju automatski."
+  create:
+    name-taken: "{RED}Frakcija sa imenom{NAME} već postoji."
+    name-blacklisted: "{RED}Ime {NAME} je na crnoj listi."
+    name-too-long: "{RED}Ime {NAME} prelazi maksimalno ograničenje karaktera."
+    success: "{GREEN}Frakcija {NAME} je napravljena."
+  demote:
+    cant-demote-higher: "{RED}Ne mozes demotirati membere sa većim rankom."
+    already-lowest: "{RED}{PLAYER} je već namjanji rank."
+    success: "{GREEN}{PLAYER}je demotan na {ROLE}."
+    demoted: "{RED}Ti si demotan na {ROLE}."
+  deposit:
+    success: "{GREEN}${MONEY} je depozitovana u frakcijinu banku."
+  description:
+    success: "{GREEN}Frakcijin opis je sad {DESCRIPTION}"
+  disband:
+    success: "{YELLOW}Tvoja frakcija je obustavljena!"
+  enemy:
+    self: "{RED}Ne mozes samog sebe označiti neprijateljem."
+    already-enemy: "{RED}{FACTION} je već neprijatelj!"
+    success: "{GREEN}{FACTION} Je označena kao neprijatelj."
+  flag:
+    invalid-flag: "{RED}Konfiguracija{FLAG} nije pronadjena."
+    not-editable: "{RED}Konfiguracija {FLAG} se ne može promeniti."
+    toggled: "{GREEN}Konfiguracija{FLAG} je omogućena."
+    toggled-off: "{GREEN}Konfiguracija {FLAG} je onesposobljena."
+  fly:
+    not-allowed: "{RED}Ne smeš da letiš ovde."
+    toggled: "{GREEN}Letenje je omogućeno."
+    toggled-off: "{RED}Letenje je onesposobljeno."
+  help:
+    header: "{GOLD}____________.[{DARK_GREEN}Pomoć za frakcije ({PAGE}/{MAXPAGE}){GOLD}].____________"
+    command: "\n{GREEN}/f {COMMAND} - {RESET}{DESCRIPTION}"
+  home:
+    not-set: "{RED}Frakcijina kuća nije postavljena."
+  info:
+    message: "{GOLD}____________.[{DARK_GREEN}Frakcija{FACTION}{GOLD}].____________\n{GOLD}Deskripcija: {YELLOW}{DESCRIPTION}\n{GOLD}Moć: {YELLOW}{POWER}/{TOTALPOWER}\n{GOLD}Online: {YELLOW}{ONLINECOUNT}/{TOTALPLAYERS}\n{GOLD}Vodja: {YELLOW}{LEADER}\n{GOLD}Saveznik: {DARK_PURPLE}{ALLIES}\n{GOLD}Neprijatelji: {RED}{ENEMIES}\n{GOLD}Memberi: {YELLOW}{PLAYERS}"
+  invite:
+    already-in-faction: "{RED}{PLAYER} Je već u frakciji."
+    already-sent: "{RED}Pozivnica je već poslata {PLAYER}u."
+    success: "{GREEN}Pozivnica je poslata {PLAYER}u."
+    invited: "{GREEN}Pozvan si da se pridružiš{FACTION}. Napiši /f join {FACTION} da se pridružiš."
+  join:
+    no-invite: "{RED}Nemaš pozivnicu od {FACTION}."
+    joined: "{GREEN}{PLAYER} Se pridružio frakciji!"
+  kick:
+    cant-kick-higher: "{RED}Ne možes izbaciti membere većeg ranka."
+    announcement: "{YELLOW}{PLAYER} Je izbačen iz frakcije."
+    kicked: "{RED}Ti si izbačen is frakcije."
+  language:
+    invalid-language: "{RED}Jezik nije nadjen."
+    success: "{GREEN}Jezik je promenjen na engleski."
+  leader:
+    offline: "{RED}Igrač mora biti online da se prebaci vodjstvo."
+    recipient: "{GREEN}Ti si sad lider tvoje frakcije."
+    success: "{GREEN}Frakcija je prebačena {PLAYER}. ok im not sure how to translate this yet ok"
+  leave:
+    is-leader: "{RED}Ti si lider tvoje frakcije."
+    success: "{YELLOW}Izašao si iz tvoje frakcije."
+  map:
+    header: "{GOLD}____________.[ {GREEN}({X},{Z}) {FACTION} {GOLD}].____________"
+  money:
+    balance: "{GREEN}Frakcijino stanje: ${MONEY}"
+  motd:
+    success: "{GREEN}Frakcijin MOTD je postavljen kao {MOTD}"
+  name:
+    success: "{GREEN}Frakcijino ime je promenjeno u {FACTION}."
+  neutral:
+    already-neutral: "{RED}Tvoja frakcija nije u odnosu sa {FACTION}."
+    success: "{GREEN}Tvoja frakcija je neutralna sa {FACTION}."
+  permission:
+    role-not-found: "{RED}Pozicija nije pronadjena."
+    permission-not-found: "{RED}Dozvola nije pronadjena."
+    success: "{GREEN}Dozvola {PERMISSION} je {TOGGLED} za poziciju {ROLE}."
+  promote:
+    cant-promote-higher: "{RED}Ne mozeš promovisati više od tvog ranka."
+    already-maxed: "{RED}{PLAYER} Je već najveći rank."
+    success: "{GREEN}{PLAYER} je promovisan na {ROLE}."
+    promoted: "{GREEN}ti si promovisan na {ROLE}."
+  sethome:
+    not-within-territory: "{RED}Frakcijina kuća mora biti u frakcijinoj teritoriji."
+    success: "{GREEN}Frakcijina kuća je postavljena."
+  setpower:
+    success: "{GREEN}{PLAYER}va moć je postavljena na {POWER}."
+    power-set: "{GREEN}Tvoja moć je postavljena na {POWER}."
+  top:
+    header: "{GOLD}____________.[{DARK_GREEN}Najbolja frakcija{CATEGORY} ({PAGE}/{TOTALPAGES}){GOLD}].____________"
+    line:
+      online: "{GOLD}#{RANK} {RELATIONCOLOR}{FACTION}{GOLD} -{YELLOW} {ONLINE}"
+      members: "{GOLD}#{RANK} {RELATIONCOLOR}{FACTION}{GOLD} -{YELLOW} {MEMBERS}"
+      power: "{GOLD}#{RANK} {RELATIONCOLOR}{FACTION}{GOLD} -{YELLOW} {POWER}/{TOTALPOWER}"
+      money: "{GOLD}#{RANK} {RELATIONCOLOR}{FACTION}{GOLD} -{YELLOW} ${MONEY}"
+  truce:
+    self: "{RED}Ne možeš se pomiriti sa sobom."
+    already-truced: "{RED}Već ste pomireni!"
+    request: "{GREEN}{FACTION} je poslala zahtev za pomirenje. Napiši /f truce {FACTION} da prihvatiš."
+    truced: "{GREEN}Tvoja frakcija se pomirila sa {TRUCED}."
+    success: "{GREEN}Zahtev za pomirenje je poslato {FACTION}."
+  unally:
+    not-allied: "{RED}Nisi u savezništvu sa  {FACTION}."
+    unallied: "{RED}Tvoja Frakcija više nije u savezništvu sa {FACTION}."
+  unban:
+    not-banned: "{RED}{PLAYER} nije banovan."
+    announcement: "{YELLOW}{PLAYER} je unbanovan iz frakcije."
+  unclaim:
+    not-claimed: "{RED}Ovaj komad nije uzet."
+    other-faction: "{RED}Ovaj komad već ima druga frakcija."
+    success: "{GREEN}Ovaj komad nije više uzet."
+    all:
+      success: "{GREEN}Svi {FACTION} komadi više nisu uzeti."
+  withdraw:
+    success: "{GREEN}${MONEY} je uzeto iz frakcijine banke."
+death:
+  power: "{RED}Tvoja moć je sad{POWER}."
+economy:
+  not-enough-money: "{RED}Nemaš dovoljno novca. Nedostaje ${DIFFERENCE}.\n "
+  negative-money: "{RED}Negativan iznos novca."
+forms:
+  title: "PiggyFactions UI"
+motd: "{GOLD}____________.[{DARK_GREEN}{FACTION} MOTD{GOLD}].____________\n{WHITE}{MOTD}"
+pvp:
+  attacker-factionless: "{RED}Ne možeš povrediti druge igrače pre nego što udješ u frakciju."
+  target-factionless: "{RED}Ne možeš povrediti igrače koje nisu u frakciji."
+  cant-attack-in-territory: "{RED}Ne možeš povrediti {PLAYER} u njihovoj teritoriji osim ako ih proglasiš za neprijatelja."
+territory-titles:
+  wilderness-title: "{DARK_GREEN}Divljina"
+  wilderness-subtitle: "{YELLOW}Opasno je otići sam."
+  faction-title: "{RELATION}{FACTION}"
+  faction-subtitle: "{ITALIC}{DESCRIPTION}"
+logs:
+  page-too-low: "{RED}Strana mora biti veća od nula."
+  invalid-log: "{RED}Nevažeći tip ili straničin broj!\nUpotreba: /f logs <kick|ban|invite|join|leave|unban|leader_change> 1\n "
+  title: "{GOLD}Frakcijin log: {AQUA}Stranica{CURRENTPAGE}/{TOTALPAGES}"
+  actions:
+    kick: "{GOLD}{TIME} => {GREEN}{KICKED} {AQUA}je bio izbačen od strane {GREEN}{KICKER}."
+    ban: "{GOLD}{TIME} => {GREEN}{BANNED} {AQUA}bio je banovan od strane {GREEN}{BANNEDBY}."
+    join: "{GOLD}{TIME} => {GREEN}{JOINED} {AQUA}je ušao."
+    leave: "{GOLD}{TIME} => {GREEN}{LEFT} {AQUA}Je izašao."
+    unban: "{GOLD}{TIME} => {GREEN}{UNBANNED} {AQUA}je bio unbanovan od strane{GREEN}{UNBANNEDBY}"
+    invite: "{GOLD}{TIME} => {GREEN}{INVITED} {AQUA}je bio pozvan od strane {GREEN}{INVITEDBY}."
+    leader_change: "{GOLD}{TIME} => {AQUA}Vodjstvo je prebačeno od {GREEN}{OLD} {AQUA}na {GREEN}{NEW}."

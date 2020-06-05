@@ -20,6 +20,7 @@ class LanguageManager
         "chinese_traditional",
         "english",
         "german",
+        "serbian",
         "spanish"
     ];
     const LOCALE_CODE_TABLE = [
@@ -28,6 +29,7 @@ class LanguageManager
         "es_ES" => "spanish",
         "es_MX" => "spanish",
         "de_DE" => "german",
+        "sr_SP" => "serbian",
         "zh_TW" => "chinese_traditional"
     ];
 
