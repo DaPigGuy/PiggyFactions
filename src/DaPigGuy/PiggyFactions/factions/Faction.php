@@ -51,10 +51,13 @@ class Faction
     /** @var float */
     private $money;
 
+    /** @var float */
+    private $powerboost;
+
     /** @var array */
     private $invitedPlayers;
 
-    public function __construct(string $id, string $name, int $creationTime, ?string $description, ?string $motd, array $members, array $permissions, array $flags, ?Position $home, array $relations, array $banned, float $money)
+    public function __construct(string $id, string $name, int $creationTime, ?string $description, ?string $motd, array $members, array $permissions, array $flags, ?Position $home, array $relations, array $banned, float $money, float $powerboost)
     {
         $this->id = $id;
         $this->name = $name;
@@ -78,6 +81,7 @@ class Faction
         $this->relations = $relations;
         $this->banned = $banned;
         $this->money = $money;
+        $this->powerboost = $powerboost;
     }
 
     public function getId(): string
@@ -125,11 +129,29 @@ class Faction
 
     public function getPower(): float
     {
-        $power = 0;
+        $power = $this->getPowerBoost();
         foreach ($this->getMembers() as $member) {
             $power += $member->getPower();
         }
         return $power;
+    }
+
+    public function getMaxPower(): float
+    {
+        return array_sum(array_map(static function (FactionsPlayer $p): float {
+                return $p->getMaxPower();
+            }, $this->getMembers())) + $this->powerboost;
+    }
+
+    public function getPowerBoost(): float
+    {
+        return $this->powerboost;
+    }
+
+    public function setPowerBoost(float $powerboost): void
+    {
+        $this->powerboost = $powerboost;
+        $this->update();
     }
 
     /**
@@ -435,7 +457,8 @@ class Faction
             ]),
             "relations" => json_encode($this->relations),
             "banned" => json_encode($this->banned),
-            "money" => $this->money
+            "money" => $this->money,
+            "powerboost" => $this->powerboost
         ]);
     }
 }

@@ -25,6 +25,8 @@ class FactionsPlayer
     private $role;
     /** @var float */
     private $power;
+    /** @var float */
+    private $powerboost;
 
     /** @var string */
     private $language;
@@ -42,13 +44,14 @@ class FactionsPlayer
     /** @var bool */
     private $adminMode = false;
 
-    public function __construct(UUID $uuid, string $username, ?string $faction, ?string $role, float $power, string $language)
+    public function __construct(UUID $uuid, string $username, ?string $faction, ?string $role, float $power, float $powerboost, string $language)
     {
         $this->uuid = $uuid;
         $this->username = $username;
         $this->faction = $faction;
         $this->role = $role;
         $this->power = $power;
+        $this->powerboost = $powerboost;
         $this->language = $language;
     }
 
@@ -95,11 +98,27 @@ class FactionsPlayer
         return $this->power;
     }
 
+    public function getMaxPower(): float
+    {
+        return PiggyFactions::getInstance()->getConfig()->getNested("factions.power.max") + $this->powerboost;
+    }
+
     public function setPower(float $power): void
     {
         $this->power = $power;
         if ($this->power < ($min = PiggyFactions::getInstance()->getConfig()->getNested("factions.power.min", 0))) $this->power = $min;
-        if ($this->power > ($max = PiggyFactions::getInstance()->getConfig()->getNested("factions.power.max", 10))) $this->power = $max;
+        if ($this->power > ($max = $this->getMaxPower())) $this->power = $max;
+        $this->update();
+    }
+
+    public function getPowerBoost(): float
+    {
+        return $this->powerboost;
+    }
+
+    public function setPowerBoost(float $powerboost): void
+    {
+        $this->powerboost = $powerboost;
         $this->update();
     }
 
@@ -182,6 +201,7 @@ class FactionsPlayer
             "faction" => $this->faction,
             "role" => $this->role,
             "power" => $this->power,
+            "powerboost" => $this->powerboost,
             "language" => $this->language
         ]);
     }

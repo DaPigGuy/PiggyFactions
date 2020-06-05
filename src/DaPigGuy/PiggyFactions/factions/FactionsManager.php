@@ -36,7 +36,7 @@ class FactionsManager
                     $row["home"] = new Position($decodedHome["x"], $decodedHome["y"], $decodedHome["z"], $this->plugin->getServer()->getLevelByName($decodedHome["level"]));
                 }
 
-                $this->factions[$row["id"]] = new Faction($row["id"], $row["name"], $row["creation_time"], $row["description"], $row["motd"], json_decode($row["members"], true), json_decode($row["permissions"], true), json_decode($row["flags"], true), $row["home"], isset($row["relations"]) ? json_decode($row["relations"], true) : [], isset($row["banned"]) ? json_decode($row["banned"], true) : [], $row["money"]);
+                $this->factions[$row["id"]] = new Faction($row["id"], $row["name"], $row["creation_time"], $row["description"], $row["motd"], json_decode($row["members"], true), json_decode($row["permissions"], true), json_decode($row["flags"], true), $row["home"], isset($row["relations"]) ? json_decode($row["relations"], true) : [], isset($row["banned"]) ? json_decode($row["banned"], true) : [], $row["money"], $row["powerboost"]);
             }
             $this->plugin->getLogger()->debug("Loaded " . count($rows) . " factions");
         });
@@ -79,7 +79,7 @@ class FactionsManager
             }, PermissionFactory::getPermissions()),
             array_map(function (Flag $flag): bool {
                 return $flag->getValue();
-            }, $flags), null, [], [], 0);
+            }, $flags), null, [], [], 0, 0);
         foreach ($members as $member) {
             PlayerManager::getInstance()->getPlayer(UUID::fromString($member))->setFaction($this->factions[$id]);
         }

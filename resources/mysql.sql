@@ -17,7 +17,8 @@ CREATE TABLE IF NOT EXISTS factions
     home          JSON,
     relations     JSON,
     banned        JSON,
-    money         FLOAT DEFAULT 0
+    money         FLOAT DEFAULT 0,
+    powerboost    FLOAT DEFAULT 0
 );
 -- # }
 
@@ -55,6 +56,7 @@ WHERE id = :id;
 -- #    :relations string
 -- #    :banned string
 -- #    :money float
+-- #    :powerboost float
 UPDATE factions
 SET name=:name,
     description=:description,
@@ -65,7 +67,8 @@ SET name=:name,
     home=:home,
     relations=:relations,
     banned=:banned,
-    money=:money
+    money=:money,
+    powerboost=:powerboost
 WHERE id = :id;
 -- # }
 
@@ -81,6 +84,7 @@ CREATE TABLE IF NOT EXISTS players
     faction  VARCHAR(36),
     role     TEXT,
     power    FLOAT,
+    powerboost FLOAT DEFAULT 0,
     language VARCHAR(255) DEFAULT 'english'
 );
 -- # }
@@ -107,12 +111,14 @@ VALUES (:uuid, :username, :faction, :role, :power, :language);
 -- #    :faction ?string
 -- #    :role ?string
 -- #    :power float
+-- #    :powerboost float
 -- #    :language string
 UPDATE players
 SET username=:username,
     faction=:faction,
     role=:role,
     power=:power,
+    powerboost=:powerboost,
     language=:language
 WHERE uuid = :uuid;
 -- # }
@@ -250,6 +256,16 @@ ALTER TABLE factions
 -- # { 1
 ALTER TABLE players
     ADD language VARCHAR(255) DEFAULT 'english';
+-- # }
+
+-- # { 2
+ALTER TABLE factions
+    ADD powerboost FLOAT DEFAULT 0;
+-- # }
+
+-- # { 3
+ALTER TABLE players
+    ADD powerboost FLOAT DEFAULT 0;
 -- # }
 
 -- # }

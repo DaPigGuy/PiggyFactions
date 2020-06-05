@@ -6,7 +6,9 @@ namespace DaPigGuy\PiggyFactions\commands;
 
 use CortexPE\Commando\BaseCommand;
 use CortexPE\Commando\BaseSubCommand;
+use DaPigGuy\PiggyFactions\commands\subcommands\admin\AddPowerSubCommand;
 use DaPigGuy\PiggyFactions\commands\subcommands\admin\AdminSubCommand;
+use DaPigGuy\PiggyFactions\commands\subcommands\admin\PowerBoostSubCommand;
 use DaPigGuy\PiggyFactions\commands\subcommands\admin\SetPowerSubCommand;
 use DaPigGuy\PiggyFactions\commands\subcommands\ChatSubCommand;
 use DaPigGuy\PiggyFactions\commands\subcommands\claims\ClaimSubCommand;
@@ -82,6 +84,7 @@ class FactionCommand extends BaseCommand
     protected function prepare(): void
     {
         $this->setPermission("piggyfactions.command.faction.use");
+        $this->registerSubCommand(new AddPowerSubCommand($this->plugin, "addpower", "Add player power"));
         $this->registerSubCommand(new AdminSubCommand($this->plugin, "admin", "Toggle admin mode"));
         $this->registerSubCommand(new ChatSubCommand($this->plugin, ChatTypes::ALLY, "allychat", "Toggle ally chat", ["ac"]));
         $this->registerSubCommand(new AllySubCommand($this->plugin, "ally", "Ally with other factions"));
@@ -112,6 +115,7 @@ class FactionCommand extends BaseCommand
         $this->registerSubCommand(new NameSubCommand($this->plugin, "name", "Rename your faction"));
         $this->registerSubCommand(new NeutralSubCommand($this->plugin, "neutral", "Reset relation with another faction"));
         $this->registerSubCommand(new PermissionSubCommand($this->plugin, "permission", "Set faction role permissions", ["perms"]));
+        $this->registerSubCommand(new PowerBoostSubCommand($this->plugin, "powerboost", "Increases player or faction max power"));
         $this->registerSubCommand(new PromoteSubCommand($this->plugin, "promote", "Promote a faction member"));
         $this->registerSubCommand(new SeeChunkSubCommand($this->plugin, "seechunk", "Toggle chunk visualizer", ["sc"]));
         $this->registerSubCommand(new SetHomeSubCommand($this->plugin, "sethome", "Set faction home"));
