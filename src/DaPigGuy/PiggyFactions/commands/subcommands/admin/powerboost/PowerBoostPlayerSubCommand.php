@@ -33,7 +33,5 @@ class PowerBoostPlayerSubCommand extends FactionSubCommand
     {
         $this->registerArgument(0, new RawStringArgument("name"));
         $this->registerArgument(1, new FloatArgument("power"));
-        $this->setDescription("Increases player maximum power");
-        $this->setAliases(["p"]);
     }
 }

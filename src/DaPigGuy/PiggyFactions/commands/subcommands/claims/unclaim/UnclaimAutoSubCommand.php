@@ -16,10 +16,4 @@ class UnclaimAutoSubCommand extends FactionSubCommand
         $member->setAutoUnclaiming(!$member->isAutoUnclaiming());
         $member->sendMessage("commands.unclaim.auto.toggled" . ($member->isAutoUnclaiming() ? "" : "-off"));
     }
-
-    public function prepare(): void
-    {
-        $this->setDescription("Unclaim chunks as you walk automatically");
-        $this->setAliases(["a"]);
-    }
 }

@@ -36,7 +36,5 @@ class UnclaimCircleSubCommand extends UnclaimMultipleSubCommand
     protected function prepare(): void
     {
         $this->registerArgument(0, new IntegerArgument("radius"));
-        $this->setDescription("Unclaim chunks in a circle radius");
-        $this->setAliases(["c"]);
     }
 }

@@ -16,10 +16,4 @@ class ClaimAutoSubCommand extends FactionSubCommand
         $member->setAutoClaiming(!$member->isAutoClaiming());
         $member->sendMessage("commands.claim.auto.toggled" . ($member->isAutoClaiming() ? "" : "-off"));
     }
-
-    public function prepare(): void
-    {
-        $this->setDescription("Claim chunks as you walk automatically");
-        $this->setAliases(["a"]);
-    }
 }

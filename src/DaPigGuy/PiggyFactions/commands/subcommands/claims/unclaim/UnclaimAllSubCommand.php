@@ -29,9 +29,4 @@ class UnclaimAllSubCommand extends FactionSubCommand
         $member->sendMessage("commands.unclaim.all.success");
         return;
     }
-
-    public function prepare(): void
-    {
-        $this->setDescription("Unclaims all claimed chunks");
-    }
 }

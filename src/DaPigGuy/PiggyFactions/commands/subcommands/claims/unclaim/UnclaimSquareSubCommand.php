@@ -35,7 +35,5 @@ class UnclaimSquareSubCommand extends UnclaimMultipleSubCommand
     protected function prepare(): void
     {
         $this->registerArgument(0, new IntegerArgument("radius"));
-        $this->setDescription("Unclaim chunks in a square radius");
-        $this->setAliases(["s"]);
     }
 }

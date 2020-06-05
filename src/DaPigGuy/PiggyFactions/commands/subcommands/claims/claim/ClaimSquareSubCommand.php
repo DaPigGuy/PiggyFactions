@@ -35,7 +35,5 @@ class ClaimSquareSubCommand extends ClaimMultipleSubCommand
     protected function prepare(): void
     {
         $this->registerArgument(0, new IntegerArgument("radius"));
-        $this->setDescription("Claim chunks in a square radius");
-        $this->setAliases(["s"]);
     }
 }
