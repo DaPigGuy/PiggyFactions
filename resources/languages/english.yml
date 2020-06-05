@@ -117,7 +117,8 @@ commands:
   permission:
     role-not-found: "{RED}Role not found."
     permission-not-found: "{RED}Permission not found."
-    success: "{GREEN}Permission {PERMISSION} has been {TOGGLED} for role {ROLE}."
+    toggled: "{GREEN}Permission {PERMISSION} has been enabled for role {ROLE}."
+    toggled-off: "{RED}Permission {PERMISSION} has been disabled for role {ROLE}."
   promote:
     cant-promote-higher: "{RED}You can not promote past your rank."
     already-maxed: "{RED}{PLAYER} is already at the max rank."
@@ -176,6 +177,17 @@ pvp:
   attacker-factionless: "{RED}You can not hurt other players until you have joined a faction."
   target-factionless: "{RED}You can not hurt players who are not currently in a faction."
   cant-attack-in-territory: "{RED}You can not hurt {PLAYER} in their own territory unless you declare them as enemy."
+relation:
+  ally: "ally"
+  truce: "truce"
+  neutral: "neutral"
+  enemy: "enemy"
+role:
+  leader: "leader"
+  officer: "officer"
+  member: "member"
+  recruit: "recruit"
+  none: "none"
 territory-titles:
   wilderness-title: "{DARK_GREEN}Wilderness"
   wilderness-subtitle: "{YELLOW}It's dangerous to go alone."

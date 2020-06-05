@@ -39,7 +39,7 @@ class PowerBoostSubCommand extends FactionSubCommand
             }
             $player->setPowerBoost($args["power"]);
             LanguageManager::getInstance()->sendMessage($sender, "commands.powerboost.success-player", ["{PLAYER}" => $player->getUsername(), "{POWER}" => $args["power"]]);
-            if (($p = $this->plugin->getServer()->getPlayerByUUID($player->getUuid())) !== null) LanguageManager::getInstance()->sendMessage($p, "commands.powerboost.boost-player", ["{POWER}" => $args["power"]]);
+            $player->sendMessage("commands.powerboost.boost-player", ["{POWER}" => $args["power"]]);
             return;
         }
     }

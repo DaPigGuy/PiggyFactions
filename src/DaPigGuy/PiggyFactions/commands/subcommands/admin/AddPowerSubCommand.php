@@ -30,7 +30,7 @@ class AddPowerSubCommand extends FactionSubCommand
 
         $player->setPower($ev->getPower());
         LanguageManager::getInstance()->sendMessage($sender, "commands.addpower.success", ["{PLAYER}" => $player->getUsername(), "{POWER}" => $args["power"]]);
-        if (($p = $this->plugin->getServer()->getPlayerByUUID($player->getUuid())) !== null) LanguageManager::getInstance()->sendMessage($p, "commands.addpower.power-add", ["{ADDEDPOWER}" => $args["power"], "{POWER}" => round($player->getPower(), 2, PHP_ROUND_HALF_DOWN)]);
+        $player->sendMessage("commands.addpower.power-add", ["{ADDEDPOWER}" => $args["power"], "{POWER}" => round($player->getPower(), 2, PHP_ROUND_HALF_DOWN)]);
     }
 
     protected function prepare(): void

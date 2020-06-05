@@ -38,7 +38,7 @@ class PermissionSubCommand extends FactionSubCommand
         if ($ev->isCancelled()) return;
 
         $faction->setPermission($args["role"], $args["permission"], $ev->getValue());
-        $member->sendMessage("commands.permission.success", ["{PERMISSION}" => $args["permission"], "{ROLE}" => $args["role"], "{TOGGLED}" => $ev->getValue() ? "enabled" : "disabled"]);
+        $member->sendMessage("commands.permission.toggled" . ($ev->getValue() ? "" : "-off"), ["{PERMISSION}" => $args["permission"], "{ROLE}" => $args["role"]]);
     }
 
     protected function prepare(): void

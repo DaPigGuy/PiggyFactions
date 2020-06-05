@@ -30,7 +30,7 @@ class SetPowerSubCommand extends FactionSubCommand
 
         $player->setPower($ev->getPower());
         LanguageManager::getInstance()->sendMessage($sender, "commands.setpower.success", ["{PLAYER}" => $player->getUsername(), "{POWER}" => round($player->getPower(), 2, PHP_ROUND_HALF_DOWN)]);
-        if (($p = $this->plugin->getServer()->getPlayerByUUID($player->getUuid())) !== null) LanguageManager::getInstance()->sendMessage($p, "commands.setpower.power-set", ["{POWER}" => round($player->getPower(), 2, PHP_ROUND_HALF_DOWN)]);
+        $player->sendMessage("commands.setpower.power-set", ["{POWER}" => round($player->getPower(), 2, PHP_ROUND_HALF_DOWN)]);
     }
 
     protected function prepare(): void
