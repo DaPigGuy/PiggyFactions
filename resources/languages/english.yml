@@ -133,10 +133,10 @@ commands:
     success: "{GREEN}{POWER} power has been added to {PLAYER}."
     power-add: "{GREEN}Your power has been increased by {ADDEDPOWER}. You now have {POWER} power."
   powerboost:
-    success-player: "{GREEN}Player {PLAYER}'s maximum power has been set to {POWER}."
-    success-faction: "{GREEN}Faction {FACTION}'s maximum power has been set to {POWER}."
-    boost-player: "{GREEN}Your maximum power has been set to {POWER}."
-    boost-faction: "{GREEN}Your faction's maximum power has been set to {POWER}."
+    success-player: "{GREEN}Player {PLAYER}'s maximum power has been increased by {POWER}."
+    success-faction: "{GREEN}Faction {FACTION}'s power has been increased by {POWER}."
+    boost-player: "{GREEN}Your maximum power has been increased by {POWER}."
+    boost-faction: "{GREEN}Your faction's power has been increased by {POWER}."
   top:
     header: "{GOLD}____________.[{DARK_GREEN}Top Factions by {CATEGORY} ({PAGE}/{TOTALPAGES}){GOLD}].____________"
     line:

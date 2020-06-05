@@ -47,10 +47,9 @@ class PlayerManager
             "faction" => null,
             "role" => null,
             "power" => PiggyFactions::getInstance()->getConfig()->getNested("factions.power.default", 20),
-            "powerboost" => 0,
             "language" => LanguageManager::LOCALE_CODE_TABLE[$player->getLocale()] ?? LanguageManager::getInstance()->getDefaultLanguage()
         ]);
-        $this->players[$player->getUniqueId()->toString()] = new FactionsPlayer($player->getUniqueId(), $player->getName(), null, null, PiggyFactions::getInstance()->getConfig()->getNested("factions.power.default", 20), 0,LanguageManager::LOCALE_CODE_TABLE[$player->getLocale()] ?? LanguageManager::getInstance()->getDefaultLanguage());
+        $this->players[$player->getUniqueId()->toString()] = new FactionsPlayer($player->getUniqueId(), $player->getName(), null, null, PiggyFactions::getInstance()->getConfig()->getNested("factions.power.default", 20), 0, LanguageManager::LOCALE_CODE_TABLE[$player->getLocale()] ?? LanguageManager::getInstance()->getDefaultLanguage());
         return $this->players[$player->getUniqueId()->toString()];
     }
 
