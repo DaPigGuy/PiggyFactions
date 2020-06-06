@@ -22,6 +22,7 @@ use DaPigGuy\PiggyFactions\tag\TagManager;
 use DaPigGuy\PiggyFactions\tasks\CheckUpdatesTask;
 use DaPigGuy\PiggyFactions\tasks\ShowChunksTask;
 use DaPigGuy\PiggyFactions\tasks\UpdatePowerTask;
+use DaPigGuy\PiggyFactions\utils\PoggitBuildInfo;
 use Exception;
 use jojoe77777\FormAPI\Form;
 use pocketmine\entity\Entity;
@@ -37,6 +38,8 @@ class PiggyFactions extends PluginBase
 
     /** @var self */
     private static $instance;
+    /** @var PoggitBuildInfo */
+    private $poggitBuildInfo;
 
     /** @var DataConnector */
     private $database;
@@ -74,6 +77,7 @@ class PiggyFactions extends PluginBase
         }
 
         self::$instance = $this;
+        $this->poggitBuildInfo = new PoggitBuildInfo($this, $this->getFile());
 
         $this->saveDefaultConfig();
         $this->initDatabase();
@@ -153,6 +157,11 @@ class PiggyFactions extends PluginBase
     public static function getInstance(): PiggyFactions
     {
         return self::$instance;
+    }
+
+    public function getPoggitBuildInfo(): PoggitBuildInfo
+    {
+        return $this->poggitBuildInfo;
     }
 
     public function getDatabase(): DataConnector
