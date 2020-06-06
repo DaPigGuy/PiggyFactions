@@ -32,7 +32,7 @@ class TruceSubCommand extends FactionSubCommand
             return;
         }
         if ($targetFaction->getRelationWish($faction) === Relations::TRUCE) {
-            $ev = new FactionRelationEvent([$faction, $targetFaction], Relations::TRUCE);
+            $ev = new FactionRelationEvent($faction, $targetFaction, Relations::TRUCE);
             $ev->call();
             if ($ev->isCancelled()) return;
 

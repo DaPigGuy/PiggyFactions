@@ -30,7 +30,7 @@ class EnemySubCommand extends FactionSubCommand
             $member->sendMessage("commands.enemy.already-enemy", ["{FACTION}" => $targetFaction->getName()]);
             return;
         }
-        $ev = new FactionRelationEvent([$faction, $targetFaction], Relations::ENEMY);
+        $ev = new FactionRelationEvent($faction, $targetFaction, Relations::ENEMY);
         $ev->call();
         if ($ev->isCancelled()) return;
 

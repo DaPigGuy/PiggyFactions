@@ -26,7 +26,7 @@ class UnallySubCommand extends FactionSubCommand
             $member->sendMessage("commands.unally.not-allied", ["{FACTION}" => $targetFaction->getName()]);
             return;
         }
-        $ev = new FactionRelationEvent([$faction, $targetFaction], Relations::NONE);
+        $ev = new FactionRelationEvent($faction, $targetFaction, Relations::NONE);
         $ev->call();
         if ($ev->isCancelled()) return;
 

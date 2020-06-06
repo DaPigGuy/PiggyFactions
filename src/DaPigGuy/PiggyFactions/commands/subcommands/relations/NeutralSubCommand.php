@@ -26,7 +26,7 @@ class NeutralSubCommand extends FactionSubCommand
             $member->sendMessage("commands.neutral.already-neutral", ["{FACTION}" => $targetFaction->getName()]);
             return;
         }
-        $ev = new FactionRelationEvent([$faction, $targetFaction], Relations::NONE);
+        $ev = new FactionRelationEvent($faction, $targetFaction, Relations::NONE);
         $ev->call();
         if ($ev->isCancelled()) return;
 

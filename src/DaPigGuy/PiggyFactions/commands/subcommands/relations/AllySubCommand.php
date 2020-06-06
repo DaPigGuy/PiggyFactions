@@ -32,7 +32,7 @@ class AllySubCommand extends FactionSubCommand
             return;
         }
         if ($targetFaction->getRelationWish($faction) === Relations::ALLY) {
-            $ev = new FactionRelationEvent([$faction, $targetFaction], Relations::ALLY);
+            $ev = new FactionRelationEvent($faction, $targetFaction, Relations::ALLY);
             $ev->call();
             if ($ev->isCancelled()) return;
 

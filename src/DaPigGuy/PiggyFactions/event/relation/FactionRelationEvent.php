@@ -4,32 +4,27 @@ declare(strict_types=1);
 
 namespace DaPigGuy\PiggyFactions\event\relation;
 
+use DaPigGuy\PiggyFactions\event\FactionEvent;
 use DaPigGuy\PiggyFactions\factions\Faction;
 use pocketmine\event\Cancellable;
-use pocketmine\event\Event;
 
-class FactionRelationEvent extends Event implements Cancellable
+class FactionRelationEvent extends FactionEvent implements Cancellable
 {
-    /** @var Faction[] */
-    private $factions;
+    /** @var Faction */
+    private $targetFaction;
     /** @var string */
     private $relation;
 
-    /**
-     * @param Faction[] $factions
-     */
-    public function __construct(array $factions, string $relation)
+    public function __construct(Faction $faction, Faction $targetFaction, string $relation)
     {
-        $this->factions = $factions;
+        parent::__construct($faction);
+        $this->targetFaction = $targetFaction;
         $this->relation = $relation;
     }
 
-    /**
-     * @return Faction[]
-     */
-    public function getFactions(): array
+    public function getTargetFaction(): Faction
     {
-        return $this->factions;
+        return $this->targetFaction;
     }
 
     public function getRelation(): string
