@@ -7,7 +7,7 @@ namespace DaPigGuy\PiggyFactions\event;
 use DaPigGuy\PiggyFactions\factions\Faction;
 use pocketmine\event\Event;
 
-class FactionEvent extends Event
+abstract class FactionEvent extends Event
 {
     /** @var Faction */
     private $faction;

@@ -7,7 +7,7 @@ namespace DaPigGuy\PiggyFactions\event;
 use DaPigGuy\PiggyFactions\factions\Faction;
 use DaPigGuy\PiggyFactions\players\FactionsPlayer;
 
-class FactionMemberEvent extends FactionEvent
+abstract class FactionMemberEvent extends FactionEvent
 {
     /** @var FactionsPlayer */
     private $member;
