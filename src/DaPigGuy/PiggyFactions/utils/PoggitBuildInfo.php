@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace DaPigGuy\PiggyFactions\utils;
 
+use Phar;
 use pocketmine\plugin\Plugin;
 
 class PoggitBuildInfo
@@ -23,7 +24,7 @@ class PoggitBuildInfo
     {
         if ($isPhar) {
             $this->runningPhar = true;
-            $phar = new \Phar($file);
+            $phar = new Phar($file);
             if ($phar->hasMetadata()) {
                 $metadata = $phar->getMetadata();
                 if (isset($metadata["poggitBuildId"])) {

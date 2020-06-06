@@ -142,7 +142,7 @@ class ClaimsListener implements Listener
                     }
 
                     if ($newClaim === null) {
-                        $player->addTitle(LanguageManager::getInstance()->getMessage($language, "territory-titles.wilderness-title"), LanguageManager::getInstance()->getMessage($language, "territory-titles.wilderness-subtitle"), 5, 60, 5);
+                        $player->sendTitle(LanguageManager::getInstance()->getMessage($language, "territory-titles.wilderness-title"), LanguageManager::getInstance()->getMessage($language, "territory-titles.wilderness-subtitle"), 5, 60, 5);
                     } else {
                         $tags = [
                             "{RELATION}" => LanguageManager::getInstance()->getColorFor($player, $newFaction),
@@ -150,7 +150,7 @@ class ClaimsListener implements Listener
                             "{DESCRIPTION}" => $newFaction->getDescription()
                         ];
 
-                        $player->addTitle(LanguageManager::getInstance()->getMessage($language, "territory-titles.faction-title", $tags), LanguageManager::getInstance()->getMessage($language, "territory-titles.faction-subtitle", $tags), 5, 60, 5);
+                        $player->sendTitle(LanguageManager::getInstance()->getMessage($language, "territory-titles.faction-title", $tags), LanguageManager::getInstance()->getMessage($language, "territory-titles.faction-subtitle", $tags), 5, 60, 5);
                     }
                 }
             }

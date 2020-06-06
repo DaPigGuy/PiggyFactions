@@ -26,7 +26,7 @@ PiggyFactions is currently in beta. While we have tested quite thoroughly, there
 
 ## Prerequisites
 * Basic knowledge on how to install plugins from Poggit Releases and/or Poggit CI
-* PMMP 3.2.0 or greater
+* PMMP 3.13.0 or greater
 * mysql & sqlite3 PHP extensions (should already exist within your PHP binaries)
 * Economy type supported by libPiggyEconomy:
   * [EconomyAPI](https://github.com/onebone/EconomyS/tree/3.x/EconomyAPI) by onebone
