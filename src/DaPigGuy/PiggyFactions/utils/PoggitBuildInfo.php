@@ -14,6 +14,8 @@ class PoggitBuildInfo
     private $runningPhar = false;
     /** @var bool */
     private $runningPoggitPhar = false;
+    /** @var bool */
+    private $isPoggitRelease = false;
     /** @var array */
     private $poggitPharMetadata;
 
@@ -26,10 +28,11 @@ class PoggitBuildInfo
                 $metadata = $phar->getMetadata();
                 if (isset($metadata["poggitBuildId"])) {
                     $this->runningPoggitPhar = true;
+                    $this->isPoggitRelease = isset($metadata["poggitRelease"]);
                     $this->poggitPharMetadata = $metadata;
                 }
             }
-        } else if(is_dir(substr($file, strlen($plugin->getPluginLoader()->getAccessProtocol())))) {
+        } else if (is_dir(substr($file, strlen($plugin->getPluginLoader()->getAccessProtocol())))) {
             $this->runningFromSource = true;
         }
     }
@@ -47,6 +50,11 @@ class PoggitBuildInfo
     public function isRunningPoggitPhar(): bool
     {
         return $this->runningPoggitPhar;
+    }
+
+    public function isPoggitRelease(): bool
+    {
+        return $this->isPoggitRelease;
     }
 
     public function getPoggitPharMetadata(): array
