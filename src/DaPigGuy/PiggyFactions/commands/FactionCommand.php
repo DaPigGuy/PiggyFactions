@@ -37,6 +37,7 @@ use DaPigGuy\PiggyFactions\commands\subcommands\management\UnbanSubCommand;
 use DaPigGuy\PiggyFactions\commands\subcommands\money\DepositSubCommand;
 use DaPigGuy\PiggyFactions\commands\subcommands\money\MoneySubCommand;
 use DaPigGuy\PiggyFactions\commands\subcommands\money\WithdrawSubCommand;
+use DaPigGuy\PiggyFactions\commands\subcommands\PlayerSubCommand;
 use DaPigGuy\PiggyFactions\commands\subcommands\relations\AllySubCommand;
 use DaPigGuy\PiggyFactions\commands\subcommands\relations\EnemySubCommand;
 use DaPigGuy\PiggyFactions\commands\subcommands\relations\NeutralSubCommand;
@@ -115,6 +116,7 @@ class FactionCommand extends BaseCommand
         $this->registerSubCommand(new NameSubCommand($this->plugin, "name", "Rename your faction"));
         $this->registerSubCommand(new NeutralSubCommand($this->plugin, "neutral", "Reset relation with another faction"));
         $this->registerSubCommand(new PermissionSubCommand($this->plugin, "permission", "Set faction role permissions", ["perms"]));
+        $this->registerSubCommand(new PlayerSubCommand($this->plugin, "player", "Display player info", ["p"]));
         $this->registerSubCommand(new PowerBoostSubCommand($this->plugin, "powerboost", "Increases max power"));
         $this->registerSubCommand(new PromoteSubCommand($this->plugin, "promote", "Promote a faction member"));
         $this->registerSubCommand(new SeeChunkSubCommand($this->plugin, "seechunk", "Toggle chunk visualizer", ["sc"]));

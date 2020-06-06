@@ -80,7 +80,8 @@ commands:
   home:
     not-set: "{RED}Faction home is not set."
   info:
-    message: "{GOLD}____________.[{DARK_GREEN}Faction {FACTION}{GOLD}].____________\n{GOLD}Description: {YELLOW}{DESCRIPTION}\n{GOLD}Power: {YELLOW}{POWER}/{TOTALPOWER}\n{GOLD}Online: {YELLOW}{ONLINECOUNT}/{TOTALPLAYERS}\n{GOLD}Leader: {YELLOW}{LEADER}\n{GOLD}Allies: {DARK_PURPLE}{ALLIES}\n{GOLD}Enemies: {RED}{ENEMIES}\n{GOLD}Members: {YELLOW}{PLAYERS}"
+    message: "{GOLD}____________.[{DARK_GREEN}Faction {FACTION}{GOLD}].____________\n{GOLD}Description: {YELLOW}{DESCRIPTION}\n{GOLD}Land / Power / Max Power: {YELLOW}{CLAIMS}/{POWER}/{TOTALPOWER}\n{GOLD}Age: {YELLOW}{AGE}\n{GOLD}Online: {YELLOW}{ONLINECOUNT}/{TOTALPLAYERS}\n{GOLD}Leader: {YELLOW}{LEADER}\n{GOLD}Relations: {RELATIONS}\n{GOLD}Members: {YELLOW}{PLAYERS}"
+    description-not-set: "no description set"
   invite:
     already-in-faction: "{RED}{PLAYER} is already in a faction."
     already-sent: "{RED}An invite has already been sent to {PLAYER}."
@@ -119,6 +120,9 @@ commands:
     permission-not-found: "{RED}Permission not found."
     toggled: "{GREEN}Permission {PERMISSION} has been enabled for role {ROLE}."
     toggled-off: "{RED}Permission {PERMISSION} has been disabled for role {ROLE}."
+  player:
+    message: "\n{GOLD}____________.[{DARK_GREEN}Player {RANKSYMBOL}{PLAYER}{GOLD}].____________\n{GOLD}Faction: {YELLOW}{FACTION}\n{GOLD}Power: {YELLOW}{POWER}/{TOTALPOWER} {TIMETOMAXPOWER}"
+    time-to-max-power: "({TIME} hours left til max)"
   promote:
     cant-promote-higher: "{RED}You can not promote past your rank."
     already-maxed: "{RED}{PLAYER} is already at the max rank."
