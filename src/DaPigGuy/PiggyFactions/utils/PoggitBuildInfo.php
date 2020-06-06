@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace DaPigGuy\PiggyFactions\utils;
 
-use pocketmine\plugin\PharPluginLoader;
 use pocketmine\plugin\Plugin;
 
 class PoggitBuildInfo
@@ -18,12 +17,9 @@ class PoggitBuildInfo
     /** @var array */
     private $poggitPharMetadata;
 
-    public function __construct(Plugin $plugin, string $file)
+    public function __construct(Plugin $plugin, string $file, bool $isPhar)
     {
-        $extension = ".phar";
-        if (is_dir($file)) {
-            $this->runningFromSource = true;
-        } else if ($plugin->getPluginLoader() instanceof PharPluginLoader && substr($file, -strlen($extension)) === $extension) {
+        if ($isPhar) {
             $this->runningPhar = true;
             $phar = new \Phar($file);
             if ($phar->hasMetadata()) {
@@ -33,6 +29,8 @@ class PoggitBuildInfo
                     $this->poggitPharMetadata = $metadata;
                 }
             }
+        } else if(is_dir(substr($file, strlen($plugin->getPluginLoader()->getAccessProtocol())))) {
+            $this->runningFromSource = true;
         }
     }
 

@@ -77,7 +77,7 @@ class PiggyFactions extends PluginBase
         }
 
         self::$instance = $this;
-        $this->poggitBuildInfo = new PoggitBuildInfo($this, $this->getFile());
+        $this->poggitBuildInfo = new PoggitBuildInfo($this, $this->getFile(), $this->isPhar());
 
         $this->saveDefaultConfig();
         $this->initDatabase();
