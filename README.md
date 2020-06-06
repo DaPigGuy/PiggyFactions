@@ -65,12 +65,13 @@ PiggyFactions is currently in beta. While we have tested quite thoroughly, there
 | Command | Description | Permissions | Aliases |
 | --- | --- | --- | --- |
 | `/f` | PiggyFactions main command | `piggyfactions.command.faction.use` |
+| `/f addpower <player> <power>` | Add player power | `piggyfactions.command.faction.addpower` |
 | `/f admin` | Toggle admin mode | `piggyfactions.command.faction.admin` |
 | `/f ally <faction>` | Ally with other factions | `piggyfactions.command.faction.ally` |
 | `/f allychat` | Toggle ally chat | `piggyfactions.command.faction.allychat` | `/f ac` |
 | `/f ban <player>` | Ban a member from your faction | `piggyfactions.command.faction.ban` |
 | `/f chat` | Toggle faction chat | `piggyfactions.command.faction.chat` | `/f c` |
-| `/f claim` | Claim a chunk | `piggyfactions.command.faction.claim` |
+| `/f claim [all/auto/circle/square]` | Claim a chunk | `piggyfactions.command.faction.claim` |
 | `/f create <name>` | Create a faction | `piggyfactions.command.faction.create` |
 | `/f deposit <money>` | Deposit money into faction bank | `piggyfactions.command.faction.deposit` |
 | `/f description <description>` | Set faction description | `piggyfactions.command.faction.description` | `/f desc` |
@@ -95,6 +96,8 @@ PiggyFactions is currently in beta. While we have tested quite thoroughly, there
 | `/f name <name>` | Rename your faction | `piggyfactions.command.faction.name` |
 | `/f neutral <faction>` | Reset relation with another faction | `piggyfactions.command.faction.neutral` |
 | `/f permission <role> <permission> [value]` | Set faction role permissions | `piggyfactions.command.faction.permission` | `/f perms` |
+| `/f player <player>` | Display player info | `piggyfactions.command.faction.player` | `/f p` |
+| `/f powerboost <faction/player> <target> <powerboost>` | Increases max power | `piggyfactions.command.faction.powerboost` |
 | `/f promote <player>` | Promote a faction member | `piggyfactions.command.faction.promote` |
 | `/f seechunk` | Toggle chunk visualizer | `piggyfactions.command.faction.seechunk` | `/f sc` |
 | `/f sethome` | Set faction home | `piggyfactions.command.faction.sethome` |
@@ -103,7 +106,7 @@ PiggyFactions is currently in beta. While we have tested quite thoroughly, there
 | `/f truce <faction>` | Truce with other factions | `piggyfactions.command.faction.truce` |
 | `/f unally <faction>` | End faction alliance | `piggyfactions.command.faction.unally` |
 | `/f unban <player>` | Unban a member from your faction | `piggyfactions.command.faction.unban` |
-| `/f unclaim` | Unclaim a chunk | `piggyfactions.command.faction.unclaim` |
+| `/f unclaim [all/auto/circle/square]` | Unclaim a chunk | `piggyfactions.command.faction.unclaim` |
 | `/f withdraw <money>` | Withdraw money from faction bank | `piggyfactions.command.faction.withdraw` |
 
 ## Permissions
@@ -113,6 +116,7 @@ PiggyFactions is currently in beta. While we have tested quite thoroughly, there
 | `piggyfactions.command` | Allow usage of all PiggyFactions commands | `op`|
 | `piggyfactions.command.faction` | Allow usage of /f subcommands | `op` |
 | `piggyfactions.command.faction.use` | Allow usage of /f | `true` |
+| `piggyfactions.command.faction.addpower` | Allow usage of /f addpower | `op` |
 | `piggyfactions.command.faction.admin` | Allow usage of /f admin | `op` |
 | `piggyfactions.command.faction.ally` | Allow usage of /f ally | `true` |
 | `piggyfactions.command.faction.allychat` | Allow usage of /f allychat | `true` |
@@ -143,6 +147,8 @@ PiggyFactions is currently in beta. While we have tested quite thoroughly, there
 | `piggyfactions.command.faction.name` | Allow usage of /f name | `true` |
 | `piggyfactions.command.faction.neutral` | Allow usage of /f neutral | `true` |
 | `piggyfactions.command.faction.permission` | Allow usage of /f permission | `true` |
+| `piggyfactions.command.faction.player` | Allow usage of /f player | `true` |
+| `piggyfactions.command.faction.powerboost` | Allow usage of /f powerboost | `op` |
 | `piggyfactions.command.faction.promote` | Allow usage of /f promote | `true` |
 | `piggyfactions.command.faction.seechunk` | Allow usage of /f seechunk | `true` |
 | `piggyfactions.command.faction.sethome` | Allow usage of /f sethome | `true` |
@@ -213,7 +219,7 @@ Translations for PiggyFactions are powered by our community translators:
 <!-- **Indonesian** - @SillierShark195 -->
 <!-- **Korean** - @Nabibobettau -->
 <!-- **Romanian** - @Gabitzuu -->
-<!-- **Serbian** - yuriiscute53925 -->
+* **Serbian** - yuriiscute53925
 * **Spanish** - @UnEnanoMas
 <!-- **Turkish** - @KingOfTurkey38 -->
 

@@ -21,6 +21,9 @@ permissions:
               piggyfactions.command.faction.use:
                 default: true
                 description: "Allow usage of /f"
+              piggyfactions.command.faction.addpower:
+                default: op
+                description: "Allow usage of /f addpower"
               piggyfactions.command.faction.admin:
                 default: op
                 description: "Allow usage of /f admin"
@@ -111,6 +114,12 @@ permissions:
               piggyfactions.command.faction.permission:
                 default: true
                 description: "Allow usage of /f permission"
+              piggyfactions.command.faction.player:
+                default: true
+                description: "Allow usage of /f player"
+              piggyfactions.command.faction.powerboost:
+                default: op
+                description: "Allow usage of /f powerboost"
               piggyfactions.command.faction.promote:
                 default: true
                 description: "Allow usage of /f promote"
