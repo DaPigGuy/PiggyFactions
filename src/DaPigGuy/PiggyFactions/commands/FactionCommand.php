@@ -48,6 +48,7 @@ use DaPigGuy\PiggyFactions\commands\subcommands\roles\LeaderSubCommand;
 use DaPigGuy\PiggyFactions\commands\subcommands\roles\PermissionSubCommand;
 use DaPigGuy\PiggyFactions\commands\subcommands\roles\PromoteSubCommand;
 use DaPigGuy\PiggyFactions\commands\subcommands\TopSubCommand;
+use DaPigGuy\PiggyFactions\commands\subcommands\VersionSubCommand;
 use DaPigGuy\PiggyFactions\language\LanguageManager;
 use DaPigGuy\PiggyFactions\PiggyFactions;
 use DaPigGuy\PiggyFactions\utils\ChatTypes;
@@ -127,6 +128,7 @@ class FactionCommand extends BaseCommand
         $this->registerSubCommand(new UnallySubCommand($this->plugin, "unally", "End faction alliance"));
         $this->registerSubCommand(new UnbanSubCommand($this->plugin, "unban", "Unban a member from your faction"));
         $this->registerSubCommand(new UnclaimSubCommand($this->plugin, "unclaim", "Unclaim a chunk"));
+        $this->registerSubCommand(new VersionSubCommand($this->plugin, "version", "Display version & credits for PiggyFactions"));
         if ($this->plugin->isFactionBankEnabled()) $this->registerSubCommand(new WithdrawSubCommand($this->plugin, "withdraw", "Withdraw money from faction bank"));
     }
 }

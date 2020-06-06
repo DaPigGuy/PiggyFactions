@@ -147,6 +147,9 @@ permissions:
               piggyfactions.command.faction.unclaim:
                 default: true
                 description: "Allow usage of /f unclaim"
+              piggyfactions.command.faction.version:
+                default: true
+                description: "Allow usage of /f version"
               piggyfactions.command.faction.withdraw:
                 default: true
                 description: "Allow usage of /f withdraw"

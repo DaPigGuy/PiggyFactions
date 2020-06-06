@@ -71,7 +71,7 @@ PiggyFactions is currently in beta. While we have tested quite thoroughly, there
 | `/f allychat` | Toggle ally chat | `piggyfactions.command.faction.allychat` | `/f ac` |
 | `/f ban <player>` | Ban a member from your faction | `piggyfactions.command.faction.ban` |
 | `/f chat` | Toggle faction chat | `piggyfactions.command.faction.chat` | `/f c` |
-| `/f claim [all/auto/circle/square]` | Claim a chunk | `piggyfactions.command.faction.claim` |
+| `/f claim [auto/circle/square]` | Claim a chunk | `piggyfactions.command.faction.claim` |
 | `/f create <name>` | Create a faction | `piggyfactions.command.faction.create` |
 | `/f deposit <money>` | Deposit money into faction bank | `piggyfactions.command.faction.deposit` |
 | `/f description <description>` | Set faction description | `piggyfactions.command.faction.description` | `/f desc` |
@@ -107,6 +107,7 @@ PiggyFactions is currently in beta. While we have tested quite thoroughly, there
 | `/f unally <faction>` | End faction alliance | `piggyfactions.command.faction.unally` |
 | `/f unban <player>` | Unban a member from your faction | `piggyfactions.command.faction.unban` |
 | `/f unclaim [all/auto/circle/square]` | Unclaim a chunk | `piggyfactions.command.faction.unclaim` |
+| `/f version` | Display version & credits for PiggyFactions | `piggyfactions.command.faction.version` |
 | `/f withdraw <money>` | Withdraw money from faction bank | `piggyfactions.command.faction.withdraw` |
 
 ## Permissions
@@ -158,6 +159,7 @@ PiggyFactions is currently in beta. While we have tested quite thoroughly, there
 | `piggyfactions.command.faction.unally` | Allow usage of /f unally | `true` |
 | `piggyfactions.command.faction.unban` | Allow usage of /f unban | `true` |
 | `piggyfactions.command.faction.unclaim` | Allow usage of /f unclaim | `true` |
+| `piggyfactions.command.faction.version` | Allow usage of /f version | `true` |
 | `piggyfactions.command.faction.withdraw` | Allow usage of /f withdraw | `true` |
 
 ## Flags
