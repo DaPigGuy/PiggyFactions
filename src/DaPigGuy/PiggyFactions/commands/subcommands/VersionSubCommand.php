@@ -24,18 +24,18 @@ class VersionSubCommand extends FactionSubCommand
         $poggitBuildInfo = $this->plugin->getPoggitBuildInfo();
         $specificVersion = "";
         if ($poggitBuildInfo->isRunningFromSource()) {
-            $specificVersion = "(from source)";
+            $specificVersion = "(source)";
         } elseif ($poggitBuildInfo->isRunningPoggitPhar()) {
             $metadata = $poggitBuildInfo->getPoggitPharMetadata();
-            $specificVersion = "(poggit build #" . $metadata["projectBuildNumber"] . ")";
+            $specificVersion = "(build #" . $metadata["projectBuildNumber"] . ")";
         } elseif ($poggitBuildInfo->isRunningPhar()) {
-            $specificVersion = "(from custom compiled phar)";
+            $specificVersion = "(custom phar)";
         }
 
-        $sender->sendMessage("PiggyFactions version " . TextFormat::GOLD . $this->plugin->getDescription()->getVersion() . TextFormat::RESET . " " . $specificVersion . TextFormat::EOL .
-            TextFormat::GREEN . "PiggyFactions is a modern factions plugin developed by DaPigGuy (MCPEPIG) and Aericio." . TextFormat::EOL .
-            TextFormat::GREEN . "Translations provided by " . implode(", ", array_map(function (string $translator, array $languages): string {
-                return $translator . " (" . implode(", ", $languages) . ")";
+        $sender->sendMessage(TextFormat::GOLD . "____________.[" . TextFormat::DARK_GREEN . "PiggyFactions " . TextFormat::GREEN . "v" . $this->plugin->getDescription()->getVersion() . " " . $specificVersion . TextFormat::GOLD . "].____________" . TextFormat::EOL .
+            TextFormat::GOLD . "PiggyFactions is a modern factions plugin developed by " . TextFormat::YELLOW . "DaPigGuy (MCPEPIG) " . TextFormat::GOLD . "and " . TextFormat::YELLOW . "Aericio" . TextFormat::GOLD . "."  . TextFormat::EOL .
+            TextFormat::GOLD . "Translations provided by " . implode(", ", array_map(function (string $translator, array $languages): string {
+                return TextFormat::YELLOW . $translator . " (" . implode(", ", $languages) . ")" . TextFormat::GOLD;
             }, array_keys($translators), $translators)) . TextFormat::EOL .
             TextFormat::GRAY . "Copyright 2020 DaPigGuy; Licensed under the Apache License.");
     }

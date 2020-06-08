@@ -110,7 +110,7 @@ class FactionCommand extends BaseCommand
         $this->registerSubCommand(new LanguageSubCommand($this->plugin, "language", "Change personal language for PiggyFactions", ["lang"]));
         $this->registerSubCommand(new LeaderSubCommand($this->plugin, "leader", "Transfer leadership of your faction"));
         $this->registerSubCommand(new LeaveSubCommand($this->plugin, "leave", "Leave your faction"));
-        $this->registerSubCommand(new LogsSubCommand($this->plugin, "logs", "View your Factions logs!"));
+        $this->registerSubCommand(new LogsSubCommand($this->plugin, "logs", "View your Factions logs", ["log"]));
         $this->registerSubCommand(new MapSubCommand($this->plugin, "map", "View map of area"));
         if ($this->plugin->isFactionBankEnabled()) $this->registerSubCommand(new MoneySubCommand($this->plugin, "money", "View faction bank balance"));
         $this->registerSubCommand(new MotdSubCommand($this->plugin, "motd", "Set faction MOTD"));
@@ -128,7 +128,7 @@ class FactionCommand extends BaseCommand
         $this->registerSubCommand(new UnallySubCommand($this->plugin, "unally", "End faction alliance"));
         $this->registerSubCommand(new UnbanSubCommand($this->plugin, "unban", "Unban a member from your faction"));
         $this->registerSubCommand(new UnclaimSubCommand($this->plugin, "unclaim", "Unclaim a chunk"));
-        $this->registerSubCommand(new VersionSubCommand($this->plugin, "version", "Display version & credits for PiggyFactions"));
+        $this->registerSubCommand(new VersionSubCommand($this->plugin, "version", "Display version & credits for PiggyFactions", ["v", "ver"]));
         if ($this->plugin->isFactionBankEnabled()) $this->registerSubCommand(new WithdrawSubCommand($this->plugin, "withdraw", "Withdraw money from faction bank"));
     }
 }
