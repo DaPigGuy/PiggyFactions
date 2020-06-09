@@ -14,6 +14,7 @@ economy:
   faction-bank:
     enabled: true
 factions:
+  enforce-alphanumeric-names: false
   blacklisted-names:
     - staff
     - owner

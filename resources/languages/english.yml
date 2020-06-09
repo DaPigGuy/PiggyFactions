@@ -47,6 +47,7 @@ commands:
       toggled-off: "{RED}You are no longer auto-claiming."
   create:
     name-taken: "{RED}A faction with the name {NAME} already exists."
+    alphanumeric-only: "{RED}Faction name must consist only of alphanumeric characters."
     name-blacklisted: "{RED}The name {NAME} is blacklisted."
     name-too-long: "{RED}The name {NAME} exceeds the maximum character limit."
     success: "{GREEN}Faction {NAME} has been created."

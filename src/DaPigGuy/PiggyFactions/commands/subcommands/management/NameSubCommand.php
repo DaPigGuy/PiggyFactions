@@ -19,6 +19,10 @@ class NameSubCommand extends FactionSubCommand
             $member->sendMessage("commands.create.name-taken", ["{NAME}" => $args["name"]]);
             return;
         }
+        if ($this->plugin->getConfig()->getNested("factions.enforce-alphanumeric-names", false) && !ctype_alnum($args["name"])) {
+            $member->sendMessage("commands.create.alphanumeric-only", ["{NAME}" => $args["name"]]);
+            return;
+        }
         if (in_array(strtolower($args["name"]), $this->plugin->getConfig()->getNested("factions.blacklisted-names", []))) {
             $member->sendMessage("commands.create.name-blacklisted", ["{NAME}" => $args["name"]]);
             return;
