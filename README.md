@@ -89,7 +89,7 @@ PiggyFactions is currently in beta. While we have tested quite thoroughly, there
 | `/f language <language>` | Change personal language for PiggyFactions | `piggyfactions.command.faction.language` | `/f lang` |
 | `/f leader <player>` | Transfer leadership of your faction | `piggyfactions.command.faction.leader` |
 | `/f leave` | Leave your faction | `piggyfactions.command.faction.leave` |
-| `/f logs` | View your faction logs | `piggyfactions.command.faction.logs` |
+| `/f logs` | View your faction logs | `piggyfactions.command.faction.logs` | `/f log` |
 | `/f map` | View map of area | `piggyfactions.command.faction.map` |
 | `/f money` | View faction bank balance | `piggyfactions.command.faction.money` |
 | `/f motd <motd>` | Set faction MOTD | `piggyfactions.command.faction.motd` |
@@ -107,7 +107,7 @@ PiggyFactions is currently in beta. While we have tested quite thoroughly, there
 | `/f unally <faction>` | End faction alliance | `piggyfactions.command.faction.unally` |
 | `/f unban <player>` | Unban a member from your faction | `piggyfactions.command.faction.unban` |
 | `/f unclaim [all/auto/circle/square]` | Unclaim a chunk | `piggyfactions.command.faction.unclaim` |
-| `/f version` | Display version & credits for PiggyFactions | `piggyfactions.command.faction.version` |
+| `/f version` | Display version & credits for PiggyFactions | `piggyfactions.command.faction.version` | `/f v`, `/f ver` |
 | `/f withdraw <money>` | Withdraw money from faction bank | `piggyfactions.command.faction.withdraw` |
 
 ## Permissions
