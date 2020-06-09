@@ -25,6 +25,7 @@ commands:
     allied: "{GREEN}Your faction is now allied with {ALLY}."
     success: "{GREEN}An ally request has been sent to {FACTION}."
   ban:
+    cant-ban-self: "{RED}You can not ban yourself."
     cant-ban-higher: "{RED}You can not ban members of higher rank."
     already-banned: "{RED}{PLAYER} is already banned."
     announcement: "{YELLOW}{PLAYER} was banned from the faction."
@@ -92,6 +93,7 @@ commands:
     no-invite: "{RED}You do not have an invite from {FACTION}."
     joined: "{GREEN}{PLAYER} has joined the faction!"
   kick:
+    cant-kick-self: "{REDYou can not kick yourself."
     cant-kick-higher: "{RED}You can not kick members of higher rank."
     announcement: "{YELLOW}{PLAYER} was kicked from the faction."
     kicked: "{RED}You were kicked from the faction."
