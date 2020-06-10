@@ -52,7 +52,14 @@ class LanguageManager
         self::$instance = $this;
 
         $this->plugin = $plugin;
-        $this->defaultLanguage = $plugin->getConfig()->getNested("languages.default", "english");
+
+        $defaultLanguage = $plugin->getConfig()->getNested("languages.default", "english");
+        if (!in_array($defaultLanguage, self::LANGUAGES)) {
+            $this->plugin->getLogger()->warning("Default language '" . $defaultLanguage . "' does not exist, defaulting to english.");
+            $defaultLanguage = "english";
+        }
+        $this->defaultLanguage = $defaultLanguage;
+
         foreach (self::LANGUAGES as $language) {
             $file = "languages/" . $language . ".yml";
             $plugin->saveResource($file);
