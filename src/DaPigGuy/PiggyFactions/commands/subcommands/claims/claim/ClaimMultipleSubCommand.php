@@ -9,7 +9,6 @@ use DaPigGuy\PiggyFactions\commands\subcommands\FactionSubCommand;
 use DaPigGuy\PiggyFactions\event\claims\ChunkOverclaimEvent;
 use DaPigGuy\PiggyFactions\event\claims\ClaimChunkEvent;
 use DaPigGuy\PiggyFactions\factions\Faction;
-use DaPigGuy\PiggyFactions\language\LanguageManager;
 use DaPigGuy\PiggyFactions\players\FactionsPlayer;
 use pocketmine\level\format\Chunk;
 use pocketmine\Player;
@@ -19,7 +18,7 @@ abstract class ClaimMultipleSubCommand extends FactionSubCommand
     public function onNormalRun(Player $sender, ?Faction $faction, FactionsPlayer $member, string $aliasUsed, array $args): void
     {
         if (in_array($sender->getLevel()->getFolderName(), $this->plugin->getConfig()->getNested("factions.claims.blacklisted-worlds"))) {
-            LanguageManager::getInstance()->sendMessage($sender, "commands.claim.blacklisted-world");
+            $member->sendMessage("commands.claim.blacklisted-world");
             return;
         }
         $claimed = 0;
@@ -54,7 +53,7 @@ abstract class ClaimMultipleSubCommand extends FactionSubCommand
             ClaimsManager::getInstance()->createClaim($faction, $sender->getLevel(), $chunk);
             $claimed++;
         }
-        LanguageManager::getInstance()->sendMessage($sender, "commands.claim.claimed-multiple", ["{AMOUNT}" => $claimed, "{COMMAND}" => $this->getName()]);
+        $member->sendMessage("commands.claim.claimed-multiple", ["{AMOUNT}" => $claimed, "{COMMAND}" => $this->getName()]);
     }
 
     /**
