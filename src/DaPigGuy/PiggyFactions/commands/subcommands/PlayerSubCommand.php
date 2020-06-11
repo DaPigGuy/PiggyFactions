@@ -33,7 +33,7 @@ class PlayerSubCommand extends FactionSubCommand
 
         $config = $this->plugin->getConfig();
         $time = round(($player->getMaxPower() - $player->getPower()) / $config->getNested("factions.power.per.hour"), 2, PHP_ROUND_HALF_DOWN);
-        $firstPlayed = (int)substr((string)$this->plugin->getServer()->getOfflinePlayer($player->getUsername())->getFirstPlayed(), 0, -3);
+        $firstPlayed = (int)($this->plugin->getServer()->getOfflinePlayer($player->getUsername())->getFirstPlayed() / 1000);
         $faction = $player->getFaction();
         LanguageManager::getInstance()->sendMessage($sender, "commands.player.message", [
             "{PLAYER}" => $player->getUsername(),
