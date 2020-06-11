@@ -47,6 +47,7 @@ commands:
       toggled-off: "{RED}Više ne uzimas zemlju automatski."
   create:
     name-taken: "{RED}Frakcija sa imenom{NAME} već postoji."
+    alphanumeric-only: "{RED}Frakcijino ime se mora sastojiti od alfanumeričkih karaktera."
     name-blacklisted: "{RED}Ime {NAME} je na crnoj listi."
     name-too-long: "{RED}Ime {NAME} prelazi maksimalno ograničenje karaktera."
     success: "{GREEN}Frakcija {NAME} je napravljena."
@@ -80,7 +81,8 @@ commands:
   home:
     not-set: "{RED}Frakcijina kuća nije postavljena."
   info:
-    message: "{GOLD}____________.[{DARK_GREEN}Frakcija{FACTION}{GOLD}].____________\n{GOLD}Deskripcija: {YELLOW}{DESCRIPTION}\n{GOLD}Moć: {YELLOW}{POWER}/{TOTALPOWER}\n{GOLD}Online: {YELLOW}{ONLINECOUNT}/{TOTALPLAYERS}\n{GOLD}Vodja: {YELLOW}{LEADER}\n{GOLD}Saveznik: {DARK_PURPLE}{ALLIES}\n{GOLD}Neprijatelji: {RED}{ENEMIES}\n{GOLD}Memberi: {YELLOW}{PLAYERS}"
+    message: "{GOLD}____________.[{DARK_GREEN}Frakcija {FACTION}{GOLD}].____________\n{GOLD}Deskripcija: {YELLOW}{DESCRIPTION}\n{GOLD}Zemljište / Moć / Maksimalna moć: {YELLOW}{CLAIMS}/{POWER}/{TOTALPOWER}\n{GOLD}Starost: {YELLOW}{AGE}\n{GOLD}Online: {YELLOW}{ONLINECOUNT}/{TOTALPLAYERS}\n{GOLD}Lider: {YELLOW}{LEADER}\n{GOLD}Veze: {RELATIONS}\n{GOLD}Memberi: {YELLOW}{PLAYERS}"
+    description-not-set: "nije postavljen opis"
   invite:
     already-in-faction: "{RED}{PLAYER} Je već u frakciji."
     already-sent: "{RED}Pozivnica je već poslata {PLAYER}u."
@@ -117,7 +119,11 @@ commands:
   permission:
     role-not-found: "{RED}Pozicija nije pronadjena."
     permission-not-found: "{RED}Dozvola nije pronadjena."
-    success: "{GREEN}Dozvola {PERMISSION} je {TOGGLED} za poziciju {ROLE}."
+    toggled: "{GREEN}Dozvola {PERMISSION} je uključena za ulogu {ROLE}."
+    toggled-off: "{RED}Dozvola {PERMISSION} Je isključena za ulogu {ROLE}."
+  player:
+    message: "\n{GOLD}____________.[{DARK_GREEN}Igrač {RANKSYMBOL}{PLAYER}{GOLD}].____________\n{GOLD}Frakcija: {YELLOW}{FACTION}\n{GOLD}Moć: {YELLOW}{POWER}/{TOTALPOWER} {TIMETOMAXPOWER}"
+    time-to-max-power: "({TIME} sati preostalo do maksimuma)"
   promote:
     cant-promote-higher: "{RED}Ne mozeš promovisati više od tvog ranka."
     already-maxed: "{RED}{PLAYER} Je već najveći rank."
@@ -129,6 +135,14 @@ commands:
   setpower:
     success: "{GREEN}{PLAYER}va moć je postavljena na {POWER}."
     power-set: "{GREEN}Tvoja moć je postavljena na {POWER}."
+  addpower:
+    success: "{GREEN}{POWER} Moći je dodato {PLAYER}."
+    power-add: "{GREEN}Tvoja moć se povećala za {ADDEDPOWER}. Sad imaš {POWER} moći."
+  powerboost:
+    success-player: "{GREEN}Igrač {PLAYER}va maksimalna moć se povećala za {POWER}."
+    success-faction: "{GREEN}Frakcijina {FACTION} Moć se povećala za {POWER}."
+    boost-player: "{GREEN}Tvoja maksimalna moć se povećala za {POWER}."
+    boost-faction: "{GREEN}TFrakcijina moć se povećala za {POWER}."
   top:
     header: "{GOLD}____________.[{DARK_GREEN}Najbolja frakcija{CATEGORY} ({PAGE}/{TOTALPAGES}){GOLD}].____________"
     line:
@@ -149,11 +163,16 @@ commands:
     not-banned: "{RED}{PLAYER} nije banovan."
     announcement: "{YELLOW}{PLAYER} je unbanovan iz frakcije."
   unclaim:
+    blacklisted-world: "{RED}Unclaimovanje nije dozvoljeno u ovom svetu."
     not-claimed: "{RED}Ovaj komad nije uzet."
     other-faction: "{RED}Ovaj komad već ima druga frakcija."
     success: "{GREEN}Ovaj komad nije više uzet."
+    claimed-multiple: "{GREEN}{AMOUNT} komada unclaimovano od strane {COMMAND}."
     all:
       success: "{GREEN}Svi {FACTION} komadi više nisu uzeti."
+    auto:
+      toggled: "{GREEN}Ti sad automatski unclaimaš"
+      toggled-off: "{RED}Ti više ne automatski claimaš"
   withdraw:
     success: "{GREEN}${MONEY} je uzeto iz frakcijine banke."
 death:
@@ -168,6 +187,17 @@ pvp:
   attacker-factionless: "{RED}Ne možeš povrediti druge igrače pre nego što udješ u frakciju."
   target-factionless: "{RED}Ne možeš povrediti igrače koje nisu u frakciji."
   cant-attack-in-territory: "{RED}Ne možeš povrediti {PLAYER} u njihovoj teritoriji osim ako ih proglasiš za neprijatelja."
+relation:
+  ally: "saveznik"
+  truce: "primirje"
+  neutral: "neutralno"
+  enemy: "neprijatelj"
+role:
+  leader: "vodlja"
+  officer: "oficir"
+  member: "member"
+  recruit: "regrut"
+  none: "nijedan"
 territory-titles:
   wilderness-title: "{DARK_GREEN}Divljina"
   wilderness-subtitle: "{YELLOW}Opasno je otići sam."
