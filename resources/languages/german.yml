@@ -47,6 +47,7 @@ commands:
       toggled-off: "{RED}Du beanspruchst nicht mehr automatisch."
   create:
     name-taken: "{RED}Eine Faktion mit den Namen {NAME} existiert bereits."
+    alphanumeric-only: "{RED}Der Faktionsname darf nur aus alphanumerischen Zeichen bestehen."
     name-blacklisted: "{RED}Der Name {NAME} ist gesperrt."
     name-too-long: "{RED}Der Name {NAME} überschreitet das maximale Zeichenlimit."
     success: "{GREEN}Faktion {NAME} wurde erstellt."
@@ -80,7 +81,8 @@ commands:
   home:
     not-set: "{RED}Faktionsheim ist nicht gesetzt."
   info:
-    message: "{GOLD}____________.[{DARK_GREEN}Faktion {FACTION}{GOLD}].____________\n{GOLD}Beschreibung: {YELLOW}{DESCRIPTION}\n{GOLD}Stärke: {YELLOW}{POWER}/{TOTALPOWER}\n{GOLD}Online: {YELLOW}{ONLINECOUNT}/{TOTALPLAYERS}\n{GOLD}Leiter: {YELLOW}{LEADER}\n{GOLD}Verbündete: {DARK_PURPLE}{ALLIES}\n{GOLD}Feinde: {RED}{ENEMIES}\n{GOLD}Mitglieder: {YELLOW}{PLAYERS}"
+    message: "{GOLD}____________.[{DARK_GREEN}Faktion {FACTION}{GOLD}].____________\n{GOLD}Beschreibung: {YELLOW}{DESCRIPTION}\n{GOLD}Land / Stärke / max Stärke: {YELLOW}{CLAIMS}/{POWER}/{TOTALPOWER}\n{GOLD}Alter: {YELLOW}{AGE}\n{GOLD}Online: {YELLOW}{ONLINECOUNT}/{TOTALPLAYERS}\n{GOLD}Leiter: {YELLOW}{LEADER}\n{GOLD}Beziehungen: {RELATIONS}\n{GOLD}Mitglieder: {YELLOW}{PLAYERS}"
+    description-not-set: "keine Beschreibung vorhanden"
   invite:
     already-in-faction: "{RED}{PLAYER} ist bereits in einer Faktion."
     already-sent: "{RED}Eine Einladung wurde bereits versandt an {PLAYER}."
@@ -117,7 +119,11 @@ commands:
   permission:
     role-not-found: "{RED}Rolle nicht gefunden."
     permission-not-found: "{RED}Berechtigung nicht gefunden."
-    success: "{GREEN}Berechtigung {PERMISSION} wurde {TOGGLED} für Rolle {ROLE}."
+    toggled: "{GREEN}Berechtigung {PERMISSION} wurde aktiviert für die Rolle {ROLE}."
+    toggled-off: "{RED}Berechtigung {PERMISSION} wurde deaktiviert für die Rolle {ROLE}."
+  player:
+    message: "\n{GOLD}____________.[{DARK_GREEN}Spieler {RANKSYMBOL}{PLAYER}{GOLD}].____________\n{GOLD}Faktion: {YELLOW}{FACTION}\n{GOLD}Stärke: {YELLOW}{POWER}/{TOTALPOWER} {TIMETOMAXPOWER}"
+    time-to-max-power: "({TIME} Stunden bis Max)"
   promote:
     cant-promote-higher: "{RED}Du kannst nicht über deinen Rang hinaus befördern."
     already-maxed: "{RED}{PLAYER} hat bereits den maximalen Rang."
@@ -129,6 +135,14 @@ commands:
   setpower:
     success: "{GREEN}{PLAYER}'s Stärke wurde gesetzt auf {POWER}."
     power-set: "{GREEN}Deine Stärke wurde gesetzt auf {POWER}."
+  addpower:
+    success: "{GREEN}{POWER} Stärke wurde dem Spieler {PLAYER} hinzugefügt."
+    power-add: "{GREEN}Deine Stärke wurde um {ADDEDPOWER} erhöht. Du hast nun {POWER} Stärke."
+  powerboost:
+    success-player: "{GREEN}Spieler {PLAYER}'s maximale Stärke wurde erhöht um {POWER}."
+    success-faction: "{GREEN}Faktion {FACTION}'s Stärke wurde erhöht um {POWER}."
+    boost-player: "{GREEN}Deine maximale Stärke wurde erhöht um {POWER}."
+    boost-faction: "{GREEN}Die Stärke deiner Faktion wurde erhöht um {POWER}."
   top:
     header: "{GOLD}____________.[{DARK_GREEN}Beste Faktionen nach {CATEGORY} ({PAGE}/{TOTALPAGES}){GOLD}].____________"
     line:
@@ -149,11 +163,16 @@ commands:
     not-banned: "{RED}{PLAYER} ist nicht verwiesen."
     announcement: "{YELLOW}{PLAYER} ist nicht mehr von der Faktion verwiesen."
   unclaim:
+    blacklisted-world: "{RED}Die Freigabe von Land ist in dieser Welt nicht erlaubt."
     not-claimed: "{RED}Dieser Chunk ist unbeansprucht."
     other-faction: "{RED}Dieser Chunk ist von einer anderen Faktion beansprucht."
     success: "{GREEN}Der Anspruch auf diesen Chunk wurde fallen gelassen."
+    claimed-multiple: "{GREEN}{AMOUNT} Chunks freigegeben durch {COMMAND}."
     all:
       success: "{GREEN}Alle Ansprüche von {FACTION} wurden fallen gelassen."
+    auto:
+      toggled: "{GREEN}Du gibst Land nun automatisch frei."
+      toggled-off: "{RED}Du gibst Land nicht mehr automatisch frei."
   withdraw:
     success: "{GREEN}{MONEY} $ wurden von der Faktionsbank abgehoben."
 death:
@@ -168,6 +187,17 @@ pvp:
   attacker-factionless: "{RED}Du kannst anderen Spielern keinen Schaden zufügen, bis du einer Faktion beigetreten bist."
   target-factionless: "{RED}Du kannst faktionslosen Spielern keinen Schaden zufügen."
   cant-attack-in-territory: "{RED}Du kannst {PLAYER} nicht in seinem eigenen Territorium angreifen, außer du deklarierst ihn als Feind."
+relation:
+  ally: "Verbündeter"
+  truce: "Waffenstillstand"
+  neutral: "neutral"
+  enemy: "Feind"
+role:
+  leader: "Leiter"
+  officer: "Offizier"
+  member: "Mitglied"
+  recruit: "Rekrut"
+  none: "keine"
 territory-titles:
   wilderness-title: "{DARK_GREEN}Wildnis"
   wilderness-subtitle: "{YELLOW}Es ist gefährlich alleine zu gehen."
