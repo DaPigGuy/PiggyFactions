@@ -47,6 +47,7 @@ commands:
       toggled-off: "{RED} Ya no estás reclamando automáticamente."
   create:
     name-taken: "{RED} Ya existe una facción con el nombre {NAME}."
+    alphanumeric-only: "{RED}El nombre de la facción debe consistir solo en caracteres alfanuméricos."
     name-blacklisted: "{RED}El nombre {NAME} esta en la lista negra."
     name-too-long: "{RED}El nombre {NAME} excede el límite máximo de caracteres."
     success: "{GREEN} La facción {NAME} ha sido creada."
@@ -80,7 +81,8 @@ commands:
   home:
     not-set: "{RED}El hogar de la facción no está establecido."
   info:
-    message: "{GOLD}____________.[{DARK_GREEN}Facción {FACTION}{GOLD}].____________\n{GOLD}Descripción: {YELLOW}{DESCRIPTION}\n{GOLD}Poder: {YELLOW}{POWER}/{TOTALPOWER}\n{GOLD}En linea: {YELLOW}{ONLINECOUNT}/{TOTALPLAYERS}\n{GOLD}Líder: {YELLOW}{LEADER}\n{GOLD}Aliados: {DARK_PURPLE}{ALLIES}\n{GOLD}Enemigos: {RED}{ENEMIES}\n{GOLD}Miembros: {YELLOW}{PLAYERS}"
+    message: "{GOLD}____________.[{DARK_GREEN}Facción {FACTION}{GOLD}].____________\n{GOLD}Descripción: {YELLOW}{DESCRIPTION}\n{GOLD}Tierra / Poder / Poder Maximo: {YELLOW}{CLAIMS}/{POWER}/{TOTALPOWER}\n{GOLD}Años: {YELLOW}{AGE}\n{GOLD}En linea: {YELLOW}{ONLINECOUNT}/{TOTALPLAYERS}\n{GOLD}Líder: {YELLOW}{LEADER}\n{GOLD}Relaciones: {RELATIONS}\n{GOLD}Miembros: {YELLOW}{PLAYERS}"
+    description-not-set: "sin descripción establecida"
   invite:
     already-in-faction: "{RED} {PLAYER} ya está en una facción."
     already-sent: "{RED}Ya se envió una invitación a {PLAYER}."
@@ -117,7 +119,11 @@ commands:
   permission:
     role-not-found: "{RED}Rol no encontrado."
     permission-not-found: "{RED}Permiso no encontrado."
-    success: "{GREEN}El permiso {PERMISSION} has sido {TOGGLED} para el rol {ROLE}."
+    toggled: "{GREEN}El permiso {PERMISSION} ha sido habilitado para el rol {ROLE}."
+    toggled-off: "{RED}El permiso {PERMISSION} ha sido deshabilitado para el rol {ROLE}."
+  player:
+    message: "\n{GOLD}____________.[{DARK_GREEN}Jugador {RANKSYMBOL}{PLAYER}{GOLD}].____________\n{GOLD}Facción: {YELLOW}{FACTION}\n{GOLD}Poder: {YELLOW}{POWER}/{TOTALPOWER} {TIMETOMAXPOWER}"
+    time-to-max-power: "({TIME} horas restantes hasta el máximo)"
   promote:
     cant-promote-higher: "{RED}Tu no puedes promover debido a tu rango."
     already-maxed: "{RED}{PLAYER} ya está en el rango máximo."
@@ -129,6 +135,14 @@ commands:
   setpower:
     success: "{GREEN}El poder de {PLAYER} se ha establecido en {POWER}."
     power-set: "{GREEN}Tu poder se ha establecido en {POWER}."
+  addpower:
+    success: "{GREEN}{POWER} el poder ha sido agregado a {PLAYER}."
+    power-add: "{GREEN}Tu poder se ha incrementado en {ADDEDPOWER}. Ahora tienes {POWER} de poder."
+  powerboost:
+    success-player: "{GREEN}La potencia máxima del jugador {PLAYER} se ha incrementado en {POWER}."
+    success-faction: "{GREEN}El poder de la facción {FACTION} ha aumentado en {POWER}."
+    boost-player: "{GREEN}Tu poder máximo se ha incrementado en {POWER}."
+    boost-faction: "{GREEN}El poder de tu facción se ha incrementado en {POWER}."
   top:
     header: "{GOLD}____________.[{DARK_GREEN}Facciones principales por {CATEGORY} ({PAGE}/{TOTALPAGES}){GOLD}].____________"
     line:
@@ -149,11 +163,16 @@ commands:
     not-banned: "{RED}{PLAYER} no esta bloqueado."
     announcement: "{YELLOW}{PLAYER} Fue desbloqueado de la facción."
   unclaim:
+    blacklisted-world: "{RED}Eliminar el reclamo no está permitido en este mundo."
     not-claimed: "{RED} Este trozo no esta reclamado."
     other-faction: "{RED}Este trozo esta reclamado por otra facción."
     success: "{GREEN}Este trozo ya no esta reclamado."
+    claimed-multiple: "{GREEN}{AMOUNT} trozos eliminados de reclamo por {COMMAND}."
     all:
       success: "{GREEN}Todas las reclamaciones de {FACTION} se han eliminado."
+    auto:
+      toggled: "{GREEN}Ahora estás eliminando el reclamo automáticamente."
+      toggled-off: "{RED}Ya no estás eliminando el reclamo automáticamente."
   withdraw:
     success: "{GREEN}Se ha retirado {MONEY}$ del banco de facciones."
 death:
@@ -168,6 +187,17 @@ pvp:
   attacker-factionless: "{ROJO}No puedes dañar a otros jugadores hasta que te hayas unido a una facción."
   target-factionless: "{RED}No puedes dañar a jugadores que no están actualmente en una facción."
   cant-attack-in-territory: "{RED}No puedes dañar a {PLAYER} en su propio territorio a menos que los declares como enemigos."
+relation:
+  ally: "aliado"
+  truce: "tregua"
+  neutral: "neutral"
+  enemy: "enemigo"
+role:
+  leader: "líder"
+  officer: "oficial"
+  member: "miembro"
+  recruit: "recluta"
+  none: "ninguno"
 territory-titles:
   wilderness-title: "{DARK_GREEN}Naturaleza"
   wilderness-subtitle: "{YELLOW}Es peligroso ir solo."
