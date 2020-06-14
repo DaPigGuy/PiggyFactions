@@ -8,6 +8,7 @@ use DaPigGuy\PiggyFactions\claims\ClaimsManager;
 use DaPigGuy\PiggyFactions\factions\Faction;
 use DaPigGuy\PiggyFactions\permissions\FactionPermission;
 use DaPigGuy\PiggyFactions\players\FactionsPlayer;
+use DaPigGuy\PiggyFactions\tasks\CheckFlightTask;
 use pocketmine\Player;
 
 class FlySubCommand extends FactionSubCommand
@@ -25,6 +26,7 @@ class FlySubCommand extends FactionSubCommand
         $member->setFlying(!$member->isFlying());
         $sender->setAllowFlight($member->isFlying());
         if (!$member->isFlying()) $sender->setFlying(false);
+        $this->plugin->getScheduler()->scheduleRepeatingTask(new CheckFlightTask($sender, $member), 20);
         $member->sendMessage("commands.fly.toggled" . ($member->isFlying() ? "" : "-off"));
     }
 }

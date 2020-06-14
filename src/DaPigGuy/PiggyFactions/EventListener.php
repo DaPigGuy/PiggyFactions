@@ -16,7 +16,6 @@ use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerChatEvent;
 use pocketmine\event\player\PlayerDeathEvent;
 use pocketmine\event\player\PlayerJoinEvent;
-use pocketmine\event\player\PlayerQuitEvent;
 use pocketmine\event\player\PlayerRespawnEvent;
 use pocketmine\Player;
 
@@ -142,12 +141,6 @@ class EventListener implements Listener
         if (($faction = $member->getFaction()) !== null) {
             if (($motd = $faction->getMotd()) !== null) $member->sendMessage("motd", ["{MOTD}" => $motd]);
         }
-    }
-
-    public function onQuit(PlayerQuitEvent $event): void
-    {
-        $member = PlayerManager::getInstance()->getPlayer($event->getPlayer()->getUniqueId());
-        if ($member->isFlying()) $member->setFlying(false);
     }
 
     public function onRespawn(PlayerRespawnEvent $event): void
