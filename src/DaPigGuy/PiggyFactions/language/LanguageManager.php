@@ -17,6 +17,7 @@ use ReflectionClass;
 class LanguageManager
 {
     const LANGUAGES = [
+        "chinese_simplified",
         "chinese_traditional",
         "english",
         "german",
@@ -30,6 +31,7 @@ class LanguageManager
         "es_MX" => "spanish",
         "de_DE" => "german",
         "sr_SP" => "serbian",
+        "zh_CN" => "chinese_simplified",
         "zh_TW" => "chinese_traditional"
     ];
 

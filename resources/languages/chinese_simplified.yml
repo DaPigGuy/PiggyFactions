@@ -1,0 +1,217 @@
+chat:
+  ally: "{BOLD}{GOLD}盟友 {RESET}{LIGHT_PURPLE}{RANK_SYMBOL}{FACTION} {RESET}{PLAYER}: {MESSAGE}"
+  faction: "{BOLD}{GOLD}公会 {RESET}{RANK_SYMBOL}{PLAYER}: {MESSAGE}"
+claims:
+  command-denied: "{RED}你不能在 {RELATION} 领地使用 {COMMAND} 指令."
+  flight-disable-warning: "{RED} 由于你不在公会领地内, 将于 {AMOUNT} 秒取消飞行."
+commands:
+  invalid-player: "{RED}未能找到 {PLAYER} 玩家."
+  invalid-faction: "{RED}未能找到 {FACTION} 公会."
+  member-not-found: "{RED}未能找到 {PLAYER} 会员."
+  not-in-faction: "{RED}你不在任何公会内."
+  already-in-faction: "{RED}你已经加入了一个公会."
+  not-leader: "{RED}你不是公会领袖!"
+  no-permission: "{RED}你并不允许执行此动作."
+  player-is-banned: "{RED}{PLAYER} 玩家禁止加入或参与此公会."
+  you-are-banned: "{RED}你被禁止加入或参与此公会."
+  faction-full: "{RED}此公会已满."
+  admin:
+    toggled: "{GREEN}你已进入管理员模式."
+    toggled-off: "{RED}你已离开管理员模式."
+  ally:
+    self: "{RED}你不能与自己结盟."
+    already-allied: "{RED}你已经与之结盟."
+    request: "{GREEN}{FACTION} 发出结盟请求. 请输入 /f ally {FACTION} 来接受."
+    allied: "{GREEN}你的公会现与 {ALLY} 结盟."
+    success: "{GREEN}已向 {FACTION} 发出结盟请求."
+  ban:
+    cant-ban-higher: "{RED}你不能禁制地位高于你的会员."
+    already-banned: "{RED}{PLAYER} 已经被禁止加入或参与此公会. "
+    announcement: "{YELLOW}{PLAYER} 已经被禁止加入或参与此公会. "
+    banned: "{RED}你被你的公会禁制."
+  chat:
+    already-in-chat: "{RED}你已经在对话之中!"
+    toggled: "{GREEN}你已进入{CHAT} 对话."
+    toggled-off: "{RED}你已退出 {CHAT} 对话."
+  claim:
+    blacklisted-world: "{RED}此世界并不能进行领地霸占或拥有."
+    max-claimed: "{RED}你不能再霸占或拥有任何领地."
+    already-claimed: "{RED}此区块已被霸占及拥有."
+    no-power: "{RED}你公会并没有足够的力量."
+    radius-less-than-one: "{RED}半径必须大于 1."
+    over-claimed: "{GREEN}成功从其他公会霸占此区块."
+    success: "{GREEN}你已霸占及拥有此区块."
+    claimed-multiple: "{GREEN}以 {COMMAND} 霸占及拥有 {AMOUNT} 区块."
+    auto:
+      toggled: "{GREEN}你现在将自动霸占领地."
+      toggled-off: "{RED}你不再自动霸占领地."
+  create:
+    name-taken: "{RED}已有名为 {NAME} 的公会."
+    alphanumeric-only: "{RED}公会名称只能由字母组成."
+    name-blacklisted: "{RED}名称 {NAME} 已被禁止."
+    name-too-long: "{RED} {NAME} 名称超出字数限制."
+    success: "{GREEN}成功创建名为 {NAME} 的公会."
+  demote:
+    cant-demote-higher: "{RED}你不能将地位高于你的会员降级."
+    already-lowest: "{RED}{PLAYER} 玩家已属于最低等级."
+    success: "{GREEN}{PLAYER} 玩家已被降级为 {ROLE}."
+    demoted: "{RED}你已被降级为 {ROLE}."
+  deposit:
+    success: "{GREEN}${MONEY} 金钱已被存放于公会银行."
+  description:
+    success: "{GREEN}公会描述已被设定为 {DESCRIPTION}"
+  disband:
+    success: "{YELLOW}你的公会已被解散!"
+  enemy:
+    self: "{RED}你不能将自己标记为敌人."
+    already-enemy: "{RED}{FACTION} 已是你的敌人!"
+    success: "{GREEN}{FACTION} 已被标记为敌人."
+  flag:
+    invalid-flag: "{RED}未能找到 {FLAG} 标签."
+    not-editable: "{RED}标签 {FLAG}并不能被修改."
+    toggled: "{GREEN}已启用 {FLAG} 标签."
+    toggled-off: "{GREEN}已停用 {FLAG} 标签."
+  fly:
+    not-allowed: "{RED}你不允许在此飞行."
+    toggled: "{GREEN}已启用飞行模式."
+    toggled-off: "{RED}已停用飞行模式."
+  help:
+    header: "{GOLD}____________.[{DARK_GREEN}公会协助 ({PAGE}/{MAXPAGE}){GOLD}].____________"
+    command: "\n{GREEN}/f {COMMAND} - {RESET}{DESCRIPTION}"
+  home:
+    not-set: "{RED}并未设定公会家园."
+  info:
+    message: "{GOLD}____________.[{DARK_GREEN}Faction {FACTION}{GOLD}].____________\n{GOLD}描述: {YELLOW}{DESCRIPTION}\n{GOLD}领地/ 力量/ 最大力量: {YELLOW} {CLAIMS}/{POWER}/{TOTALPOWER}\n{GOLD}年代: {YELLOW}{AGE}\n{GOLD}在线: {YELLOW}{ONLINECOUNT}/{TOTALPLAYERS}\n{GOLD}领袖: {YELLOW }{LEADER}\n{GOLD}关系: {RELATIONS}\n{GOLD}会员: {YELLOW}{PLAYERS}"
+    description-not-set: "没有描述集"
+  invite:
+    already-in-faction: "{RED}{PLAYER} 玩家已在公会内."
+    already-sent: "{RED}已向 {PLAYER} 玩家发送邀请"
+    success: "{GREEN}成功向 {PLAYER} 玩家发送邀请."
+    invited: "{GREEN}你被邀请加入 {FACTION} 公会. 输入 /f join {FACTION} 来加入."
+  join:
+    no-invite: "{RED}你没有来自 {FACTION} 公会的邀请."
+    joined: "{GREEN}{PLAYER} 玩家加入了公会!"
+  kick:
+    cant-kick-higher: "{RED}你不能移除地位高于你的会员."
+    announcement: "{YELLOW}{PLAYER} 玩家已从公会移除."
+    kicked: "{RED}你被工会移除."
+  language:
+    invalid-language: "{RED}未能找到此语言."
+    success: "{GREEN}语言已切换至英语."
+  leader:
+    offline: "{RED}玩家必须在线以进行领袖转移."
+    recipient: "{GREEN}你现已成为公会领袖."
+    success: "{GREEN}公会已被转移至 {PLAYER} 玩家."
+  leave:
+    is-leader: "{RED}你已是公会领袖."
+    success: "{YELLOW}你已离开你的公会."
+  map:
+    header: "{GOLD}____________.[ {GREEN}({X},{Z}) {FACTION} {GOLD}].____________"
+  money:
+    balance: "{GREEN}公会储备: ${MONEY}"
+  motd:
+    success: "{GREEN}公会本日讯息已被设为 {MOTD}"
+  name:
+    success: "{GREEN}公会已被命名为 {FACTION}."
+  neutral:
+    already-neutral: "{RED}你的公会和 {FACTION} 公会并无任何关系."
+    success: "{GREEN}你的公会现与 {FACTION} 公会保持中性关系. "
+  permission:
+    role-not-found: "{RED}未能找到此身份."
+    permission-not-found: "{RED}未能找到此权限."
+    toggled: "{GREEN}权限{PERMISSION} 以为 {ROLE} 身份启用."
+    toggled-off: "{GREEN}权限{PERMISSION} 以为 {ROLE} 身份禁用."
+  player:
+    message: "\n{GOLD}____________.[{DARK_GREEN}玩家{RANKSYMBOL}{PLAYER}{GOLD}].____________\n{GOLD}公会: {YELLOW}{FACTION}\n{GOLD}力量: {YELLOW} {POWER}/{TOTALPOWER} {TIMETOMAXPOWER}"
+    time-to-max-power: "({TIME} 小时后到达最大极限)"
+  promote:
+    cant-promote-higher: "{RED}你不能为地位高于你的会员升级."
+    already-maxed: "{RED}{PLAYER} 玩家已属最高地位."
+    success: "{GREEN}{PLAYER} 玩家已被提升至 {ROLE} 身份."
+    promoted: "{GREEN}你已被提升至 {ROLE} 身份. "
+  sethome:
+    not-within-territory: "{RED}公会家园必须在公会领地范围内."
+    success: "{GREEN}成功设定公会家园."
+  setpower:
+    success: "{GREEN}{PLAYER} 玩家的力量已被设为 {POWER}."
+    power-set: "{GREEN}你的力量已被设为 {POWER}."
+  addpower:
+    success: "{GREEN}{POWER} 力量已添加给 {PLAYER}."
+    power-add: "{GREEN}你的力量已被增加了 {ADDEDPOWER}. 你现在一共有 {POWER} 力量."
+  powerboost:
+    success-player: "{GREEN}玩家 {PLAYER}的最大力量已被增加了 {POWER}."
+    success-faction: "{GREEN}工会{FACTION}的最大力量被增加了{POWER}."
+    boost-player: "{GREEN}你的最大力量已被增加了{POWER}."
+    boost-faction: "{GREEN}你的工会的力量已被增加了{POWER}."
+  top:
+    header: "{GOLD}____________.[{DARK_GREEN}{CATEGORY} 类别最高排名公会 ({PAGE}/{TOTALPAGES}){GOLD}].____________"
+    line:
+      online: "{GOLD}#{RANK} {RELATIONCOLOR}{FACTION}{GOLD} -{YELLOW} {ONLINE}"
+      members: "{GOLD}#{RANK} {RELATIONCOLOR}{FACTION}{GOLD} -{YELLOW} {MEMBERS}"
+      power: "{GOLD}#{RANK} {RELATIONCOLOR}{FACTION}{GOLD} -{YELLOW} {POWER}/{TOTALPOWER}"
+      money: "{GOLD}#{RANK} {RELATIONCOLOR}{FACTION}{GOLD} -{YELLOW} ${MONEY}"
+  truce:
+    self: "{RED}你不能和自己休战."
+    already-truced: "{RED}你与该公会已在休战状态!"
+    request: "{GREEN}{FACTION} 公会发出休战请求. 输入 /f truce {FACTION} 以接受."
+    truced: "{GREEN}你的公会现与 {TRUCED} 公会进入休战状态."
+    success: "{GREEN}已向 {FACTION} 公会发出休战请求."
+  unally:
+    not-allied: "{RED}你并未与 {FACTION} 公会结盟."
+    unallied: "{RED}你的公会和 {FACTION} 公会不再维持盟友关系."
+  unban:
+    not-banned: "{RED}{PLAYER} 并未受到禁制."
+    announcement: "{YELLOW}{PLAYER} 玩家已从公会中解除禁制."
+  unclaim:
+    blacklisted-world: "{RED}此世界并不能进行撤销占领地或撤销拥有."
+    not-claimed: "{RED}此区块并未被霸占."
+    other-faction: "{RED}此区块已被其他公会霸占."
+    success: "{GREEN}已取消霸占此区块."
+    claimed-multiple: "{GREEN}以 {COMMAND} 撤销了领地占有权并失去了 {AMOUNT} 区块."
+    all:
+      success: "{GREEN}{FACTION} 公会的所有领地已被取消霸占及拥有."
+    auto:
+      toggled: "{GREEN}你现在已在自动撤销领地占有权."
+      toggled-off: "{RED}你不再自动撤销领地占有权."
+  withdraw:
+    success: "{GREEN}${MONEY} 已从公会银行中取出."
+death:
+  power: "{RED}你现在的力量为 {POWER}."
+economy:
+  not-enough-money: "{RED}金钱不足. 还欠 ${DIFFERENCE}."
+  negative-money: "{RED}提供了负数的币值."
+forms:
+  title: "PiggyFactions 介面"
+motd: "{GOLD}____________.[{DARK_GREEN}{FACTION} 本日讯息{GOLD}].____________\n{WHITE}{MOTD}"
+pvp:
+  attacker-factionless: "{RED}在加入公会之前, 你不能伤害或攻击其他玩家."
+  target-factionless: "{RED}你不能伤害或攻击不在任何公会的玩家."
+  cant-attack-in-territory: "{RED}除非你宣告 {PLAYER} 玩家作为你的敌人, 否则你不能在其领地内伤害或攻击他 ."
+relation:
+  ally: "盟友"
+  truce: "休战"
+  neutral: "中性"
+  enemy: "敌人"
+role:
+  leader: "领袖"
+  officer: "官员"
+  member: "会员"
+  recruit: "新兵"
+  none: "无"
+territory-titles:
+  wilderness-title: "{DARK_GREEN}野外"
+  wilderness-subtitle: "{YELLOW}独自前往野外比较危险."
+  faction-title: "{RELATION}{FACTION}"
+  faction-subtitle: "{ITALIC}{DESCRIPTION}"
+logs:
+  page-too-low: "{RED}页数必须大于 0."
+  invalid-log: "{RED}无效的纪录种类或页数! \n用途: /f logs <kick|ban|invite|join|leave|unban|leader_change> <page>"
+  title: "{GOLD}公会记录: {AQUA}{CURRENTPAGE}/{TOTALPAGES} 页数"
+  actions:
+    kick: "{GOLD}{TIME} => {GREEN}{KICKED} 玩家{AQUA}被 {GREEN}{KICKER} 玩家移除."
+    ban: "{GOLD}{TIME} => {GREEN}{BANNED} 玩家{AQUA}被 {GREEN}{BANNEDBY} 玩家禁制."
+    join: "{GOLD}{TIME} => {GREEN}{JOINED} 玩家{AQUA}加入了公会."
+    leave: "{GOLD}{TIME} => {GREEN}{LEFT} 玩家{AQUA}离开了公会."
+    unban: "{GOLD}{TIME} => {GREEN}{UNBANNED} 玩家{AQUA}被 {GREEN}{UNBANNEDBY} 玩家解除禁制."
+    invite: "{GOLD}{TIME} => {GREEN}{INVITED} 玩家{AQUA}被 {GREEN}{INVITEDBY} 玩家邀请."
+    leader_change: "{GOLD}{TIME} => {AQUA}公会领导权由 {GREEN}{OLD} 玩家{AQUA}转移至 {GREEN}{NEW} 玩家."

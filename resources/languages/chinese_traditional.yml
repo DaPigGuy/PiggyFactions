@@ -47,6 +47,7 @@ commands:
       toggled-off: "{RED}你不再自動霸佔領地."
   create:
     name-taken: "{RED}已有名為 {NAME} 的公會."
+    alphanumeric-only: "{RED}公會名稱只能由字母組成."
     name-blacklisted: "{RED}名稱 {NAME} 已被禁止."
     name-too-long: "{RED} {NAME} 名稱超出字數限制."
     success: "{GREEN}成功創建名為 {NAME} 的公會."
@@ -80,7 +81,8 @@ commands:
   home:
     not-set: "{RED}並未設定公會家園."
   info:
-    message: "{GOLD}____________.[{DARK_GREEN}公會 {FACTION}{GOLD}].____________\n{GOLD}描述: {YELLOW}{DESCRIPTION}\n{GOLD}力量: {YELLOW}{POWER}/{TOTALPOWER}\n{GOLD}在線: {YELLOW}{ONLINECOUNT}/{TOTALPLAYERS}\n{GOLD}領袖: {YELLOW}{LEADER}\n{GOLD}盟友: {DARK_PURPLE}{ALLIES}\n{GOLD}敵人: {RED}{ENEMIES}\n{GOLD}會員: {YELLOW}{PLAYERS}"
+    message: "{GOLD}____________.[{DARK_GREEN}Faction {FACTION}{GOLD}].____________\n{GOLD}描述: {YELLOW}{DESCRIPTION}\n{GOLD}領地 / 力量 / 最大力量: {YELLOW}{CLAIMS}/{POWER}/{TOTALPOWER}\n{GOLD}年代: {YELLOW}{AGE}\n{GOLD}在線: {YELLOW}{ONLINECOUNT}/{TOTALPLAYERS}\n{GOLD}領袖: {YELLOW}{LEADER}\n{GOLD}关系: {RELATIONS}\n{GOLD}會員: {YELLOW}{PLAYERS}"
+    description-not-set: "沒有描述集"
   invite:
     already-in-faction: "{RED}{PLAYER} 玩家已在公會內."
     already-sent: "{RED}已向 {PLAYER} 玩家發送邀請"
@@ -117,7 +119,11 @@ commands:
   permission:
     role-not-found: "{RED}未能找到此身份."
     permission-not-found: "{RED}未能找到此權限."
-    success: "{GREEN} {ROLE} 身份 的 {PERMISSION} 權限 已 {TOGGLED}."
+    toggled: "{GREEN}權限{PERMISSION} 以為 {ROLE} 身份啟用."
+    toggled-off: "{GREEN}權限{PERMISSION} 以為 {ROLE} 身份禁用."
+  player:
+    message: "\n{GOLD}____________.[{DARK_GREEN}玩家 {RANKSYMBOL}{PLAYER}{GOLD}].____________\n{GOLD}公會: {YELLOW}{FACTION}\n{GOLD}力量: {YELLOW}{POWER}/{TOTALPOWER} {TIMETOMAXPOWER}"
+    time-to-max-power: "({TIME} 小時後到达最大極限)"
   promote:
     cant-promote-higher: "{RED}你不能為地位高於你的會員升級."
     already-maxed: "{RED}{PLAYER} 玩家已屬最高地位."
@@ -129,6 +135,14 @@ commands:
   setpower:
     success: "{GREEN}{PLAYER} 玩家的力量已被設為 {POWER}."
     power-set: "{GREEN}你的力量已被設為 {POWER}."
+  addpower:
+    success: "{GREEN}{POWER} 力量已添加給 {PLAYER}."
+    power-add: "{GREEN}你的力量已被增加了 {ADDEDPOWER}. 你現在一共有 {POWER} 力量."
+  powerboost:
+    success-player: "{GREEN}玩家 {PLAYER}的最大力量已被增加了 {POWER}."
+    success-faction: "{GREEN}工會{FACTION}的最大力量被增加了{POWER}."
+    boost-player: "{GREEN}你的最大力量已被增加了{POWER}."
+    boost-faction: "{GREEN}你的工會的力量已被增加了{POWER}."
   top:
     header: "{GOLD}____________.[{DARK_GREEN}{CATEGORY} 類別最高排名公會 ({PAGE}/{TOTALPAGES}){GOLD}].____________"
     line:
@@ -149,11 +163,16 @@ commands:
     not-banned: "{RED}{PLAYER} 並未受到禁制."
     announcement: "{YELLOW}{PLAYER} 玩家已從公會中解除禁制."
   unclaim:
+    blacklisted-world: "{RED}此世界並不能進行撤銷佔領地或撤銷擁有."
     not-claimed: "{RED}此區塊並未被霸佔."
     other-faction: "{RED}此區塊已被其他公會霸佔."
     success: "{GREEN}已取消霸佔此區塊."
+    claimed-multiple: "{GREEN}以 {COMMAND} 撤銷了領地佔有權並失去了 {AMOUNT} 區塊."
     all:
       success: "{GREEN}{FACTION} 公會的所有領地已被取消霸佔及擁有."
+    auto:
+      toggled: "{GREEN}你現在已在自動撤銷領地佔有權."
+      toggled-off: "{RED}你不再自動撤銷領地佔有權."
   withdraw:
     success: "{GREEN}${MONEY} 已從公會銀行中取出."
 death:
@@ -168,6 +187,17 @@ pvp:
   attacker-factionless: "{RED}在加入公會之前, 你不能傷害或攻擊其他玩家."
   target-factionless: "{RED}你不能傷害或攻擊不在任何公會的玩家."
   cant-attack-in-territory: "{RED}除非你宣告 {PLAYER} 玩家作為你的敵人, 否則你不能在其領地內傷害或攻擊他 ."
+relation:
+  ally: "盟友"
+  truce: "休戰"
+  neutral: "中性"
+  enemy: "敵人"
+role:
+  leader: "領袖"
+  officer: "官員"
+  member: "會員"
+  recruit: "新兵"
+  none: "無"
 territory-titles:
   wilderness-title: "{DARK_GREEN}野外"
   wilderness-subtitle: "{YELLOW}獨自前往野外比較危險."
