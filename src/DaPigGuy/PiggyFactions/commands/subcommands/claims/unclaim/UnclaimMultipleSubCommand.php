@@ -21,10 +21,10 @@ abstract class UnclaimMultipleSubCommand extends FactionSubCommand
             return;
         }
         $unclaimed = 0;
-        $positions = $this->getPositions($sender, $args);
-        if (empty($positions)) return;
-        foreach ($positions as $position) {
-            $claim = ClaimsManager::getInstance()->getClaim($position);
+        $chunks = $this->getChunks($sender, $args);
+        if (empty($chunks)) return;
+        foreach ($chunks as $chunk) {
+            $claim = ClaimsManager::getInstance()->getClaim(new Position($chunk[0] << 4, 0, $chunk[1] << 4, $sender->getLevel()));
             if ($claim !== null) {
                 if ($claim->getFaction() === $faction || $member->isInAdminMode()) {
                     $ev = new UnclaimChunkEvent($faction, $member, $claim);
@@ -39,8 +39,5 @@ abstract class UnclaimMultipleSubCommand extends FactionSubCommand
         $member->sendMessage("commands.unclaim.claimed-multiple", ["{AMOUNT}" => $unclaimed, "{COMMAND}" => $this->getName()]);
     }
 
-    /**
-     * @return Position[]
-     */
-    abstract public function getPositions(Player $player, array $args): array;
+    abstract public function getChunks(Player $player, array $args): array;
 }
