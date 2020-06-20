@@ -41,7 +41,7 @@ class ClaimsManager
 
     public function getClaim(int $chunkX, int $chunkZ, string $level): ?Claim
     {
-        return $this->claims[$chunkX . ":" . $chunkZ . ":" . $level];
+        return $this->claims[$chunkX . ":" . $chunkZ . ":" . $level] ?? null;
     }
 
     public function getClaimByPosition(Position $position): ?Claim
