@@ -7,6 +7,7 @@ namespace DaPigGuy\PiggyFactions\utils;
 use DaPigGuy\PiggyFactions\claims\ClaimsManager;
 use DaPigGuy\PiggyFactions\factions\Faction;
 use DaPigGuy\PiggyFactions\language\LanguageManager;
+use pocketmine\level\Position;
 use pocketmine\Player;
 use pocketmine\utils\TextFormat;
 
@@ -25,7 +26,7 @@ class AsciiMap
     public static function getMap(Player $player, int $width, int $height): array
     {
         $center = $player->getLevel()->getChunkAtPosition($player);
-        $centerFaction = ($claim = ClaimsManager::getInstance()->getClaim($player->getLevel(), $center)) === null ? null : $claim->getFaction();
+        $centerFaction = ($claim = ClaimsManager::getInstance()->getClaim($player)) === null ? null : $claim->getFaction();
 
         $compass = AsciiCompass::getAsciiCompass($player->getYaw());
 
@@ -45,8 +46,7 @@ class AsciiMap
                     continue;
                 }
 
-                $chunk = $player->getLevel()->getChunk($chunkX, $chunkZ);
-                $faction = $chunk === null || ($claim = ClaimsManager::getInstance()->getClaim($player->getLevel(), $chunk)) === null ? null : $claim->getFaction();
+                $faction = ($claim = ClaimsManager::getInstance()->getClaim(new Position($chunkX << 4, 0, $chunkZ << 4, $player->getLevel()))) === null ? null : $claim->getFaction();
 
                 if ($faction === null) {
                     $row .= self::MAP_KEY_WILDERNESS;

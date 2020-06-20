@@ -88,7 +88,7 @@ class EventListener implements Listener
                 return;
             }
 
-            $claim = ClaimsManager::getInstance()->getClaim($entity->getLevel(), $entity->getLevel()->getChunkAtPosition($entity));
+            $claim = ClaimsManager::getInstance()->getClaim($entity);
             if ($claim !== null) {
                 if ($claim->getFaction() === $entityFaction) {
                     if ($damagerFaction === null || !$damagerFaction->isEnemy($entityFaction)) {

@@ -8,21 +8,28 @@ use DaPigGuy\PiggyFactions\event\FactionMemberEvent;
 use DaPigGuy\PiggyFactions\factions\Faction;
 use DaPigGuy\PiggyFactions\players\FactionsPlayer;
 use pocketmine\event\Cancellable;
-use pocketmine\level\format\Chunk;
 
 class ClaimChunkEvent extends FactionMemberEvent implements Cancellable
 {
-    /** @var Chunk */
-    private $chunk;
+    /** @var int */
+    private $chunkX;
+    /** @var int */
+    private $chunkZ;
 
-    public function __construct(Faction $faction, FactionsPlayer $member, Chunk $chunk)
+    public function __construct(Faction $faction, FactionsPlayer $member, int $chunkX, int $chunkZ)
     {
         parent::__construct($faction, $member);
-        $this->chunk = $chunk;
+        $this->chunkX = $chunkX;
+        $this->chunkZ = $chunkZ;
     }
 
-    public function getChunk(): Chunk
+    public function getChunkX(): int
     {
-        return $this->chunk;
+        return $this->chunkX;
+    }
+
+    public function getChunkZ(): int
+    {
+        return $this->chunkZ;
     }
 }

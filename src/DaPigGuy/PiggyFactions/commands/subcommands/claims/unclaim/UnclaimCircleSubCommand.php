@@ -6,15 +6,12 @@ namespace DaPigGuy\PiggyFactions\commands\subcommands\claims\unclaim;
 
 use CortexPE\Commando\args\IntegerArgument;
 use DaPigGuy\PiggyFactions\language\LanguageManager;
-use pocketmine\level\format\Chunk;
+use pocketmine\level\Position;
 use pocketmine\Player;
 
 class UnclaimCircleSubCommand extends UnclaimMultipleSubCommand
 {
-    /**
-     * @return Chunk[]
-     */
-    public function getChunks(Player $player, array $args): array
+    public function getPositions(Player $player, array $args): array
     {
         if (($radius = (int)$args["radius"]) < 1) {
             LanguageManager::getInstance()->sendMessage($player, "commands.claim.radius-less-than-one");
@@ -27,7 +24,7 @@ class UnclaimCircleSubCommand extends UnclaimMultipleSubCommand
         for ($dx = -$radius; $dx <= $radius; $dx++) {
             for ($dz = -$radius; $dz <= $radius; $dz++) {
                 if ($dx * $dx + $dz * $dz > $radius * $radius) continue;
-                $chunks[] = $player->getLevel()->getChunk($center->getX() + $dx, $center->getZ() + $dz);
+                $chunks[] = new Position(($center->getX() + $dx) << 4, 0, ($center->getZ() + $dz) << 4, $player->getLevel());
             }
         }
         return $chunks;

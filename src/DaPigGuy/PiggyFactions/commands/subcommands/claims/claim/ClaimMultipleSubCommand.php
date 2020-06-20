@@ -10,7 +10,7 @@ use DaPigGuy\PiggyFactions\event\claims\ChunkOverclaimEvent;
 use DaPigGuy\PiggyFactions\event\claims\ClaimChunkEvent;
 use DaPigGuy\PiggyFactions\factions\Faction;
 use DaPigGuy\PiggyFactions\players\FactionsPlayer;
-use pocketmine\level\format\Chunk;
+use pocketmine\level\Position;
 use pocketmine\Player;
 
 abstract class ClaimMultipleSubCommand extends FactionSubCommand
@@ -22,9 +22,9 @@ abstract class ClaimMultipleSubCommand extends FactionSubCommand
             return;
         }
         $claimed = 0;
-        $chunks = $this->getChunks($sender, $args);
-        if (empty($chunks)) return;
-        foreach ($chunks as $chunk) {
+        $positions = $this->getPositions($sender, $args);
+        if (empty($positions)) return;
+        foreach ($positions as $position) {
             if (!$member->isInAdminMode()) {
                 if ($faction->getPower() / $this->plugin->getConfig()->getNested("factions.claim.cost", 1) < count(ClaimsManager::getInstance()->getFactionClaims($faction)) + 1) {
                     break;
@@ -33,7 +33,7 @@ abstract class ClaimMultipleSubCommand extends FactionSubCommand
                     break;
                 }
             }
-            $claim = ClaimsManager::getInstance()->getClaim($sender->getLevel(), $chunk);
+            $claim = ClaimsManager::getInstance()->getClaim($position);
             if ($claim !== null) {
                 if (($claim->canBeOverClaimed() || $member->isInAdminMode()) && $claim->getFaction() !== $faction) {
                     $ev = new ChunkOverclaimEvent($faction, $member, $claim);
@@ -46,18 +46,18 @@ abstract class ClaimMultipleSubCommand extends FactionSubCommand
                 }
             }
 
-            $ev = new ClaimChunkEvent($faction, $member, $chunk);
+            $ev = new ClaimChunkEvent($faction, $member, $position->getFloorX() >> 4, $position->getFloorZ() >> 4);
             $ev->call();
             if ($ev->isCancelled()) continue;
 
-            ClaimsManager::getInstance()->createClaim($faction, $sender->getLevel(), $chunk);
+            ClaimsManager::getInstance()->createClaim($faction, $sender->getLevel(), $position->getFloorX() >> 4, $position->getFloorZ() >> 4);
             $claimed++;
         }
         $member->sendMessage("commands.claim.claimed-multiple", ["{AMOUNT}" => $claimed, "{COMMAND}" => $this->getName()]);
     }
 
     /**
-     * @return Chunk[]
+     * @return Position[]
      */
-    abstract public function getChunks(Player $player, array $args): array;
+    abstract public function getPositions(Player $player, array $args): array;
 }

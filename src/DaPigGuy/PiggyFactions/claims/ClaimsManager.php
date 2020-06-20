@@ -6,8 +6,8 @@ namespace DaPigGuy\PiggyFactions\claims;
 
 use DaPigGuy\PiggyFactions\factions\Faction;
 use DaPigGuy\PiggyFactions\PiggyFactions;
-use pocketmine\level\format\Chunk;
 use pocketmine\level\Level;
+use pocketmine\level\Position;
 
 class ClaimsManager
 {
@@ -39,9 +39,9 @@ class ClaimsManager
         return self::$instance;
     }
 
-    public function getClaim(Level $level, Chunk $chunk): ?Claim
+    public function getClaim(Position $position): ?Claim
     {
-        return $this->claims[$chunk->getX() . ":" . $chunk->getZ() . ":" . $level->getFolderName()] ?? null;
+        return $this->claims[($position->getFloorX() >> 4) . ":" . ($position->getFloorZ() >> 4) . ":" . $position->getLevel()->getFolderName()] ?? null;
     }
 
     /**
@@ -54,12 +54,12 @@ class ClaimsManager
         });
     }
 
-    public function createClaim(Faction $faction, Level $level, Chunk $chunk): Claim
+    public function createClaim(Faction $faction, Level $level, int $chunkX, int $chunkZ): Claim
     {
         $args = [
             "faction" => $faction->getId(),
-            "chunkX" => $chunk->getX(),
-            "chunkZ" => $chunk->getZ(),
+            "chunkX" => $chunkX,
+            "chunkZ" => $chunkZ,
             "level" => $level->getFolderName()
         ];
         $this->claims[$args["chunkX"] . ":" . $args["chunkZ"] . ":" . $args["level"]] = new Claim(...array_values($args));

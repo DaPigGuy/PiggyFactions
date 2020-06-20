@@ -52,7 +52,7 @@ class ClaimsListener implements Listener
         $member = PlayerManager::getInstance()->getPlayer($player->getUniqueId());
         if ($member !== null) {
             $faction = $member->getFaction();
-            $claim = ClaimsManager::getInstance()->getClaim($player->getLevel(), $player->getLevel()->getChunkAtPosition($player));
+            $claim = ClaimsManager::getInstance()->getClaim($player);
             if (!$member->isInAdminMode() && $claim !== null && $claim->getFaction() !== $faction) {
                 $relation = $faction === null ? Relations::NONE : $faction->getRelation($claim->getFaction());
                 if (substr($message, 0, 1) === "/") {
@@ -77,17 +77,17 @@ class ClaimsListener implements Listener
         $player = $event->getPlayer();
         $member = PlayerManager::getInstance()->getPlayer($player->getUniqueId());
         if ($member !== null) {
-            $oldClaim = ClaimsManager::getInstance()->getClaim($player->getLevel(), ($oldChunk = $player->getLevel()->getChunkAtPosition($event->getFrom())));
-            $newClaim = ClaimsManager::getInstance()->getClaim($player->getLevel(), ($newChunk = $player->getLevel()->getChunkAtPosition($event->getTo())));
-            if ($oldChunk !== $newChunk) {
+            $oldClaim = ClaimsManager::getInstance()->getClaim($event->getFrom());
+            $newClaim = ClaimsManager::getInstance()->getClaim($event->getTo());
+            if ($oldClaim !== $newClaim) {
                 if (($faction = $member->getFaction()) !== null) {
                     if ($member->isAutoClaiming()) {
                         if (floor($faction->getPower() / $this->plugin->getConfig()->getNested("factions.claim.cost", 1)) > ($total = count(ClaimsManager::getInstance()->getFactionClaims($faction))) || $member->isInAdminMode()) {
                             if ($member->isInAdminMode() || $total < ($max = $this->plugin->getConfig()->getNested("factions.claims.max", -1)) || $max === -1) {
                                 if ($newClaim === null) {
-                                    $ev = new ClaimChunkEvent($faction, $member, $newChunk);
+                                    $ev = new ClaimChunkEvent($faction, $member, ($newChunk = $player->getLevel()->getChunkAtPosition($event->getTo()))->getX(), $newChunk->getZ());
                                     $ev->call();
-                                    if (!$ev->isCancelled()) $newClaim = $this->plugin->getClaimsManager()->createClaim($faction, $player->getLevel(), $newChunk);
+                                    if (!$ev->isCancelled()) $newClaim = $this->plugin->getClaimsManager()->createClaim($faction, $player->getLevel(), $newChunk->getX(), $newChunk->getZ());
                                 } else {
                                     if ($newClaim->canBeOverClaimed() && $newClaim->getFaction()->getId() !== $faction->getId()) {
                                         $ev = new ChunkOverclaimEvent($faction, $member, $newClaim);
@@ -129,7 +129,7 @@ class ClaimsListener implements Listener
     public function canAffectArea(Player $player, Position $position, string $type = FactionPermission::BUILD): bool
     {
         $member = PlayerManager::getInstance()->getPlayer($player->getUniqueId());
-        $claim = ($chunk = $position->getLevel()->getChunkAtPosition($position)) === null ? null : $this->manager->getClaim($position->getLevel(), $chunk);
+        $claim = $this->manager->getClaim($position);
         if ($claim !== null) {
             return $member === null ? false : $claim->getFaction()->hasPermission($member, $type);
         }

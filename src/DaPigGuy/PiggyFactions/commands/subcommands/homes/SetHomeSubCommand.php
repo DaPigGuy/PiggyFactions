@@ -16,7 +16,7 @@ class SetHomeSubCommand extends FactionSubCommand
     public function onNormalRun(Player $sender, ?Faction $faction, FactionsPlayer $member, string $aliasUsed, array $args): void
     {
         if ($this->plugin->getConfig()->getNested("factions.homes.within-territory", true)) {
-            $claim = ClaimsManager::getInstance()->getClaim($sender->getLevel(), $sender->getLevel()->getChunkAtPosition($sender));
+            $claim = ClaimsManager::getInstance()->getClaim($sender);
             if ($claim === null || $claim->getFaction()->getId() !== $faction->getId()) {
                 $member->sendMessage("commands.sethome.not-within-territory");
                 return;

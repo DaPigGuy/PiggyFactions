@@ -9,7 +9,7 @@ use DaPigGuy\PiggyFactions\commands\subcommands\FactionSubCommand;
 use DaPigGuy\PiggyFactions\event\claims\UnclaimChunkEvent;
 use DaPigGuy\PiggyFactions\factions\Faction;
 use DaPigGuy\PiggyFactions\players\FactionsPlayer;
-use pocketmine\level\format\Chunk;
+use pocketmine\level\Position;
 use pocketmine\Player;
 
 abstract class UnclaimMultipleSubCommand extends FactionSubCommand
@@ -21,10 +21,10 @@ abstract class UnclaimMultipleSubCommand extends FactionSubCommand
             return;
         }
         $unclaimed = 0;
-        $chunks = $this->getChunks($sender, $args);
-        if (empty($chunks)) return;
-        foreach ($chunks as $chunk) {
-            $claim = ClaimsManager::getInstance()->getClaim($sender->getLevel(), $chunk);
+        $positions = $this->getPositions($sender, $args);
+        if (empty($positions)) return;
+        foreach ($positions as $position) {
+            $claim = ClaimsManager::getInstance()->getClaim($position);
             if ($claim !== null) {
                 if ($claim->getFaction() === $faction || $member->isInAdminMode()) {
                     $ev = new UnclaimChunkEvent($faction, $member, $claim);
@@ -40,7 +40,7 @@ abstract class UnclaimMultipleSubCommand extends FactionSubCommand
     }
 
     /**
-     * @return Chunk[]
+     * @return Position[]
      */
-    abstract public function getChunks(Player $player, array $args): array;
+    abstract public function getPositions(Player $player, array $args): array;
 }
