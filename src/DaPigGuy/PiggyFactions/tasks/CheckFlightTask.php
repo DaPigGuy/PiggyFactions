@@ -33,7 +33,7 @@ class CheckFlightTask extends Task
             $this->getHandler()->cancel();
             return;
         }
-        $claim = ClaimsManager::getInstance()->getClaim($this->player);
+        $claim = ClaimsManager::getInstance()->getClaimByPosition($this->player);
         if ($claim !== null && $claim->getFaction()->hasPermission($this->member, FactionPermission::FLY)) {
             $this->duration = 5;
             return;

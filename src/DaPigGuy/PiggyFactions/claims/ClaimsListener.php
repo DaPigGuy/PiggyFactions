@@ -52,7 +52,7 @@ class ClaimsListener implements Listener
         $member = PlayerManager::getInstance()->getPlayer($player->getUniqueId());
         if ($member !== null) {
             $faction = $member->getFaction();
-            $claim = ClaimsManager::getInstance()->getClaim($player);
+            $claim = ClaimsManager::getInstance()->getClaimByPosition($player);
             if (!$member->isInAdminMode() && $claim !== null && $claim->getFaction() !== $faction) {
                 $relation = $faction === null ? Relations::NONE : $faction->getRelation($claim->getFaction());
                 if (substr($message, 0, 1) === "/") {
@@ -77,8 +77,8 @@ class ClaimsListener implements Listener
         $player = $event->getPlayer();
         $member = PlayerManager::getInstance()->getPlayer($player->getUniqueId());
         if ($member !== null) {
-            $oldClaim = ClaimsManager::getInstance()->getClaim($event->getFrom());
-            $newClaim = ClaimsManager::getInstance()->getClaim($event->getTo());
+            $oldClaim = ClaimsManager::getInstance()->getClaimByPosition($event->getFrom());
+            $newClaim = ClaimsManager::getInstance()->getClaimByPosition($event->getTo());
             if ($oldClaim !== $newClaim) {
                 if (($faction = $member->getFaction()) !== null) {
                     if ($member->isAutoClaiming()) {
@@ -129,7 +129,7 @@ class ClaimsListener implements Listener
     public function canAffectArea(Player $player, Position $position, string $type = FactionPermission::BUILD): bool
     {
         $member = PlayerManager::getInstance()->getPlayer($player->getUniqueId());
-        $claim = $this->manager->getClaim($position);
+        $claim = $this->manager->getClaimByPosition($position);
         if ($claim !== null) {
             return $member === null ? false : $claim->getFaction()->hasPermission($member, $type);
         }

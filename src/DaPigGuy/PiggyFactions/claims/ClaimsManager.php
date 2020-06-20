@@ -39,9 +39,14 @@ class ClaimsManager
         return self::$instance;
     }
 
-    public function getClaim(Position $position): ?Claim
+    public function getClaim(int $chunkX, int $chunkZ, string $level): ?Claim
     {
-        return $this->claims[($position->getFloorX() >> 4) . ":" . ($position->getFloorZ() >> 4) . ":" . $position->getLevel()->getFolderName()] ?? null;
+        return $this->claims[$chunkX . ":" . $chunkZ . ":" . $level];
+    }
+
+    public function getClaimByPosition(Position $position): ?Claim
+    {
+        return $this->getClaim($position->getFloorX() >> 4, $position->getFloorZ() >> 4, $position->getLevel()->getFolderName());
     }
 
     /**

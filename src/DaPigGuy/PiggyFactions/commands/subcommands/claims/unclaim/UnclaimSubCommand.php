@@ -15,7 +15,7 @@ class UnclaimSubCommand extends FactionSubCommand
 {
     public function onNormalRun(Player $sender, ?Faction $faction, FactionsPlayer $member, string $aliasUsed, array $args): void
     {
-        $claim = ClaimsManager::getInstance()->getClaim($sender);
+        $claim = ClaimsManager::getInstance()->getClaimByPosition($sender);
         if ($claim === null) {
             $member->sendMessage("commands.unclaim.not-claimed");
             return;

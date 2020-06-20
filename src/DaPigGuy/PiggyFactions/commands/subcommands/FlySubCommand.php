@@ -18,7 +18,7 @@ class FlySubCommand extends FactionSubCommand
 
     public function onNormalRun(Player $sender, ?Faction $faction, FactionsPlayer $member, string $aliasUsed, array $args): void
     {
-        $claim = ClaimsManager::getInstance()->getClaim($sender);
+        $claim = ClaimsManager::getInstance()->getClaimByPosition($sender);
         if ($claim === null || (!$claim->getFaction()->hasPermission($member, FactionPermission::FLY))) {
             $member->sendMessage("commands.fly.not-allowed");
             return;

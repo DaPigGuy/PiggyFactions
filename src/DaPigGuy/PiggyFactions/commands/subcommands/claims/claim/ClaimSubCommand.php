@@ -11,7 +11,6 @@ use DaPigGuy\PiggyFactions\event\claims\ClaimChunkEvent;
 use DaPigGuy\PiggyFactions\factions\Faction;
 use DaPigGuy\PiggyFactions\players\FactionsPlayer;
 use pocketmine\level\format\Chunk;
-use pocketmine\level\Position;
 use pocketmine\Player;
 
 class ClaimSubCommand extends FactionSubCommand
@@ -32,13 +31,13 @@ class ClaimSubCommand extends FactionSubCommand
                 return;
             }
         }
-        $claim = ClaimsManager::getInstance()->getClaim($sender);
+        $claim = ClaimsManager::getInstance()->getClaimByPosition($sender);
         if ($claim !== null) {
             if ($claim->canBeOverClaimed() && $claim->getFaction() !== $faction) {
                 $adjacentChunks = $sender->getLevel()->getAdjacentChunks($claim->getChunkX(), $claim->getChunkZ());
                 foreach ($adjacentChunks as $chunk) {
                     if ($chunk instanceof Chunk) {
-                        $adjacentClaim = ClaimsManager::getInstance()->getClaim(new Position($chunk->getX() << 4, 0, $chunk->getZ() << 4, $sender->getLevel()));
+                        $adjacentClaim = ClaimsManager::getInstance()->getClaim($chunk->getX(), $chunk->getZ(), $sender->getLevel()->getFolderName());
                         if ($adjacentClaim !== null && $adjacentClaim->getFaction() === $faction) {
                             $ev = new ChunkOverclaimEvent($faction, $member, $claim);
                             $ev->call();
