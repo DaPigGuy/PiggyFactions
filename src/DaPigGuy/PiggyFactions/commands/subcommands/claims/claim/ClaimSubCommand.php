@@ -35,7 +35,7 @@ class ClaimSubCommand extends FactionSubCommand
         $claim = ClaimsManager::getInstance()->getClaim($sender);
         if ($claim !== null) {
             if ($claim->canBeOverClaimed() && $claim->getFaction() !== $faction) {
-                $adjacentChunks = $sender->getLevel()->getAdjacentChunks($claim->getChunk()->getX(), $claim->getChunk()->getZ());
+                $adjacentChunks = $sender->getLevel()->getAdjacentChunks($claim->getChunkX(), $claim->getChunkZ());
                 foreach ($adjacentChunks as $chunk) {
                     if ($chunk instanceof Chunk) {
                         $adjacentClaim = ClaimsManager::getInstance()->getClaim(new Position($chunk->getX() << 4, 0, $chunk->getZ() << 4, $sender->getLevel()));

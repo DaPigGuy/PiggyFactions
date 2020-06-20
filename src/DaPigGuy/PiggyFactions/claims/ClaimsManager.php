@@ -69,7 +69,7 @@ class ClaimsManager
 
     public function deleteClaim(Claim $claim): void
     {
-        unset($this->claims[($chunkX = $claim->getChunk()->getX()) . ":" . ($chunkZ = $claim->getChunk()->getZ()) . ":" . ($level = $claim->getLevel()->getFolderName())]);
+        unset($this->claims[($chunkX = $claim->getChunkX()) . ":" . ($chunkZ = $claim->getChunkZ()) . ":" . ($level = $claim->getLevel()->getFolderName())]);
         $this->plugin->getDatabase()->executeGeneric("piggyfactions.claims.delete", ["chunkX" => $chunkX, "chunkZ" => $chunkZ, "level" => $level]);
     }
 }

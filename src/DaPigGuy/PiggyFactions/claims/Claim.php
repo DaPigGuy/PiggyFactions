@@ -8,7 +8,6 @@ use DaPigGuy\PiggyFactions\factions\Faction;
 use DaPigGuy\PiggyFactions\factions\FactionsManager;
 use DaPigGuy\PiggyFactions\flags\Flag;
 use DaPigGuy\PiggyFactions\PiggyFactions;
-use pocketmine\level\format\Chunk;
 use pocketmine\level\Level;
 
 class Claim
@@ -46,11 +45,14 @@ class Claim
         return PiggyFactions::getInstance()->getServer()->getLevelByName($this->level);
     }
 
-    public function getChunk(): ?Chunk
+    public function getChunkX(): int
     {
-        $level = PiggyFactions::getInstance()->getServer()->getLevelByName($this->level);
-        if ($level === null) return null;
-        return $level->getChunk($this->chunkX, $this->chunkZ);
+        return $this->chunkX;
+    }
+
+    public function getChunkZ(): int
+    {
+        return $this->chunkZ;
     }
 
     public function canBeOverClaimed(): bool

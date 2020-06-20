@@ -20,13 +20,13 @@ class ClaimSquareSubCommand extends ClaimMultipleSubCommand
         $radius--;
 
         $center = $player->getLevel()->getChunkAtPosition($player);
-        $chunks = [];
+        $positions = [];
         for ($dx = -$radius; $dx <= $radius; $dx++) {
             for ($dz = -$radius; $dz <= $radius; $dz++) {
-                $chunks[] = new Position(($center->getX() + $dx) << 4, 0, ($center->getZ() + $dz) << 4, $player->getLevel());
+                $positions[] = new Position(($center->getX() + $dx) << 4, 0, ($center->getZ() + $dz) << 4, $player->getLevel());
             }
         }
-        return $chunks;
+        return $positions;
     }
 
     protected function prepare(): void
