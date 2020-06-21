@@ -24,7 +24,7 @@ class UpdatePowerTask extends Task
     public function onRun(int $currentTick)
     {
         foreach ($this->plugin->getServer()->getOnlinePlayers() as $p) {
-            $member = PlayerManager::getInstance()->getPlayer($p->getUniqueId());
+            $member = PlayerManager::getInstance()->getPlayer($p);
             if ($member !== null) {
                 $ev = new PowerChangeEvent($member, PowerChangeEvent::CAUSE_TIME, $member->getPower() + $this->plugin->getConfig()->getNested("factions.power.per.hour", 2) / (72000 / self::INTERVAL));
                 $ev->call();

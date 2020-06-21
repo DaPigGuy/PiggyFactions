@@ -160,7 +160,7 @@ class Faction
     public function getMembers(): array
     {
         return array_map(function (UUID $uuid): FactionsPlayer {
-            return PlayerManager::getInstance()->getPlayer($uuid);
+            return PlayerManager::getInstance()->getPlayerByUUID($uuid);
         }, $this->members);
     }
 
@@ -202,8 +202,8 @@ class Faction
     public function addMember(Player $member): void
     {
         $this->members[] = $member->getUniqueId();
-        PlayerManager::getInstance()->getPlayer($member->getUniqueId())->setFaction($this);
-        PlayerManager::getInstance()->getPlayer($member->getUniqueId())->setRole(Roles::RECRUIT);
+        PlayerManager::getInstance()->getPlayer($member)->setFaction($this);
+        PlayerManager::getInstance()->getPlayer($member)->setRole(Roles::RECRUIT);
         $this->broadcastMessage("commands.join.joined", ["{PLAYER}" => $member->getName()]);
         $this->update();
     }
@@ -211,15 +211,15 @@ class Faction
     public function removeMember(UUID $uuid): void
     {
         unset($this->members[array_search($uuid, $this->members)]);
-        PlayerManager::getInstance()->getPlayer($uuid)->setFaction(null);
-        PlayerManager::getInstance()->getPlayer($uuid)->setRole(null);
+        PlayerManager::getInstance()->getPlayerByUUID($uuid)->setFaction(null);
+        PlayerManager::getInstance()->getPlayerByUUID($uuid)->setRole(null);
         $this->update();
     }
 
     public function getLeader(): ?FactionsPlayer
     {
         foreach ($this->members as $member) {
-            if (($member = PlayerManager::getInstance()->getPlayer($member)) !== null && $member->getRole() === Roles::LEADER) {
+            if (($member = PlayerManager::getInstance()->getPlayerByUUID($member)) !== null && $member->getRole() === Roles::LEADER) {
                 return $member;
             }
         }

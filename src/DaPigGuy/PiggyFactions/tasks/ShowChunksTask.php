@@ -23,7 +23,7 @@ class ShowChunksTask extends Task
     public function onRun(int $currentTick): void
     {
         foreach ($this->plugin->getServer()->getOnlinePlayers() as $p) {
-            if (($member = PlayerManager::getInstance()->getPlayer($p->getUniqueId())) !== null && $member->canSeeChunks()) {
+            if (($member = PlayerManager::getInstance()->getPlayer($p)) !== null && $member->canSeeChunks()) {
                 $chunk = $p->getLevel()->getChunkAtPosition($p);
 
                 $minX = (float)$chunk->getX() * 16;

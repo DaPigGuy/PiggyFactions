@@ -49,7 +49,7 @@ class ClaimsListener implements Listener
     {
         $player = $event->getPlayer();
         $message = $event->getMessage();
-        $member = PlayerManager::getInstance()->getPlayer($player->getUniqueId());
+        $member = PlayerManager::getInstance()->getPlayer($player);
         if ($member !== null) {
             $faction = $member->getFaction();
             $claim = ClaimsManager::getInstance()->getClaimByPosition($player);
@@ -75,7 +75,7 @@ class ClaimsListener implements Listener
     public function onMove(PlayerMoveEvent $event): void
     {
         $player = $event->getPlayer();
-        $member = PlayerManager::getInstance()->getPlayer($player->getUniqueId());
+        $member = PlayerManager::getInstance()->getPlayer($player);
         if ($member !== null) {
             $oldClaim = ClaimsManager::getInstance()->getClaimByPosition($event->getFrom());
             $newClaim = ClaimsManager::getInstance()->getClaimByPosition($event->getTo());
@@ -128,7 +128,7 @@ class ClaimsListener implements Listener
 
     public function canAffectArea(Player $player, Position $position, string $type = FactionPermission::BUILD): bool
     {
-        $member = PlayerManager::getInstance()->getPlayer($player->getUniqueId());
+        $member = PlayerManager::getInstance()->getPlayer($player);
         $claim = $this->manager->getClaimByPosition($position);
         if ($claim !== null) {
             return $member === null ? false : $claim->getFaction()->hasPermission($member, $type);

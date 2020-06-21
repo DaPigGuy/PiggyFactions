@@ -81,7 +81,7 @@ class FactionsManager
                 return $flag->getValue();
             }, $flags), null, [], [], 0, 0);
         foreach ($members as $member) {
-            PlayerManager::getInstance()->getPlayer(UUID::fromString($member))->setFaction($this->factions[$id]);
+            PlayerManager::getInstance()->getPlayerByUUID(UUID::fromString($member))->setFaction($this->factions[$id]);
         }
         $this->plugin->getDatabase()->executeInsert("piggyfactions.factions.create", ["id" => $id, "name" => $name, "members" => json_encode($members), "permissions" => json_encode(PermissionFactory::getPermissions()), "flags" => json_encode($flags)]);
     }

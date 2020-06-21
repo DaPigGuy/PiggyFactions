@@ -35,7 +35,7 @@ class EventListener implements Listener
     public function onChat(PlayerChatEvent $event): void
     {
         $player = $event->getPlayer();
-        $member = PlayerManager::getInstance()->getPlayer($player->getUniqueId());
+        $member = PlayerManager::getInstance()->getPlayer($player);
         if ($member !== null) {
             $faction = $member->getFaction();
             if ($faction !== null) {
@@ -107,7 +107,7 @@ class EventListener implements Listener
     public function onDeath(PlayerDeathEvent $event): void
     {
         $player = $event->getPlayer();
-        $member = PlayerManager::getInstance()->getPlayer($player->getUniqueId());
+        $member = PlayerManager::getInstance()->getPlayer($player);
 
         if ($member !== null) {
             $ev = new PowerChangeEvent($member, PowerChangeEvent::CAUSE_DEATH, $member->getPower() + $this->plugin->getConfig()->getNested("factions.power.per.death", -2));
@@ -121,7 +121,7 @@ class EventListener implements Listener
         if ($cause instanceof EntityDamageByEntityEvent) {
             $damager = $cause->getDamager();
             if ($damager instanceof Player) {
-                $damagerMember = PlayerManager::getInstance()->getPlayer($damager->getUniqueId());
+                $damagerMember = PlayerManager::getInstance()->getPlayer($damager);
 
                 if ($damagerMember !== null) {
                     $ev = new PowerChangeEvent($damagerMember, PowerChangeEvent::CAUSE_KILL, $damagerMember->getPower() + $this->plugin->getConfig()->getNested("factions.power.per.kill", 1));
@@ -136,7 +136,7 @@ class EventListener implements Listener
     public function onJoin(PlayerJoinEvent $event): void
     {
         $player = $event->getPlayer();
-        if (($member = PlayerManager::getInstance()->getPlayer($player->getUniqueId())) === null) $member = PlayerManager::getInstance()->createPlayer($player);
+        if (($member = PlayerManager::getInstance()->getPlayer($player)) === null) $member = PlayerManager::getInstance()->createPlayer($player);
         if ($member->getUsername() !== $player->getName()) $member->setUsername($player->getName());
         if (($faction = $member->getFaction()) !== null) {
             if (($motd = $faction->getMotd()) !== null) $member->sendMessage("motd", ["{MOTD}" => $motd]);

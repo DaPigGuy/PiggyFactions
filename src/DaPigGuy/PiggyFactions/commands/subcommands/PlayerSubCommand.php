@@ -18,7 +18,7 @@ class PlayerSubCommand extends FactionSubCommand
 
     public function onBasicRun(CommandSender $sender, array $args): void
     {
-        $player = $sender instanceof Player ? PlayerManager::getInstance()->getPlayer($sender->getUniqueId()) : null;
+        $player = $sender instanceof Player ? PlayerManager::getInstance()->getPlayer($sender) : null;
         if (isset($args["player"])) {
             $player = PlayerManager::getInstance()->getPlayerByName($args["player"]);
             if ($player === null) {
@@ -41,7 +41,7 @@ class PlayerSubCommand extends FactionSubCommand
             "{RANKSYMBOL}" => $this->plugin->getTagManager()->getPlayerRankSymbol($player),
             "{POWER}" => round($player->getPower(), 2, PHP_ROUND_HALF_DOWN),
             "{TOTALPOWER}" => $player->getMaxPower(),
-            "{TIMETOMAXPOWER}" => $time <= 0 ? "" : LanguageManager::getInstance()->getMessage($sender instanceof Player ? PlayerManager::getInstance()->getPlayer($sender->getUniqueId())->getLanguage() : LanguageManager::getInstance()->getDefaultLanguage(), "commands.player.time-to-max-power", ["{TIME}" => $time]),
+            "{TIMETOMAXPOWER}" => $time <= 0 ? "" : LanguageManager::getInstance()->getMessage($sender instanceof Player ? PlayerManager::getInstance()->getPlayer($sender)->getLanguage() : LanguageManager::getInstance()->getDefaultLanguage(), "commands.player.time-to-max-power", ["{TIME}" => $time]),
             "{POWERPERHOUR}" => round($config->getNested("factions.power.per.hour"), 2, PHP_ROUND_HALF_DOWN),
             "{POWERPERDEATH}" => round($config->getNested("factions.power.per.death"), 2, PHP_ROUND_HALF_DOWN),
             "{CREATIONDATE}" => date("F j, Y @ g:i a T", $firstPlayed),

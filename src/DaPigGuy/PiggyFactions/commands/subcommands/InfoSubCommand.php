@@ -44,7 +44,7 @@ class InfoSubCommand extends FactionSubCommand
 
         LanguageManager::getInstance()->sendMessage($sender, "commands.info.message", [
             "{FACTION}" => $faction->getName(),
-            "{DESCRIPTION}" => $faction->getDescription() ?? LanguageManager::getInstance()->getMessage($sender instanceof Player ? PlayerManager::getInstance()->getPlayer($sender->getUniqueId())->getLanguage() : LanguageManager::getInstance()->getDefaultLanguage(), "commands.info.description-not-set"),
+            "{DESCRIPTION}" => $faction->getDescription() ?? LanguageManager::getInstance()->getMessage($sender instanceof Player ? PlayerManager::getInstance()->getPlayer($sender)->getLanguage() : LanguageManager::getInstance()->getDefaultLanguage(), "commands.info.description-not-set"),
             "{CLAIMS}" => count(ClaimsManager::getInstance()->getFactionClaims($faction)),
             "{POWER}" => round($faction->getPower(), 2, PHP_ROUND_HALF_DOWN),
             "{TOTALPOWER}" => $faction->getMaxPower(),

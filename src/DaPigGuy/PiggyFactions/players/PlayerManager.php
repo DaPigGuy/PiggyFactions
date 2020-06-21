@@ -53,7 +53,12 @@ class PlayerManager
         return $this->players[$player->getUniqueId()->toString()];
     }
 
-    public function getPlayer(UUID $uuid): ?FactionsPlayer
+    public function getPlayer(Player $player): ?FactionsPlayer
+    {
+        return $this->getPlayerByUUID($player->getUniqueId());
+    }
+
+    public function getPlayerByUUID(UUID $uuid): ?FactionsPlayer
     {
         return $this->players[$uuid->toString()] ?? null;
     }
@@ -68,7 +73,7 @@ class PlayerManager
 
     public function getPlayerFaction(UUID $uuid): ?Faction
     {
-        return ($player = $this->getPlayer($uuid)) === null ? null : $player->getFaction();
+        return ($player = $this->getPlayerByUUID($uuid)) === null ? null : $player->getFaction();
     }
 
     public function areAlliedOrTruced(Player $a, Player $b): bool

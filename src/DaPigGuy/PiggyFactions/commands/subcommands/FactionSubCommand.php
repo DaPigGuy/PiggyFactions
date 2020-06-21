@@ -45,7 +45,7 @@ abstract class FactionSubCommand extends BaseSubCommand
             return;
         }
 
-        $member = $sender instanceof Player ? PlayerManager::getInstance()->getPlayer($sender->getUniqueId()) : null;
+        $member = $sender instanceof Player ? PlayerManager::getInstance()->getPlayer($sender) : null;
         $faction = $member === null ? null : $member->getFaction();
 
         if ($this->requiresFaction && $this->requiresPlayer) {

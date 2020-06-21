@@ -40,7 +40,7 @@ class TagManager
         $tags = explode('.', $tag, 2);
         if ($tags[0] !== 'piggyfacs' || count($tags) < 2) return null;
 
-        $member = PlayerManager::getInstance()->getPlayer($player->getUniqueId());
+        $member = PlayerManager::getInstance()->getPlayer($player);
         switch ($tags[1]) {
             case "name":
                 return $this->getFactionName($member) ?? $this->factionless;

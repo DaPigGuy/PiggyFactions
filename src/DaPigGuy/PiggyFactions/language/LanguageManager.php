@@ -85,7 +85,7 @@ class LanguageManager
 
     public function getPlayerLanguage(Player $player): string
     {
-        $member = PlayerManager::getInstance()->getPlayer($player->getUniqueId());
+        $member = PlayerManager::getInstance()->getPlayer($player);
         if ($member === null) return $this->defaultLanguage;
         return $member->getLanguage();
     }
