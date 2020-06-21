@@ -9,7 +9,6 @@ use DaPigGuy\PiggyFactions\flags\FlagFactory;
 use DaPigGuy\PiggyFactions\permissions\FactionPermission;
 use DaPigGuy\PiggyFactions\permissions\PermissionFactory;
 use DaPigGuy\PiggyFactions\PiggyFactions;
-use DaPigGuy\PiggyFactions\players\PlayerManager;
 use pocketmine\level\Position;
 use pocketmine\utils\UUID;
 
@@ -81,7 +80,7 @@ class FactionsManager
                 return $flag->getValue();
             }, $flags), null, [], [], 0, 0);
         foreach ($members as $member) {
-            PlayerManager::getInstance()->getPlayerByUUID(UUID::fromString($member))->setFaction($this->factions[$id]);
+            $this->plugin->getPlayerManager()->getPlayerByUUID(UUID::fromString($member))->setFaction($this->factions[$id]);
         }
         $this->plugin->getDatabase()->executeInsert("piggyfactions.factions.create", ["id" => $id, "name" => $name, "members" => json_encode($members), "permissions" => json_encode(PermissionFactory::getPermissions()), "flags" => json_encode($flags)]);
     }

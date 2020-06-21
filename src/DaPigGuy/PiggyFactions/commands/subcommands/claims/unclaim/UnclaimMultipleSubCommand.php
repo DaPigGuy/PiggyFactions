@@ -23,7 +23,7 @@ abstract class UnclaimMultipleSubCommand extends FactionSubCommand
         $chunks = $this->getChunks($sender, $args);
         if (empty($chunks)) return;
         foreach ($chunks as $chunk) {
-            $claim = ClaimsManager::getInstance()->getClaim($chunk[0], $chunk[1], $sender->getLevel()->getFolderName());
+            $claim = $this->plugin->getClaimsManager()->getClaim($chunk[0], $chunk[1], $sender->getLevel()->getFolderName());
             if ($claim !== null) {
                 if ($claim->getFaction() === $faction || $member->isInAdminMode()) {
                     $ev = new UnclaimChunkEvent($faction, $member, $claim);

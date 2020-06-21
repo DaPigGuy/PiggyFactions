@@ -9,7 +9,6 @@ use DaPigGuy\PiggyFactions\commands\subcommands\FactionSubCommand;
 use DaPigGuy\PiggyFactions\event\relation\FactionRelationEvent;
 use DaPigGuy\PiggyFactions\event\relation\FactionRelationWishEvent;
 use DaPigGuy\PiggyFactions\factions\Faction;
-use DaPigGuy\PiggyFactions\factions\FactionsManager;
 use DaPigGuy\PiggyFactions\players\FactionsPlayer;
 use DaPigGuy\PiggyFactions\utils\Relations;
 use pocketmine\Player;
@@ -18,7 +17,7 @@ class AllySubCommand extends FactionSubCommand
 {
     public function onNormalRun(Player $sender, ?Faction $faction, FactionsPlayer $member, string $aliasUsed, array $args): void
     {
-        $targetFaction = FactionsManager::getInstance()->getFactionByName($args["faction"]);
+        $targetFaction = $this->plugin->getFactionsManager()->getFactionByName($args["faction"]);
         if ($targetFaction === null) {
             $member->sendMessage("commands.invalid-faction", ["{FACTION}" => $args["faction"]]);
             return;

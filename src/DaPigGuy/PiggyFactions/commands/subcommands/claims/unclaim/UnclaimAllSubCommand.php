@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace DaPigGuy\PiggyFactions\commands\subcommands\claims\unclaim;
 
-use DaPigGuy\PiggyFactions\claims\ClaimsManager;
 use DaPigGuy\PiggyFactions\commands\subcommands\FactionSubCommand;
 use DaPigGuy\PiggyFactions\event\claims\UnclaimAllChunksEvent;
 use DaPigGuy\PiggyFactions\factions\Faction;
@@ -23,8 +22,8 @@ class UnclaimAllSubCommand extends FactionSubCommand
         $ev->call();
         if ($ev->isCancelled()) return;
 
-        foreach (ClaimsManager::getInstance()->getFactionClaims($faction) as $claim) {
-            ClaimsManager::getInstance()->deleteClaim($claim);
+        foreach ($this->plugin->getClaimsManager()->getFactionClaims($faction) as $claim) {
+            $this->plugin->getClaimsManager()->deleteClaim($claim);
         }
         $member->sendMessage("commands.unclaim.all.success");
         return;

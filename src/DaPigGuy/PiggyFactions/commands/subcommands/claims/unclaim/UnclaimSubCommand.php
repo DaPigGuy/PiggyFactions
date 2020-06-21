@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace DaPigGuy\PiggyFactions\commands\subcommands\claims\unclaim;
 
-use DaPigGuy\PiggyFactions\claims\ClaimsManager;
 use DaPigGuy\PiggyFactions\commands\subcommands\FactionSubCommand;
 use DaPigGuy\PiggyFactions\event\claims\UnclaimChunkEvent;
 use DaPigGuy\PiggyFactions\factions\Faction;
@@ -15,7 +14,7 @@ class UnclaimSubCommand extends FactionSubCommand
 {
     public function onNormalRun(Player $sender, ?Faction $faction, FactionsPlayer $member, string $aliasUsed, array $args): void
     {
-        $claim = ClaimsManager::getInstance()->getClaimByPosition($sender);
+        $claim = $this->plugin->getClaimsManager()->getClaimByPosition($sender);
         if ($claim === null) {
             $member->sendMessage("commands.unclaim.not-claimed");
             return;
@@ -29,7 +28,7 @@ class UnclaimSubCommand extends FactionSubCommand
         $ev->call();
         if ($ev->isCancelled()) return;
 
-        ClaimsManager::getInstance()->deleteClaim($claim);
+        $this->plugin->getClaimsManager()->deleteClaim($claim);
         $member->sendMessage("commands.unclaim.success");
     }
 

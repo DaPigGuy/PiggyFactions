@@ -4,12 +4,9 @@ declare(strict_types=1);
 
 namespace DaPigGuy\PiggyFactions;
 
-use DaPigGuy\PiggyFactions\claims\ClaimsManager;
 use DaPigGuy\PiggyFactions\event\member\PowerChangeEvent;
 use DaPigGuy\PiggyFactions\factions\Faction;
 use DaPigGuy\PiggyFactions\flags\Flag;
-use DaPigGuy\PiggyFactions\language\LanguageManager;
-use DaPigGuy\PiggyFactions\players\PlayerManager;
 use DaPigGuy\PiggyFactions\utils\ChatTypes;
 use pocketmine\event\entity\EntityDamageByEntityEvent;
 use pocketmine\event\Listener;
@@ -35,7 +32,7 @@ class EventListener implements Listener
     public function onChat(PlayerChatEvent $event): void
     {
         $player = $event->getPlayer();
-        $member = PlayerManager::getInstance()->getPlayer($player);
+        $member = $this->plugin->getPlayerManager()->getPlayer($player);
         if ($member !== null) {
             $faction = $member->getFaction();
             if ($faction !== null) {
@@ -51,11 +48,11 @@ class EventListener implements Listener
                         $event->setRecipients(array_merge($faction->getOnlineMembers(), ...array_map(function (Faction $ally): array {
                             return $ally->getOnlineMembers();
                         }, $faction->getAllies())));
-                        $event->setFormat(LanguageManager::getInstance()->getMessage(LanguageManager::getInstance()->getDefaultLanguage(), "chat.ally", $placeholders));
+                        $event->setFormat($this->plugin->getLanguageManager()->getMessage($this->plugin->getLanguageManager()->getDefaultLanguage(), "chat.ally", $placeholders));
                         break;
                     case ChatTypes::FACTION:
                         $event->setRecipients($faction->getOnlineMembers());
-                        $event->setFormat(LanguageManager::getInstance()->getMessage(LanguageManager::getInstance()->getDefaultLanguage(), "chat.faction", $placeholders));
+                        $event->setFormat($this->plugin->getLanguageManager()->getMessage($this->plugin->getLanguageManager()->getDefaultLanguage(), "chat.faction", $placeholders));
                         break;
                 }
             }
@@ -67,19 +64,19 @@ class EventListener implements Listener
         $entity = $event->getEntity();
         $damager = $event->getDamager();
         if ($entity instanceof Player && $damager instanceof Player) {
-            if (PlayerManager::getInstance()->areAlliedOrTruced($entity, $damager)) {
+            if ($this->plugin->getPlayerManager()->areAlliedOrTruced($entity, $damager)) {
                 $event->setCancelled();
                 return;
             }
 
-            $entityFaction = PlayerManager::getInstance()->getPlayerFaction($entity->getUniqueId());
-            $damagerFaction = PlayerManager::getInstance()->getPlayerFaction($damager->getUniqueId());
+            $entityFaction = $this->plugin->getPlayerManager()->getPlayerFaction($entity->getUniqueId());
+            $damagerFaction = $this->plugin->getPlayerManager()->getPlayerFaction($damager->getUniqueId());
             if (($entityFaction === null || $damagerFaction === null) && !$this->plugin->getConfig()->getNested("factions.pvp.factionless", true)) {
                 $event->setCancelled();
                 if ($damagerFaction === null) {
-                    LanguageManager::getInstance()->sendMessage($damager, "pvp.attacker-factionless");
+                    $this->plugin->getLanguageManager()->sendMessage($damager, "pvp.attacker-factionless");
                 } else {
-                    LanguageManager::getInstance()->sendMessage($damager, "pvp.target-factionless");
+                    $this->plugin->getLanguageManager()->sendMessage($damager, "pvp.target-factionless");
                 }
                 return;
             }
@@ -88,12 +85,12 @@ class EventListener implements Listener
                 return;
             }
 
-            $claim = ClaimsManager::getInstance()->getClaimByPosition($entity);
+            $claim = $this->plugin->getClaimsManager()->getClaimByPosition($entity);
             if ($claim !== null) {
                 if ($claim->getFaction() === $entityFaction) {
                     if ($damagerFaction === null || !$damagerFaction->isEnemy($entityFaction)) {
                         $event->setCancelled();
-                        LanguageManager::getInstance()->sendMessage($damager, "pvp.cant-attack-in-territory", ["{PLAYER}" => $entity->getDisplayName()]);
+                        $this->plugin->getLanguageManager()->sendMessage($damager, "pvp.cant-attack-in-territory", ["{PLAYER}" => $entity->getDisplayName()]);
                         return;
                     }
                     $event->setModifier(-$this->plugin->getConfig()->getNested("factions.claims.shield-factor", 0.1), 56789);
@@ -107,7 +104,7 @@ class EventListener implements Listener
     public function onDeath(PlayerDeathEvent $event): void
     {
         $player = $event->getPlayer();
-        $member = PlayerManager::getInstance()->getPlayer($player);
+        $member = $this->plugin->getPlayerManager()->getPlayer($player);
 
         if ($member !== null) {
             $ev = new PowerChangeEvent($member, PowerChangeEvent::CAUSE_DEATH, $member->getPower() + $this->plugin->getConfig()->getNested("factions.power.per.death", -2));
@@ -121,7 +118,7 @@ class EventListener implements Listener
         if ($cause instanceof EntityDamageByEntityEvent) {
             $damager = $cause->getDamager();
             if ($damager instanceof Player) {
-                $damagerMember = PlayerManager::getInstance()->getPlayer($damager);
+                $damagerMember = $this->plugin->getPlayerManager()->getPlayer($damager);
 
                 if ($damagerMember !== null) {
                     $ev = new PowerChangeEvent($damagerMember, PowerChangeEvent::CAUSE_KILL, $damagerMember->getPower() + $this->plugin->getConfig()->getNested("factions.power.per.kill", 1));
@@ -136,7 +133,7 @@ class EventListener implements Listener
     public function onJoin(PlayerJoinEvent $event): void
     {
         $player = $event->getPlayer();
-        if (($member = PlayerManager::getInstance()->getPlayer($player)) === null) $member = PlayerManager::getInstance()->createPlayer($player);
+        if (($member = $this->plugin->getPlayerManager()->getPlayer($player)) === null) $member = $this->plugin->getPlayerManager()->createPlayer($player);
         if ($member->getUsername() !== $player->getName()) $member->setUsername($player->getName());
         if (($faction = $member->getFaction()) !== null) {
             if (($motd = $faction->getMotd()) !== null) $member->sendMessage("motd", ["{MOTD}" => $motd]);
@@ -146,7 +143,7 @@ class EventListener implements Listener
     public function onRespawn(PlayerRespawnEvent $event): void
     {
         $player = $event->getPlayer();
-        $faction = PlayerManager::getInstance()->getPlayerFaction($player->getUniqueId());
+        $faction = $this->plugin->getPlayerManager()->getPlayerFaction($player->getUniqueId());
         if ($this->plugin->getConfig()->getNested("factions.homes.teleport-on-death") && $faction !== null && $faction->getHome() !== null) {
             $event->setRespawnPosition($faction->getHome());
         }

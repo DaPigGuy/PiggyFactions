@@ -7,7 +7,6 @@ namespace DaPigGuy\PiggyFactions\commands\subcommands;
 use CortexPE\Commando\args\IntegerArgument;
 use CortexPE\Commando\BaseSubCommand;
 use DaPigGuy\PiggyFactions\commands\FactionCommand;
-use DaPigGuy\PiggyFactions\language\LanguageManager;
 use DaPigGuy\PiggyFactions\PiggyFactions;
 use pocketmine\command\CommandSender;
 use pocketmine\Player;
@@ -40,10 +39,10 @@ class HelpSubCommand extends FactionSubCommand
         $page = $page > $maxPages ? $maxPages : $page;
         $pageCommands = array_slice($subcommands, $commandsPerPage * ($page - 1), $commandsPerPage);
 
-        $language = $sender instanceof Player ? LanguageManager::getInstance()->getPlayerLanguage($sender) : LanguageManager::getInstance()->getDefaultLanguage();
-        $message = LanguageManager::getInstance()->getMessage($language, "commands.help.header", ["{PAGE}" => $page, "{MAXPAGE}" => $maxPages]);
+        $language = $sender instanceof Player ? $this->plugin->getLanguageManager()->getPlayerLanguage($sender) : $this->plugin->getLanguageManager()->getDefaultLanguage();
+        $message = $this->plugin->getLanguageManager()->getMessage($language, "commands.help.header", ["{PAGE}" => $page, "{MAXPAGE}" => $maxPages]);
         foreach ($pageCommands as $pageCommand) {
-            $message .= LanguageManager::getInstance()->getMessage($language, "commands.help.command", ["{COMMAND}" => $pageCommand->getName(), "{DESCRIPTION}" => $pageCommand->getDescription()]);
+            $message .= $this->plugin->getLanguageManager()->getMessage($language, "commands.help.command", ["{COMMAND}" => $pageCommand->getName(), "{DESCRIPTION}" => $pageCommand->getDescription()]);
         }
         $sender->sendMessage($message);
     }

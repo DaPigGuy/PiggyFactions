@@ -7,7 +7,6 @@ namespace DaPigGuy\PiggyFactions\language;
 use DaPigGuy\PiggyFactions\factions\Faction;
 use DaPigGuy\PiggyFactions\flags\Flag;
 use DaPigGuy\PiggyFactions\PiggyFactions;
-use DaPigGuy\PiggyFactions\players\PlayerManager;
 use pocketmine\command\CommandSender;
 use pocketmine\Player;
 use pocketmine\utils\Config;
@@ -85,7 +84,7 @@ class LanguageManager
 
     public function getPlayerLanguage(Player $player): string
     {
-        $member = PlayerManager::getInstance()->getPlayer($player);
+        $member = $this->plugin->getPlayerManager()->getPlayer($player);
         if ($member === null) return $this->defaultLanguage;
         return $member->getLanguage();
     }
@@ -113,7 +112,7 @@ class LanguageManager
 
     public function getColorFor(Player $player, Faction $faction): string
     {
-        $playerFaction = PlayerManager::getInstance()->getPlayerFaction($player->getUniqueId());
+        $playerFaction = $this->plugin->getPlayerManager()->getPlayerFaction($player->getUniqueId());
         $relation = "neutral";
         if ($faction->getFlag(Flag::WARZONE)) {
             $relation = "warzone";

@@ -8,7 +8,6 @@ use CortexPE\Commando\args\FloatArgument;
 use CortexPE\Commando\args\RawStringArgument;
 use DaPigGuy\PiggyFactions\commands\subcommands\FactionSubCommand;
 use DaPigGuy\PiggyFactions\factions\FactionsManager;
-use DaPigGuy\PiggyFactions\language\LanguageManager;
 use pocketmine\command\CommandSender;
 
 class PowerBoostFactionSubCommand extends FactionSubCommand
@@ -20,11 +19,11 @@ class PowerBoostFactionSubCommand extends FactionSubCommand
     {
         $faction = FactionsManager::getInstance()->getFactionByName($args["name"]);
         if ($faction === null) {
-            LanguageManager::getInstance()->sendMessage($sender, "commands.invalid-faction", ["{FACTION}" => $args["name"]]);
+            $this->plugin->getLanguageManager()->sendMessage($sender, "commands.invalid-faction", ["{FACTION}" => $args["name"]]);
             return;
         }
         $faction->setPowerBoost($args["power"]);
-        LanguageManager::getInstance()->sendMessage($sender, "commands.powerboost.success-faction", ["{FACTION}" => $faction->getName(), "{POWER}" => $args["power"]]);
+        $this->plugin->getLanguageManager()->sendMessage($sender, "commands.powerboost.success-faction", ["{FACTION}" => $faction->getName(), "{POWER}" => $args["power"]]);
         $faction->broadcastMessage("commands.powerboost.boost-faction", ["{POWER}" => $args["power"]]);
         return;
     }

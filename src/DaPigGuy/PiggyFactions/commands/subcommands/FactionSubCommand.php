@@ -14,7 +14,6 @@ use DaPigGuy\PiggyFactions\factions\Faction;
 use DaPigGuy\PiggyFactions\permissions\PermissionFactory;
 use DaPigGuy\PiggyFactions\PiggyFactions;
 use DaPigGuy\PiggyFactions\players\FactionsPlayer;
-use DaPigGuy\PiggyFactions\players\PlayerManager;
 use DaPigGuy\PiggyFactions\utils\PiggyArgument;
 use jojoe77777\FormAPI\CustomForm;
 use pocketmine\command\CommandSender;
@@ -45,7 +44,7 @@ abstract class FactionSubCommand extends BaseSubCommand
             return;
         }
 
-        $member = $sender instanceof Player ? PlayerManager::getInstance()->getPlayer($sender) : null;
+        $member = $sender instanceof Player ? $this->plugin->getPlayerManager()->getPlayer($sender) : null;
         $faction = $member === null ? null : $member->getFaction();
 
         if ($this->requiresFaction && $this->requiresPlayer) {

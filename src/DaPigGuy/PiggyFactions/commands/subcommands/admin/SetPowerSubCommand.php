@@ -8,8 +8,6 @@ use CortexPE\Commando\args\FloatArgument;
 use CortexPE\Commando\args\RawStringArgument;
 use DaPigGuy\PiggyFactions\commands\subcommands\FactionSubCommand;
 use DaPigGuy\PiggyFactions\event\member\PowerChangeEvent;
-use DaPigGuy\PiggyFactions\language\LanguageManager;
-use DaPigGuy\PiggyFactions\players\PlayerManager;
 use pocketmine\command\CommandSender;
 
 class SetPowerSubCommand extends FactionSubCommand
@@ -19,9 +17,9 @@ class SetPowerSubCommand extends FactionSubCommand
 
     public function onBasicRun(CommandSender $sender, array $args): void
     {
-        $player = PlayerManager::getInstance()->getPlayerByName($args["player"]);
+        $player = $this->plugin->getPlayerManager()->getPlayerByName($args["player"]);
         if ($player === null) {
-            LanguageManager::getInstance()->sendMessage($sender, "commands.invalid-player", ["{PLAYER}" => $args["player"]]);
+            $this->plugin->getLanguageManager()->sendMessage($sender, "commands.invalid-player", ["{PLAYER}" => $args["player"]]);
             return;
         }
         $ev = new PowerChangeEvent($player, PowerChangeEvent::CAUSE_ADMIN, (float)$args["power"]);
@@ -29,7 +27,7 @@ class SetPowerSubCommand extends FactionSubCommand
         if ($ev->isCancelled()) return;
 
         $player->setPower($ev->getPower());
-        LanguageManager::getInstance()->sendMessage($sender, "commands.setpower.success", ["{PLAYER}" => $player->getUsername(), "{POWER}" => round($player->getPower(), 2, PHP_ROUND_HALF_DOWN)]);
+        $this->plugin->getLanguageManager()->sendMessage($sender, "commands.setpower.success", ["{PLAYER}" => $player->getUsername(), "{POWER}" => round($player->getPower(), 2, PHP_ROUND_HALF_DOWN)]);
         $player->sendMessage("commands.setpower.power-set", ["{POWER}" => round($player->getPower(), 2, PHP_ROUND_HALF_DOWN)]);
     }
 

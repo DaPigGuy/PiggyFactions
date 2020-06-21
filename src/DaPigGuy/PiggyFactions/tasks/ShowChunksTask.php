@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace DaPigGuy\PiggyFactions\tasks;
 
 use DaPigGuy\PiggyFactions\PiggyFactions;
-use DaPigGuy\PiggyFactions\players\PlayerManager;
 use pocketmine\level\particle\RedstoneParticle;
 use pocketmine\math\Vector3;
 use pocketmine\scheduler\Task;
@@ -23,7 +22,7 @@ class ShowChunksTask extends Task
     public function onRun(int $currentTick): void
     {
         foreach ($this->plugin->getServer()->getOnlinePlayers() as $p) {
-            if (($member = PlayerManager::getInstance()->getPlayer($p)) !== null && $member->canSeeChunks()) {
+            if (($member = $this->plugin->getPlayerManager()->getPlayer($p)) !== null && $member->canSeeChunks()) {
                 $chunk = $p->getLevel()->getChunkAtPosition($p);
 
                 $minX = (float)$chunk->getX() * 16;

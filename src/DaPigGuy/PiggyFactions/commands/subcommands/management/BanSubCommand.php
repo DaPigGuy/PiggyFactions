@@ -9,7 +9,6 @@ use DaPigGuy\PiggyFactions\commands\subcommands\FactionSubCommand;
 use DaPigGuy\PiggyFactions\event\management\FactionBanEvent;
 use DaPigGuy\PiggyFactions\factions\Faction;
 use DaPigGuy\PiggyFactions\players\FactionsPlayer;
-use DaPigGuy\PiggyFactions\players\PlayerManager;
 use DaPigGuy\PiggyFactions\utils\Roles;
 use pocketmine\Player;
 
@@ -17,7 +16,7 @@ class BanSubCommand extends FactionSubCommand
 {
     public function onNormalRun(Player $sender, ?Faction $faction, FactionsPlayer $member, string $aliasUsed, array $args): void
     {
-        $target = PlayerManager::getInstance()->getPlayerByName($args["name"]);
+        $target = $this->plugin->getPlayerManager()->getPlayerByName($args["name"]);
         if ($target === null) {
             $member->sendMessage("commands.invalid-player", ["{PLAYER}" => $args["name"]]);
             return;

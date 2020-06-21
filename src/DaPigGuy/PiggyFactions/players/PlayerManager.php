@@ -46,10 +46,10 @@ class PlayerManager
             "username" => $player->getName(),
             "faction" => null,
             "role" => null,
-            "power" => PiggyFactions::getInstance()->getConfig()->getNested("factions.power.default", 20),
-            "language" => LanguageManager::LOCALE_CODE_TABLE[$player->getLocale()] ?? LanguageManager::getInstance()->getDefaultLanguage()
+            "power" => $this->plugin->getConfig()->getNested("factions.power.default", 20),
+            "language" => LanguageManager::LOCALE_CODE_TABLE[$player->getLocale()] ?? $this->plugin->getLanguageManager()->getDefaultLanguage()
         ]);
-        $this->players[$player->getUniqueId()->toString()] = new FactionsPlayer($player->getUniqueId(), $player->getName(), null, null, PiggyFactions::getInstance()->getConfig()->getNested("factions.power.default", 20), 0, LanguageManager::LOCALE_CODE_TABLE[$player->getLocale()] ?? LanguageManager::getInstance()->getDefaultLanguage());
+        $this->players[$player->getUniqueId()->toString()] = new FactionsPlayer($player->getUniqueId(), $player->getName(), null, null, $this->plugin->getConfig()->getNested("factions.power.default", 20), 0, LanguageManager::LOCALE_CODE_TABLE[$player->getLocale()] ?? $this->plugin->getLanguageManager()->getDefaultLanguage());
         return $this->players[$player->getUniqueId()->toString()];
     }
 

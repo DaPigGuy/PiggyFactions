@@ -49,7 +49,6 @@ use DaPigGuy\PiggyFactions\commands\subcommands\roles\PermissionSubCommand;
 use DaPigGuy\PiggyFactions\commands\subcommands\roles\PromoteSubCommand;
 use DaPigGuy\PiggyFactions\commands\subcommands\TopSubCommand;
 use DaPigGuy\PiggyFactions\commands\subcommands\VersionSubCommand;
-use DaPigGuy\PiggyFactions\language\LanguageManager;
 use DaPigGuy\PiggyFactions\PiggyFactions;
 use DaPigGuy\PiggyFactions\utils\ChatTypes;
 use jojoe77777\FormAPI\SimpleForm;
@@ -73,7 +72,7 @@ class FactionCommand extends BaseCommand
                     $subcommand->onRun($player, $subcommand->getName(), []);
                 }
             });
-            $form->setTitle(LanguageManager::getInstance()->getMessage(LanguageManager::getInstance()->getPlayerLanguage($sender), "forms.title"));
+            $form->setTitle($this->plugin->getLanguageManager()->getMessage($this->plugin->getLanguageManager()->getPlayerLanguage($sender), "forms.title"));
             foreach ($subcommands as $key => $subcommand) {
                 $form->addButton(ucfirst($subcommand->getName()));
             }

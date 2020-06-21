@@ -9,14 +9,13 @@ use DaPigGuy\PiggyFactions\commands\subcommands\FactionSubCommand;
 use DaPigGuy\PiggyFactions\event\management\FactionUnbanEvent;
 use DaPigGuy\PiggyFactions\factions\Faction;
 use DaPigGuy\PiggyFactions\players\FactionsPlayer;
-use DaPigGuy\PiggyFactions\players\PlayerManager;
 use pocketmine\Player;
 
 class UnbanSubCommand extends FactionSubCommand
 {
     public function onNormalRun(Player $sender, ?Faction $faction, FactionsPlayer $member, string $aliasUsed, array $args): void
     {
-        $target = PlayerManager::getInstance()->getPlayerByName($args["name"]);
+        $target = $this->plugin->getPlayerManager()->getPlayerByName($args["name"]);
         if ($target === null) {
             $member->sendMessage("commands.invalid-player", ["{PLAYER}" => $args["name"]]);
             return;

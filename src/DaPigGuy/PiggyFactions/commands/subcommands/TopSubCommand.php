@@ -7,9 +7,7 @@ namespace DaPigGuy\PiggyFactions\commands\subcommands;
 use CortexPE\Commando\args\IntegerArgument;
 use CortexPE\Commando\args\RawStringArgument;
 use DaPigGuy\PiggyFactions\factions\Faction;
-use DaPigGuy\PiggyFactions\factions\FactionsManager;
 use DaPigGuy\PiggyFactions\flags\Flag;
-use DaPigGuy\PiggyFactions\language\LanguageManager;
 use pocketmine\command\CommandSender;
 use pocketmine\Player;
 use pocketmine\utils\TextFormat;
@@ -43,16 +41,16 @@ class TopSubCommand extends FactionSubCommand
             return;
         }
 
-        $factions = array_filter(FactionsManager::getInstance()->getFactions(), function (Faction $faction): bool {
+        $factions = array_filter($this->plugin->getFactionsManager()->getFactions(), function (Faction $faction): bool {
             return !$faction->getFlag(Flag::SAFEZONE) && !$faction->getFlag(Flag::WARZONE);
         });
         usort($factions, $types[$type]);
 
-        $language = $sender instanceof Player ? LanguageManager::getInstance()->getPlayerLanguage($sender) : LanguageManager::getInstance()->getDefaultLanguage();
-        $message = LanguageManager::getInstance()->getMessage($language, "commands.top.header", ["{PAGE}" => $page + 1, "{TOTALPAGES}" => ceil(count($factions) / self::PAGE_LENGTH), "{CATEGORY}" => ucfirst($type)]);
+        $language = $sender instanceof Player ? $this->plugin->getLanguageManager()->getPlayerLanguage($sender) : $this->plugin->getLanguageManager()->getDefaultLanguage();
+        $message = $this->plugin->getLanguageManager()->getMessage($language, "commands.top.header", ["{PAGE}" => $page + 1, "{TOTALPAGES}" => ceil(count($factions) / self::PAGE_LENGTH), "{CATEGORY}" => ucfirst($type)]);
         foreach (array_slice($factions, $page * self::PAGE_LENGTH, self::PAGE_LENGTH) as $rank => $faction) {
-            $message .= TextFormat::EOL . LanguageManager::getInstance()->getMessage($language, "commands.top.line." . $type, [
-                    "{RELATIONCOLOR}" => $sender instanceof Player ? LanguageManager::getInstance()->getColorFor($sender, $faction) : $this->plugin->getConfig()->getNested("symbols.colors.neutral", TextFormat::WHITE),
+            $message .= TextFormat::EOL . $this->plugin->getLanguageManager()->getMessage($language, "commands.top.line." . $type, [
+                    "{RELATIONCOLOR}" => $sender instanceof Player ? $this->plugin->getLanguageManager()->getColorFor($sender, $faction) : $this->plugin->getConfig()->getNested("symbols.colors.neutral", TextFormat::WHITE),
                     "{RANK}" => $rank + 1 + $page * self::PAGE_LENGTH,
                     "{FACTION}" => $faction->getName(),
                     "{ONLINE}" => count($faction->getOnlineMembers()),

@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace DaPigGuy\PiggyFactions\commands\subcommands;
 
-use DaPigGuy\PiggyFactions\claims\ClaimsManager;
 use DaPigGuy\PiggyFactions\factions\Faction;
 use DaPigGuy\PiggyFactions\permissions\FactionPermission;
 use DaPigGuy\PiggyFactions\players\FactionsPlayer;
@@ -18,7 +17,7 @@ class FlySubCommand extends FactionSubCommand
 
     public function onNormalRun(Player $sender, ?Faction $faction, FactionsPlayer $member, string $aliasUsed, array $args): void
     {
-        $claim = ClaimsManager::getInstance()->getClaimByPosition($sender);
+        $claim = $this->plugin->getClaimsManager()->getClaimByPosition($sender);
         if ($claim === null || (!$claim->getFaction()->hasPermission($member, FactionPermission::FLY))) {
             $member->sendMessage("commands.fly.not-allowed");
             return;

@@ -7,10 +7,8 @@ namespace DaPigGuy\PiggyFactions\claims;
 use DaPigGuy\PiggyFactions\event\claims\ChunkOverclaimEvent;
 use DaPigGuy\PiggyFactions\event\claims\ClaimChunkEvent;
 use DaPigGuy\PiggyFactions\event\claims\UnclaimChunkEvent;
-use DaPigGuy\PiggyFactions\language\LanguageManager;
 use DaPigGuy\PiggyFactions\permissions\FactionPermission;
 use DaPigGuy\PiggyFactions\PiggyFactions;
-use DaPigGuy\PiggyFactions\players\PlayerManager;
 use DaPigGuy\PiggyFactions\utils\Relations;
 use pocketmine\event\block\BlockBreakEvent;
 use pocketmine\event\block\BlockPlaceEvent;
@@ -49,10 +47,10 @@ class ClaimsListener implements Listener
     {
         $player = $event->getPlayer();
         $message = $event->getMessage();
-        $member = PlayerManager::getInstance()->getPlayer($player);
+        $member = $this->plugin->getPlayerManager()->getPlayer($player);
         if ($member !== null) {
             $faction = $member->getFaction();
-            $claim = ClaimsManager::getInstance()->getClaimByPosition($player);
+            $claim = $this->manager->getClaimByPosition($player);
             if (!$member->isInAdminMode() && $claim !== null && $claim->getFaction() !== $faction) {
                 $relation = $faction === null ? Relations::NONE : $faction->getRelation($claim->getFaction());
                 if (substr($message, 0, 1) === "/") {
@@ -75,19 +73,19 @@ class ClaimsListener implements Listener
     public function onMove(PlayerMoveEvent $event): void
     {
         $player = $event->getPlayer();
-        $member = PlayerManager::getInstance()->getPlayer($player);
+        $member = $this->plugin->getPlayerManager()->getPlayer($player);
         if ($member !== null) {
-            $oldClaim = ClaimsManager::getInstance()->getClaimByPosition($event->getFrom());
-            $newClaim = ClaimsManager::getInstance()->getClaimByPosition($event->getTo());
+            $oldClaim = $this->manager->getClaimByPosition($event->getFrom());
+            $newClaim = $this->manager->getClaimByPosition($event->getTo());
             if ($oldClaim !== $newClaim) {
                 if (($faction = $member->getFaction()) !== null) {
                     if ($member->isAutoClaiming()) {
-                        if (floor($faction->getPower() / $this->plugin->getConfig()->getNested("factions.claim.cost", 1)) > ($total = count(ClaimsManager::getInstance()->getFactionClaims($faction))) || $member->isInAdminMode()) {
+                        if (floor($faction->getPower() / $this->plugin->getConfig()->getNested("factions.claim.cost", 1)) > ($total = count($this->manager->getFactionClaims($faction))) || $member->isInAdminMode()) {
                             if ($member->isInAdminMode() || $total < ($max = $this->plugin->getConfig()->getNested("factions.claims.max", -1)) || $max === -1) {
                                 if ($newClaim === null) {
                                     $ev = new ClaimChunkEvent($faction, $member, ($newChunk = $player->getLevel()->getChunkAtPosition($event->getTo()))->getX(), $newChunk->getZ());
                                     $ev->call();
-                                    if (!$ev->isCancelled()) $newClaim = $this->plugin->getClaimsManager()->createClaim($faction, $player->getLevel(), $newChunk->getX(), $newChunk->getZ());
+                                    if (!$ev->isCancelled()) $newClaim = $this->manager->createClaim($faction, $player->getLevel(), $newChunk->getX(), $newChunk->getZ());
                                 } else {
                                     if ($newClaim->canBeOverClaimed() && $newClaim->getFaction()->getId() !== $faction->getId()) {
                                         $ev = new ChunkOverclaimEvent($faction, $member, $newClaim);
@@ -101,7 +99,7 @@ class ClaimsListener implements Listener
                         if ($newClaim !== null && ($member->isInAdminMode() || ($newClaim->getFaction()->getId() === $faction->getId() && $faction->hasPermission($member, FactionPermission::UNCLAIM)))) {
                             $ev = new UnclaimChunkEvent($newClaim->getFaction(), $member, $newClaim);
                             $ev->call();
-                            if (!$ev->isCancelled()) $this->plugin->getClaimsManager()->deleteClaim($newClaim);
+                            if (!$ev->isCancelled()) $this->manager->deleteClaim($newClaim);
                         }
                     }
                 }
@@ -111,15 +109,15 @@ class ClaimsListener implements Listener
                 $newFaction = $newClaim === null ? null : $newClaim->getFaction();
                 if ($oldFaction !== $newFaction) {
                     if ($newClaim === null) {
-                        $player->sendTitle(LanguageManager::getInstance()->getMessage($language, "territory-titles.wilderness-title"), LanguageManager::getInstance()->getMessage($language, "territory-titles.wilderness-subtitle"), 5, 60, 5);
+                        $player->sendTitle($this->plugin->getLanguageManager()->getMessage($language, "territory-titles.wilderness-title"), $this->plugin->getLanguageManager()->getMessage($language, "territory-titles.wilderness-subtitle"), 5, 60, 5);
                     } else {
                         $tags = [
-                            "{RELATION}" => LanguageManager::getInstance()->getColorFor($player, $newFaction),
+                            "{RELATION}" => $this->plugin->getLanguageManager()->getColorFor($player, $newFaction),
                             "{FACTION}" => $newFaction->getName(),
                             "{DESCRIPTION}" => $newFaction->getDescription()
                         ];
 
-                        $player->sendTitle(LanguageManager::getInstance()->getMessage($language, "territory-titles.faction-title", $tags), LanguageManager::getInstance()->getMessage($language, "territory-titles.faction-subtitle", $tags), 5, 60, 5);
+                        $player->sendTitle($this->plugin->getLanguageManager()->getMessage($language, "territory-titles.faction-title", $tags), $this->plugin->getLanguageManager()->getMessage($language, "territory-titles.faction-subtitle", $tags), 5, 60, 5);
                     }
                 }
             }
@@ -128,7 +126,7 @@ class ClaimsListener implements Listener
 
     public function canAffectArea(Player $player, Position $position, string $type = FactionPermission::BUILD): bool
     {
-        $member = PlayerManager::getInstance()->getPlayer($player);
+        $member = $this->plugin->getPlayerManager()->getPlayer($player);
         $claim = $this->manager->getClaimByPosition($position);
         if ($claim !== null) {
             return $member === null ? false : $claim->getFaction()->hasPermission($member, $type);

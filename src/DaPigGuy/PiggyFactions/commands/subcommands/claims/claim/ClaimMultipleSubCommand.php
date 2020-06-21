@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace DaPigGuy\PiggyFactions\commands\subcommands\claims\claim;
 
-use DaPigGuy\PiggyFactions\claims\ClaimsManager;
 use DaPigGuy\PiggyFactions\commands\subcommands\FactionSubCommand;
 use DaPigGuy\PiggyFactions\event\claims\ChunkOverclaimEvent;
 use DaPigGuy\PiggyFactions\event\claims\ClaimChunkEvent;
@@ -25,14 +24,14 @@ abstract class ClaimMultipleSubCommand extends FactionSubCommand
         if (empty($chunks)) return;
         foreach ($chunks as $chunk) {
             if (!$member->isInAdminMode()) {
-                if ($faction->getPower() / $this->plugin->getConfig()->getNested("factions.claim.cost", 1) < count(ClaimsManager::getInstance()->getFactionClaims($faction)) + 1) {
+                if ($faction->getPower() / $this->plugin->getConfig()->getNested("factions.claim.cost", 1) < count($this->plugin->getClaimsManager()->getFactionClaims($faction)) + 1) {
                     break;
                 }
-                if (count(ClaimsManager::getInstance()->getFactionClaims($faction)) >= ($max = $this->plugin->getConfig()->getNested("factions.claims.max", -1)) && $max !== -1) {
+                if (count($this->plugin->getClaimsManager()->getFactionClaims($faction)) >= ($max = $this->plugin->getConfig()->getNested("factions.claims.max", -1)) && $max !== -1) {
                     break;
                 }
             }
-            $claim = ClaimsManager::getInstance()->getClaim($chunk[0], $chunk[1], $sender->getLevel()->getFolderName());
+            $claim = $this->plugin->getClaimsManager()->getClaim($chunk[0], $chunk[1], $sender->getLevel()->getFolderName());
             if ($claim !== null) {
                 if (($claim->canBeOverClaimed() || $member->isInAdminMode()) && $claim->getFaction() !== $faction) {
                     $ev = new ChunkOverclaimEvent($faction, $member, $claim);
@@ -49,7 +48,7 @@ abstract class ClaimMultipleSubCommand extends FactionSubCommand
             $ev->call();
             if ($ev->isCancelled()) continue;
 
-            ClaimsManager::getInstance()->createClaim($faction, $sender->getLevel(), $chunk[0], $chunk[1]);
+            $this->plugin->getClaimsManager()->createClaim($faction, $sender->getLevel(), $chunk[0], $chunk[1]);
             $claimed++;
         }
         $member->sendMessage("commands.claim.claimed-multiple", ["{AMOUNT}" => $claimed, "{COMMAND}" => $this->getName()]);

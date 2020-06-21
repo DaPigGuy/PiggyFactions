@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace DaPigGuy\PiggyFactions\commands\subcommands\claims\claim;
 
 use CortexPE\Commando\args\IntegerArgument;
-use DaPigGuy\PiggyFactions\language\LanguageManager;
 use pocketmine\Player;
 
 class ClaimCircleSubCommand extends ClaimMultipleSubCommand
@@ -13,7 +12,7 @@ class ClaimCircleSubCommand extends ClaimMultipleSubCommand
     public function getChunks(Player $player, array $args): array
     {
         if (($radius = (int)$args["radius"]) < 1) {
-            LanguageManager::getInstance()->sendMessage($player, "commands.claim.radius-less-than-one");
+            $this->plugin->getLanguageManager()->sendMessage($player, "commands.claim.radius-less-than-one");
             return [];
         }
         $radius--;

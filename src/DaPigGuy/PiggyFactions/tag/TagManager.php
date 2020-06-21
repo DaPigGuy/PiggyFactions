@@ -7,7 +7,6 @@ namespace DaPigGuy\PiggyFactions\tag;
 use DaPigGuy\PiggyFactions\factions\Faction;
 use DaPigGuy\PiggyFactions\PiggyFactions;
 use DaPigGuy\PiggyFactions\players\FactionsPlayer;
-use DaPigGuy\PiggyFactions\players\PlayerManager;
 use pocketmine\Player;
 
 class TagManager
@@ -40,7 +39,7 @@ class TagManager
         $tags = explode('.', $tag, 2);
         if ($tags[0] !== 'piggyfacs' || count($tags) < 2) return null;
 
-        $member = PlayerManager::getInstance()->getPlayer($player);
+        $member = $this->plugin->getPlayerManager()->getPlayer($player);
         switch ($tags[1]) {
             case "name":
                 return $this->getFactionName($member) ?? $this->factionless;
