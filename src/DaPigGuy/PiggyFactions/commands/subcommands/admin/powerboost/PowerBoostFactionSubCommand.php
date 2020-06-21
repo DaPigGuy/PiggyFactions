@@ -7,7 +7,6 @@ namespace DaPigGuy\PiggyFactions\commands\subcommands\admin\powerboost;
 use CortexPE\Commando\args\FloatArgument;
 use CortexPE\Commando\args\RawStringArgument;
 use DaPigGuy\PiggyFactions\commands\subcommands\FactionSubCommand;
-use DaPigGuy\PiggyFactions\factions\FactionsManager;
 use pocketmine\command\CommandSender;
 
 class PowerBoostFactionSubCommand extends FactionSubCommand
@@ -17,7 +16,7 @@ class PowerBoostFactionSubCommand extends FactionSubCommand
 
     public function onBasicRun(CommandSender $sender, array $args): void
     {
-        $faction = FactionsManager::getInstance()->getFactionByName($args["name"]);
+        $faction = $this->plugin->getFactionsManager()->getFactionByName($args["name"]);
         if ($faction === null) {
             $this->plugin->getLanguageManager()->sendMessage($sender, "commands.invalid-faction", ["{FACTION}" => $args["name"]]);
             return;

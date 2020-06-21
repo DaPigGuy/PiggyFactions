@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace DaPigGuy\PiggyFactions\commands\subcommands\claims\unclaim;
 
-use DaPigGuy\PiggyFactions\claims\ClaimsManager;
 use DaPigGuy\PiggyFactions\commands\subcommands\FactionSubCommand;
 use DaPigGuy\PiggyFactions\event\claims\UnclaimChunkEvent;
 use DaPigGuy\PiggyFactions\factions\Faction;
@@ -30,7 +29,7 @@ abstract class UnclaimMultipleSubCommand extends FactionSubCommand
                     $ev->call();
                     if ($ev->isCancelled()) continue;
 
-                    ClaimsManager::getInstance()->deleteClaim($claim);
+                    $this->plugin->getClaimsManager()->deleteClaim($claim);
                     $unclaimed++;
                 }
             }
