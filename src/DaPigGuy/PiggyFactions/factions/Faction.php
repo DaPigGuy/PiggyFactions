@@ -286,6 +286,12 @@ class Faction
         $this->update();
     }
 
+    public function unsetHome(): void
+    {
+        $this->home = null;
+        $this->update();
+    }
+
     public function getRelationWish(Faction $faction): string
     {
         return $this->relationWish[$faction->getId()] ?? Relations::NONE;

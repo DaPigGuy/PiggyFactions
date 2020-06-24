@@ -20,6 +20,7 @@ use DaPigGuy\PiggyFactions\commands\subcommands\FlySubCommand;
 use DaPigGuy\PiggyFactions\commands\subcommands\HelpSubCommand;
 use DaPigGuy\PiggyFactions\commands\subcommands\homes\HomeSubCommand;
 use DaPigGuy\PiggyFactions\commands\subcommands\homes\SetHomeSubCommand;
+use DaPigGuy\PiggyFactions\commands\subcommands\homes\UnsetHomeSubCommand;
 use DaPigGuy\PiggyFactions\commands\subcommands\InfoSubCommand;
 use DaPigGuy\PiggyFactions\commands\subcommands\JoinSubCommand;
 use DaPigGuy\PiggyFactions\commands\subcommands\LanguageSubCommand;
@@ -127,6 +128,7 @@ class FactionCommand extends BaseCommand
         $this->registerSubCommand(new UnallySubCommand($this->plugin, "unally", "End faction alliance"));
         $this->registerSubCommand(new UnbanSubCommand($this->plugin, "unban", "Unban a member from your faction"));
         $this->registerSubCommand(new UnclaimSubCommand($this->plugin, "unclaim", "Unclaim a chunk"));
+        $this->registerSubCommand(new UnsetHomeSubCommand($this->plugin, "unsethome", "Unset faction home", ["delhome"]));
         $this->registerSubCommand(new VersionSubCommand($this->plugin, "version", "Display version & credits for PiggyFactions", ["v", "ver"]));
         if ($this->plugin->isFactionBankEnabled()) $this->registerSubCommand(new WithdrawSubCommand($this->plugin, "withdraw", "Withdraw money from faction bank"));
     }

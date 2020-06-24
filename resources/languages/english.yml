@@ -173,6 +173,8 @@ commands:
     auto:
       toggled: "{GREEN}You are now auto-unclaiming."
       toggled-off: "{RED}You are no longer auto-unclaiming."
+  unsethome:
+    success: "{GREEN}Faction home has been unset."
   withdraw:
     success: "{GREEN}${MONEY} has been withdrawn from the faction bank."
 death:
