@@ -21,12 +21,12 @@ class ClaimSubCommand extends FactionSubCommand
             return;
         }
         if (!$member->isInAdminMode()) {
-            if ($faction->getPower() / $this->plugin->getConfig()->getNested("factions.claim.cost", 1) < count($this->plugin->getClaimsManager()->getFactionClaims($faction)) + 1) {
-                $member->sendMessage("commands.claim.no-power");
+            if (($total = count($this->plugin->getClaimsManager()->getFactionClaims($faction))) >= ($max = $this->plugin->getConfig()->getNested("factions.claims.max", -1)) && $max !== -1) {
+                $member->sendMessage("commands.claim.max-claimed");
                 return;
             }
-            if (count($this->plugin->getClaimsManager()->getFactionClaims($faction)) >= ($max = $this->plugin->getConfig()->getNested("factions.claims.max", -1)) && $max !== -1) {
-                $member->sendMessage("commands.claim.max-claimed");
+            if ($total >= floor($faction->getPower() / $this->plugin->getConfig()->getNested("factions.claim.cost", 1))) {
+                $member->sendMessage("commands.claim.no-power");
                 return;
             }
         }

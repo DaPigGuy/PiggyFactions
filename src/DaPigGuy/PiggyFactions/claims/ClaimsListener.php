@@ -80,18 +80,34 @@ class ClaimsListener implements Listener
             if ($oldClaim !== $newClaim) {
                 if (($faction = $member->getFaction()) !== null) {
                     if ($member->isAutoClaiming()) {
-                        if (floor($faction->getPower() / $this->plugin->getConfig()->getNested("factions.claim.cost", 1)) > ($total = count($this->manager->getFactionClaims($faction))) || $member->isInAdminMode()) {
-                            if ($member->isInAdminMode() || $total < ($max = $this->plugin->getConfig()->getNested("factions.claims.max", -1)) || $max === -1) {
-                                if ($newClaim === null) {
-                                    $ev = new ClaimChunkEvent($faction, $member, ($newChunk = $player->getLevel()->getChunkAtPosition($event->getTo()))->getX(), $newChunk->getZ());
-                                    $ev->call();
-                                    if (!$ev->isCancelled()) $newClaim = $this->manager->createClaim($faction, $player->getLevel(), $newChunk->getX(), $newChunk->getZ());
-                                } else {
-                                    if ($newClaim->canBeOverClaimed() && $newClaim->getFaction()->getId() !== $faction->getId()) {
-                                        $ev = new ChunkOverclaimEvent($faction, $member, $newClaim);
-                                        $ev->call();
-                                        if (!$ev->isCancelled()) $newClaim->setFaction($faction);
-                                    }
+                        if (!$member->isInAdminMode()) {
+                            if (($total = count($this->manager->getFactionClaims($faction))) >= ($max = $this->plugin->getConfig()->getNested("factions.claims.max", -1)) && $max !== -1) {
+                                $member->setAutoClaiming(false);
+                                $member->sendMessage("commands.claim.auto.toggled-off");
+                                $member->sendMessage("commands.claim.max-claimed");
+                                return;
+                            }
+                            if ($total >= floor($faction->getPower() / $this->plugin->getConfig()->getNested("factions.claim.cost", 1))) {
+                                $member->setAutoClaiming(false);
+                                $member->sendMessage("commands.claim.auto.toggled-off");
+                                $member->sendMessage("commands.claim.no-power");
+                                return;
+                            }
+                        }
+                        if ($newClaim === null) {
+                            $ev = new ClaimChunkEvent($faction, $member, ($newChunk = $player->getLevel()->getChunkAtPosition($event->getTo()))->getX(), $newChunk->getZ());
+                            $ev->call();
+                            if (!$ev->isCancelled()) {
+                                $newClaim = $this->manager->createClaim($faction, $player->getLevel(), $newChunk->getX(), $newChunk->getZ());
+                                $member->sendMessage("commands.claim.success");
+                            }
+                        } else {
+                            if ($newClaim->canBeOverClaimed() && $newClaim->getFaction()->getId() !== $faction->getId()) {
+                                $ev = new ChunkOverclaimEvent($faction, $member, $newClaim);
+                                $ev->call();
+                                if (!$ev->isCancelled()) {
+                                    $newClaim->setFaction($faction);
+                                    $member->sendMessage("commands.claim.over-claimed");
                                 }
                             }
                         }
@@ -99,7 +115,10 @@ class ClaimsListener implements Listener
                         if ($newClaim !== null && ($member->isInAdminMode() || ($newClaim->getFaction()->getId() === $faction->getId() && $faction->hasPermission($member, FactionPermission::UNCLAIM)))) {
                             $ev = new UnclaimChunkEvent($newClaim->getFaction(), $member, $newClaim);
                             $ev->call();
-                            if (!$ev->isCancelled()) $this->manager->deleteClaim($newClaim);
+                            if (!$ev->isCancelled()) {
+                                $this->manager->deleteClaim($newClaim);
+                                $member->sendMessage("commands.unclaim.success");
+                            }
                         }
                     }
                 }
@@ -128,9 +147,7 @@ class ClaimsListener implements Listener
     {
         $member = $this->plugin->getPlayerManager()->getPlayer($player);
         $claim = $this->manager->getClaimByPosition($position);
-        if ($claim !== null) {
-            return $member === null ? false : $claim->getFaction()->hasPermission($member, $type);
-        }
+        if ($claim !== null) return $member === null ? false : $claim->getFaction()->hasPermission($member, $type);
         return true;
     }
 }
