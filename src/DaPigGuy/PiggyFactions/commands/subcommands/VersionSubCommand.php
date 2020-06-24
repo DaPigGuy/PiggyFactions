@@ -15,10 +15,15 @@ class VersionSubCommand extends FactionSubCommand
     public function onBasicRun(CommandSender $sender, array $args): void
     {
         $translators = [
-            "Taylarity" => ["Chinese (Traditional)"],
+            "Aericio" => ["Chinese (Simplified)", "Chinese (Traditional)"],
+            "MrAshshiddiq" => ["Indonesian"],
+            "prprprprprprpr" => ["Chinese (Simplified)", "Chinese (Traditional)"],
             "SalmonDE" => ["German"],
+            "SillierShark195" => ["Indonesian"],
+            "Taylarity" => ["Chinese (Simplified)", "Chinese (Traditional)"],
+            "TGPNG" => ["Chinese (Simplified)", "Chinese (Traditional)"],
+            "UnEnanoMas" => ["Spanish"],
             "yuriiscute53925" => ["Serbian"],
-            "UnEnanoMas" => ["Spanish"]
         ];
 
         $poggitBuildInfo = $this->plugin->getPoggitBuildInfo();

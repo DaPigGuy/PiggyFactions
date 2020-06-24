@@ -1,0 +1,217 @@
+chat:
+  ally: "{BOLD}{GOLD}SEKUTU {RESET}{LIGHT_PURPLE}{RANK_SYMBOL}{FACTION} {RESET}{PLAYER}: {MESSAGE}"
+  faction: "{BOLD}{GOLD}FACTION {RESET}{RANK_SYMBOL}{PLAYER}: {MESSAGE}"
+claims:
+  command-denied: "{RED}Kamu tidak bisa {COMMAND} di wilayah {RELATION}."
+  flight-disable-warning: "{RED}Tidak dalam wilayah Faction. mematikan Terbang dalam {AMOUNT}..."
+commands:
+  invalid-player: "{RED}Pemain {PLAYER} tidak di temukan."
+  invalid-faction: "{RED}Faction {FACTION} tidak di temukan."
+  member-not-found: "{RED}Anggota {PLAYER} tidak di temukan."
+  not-in-faction: "{RED}Kamu tidak didalam Faction."
+  already-in-faction: "{RED}Kamu sudah ada didalam Faction."
+  not-leader: "{RED}Kamu bukan Pemimpin Faction!"
+  no-permission: "{RED}Kamu tidak di izinkan lakukan ini."
+  player-is-banned: "{RED}{PLAYER} di larang dari faction kamu."
+  you-are-banned: "{RED}Kamu dilarang dari faction ini."
+  faction-full: "{RED}Faction sudah penuh."
+  admin:
+    toggled: "{GREEN}Kamu sekarang dalam mode Admin."
+    toggled-off: "{RED}Kamu tidak lagi dalam mode Admin."
+  ally:
+    self: "{RED}Kamu tidak bisa bersekutu dengan diri mu sendiri."
+    already-allied: "{RED}Kamu sudah bersekutu!"
+    request: "{GREEN}{FACTION} telah mengirim permintaan sekutu /f ally {FACTION} untuk menerima."
+    allied: "{GREEN}Faction kamu sekarang bersekutu dengan {ALLY}."
+    success: "{GREEN}Permintaan sekutu telah di kirim ke {FACTION}."
+  ban:
+    cant-ban-higher: "{RED}Kamu tidak dapat melarang anggota dengan peringkat lebih tinggi."
+    already-banned: "{RED}{PLAYER} ini sudah dilarang."
+    announcement: "{YELLOW}{PLAYER} dilarang dari Faction."
+    banned: "{RED}Kamu dilarang dari Faction kamu."
+  chat:
+    already-in-chat: "{RED}Kamu sudah ada didalam obrolan ini!"
+    toggled: "{GREEN}Kamu sekarang didalam obrolan {CHAT}."
+    toggled-off: "{RED}Kamu tidak didalam obrolan {CHAT}."
+  claim:
+    blacklisted-world: "{RED}Mengklaim tidak diizinkan di dunia ini."
+    max-claimed: "{RED}Kamu tidak dapat mengklaim tanah lagi."
+    already-claimed: "{RED}Chunk ini sudah diklaim"
+    no-power: "{RED}Faction kamu tidak memiliki kekuatan yang dicukupi"
+    radius-less-than-one: "{RED}Radius harus lebih besar dari satu."
+    over-claimed: "{GREEN}Chunk ini telah overclaimed"
+    success: "{GREEN}Chunk ini telah diklaim"
+    claimed-multiple: "{GREEN}{AMOUNT} Chunk diklaim oleh {COMMAND}"
+    auto:
+      toggled: "{GREEN}Kamu sekarang mengklaim secara otomatis"
+      toggled-off: "{RED}Kamu tidak lagi mengklaim secara otomatis"
+  create:
+    name-taken: "{RED}Faction dengan nama {NAME} telah digunakan."
+    alphanumeric-only: "{RED}Nama Faction harus hanya terdiri dari karakter alfanumerik."
+    name-blacklisted: "{RED}Nama {NAME} masuk daftar hitam."
+    name-too-long: "{RED}Nama {NAME} melebihi batas karakter maksimum."
+    success: "{GREEN}Faction {NAME} telah berhasil dibuat."
+  demote:
+    cant-demote-higher: "{RED}Kamu tidak dapat menurunkan peringkat anggota yang lebih tinggi."
+    already-lowest: "{RED}{PLAYER} sudah di peringkat terendah."
+    success: "{GREEN}{PLAYER} telah diturunkan ke {ROLE}."
+    demoted: "{RED}Peran kamu telah diturunkan menjadi {ROLE}."
+  deposit:
+    success: "{GREEN}${MONEY} telah disetorkan ke Bank Faction"
+  description:
+    success: "{GREEN}Deskripsi Faction telah diatur ke {DESCRIPTION}"
+  disband:
+    success: "{YELLOW}Faction kamu telah dibubarkan!"
+  enemy:
+    self: "{RED}Kamu tidak dapat menandai diri Kamu sebagai musuh."
+    already-enemy: "{RED}{FACTION} sudah menjadi musuh!"
+    success: "{GREEN}{FACTION} telah ditandai sebagai musuh."
+  flag:
+    invalid-flag: "{RED}Bendera {FLAG} tidak ditemukan."
+    not-editable: "{RED}Bendera {FLAG} tidak dapat diedit."
+    toggled: "{GREEN}Bendera {FLAG} telah diaktifkan."
+    toggled-off: "{GREEN}Bendera {FLAG} telah dinonaktifkan."
+  fly:
+    not-allowed: "{RED}Kamu tidak diizinkan terbang di sini."
+    toggled: "{GREEN}Terbang telah diaktifkan."
+    toggled-off: "{RED}Terbang telah dinonaktifkan."
+  help:
+    header: "{GOLD}____________.[{DARK_GREEN}Bantuan Faction ({PAGE}/{MAXPAGE}){GOLD}].____________"
+    command: "\n{GREEN}/f {COMMAND} - {RESET}{DESCRIPTION}"
+  home:
+    not-set: "{RED}Rumah Faction tidak diatur."
+  info:
+    message: "{GOLD}____________.[{DARK_GREEN}Faction {FACTION}{GOLD}].____________\n{GOLD}Deskripsi: {YELLOW}{DESCRIPTION}\n{GOLD}Lahan / Kekuatan / Kekuatan Penuh: {YELLOW}{CLAIMS}/{POWER}/{TOTALPOWER}\n{GOLD}Umur: {YELLOW}{AGE}\n{GOLD}Online: {YELLOW}{ONLINECOUNT}/{TOTALPLAYERS}\n{GOLD}Ketua: {YELLOW}{LEADER}\n{GOLD}Hubungan: {RELATIONS}\n{GOLD}Anggota: {YELLOW}{PLAYERS}"
+    description-not-set: "tidak ada deskripsi yang ditetapkan"
+  invite:
+    already-in-faction: "{RED}{PLAYER} sudah ada didalam Faction."
+    already-sent: "{RED}Sebuah undangan telah dikirim ke {PLAYER}."
+    success: "{GREEN}Undangan telah dikirim ke {PLAYER}."
+    invited: "{GREEN}Kamu telah diundang untuk bergabung ke {FACTION}. Ketik /f join {FACTION} untuk bergabung."
+  join:
+    no-invite: "{RED}Kamu tidak memiliki undangan dari {FACTION}."
+    joined: "{GREEN}{PLAYER} telah bergabung ke Faction!"
+  kick:
+    cant-kick-higher: "{RED}Kamu tidak dapat mengusir anggota dengan peringkat lebih tinggi."
+    announcement: "{YELLOW}{PLAYER} diusir dari Faction."
+    kicked: "{RED}Kamu telah diusir dari Faction."
+  language:
+    invalid-language: "{RED}Bahasa tidak ditemukan."
+    success: "{GREEN}Bahasa telah diubah ke bahasa Indonesia."
+  leader:
+    offline: "{RED}Pemain harus online untuk transfer kepemimpinan."
+    recipient: "{GREEN}Kamu sekarang adalah pemimpin Faction."
+    success: "{GREEN}Faction telah ditransfer ke {PLAYER}."
+  leave:
+    is-leader: "{RED}Kamu adalah pemimpin Faction."
+    success: "{YELLOW}Kamu telah meninggalkan Faction."
+  map:
+    header: "{GOLD}____________.[ {GREEN}({X},{Z}) {FACTION} {GOLD}].____________"
+  money:
+    balance: "{GREEN}Saldo Faction: ${MONEY}"
+  motd:
+    success: "{GREEN}Faction MOTD telah diatur ke {MOTD}"
+  name:
+    success: "{GREEN}Nama Faction telah diubah menjadi {FACTION}."
+  neutral:
+    already-neutral: "{RED}Faction kamu tidak memiliki hubungan dengan {FACTION}."
+    success: "{GREEN}Faction kamu sekarang netral dengan {FACTION}."
+  permission:
+    role-not-found: "{RED}Peran tidak ditemukan."
+    permission-not-found: "{RED}Izin tidak ditemukan."
+    toggled: "{GREEN}Izin {PERMISSION} telah diaktifkan untuk peran {ROLE}."
+    toggled-off: "{RED}Izin {PERMISSION} telah dinonaktifkan untuk peran {ROLE}."
+  player:
+    message: "\n{GOLD}____________.[{DARK_GREEN}Pemain {RANKSYMBOL}{PLAYER}{GOLD}].____________\n{GOLD}Faction: {YELLOW}{FACTION}\n{GOLD}Kekuatan: {YELLOW}{POWER}/{TOTALPOWER} {TIMETOMAXPOWER}"
+    time-to-max-power: "({TIME} jam tersisa sampai maks)"
+  promote:
+    cant-promote-higher: "{RED}Kamu tidak dapat mempromosikan melewati peringkat kamu."
+    already-maxed: "{RED}{PLAYER} sudah di peringkat maksimal."
+    success: "{GREEN}{PLAYER} telah dipromosikan menjadi {ROLE}."
+    promoted: "{GREEN}Kamu dipromosikan menjadi {ROLE}."
+  sethome:
+    not-within-territory: "{RED}Rumah Faction harus berada dalam wilayah Faction."
+    success: "{GREEN}Rumah Faction telah ditetapkan."
+  setpower:
+    success: "{GREEN}Kekuatan {PLAYER} telah diatur ke {POWER}."
+    power-set: "{GREEN}Kekuatan kamu telah diatur ke {POWER}."
+  addpower:
+    success: "{GREEN}{POWER} Kekuatan telah ditambahkan ke {PLAYER}."
+    power-add: "{GREEN}Kekuatan kamu telah meningkat sebesar {ADDEDPOWER}. Kamu sekarang memiliki {POWER} kekuatan."
+  powerboost:
+    success-player: "{GREEN}Kekuatan maksimum {PLAYER} telah ditingkatkan sebesar {POWER}."
+    success-faction: "{GREEN}Kekuatan Faction {FACTION} telah ditingkatkan sebesar {POWER}."
+    boost-player: "{GREEN}Kekuatan maksimum kamu telah meningkat sebesar {POWER}."
+    boost-faction: "{GREEN}Kekuatan Faction kamu telah meningkat sebesar {POWER}."
+  top:
+    header: "{GOLD}____________.[{DARK_GREEN}Faction teratas oleh {CATEGORY} ({PAGE}/{TOTALPAGES}){GOLD}].____________"
+    line:
+      online: "{GOLD}#{RANK} {RELATIONCOLOR}{FACTION}{GOLD} -{YELLOW} {ONLINE}"
+      members: "{GOLD}#{RANK} {RELATIONCOLOR}{FACTION}{GOLD} -{YELLOW} {MEMBERS}"
+      power: "{GOLD}#{RANK} {RELATIONCOLOR}{FACTION}{GOLD} -{YELLOW} {POWER}/{TOTALPOWER}"
+      money: "{GOLD}#{RANK} {RELATIONCOLOR}{FACTION}{GOLD} -{YELLOW} ${MONEY}"
+  truce:
+    self: "{RED}Kamu tidak bisa berdamai dengan diri kamu sendiri."
+    already-truced: "{RED}Kamu sudah berdamai!"
+    request: "{GREEN}{FACTION} telah mengirim permintaan berdamai. ketik /f truce {FACTION} untuk menerima."
+    truced: "{GREEN}Faction kamu sekarang berdamai dengan {TRUCED}."
+    success: "{GREEN}Permintaan berdamai telah dikirim ke {FACTION}."
+  unally:
+    not-allied: "{RED}Kamu tidak bersekutu dengan {FACTION}."
+    unallied: "{RED}Faction kamu tidak lagi bersekutu dengan {FACTION}."
+  unban:
+    not-banned: "{RED}{PLAYER} tidak dilarang."
+    announcement: "{YELLOW}{PLAYER} tidak dilarang dari Faction."
+  unclaim:
+    blacklisted-world: "{RED}Tidak mengklaim tidak diizinkan di dunia ini."
+    not-claimed: "{RED}Chunk tidak diklaim."
+    other-faction: "{RED}Chunk ini telah diklaim oleh Faction lain."
+    success: "{GREEN}Chunk ini sudah tidak diklaim"
+    claimed-multiple: "{GREEN}{AMOUNT} chunks tidak diklaim oleh {COMMAND}."
+    all:
+      success: "{GREEN}Semua {FACTION} klaim tidak diklaim."
+    auto:
+      toggled: "{GREEN}Kamu sekarang tidak mengklaim secara otomatis."
+      toggled-off: "{RED}Kamu tidak lagi tidak mengklaim secara otomatis"
+  withdraw:
+    success: "{GREEN}${MONEY} telah ditarik dari Bank Faction."
+death:
+  power: "{RED}Kekuatan kamu sekarang {POWER}."
+economy:
+  not-enough-money: "{RED}Tidak cukup uang. Kurang ${DIFFERENCE}."
+  negative-money: "{RED}Jumlah uang negatif yang diberikan."
+forms:
+  title: "PiggyFactions UI"
+motd: "{GOLD}____________.[{DARK_GREEN}{FACTION} MOTD{GOLD}].____________\n{WHITE}{MOTD}"
+pvp:
+  attacker-factionless: "{RED}Kamu tidak dapat melukai pemain lain sampai kamu bergabung dengan sebuah Faction."
+  target-factionless: "{RED}Kamu tidak bisa melukai pemain yang saat ini tidak ada di Faction."
+  cant-attack-in-territory: "{RED}Kamu tidak boleh melukai {PLAYER} di wilayah mereka sendiri kecuali kamu menyatakan mereka sebagai musuh."
+relation:
+  ally: "Sekutu"
+  truce: "Berdamai"
+  neutral: "Netral"
+  enemy: "Musuh"
+role:
+  leader: "Pemimpin"
+  officer: "Petugas"
+  member: "Anggota"
+  recruit: "Rekrut"
+  none: "Tidak ada"
+territory-titles:
+  wilderness-title: "{DARK_GREEN}Hutan belantara"
+  wilderness-subtitle: "{YELLOW}Berbahaya untuk pergi sendiri."
+  faction-title: "{RELATION}{FACTION}"
+  faction-subtitle: "{ITALIC}{DESCRIPTION}"
+logs:
+  page-too-low: "{RED}Halaman harus lebih besar dari nol."
+  invalid-log: "{RED}Jenis log atau nomor halaman tidak valid! \nGunakan: /f logs <kick|ban|invite|join|leave|unban|leader_change> <page>"
+  title: "{GOLD}Log Faction: {AQUA}Halaman {CURRENTPAGE}/{TOTALPAGES}"
+  actions:
+    kick: "{GOLD}{TIME} => {GREEN}{KICKED} {AQUA}ditendang oleh {GREEN}{KICKER}."
+    ban: "{GOLD}{TIME} => {GREEN}{BANNED} {AQUA}telah dilarang oleh {GREEN}{BANNEDBY}."
+    join: "{GOLD}{TIME} => {GREEN}{JOINED} {AQUA}telah bergabung."
+    leave: "{GOLD}{TIME} => {GREEN}{LEFT} {AQUA}telah meninggalkan."
+    unban: "{GOLD}{TIME} => {GREEN}{UNBANNED} {AQUA}tidak dilarang oleh {GREEN}{UNBANNEDBY}."
+    invite: "{GOLD}{TIME} => {GREEN}{INVITED} {AQUA}telah diundang oleh {GREEN}{INVITEDBY}."
+    leader_change: "{GOLD}{TIME} => {AQUA}Kepemimpinan telah ditransfer dari {GREEN}{OLD} {AQUA}ke {GREEN}{NEW}."

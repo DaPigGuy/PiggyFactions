@@ -20,6 +20,7 @@ class LanguageManager
         "chinese_traditional",
         "english",
         "german",
+        "indonesian",
         "serbian",
         "spanish"
     ];
@@ -29,6 +30,7 @@ class LanguageManager
         "es_ES" => "spanish",
         "es_MX" => "spanish",
         "de_DE" => "german",
+        "id_ID" => "indonesian",
         "sr_SP" => "serbian",
         "zh_CN" => "chinese_simplified",
         "zh_TW" => "chinese_traditional"
