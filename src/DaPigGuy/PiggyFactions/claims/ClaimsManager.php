@@ -67,7 +67,7 @@ class ClaimsManager
             "chunkZ" => $chunkZ,
             "level" => $level->getFolderName()
         ];
-        $this->claims[$args["chunkX"] . ":" . $args["chunkZ"] . ":" . $args["level"]] = new Claim(...array_values($args));
+        $this->claims[$args["chunkX"] . ":" . $args["chunkZ"] . ":" . $args["level"]] = new Claim($args["faction"], $args["chunkX"], $args["chunkZ"], $args["level"]);
         $this->plugin->getDatabase()->executeInsert("piggyfactions.claims.create", $args);
         return $this->claims[$args["chunkX"] . ":" . $args["chunkZ"] . ":" . $args["level"]];
     }
