@@ -26,7 +26,7 @@ class PromoteSubCommand extends FactionSubCommand
             $member->sendMessage("commands.promote.already-maxed", ["{PLAYER}" => $targetMember->getUsername()]);
             return;
         }
-        if (Roles::ALL[$currentRole] + 1 >= Roles::ALL[$member->getRole()] && !$member->isInAdminMode()) {
+        if ((Roles::ALL[$currentRole] + 1 >= Roles::ALL[$member->getRole()] && !$member->isInAdminMode()) || $currentRole === Roles::LEADER) {
             $member->sendMessage("commands.promote.cant-promote-higher", ["{PLAYER}" => $targetMember->getUsername()]);
             return;
         }
