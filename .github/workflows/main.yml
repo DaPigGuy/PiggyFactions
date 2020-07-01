@@ -17,7 +17,7 @@ jobs:
       - name: wget PiggyCustomEnchants
         uses: wei/wget@v1
         with:
-          args: -O vendor/PiggyCustomEnchants.phar https://poggit.pmmp.io/r/82514/PiggyCustomEnchants_dev-439.phar
+          args: -O vendor/PiggyCustomEnchants.phar https://poggit.pmmp.io/r/94443/PiggyCustomEnchants_dev-468.phar
       - name: wget HRKChat
         uses: wei/wget@v1
         with:

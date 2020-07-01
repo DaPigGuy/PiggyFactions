@@ -17,7 +17,7 @@ class UnclaimSquareSubCommand extends UnclaimMultipleSubCommand
         }
         $radius--;
 
-        $center = $player->getWorld()->getChunkAtPosition($player);
+        $center = $player->getWorld()->getChunkAtPosition($player->getPosition());
         $chunks = [];
         for ($dx = -$radius; $dx <= $radius; $dx++) {
             for ($dz = -$radius; $dz <= $radius; $dz++) {
