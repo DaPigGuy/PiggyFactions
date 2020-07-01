@@ -9,7 +9,7 @@ use DaPigGuy\PiggyFactions\commands\subcommands\FactionSubCommand;
 use DaPigGuy\PiggyFactions\event\management\FactionRenameEvent;
 use DaPigGuy\PiggyFactions\factions\Faction;
 use DaPigGuy\PiggyFactions\players\FactionsPlayer;
-use pocketmine\Player;
+use pocketmine\player\Player;
 
 class NameSubCommand extends FactionSubCommand
 {

@@ -10,7 +10,7 @@ use DaPigGuy\PiggyFactions\event\management\FactionCreateEvent;
 use DaPigGuy\PiggyFactions\factions\Faction;
 use DaPigGuy\PiggyFactions\players\FactionsPlayer;
 use DaPigGuy\PiggyFactions\utils\Roles;
-use pocketmine\Player;
+use pocketmine\player\Player;
 
 class CreateSubCommand extends FactionSubCommand
 {

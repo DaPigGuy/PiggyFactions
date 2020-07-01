@@ -9,7 +9,7 @@ use DaPigGuy\PiggyFactions\factions\Faction;
 use DaPigGuy\PiggyFactions\utils\FormattedTime;
 use DaPigGuy\PiggyFactions\utils\Roles;
 use pocketmine\command\CommandSender;
-use pocketmine\Player;
+use pocketmine\player\Player;
 
 class InfoSubCommand extends FactionSubCommand
 {

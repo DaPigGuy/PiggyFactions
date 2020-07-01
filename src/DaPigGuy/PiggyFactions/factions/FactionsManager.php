@@ -9,8 +9,8 @@ use DaPigGuy\PiggyFactions\flags\FlagFactory;
 use DaPigGuy\PiggyFactions\permissions\FactionPermission;
 use DaPigGuy\PiggyFactions\permissions\PermissionFactory;
 use DaPigGuy\PiggyFactions\PiggyFactions;
-use pocketmine\level\Position;
-use pocketmine\utils\UUID;
+use pocketmine\uuid\UUID;
+use pocketmine\world\Position;
 
 class FactionsManager
 {
@@ -32,7 +32,7 @@ class FactionsManager
             foreach ($rows as $row) {
                 if ($row["home"] !== null) {
                     $decodedHome = json_decode($row["home"], true);
-                    $row["home"] = new Position($decodedHome["x"], $decodedHome["y"], $decodedHome["z"], $this->plugin->getServer()->getLevelByName($decodedHome["level"]));
+                    $row["home"] = new Position($decodedHome["x"], $decodedHome["y"], $decodedHome["z"], $this->plugin->getServer()->getWorldManager()->getWorldByName($decodedHome["level"]));
                 }
 
                 $this->factions[$row["id"]] = new Faction($row["id"], $row["name"], $row["creation_time"], $row["description"], $row["motd"], json_decode($row["members"], true), json_decode($row["permissions"], true), json_decode($row["flags"], true), $row["home"], isset($row["relations"]) ? json_decode($row["relations"], true) : [], isset($row["banned"]) ? json_decode($row["banned"], true) : [], $row["money"], $row["powerboost"]);

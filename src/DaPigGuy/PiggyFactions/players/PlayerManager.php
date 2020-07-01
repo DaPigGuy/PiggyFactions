@@ -7,8 +7,8 @@ namespace DaPigGuy\PiggyFactions\players;
 use DaPigGuy\PiggyFactions\factions\Faction;
 use DaPigGuy\PiggyFactions\language\LanguageManager;
 use DaPigGuy\PiggyFactions\PiggyFactions;
-use pocketmine\Player;
-use pocketmine\utils\UUID;
+use pocketmine\player\Player;
+use pocketmine\uuid\UUID;
 
 class PlayerManager
 {

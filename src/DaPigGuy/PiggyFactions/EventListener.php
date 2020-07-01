@@ -14,7 +14,7 @@ use pocketmine\event\player\PlayerChatEvent;
 use pocketmine\event\player\PlayerDeathEvent;
 use pocketmine\event\player\PlayerJoinEvent;
 use pocketmine\event\player\PlayerRespawnEvent;
-use pocketmine\Player;
+use pocketmine\player\Player;
 
 class EventListener implements Listener
 {
@@ -85,7 +85,7 @@ class EventListener implements Listener
                 return;
             }
 
-            $claim = $this->plugin->getClaimsManager()->getClaimByPosition($entity);
+            $claim = $this->plugin->getClaimsManager()->getClaimByPosition($entity->getPosition());
             if ($claim !== null) {
                 if ($claim->getFaction() === $entityFaction) {
                     if ($damagerFaction === null || !$damagerFaction->isEnemy($entityFaction)) {

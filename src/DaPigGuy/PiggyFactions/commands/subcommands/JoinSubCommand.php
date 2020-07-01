@@ -9,7 +9,7 @@ use DaPigGuy\PiggyFactions\event\member\FactionJoinEvent;
 use DaPigGuy\PiggyFactions\factions\Faction;
 use DaPigGuy\PiggyFactions\flags\Flag;
 use DaPigGuy\PiggyFactions\players\FactionsPlayer;
-use pocketmine\Player;
+use pocketmine\player\Player;
 
 class JoinSubCommand extends FactionSubCommand
 {

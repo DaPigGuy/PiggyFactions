@@ -15,9 +15,9 @@ use DaPigGuy\PiggyFactions\players\FactionsPlayer;
 use DaPigGuy\PiggyFactions\players\PlayerManager;
 use DaPigGuy\PiggyFactions\utils\Relations;
 use DaPigGuy\PiggyFactions\utils\Roles;
-use pocketmine\level\Position;
-use pocketmine\Player;
-use pocketmine\utils\UUID;
+use pocketmine\player\Player;
+use pocketmine\uuid\UUID;
+use pocketmine\world\Position;
 
 class Faction
 {
@@ -459,7 +459,7 @@ class Faction
                 "x" => $this->home->x,
                 "y" => $this->home->y,
                 "z" => $this->home->z,
-                "level" => $this->home->level->getFolderName()
+                "level" => $this->home->world->getFolderName()
             ]),
             "relations" => json_encode($this->relations),
             "banned" => json_encode($this->banned),

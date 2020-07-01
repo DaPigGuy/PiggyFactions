@@ -9,9 +9,9 @@ use DaPigGuy\PiggyFactions\factions\FactionsManager;
 use DaPigGuy\PiggyFactions\language\LanguageManager;
 use DaPigGuy\PiggyFactions\PiggyFactions;
 use DaPigGuy\PiggyFactions\utils\ChatTypes;
-use pocketmine\Player;
+use pocketmine\player\Player;
 use pocketmine\Server;
-use pocketmine\utils\UUID;
+use pocketmine\uuid\UUID;
 
 class FactionsPlayer
 {

@@ -8,7 +8,7 @@ use DaPigGuy\PiggyFactions\claims\ClaimsManager;
 use DaPigGuy\PiggyFactions\language\LanguageManager;
 use DaPigGuy\PiggyFactions\permissions\FactionPermission;
 use DaPigGuy\PiggyFactions\players\FactionsPlayer;
-use pocketmine\Player;
+use pocketmine\player\Player;
 use pocketmine\scheduler\Task;
 
 class CheckFlightTask extends Task
@@ -26,14 +26,14 @@ class CheckFlightTask extends Task
         $this->member = $member;
     }
 
-    public function onRun(int $currentTick): void
+    public function onRun(): void
     {
         if (!$this->player->isOnline() || !$this->member->isFlying()) {
             $this->member->setFlying(false);
             $this->getHandler()->cancel();
             return;
         }
-        $claim = ClaimsManager::getInstance()->getClaimByPosition($this->player);
+        $claim = ClaimsManager::getInstance()->getClaimByPosition($this->player->getPosition());
         if ($claim !== null && $claim->getFaction()->hasPermission($this->member, FactionPermission::FLY)) {
             $this->duration = 5;
             return;

@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace DaPigGuy\PiggyFactions\commands\subcommands\claims\unclaim;
 
 use CortexPE\Commando\args\IntegerArgument;
-use pocketmine\Player;
+use pocketmine\player\Player;
 
 class UnclaimCircleSubCommand extends UnclaimMultipleSubCommand
 {
@@ -17,7 +17,7 @@ class UnclaimCircleSubCommand extends UnclaimMultipleSubCommand
         }
         $radius--;
 
-        $center = $player->getLevel()->getChunkAtPosition($player);
+        $center = $player->getWorld()->getChunkAtPosition($player);
         $chunks = [];
         for ($dx = -$radius; $dx <= $radius; $dx++) {
             for ($dz = -$radius; $dz <= $radius; $dz++) {

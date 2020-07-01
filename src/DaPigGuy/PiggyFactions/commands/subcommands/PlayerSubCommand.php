@@ -7,7 +7,7 @@ namespace DaPigGuy\PiggyFactions\commands\subcommands;
 use CortexPE\Commando\args\TextArgument;
 use DaPigGuy\PiggyFactions\utils\FormattedTime;
 use pocketmine\command\CommandSender;
-use pocketmine\Player;
+use pocketmine\player\Player;
 
 class PlayerSubCommand extends FactionSubCommand
 {

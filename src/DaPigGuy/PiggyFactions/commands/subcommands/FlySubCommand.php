@@ -8,7 +8,7 @@ use DaPigGuy\PiggyFactions\factions\Faction;
 use DaPigGuy\PiggyFactions\permissions\FactionPermission;
 use DaPigGuy\PiggyFactions\players\FactionsPlayer;
 use DaPigGuy\PiggyFactions\tasks\CheckFlightTask;
-use pocketmine\Player;
+use pocketmine\player\Player;
 
 class FlySubCommand extends FactionSubCommand
 {
@@ -17,7 +17,7 @@ class FlySubCommand extends FactionSubCommand
 
     public function onNormalRun(Player $sender, ?Faction $faction, FactionsPlayer $member, string $aliasUsed, array $args): void
     {
-        $claim = $this->plugin->getClaimsManager()->getClaimByPosition($sender);
+        $claim = $this->plugin->getClaimsManager()->getClaimByPosition($sender->getPosition());
         if ($claim === null || (!$claim->getFaction()->hasPermission($member, FactionPermission::FLY))) {
             $member->sendMessage("commands.fly.not-allowed");
             return;

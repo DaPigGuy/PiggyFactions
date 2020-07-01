@@ -6,10 +6,13 @@ namespace DaPigGuy\PiggyFactions\event\member;
 
 use DaPigGuy\PiggyFactions\players\FactionsPlayer;
 use pocketmine\event\Cancellable;
+use pocketmine\event\CancellableTrait;
 use pocketmine\event\Event;
 
 class PowerChangeEvent extends Event implements Cancellable
 {
+    use CancellableTrait;
+
     const CAUSE_TIME = 0;
     const CAUSE_DEATH = 1;
     const CAUSE_KILL = 2;

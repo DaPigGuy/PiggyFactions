@@ -9,7 +9,7 @@ use CortexPE\Commando\BaseSubCommand;
 use DaPigGuy\PiggyFactions\commands\FactionCommand;
 use DaPigGuy\PiggyFactions\PiggyFactions;
 use pocketmine\command\CommandSender;
-use pocketmine\Player;
+use pocketmine\player\Player;
 
 class HelpSubCommand extends FactionSubCommand
 {

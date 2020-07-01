@@ -7,7 +7,7 @@ namespace DaPigGuy\PiggyFactions\event\home;
 use DaPigGuy\PiggyFactions\event\FactionEvent;
 use DaPigGuy\PiggyFactions\factions\Faction;
 use pocketmine\event\Cancellable;
-use pocketmine\Player;
+use pocketmine\player\Player;
 
 class FactionHomeTeleportEvent extends FactionEvent implements Cancellable
 {

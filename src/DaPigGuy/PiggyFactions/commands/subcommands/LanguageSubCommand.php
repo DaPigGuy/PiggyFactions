@@ -8,7 +8,7 @@ use DaPigGuy\PiggyFactions\commands\arguments\LanguageEnumArgument;
 use DaPigGuy\PiggyFactions\factions\Faction;
 use DaPigGuy\PiggyFactions\language\LanguageManager;
 use DaPigGuy\PiggyFactions\players\FactionsPlayer;
-use pocketmine\Player;
+use pocketmine\player\Player;
 
 class LanguageSubCommand extends FactionSubCommand
 {

@@ -29,19 +29,19 @@ jobs:
       - name: wget virions, libasynql
         uses: wei/wget@v1
         with:
-          args: -O vendor/libasynql.phar https://poggit.pmmp.io/r/81738/libasynql_dev-119.phar
+          args: -O vendor/libasynql.phar https://poggit.pmmp.io/r/94448/libasynql_dev-1.phar
       - name: wget virions, FormAPI
         uses: wei/wget@v1
         with:
-          args: -O vendor/FormAPI.phar https://poggit.pmmp.io/r/54589/FormApi_dev-9.phar
+          args: -O vendor/FormAPI.phar https://poggit.pmmp.io/r/77082/FormAPI_dev-1.phar
       - name: wget virions, libPiggyEconomy
         uses: wei/wget@v1
         with:
-          args: -O vendor/libPiggyEconomy.phar https://poggit.pmmp.io/r/78540/libPiggyEconomy_dev-7.phar
+          args: -O vendor/libPiggyEconomy.phar https://poggit.pmmp.io/r/94380/libPiggyEconomy_dev-10.phar
       - name: wget virions, Commando
         uses: wei/wget@v1
         with:
-          args: -O vendor/Commando.phar https://poggit.pmmp.io/r/89644/Commando_dev-13.phar
+          args: -O vendor/Commando.phar https://poggit.pmmp.io/r/90966/Commando_dev-2.phar
       - name: Run PHPStan
         uses: nxtlvlsoftware/pmmp-phpstan-action@3
         with:

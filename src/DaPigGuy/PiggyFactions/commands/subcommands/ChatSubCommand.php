@@ -8,7 +8,7 @@ use DaPigGuy\PiggyFactions\factions\Faction;
 use DaPigGuy\PiggyFactions\PiggyFactions;
 use DaPigGuy\PiggyFactions\players\FactionsPlayer;
 use DaPigGuy\PiggyFactions\utils\ChatTypes;
-use pocketmine\Player;
+use pocketmine\player\Player;
 
 class ChatSubCommand extends FactionSubCommand
 {

@@ -8,7 +8,7 @@ use DaPigGuy\PiggyFactions\factions\Faction;
 use DaPigGuy\PiggyFactions\flags\Flag;
 use DaPigGuy\PiggyFactions\PiggyFactions;
 use pocketmine\command\CommandSender;
-use pocketmine\Player;
+use pocketmine\player\Player;
 use pocketmine\utils\Config;
 use pocketmine\utils\TextFormat;
 use ReflectionClass;

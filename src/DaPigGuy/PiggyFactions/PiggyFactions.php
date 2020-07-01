@@ -26,7 +26,7 @@ use DaPigGuy\PiggyFactions\utils\PoggitBuildInfo;
 use Exception;
 use jojoe77777\FormAPI\Form;
 use pocketmine\entity\Entity;
-use pocketmine\Player;
+use pocketmine\player\Player;
 use pocketmine\plugin\PluginBase;
 use pocketmine\utils\Config;
 use poggit\libasynql\DataConnector;
@@ -77,7 +77,7 @@ class PiggyFactions extends PluginBase
         }
 
         self::$instance = $this;
-        $this->poggitBuildInfo = new PoggitBuildInfo($this, $this->getFile(), $this->isPhar());
+        $this->poggitBuildInfo = new PoggitBuildInfo($this, $this->getFile(), strpos($this->getFile(), "phar://") === 0);
 
         $this->saveDefaultConfig();
         $this->initDatabase();

@@ -8,7 +8,7 @@ use DaPigGuy\PiggyFactions\event\FactionMemberEvent;
 use DaPigGuy\PiggyFactions\factions\Faction;
 use DaPigGuy\PiggyFactions\players\FactionsPlayer;
 use pocketmine\event\Cancellable;
-use pocketmine\level\Position;
+use pocketmine\world\Position;
 
 class FactionSetHomeEvent extends FactionMemberEvent implements Cancellable
 {

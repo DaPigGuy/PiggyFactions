@@ -7,7 +7,7 @@ namespace DaPigGuy\PiggyFactions\tag;
 use DaPigGuy\PiggyFactions\factions\Faction;
 use DaPigGuy\PiggyFactions\PiggyFactions;
 use DaPigGuy\PiggyFactions\players\FactionsPlayer;
-use pocketmine\Player;
+use pocketmine\player\Player;
 
 class TagManager
 {

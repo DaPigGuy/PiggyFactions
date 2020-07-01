@@ -8,7 +8,7 @@ use DaPigGuy\PiggyFactions\factions\Faction;
 use DaPigGuy\PiggyFactions\factions\FactionsManager;
 use DaPigGuy\PiggyFactions\flags\Flag;
 use DaPigGuy\PiggyFactions\PiggyFactions;
-use pocketmine\level\Level;
+use pocketmine\world\World;
 
 class Claim
 {
@@ -40,9 +40,9 @@ class Claim
         PiggyFactions::getInstance()->getDatabase()->executeChange("piggyfactions.claims.update", ["chunkX" => $this->chunkX, "chunkZ" => $this->chunkZ, "level" => $this->level, "faction" => $this->faction]);
     }
 
-    public function getLevel(): ?Level
+    public function getLevel(): ?World
     {
-        return PiggyFactions::getInstance()->getServer()->getLevelByName($this->level);
+        return PiggyFactions::getInstance()->getServer()->getWorldManager()->getWorldByName($this->level);
     }
 
     public function getChunkX(): int

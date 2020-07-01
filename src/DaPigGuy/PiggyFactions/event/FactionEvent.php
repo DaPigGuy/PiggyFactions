@@ -5,10 +5,13 @@ declare(strict_types=1);
 namespace DaPigGuy\PiggyFactions\event;
 
 use DaPigGuy\PiggyFactions\factions\Faction;
+use pocketmine\event\CancellableTrait;
 use pocketmine\event\Event;
 
 abstract class FactionEvent extends Event
 {
+    use CancellableTrait;
+
     /** @var Faction */
     private $faction;
 

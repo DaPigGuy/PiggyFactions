@@ -8,7 +8,7 @@ use DaPigGuy\PiggyFactions\commands\subcommands\FactionSubCommand;
 use DaPigGuy\PiggyFactions\factions\Faction;
 use DaPigGuy\PiggyFactions\players\FactionsPlayer;
 use DaPigGuy\PiggyFactions\utils\AsciiMap;
-use pocketmine\Player;
+use pocketmine\player\Player;
 use pocketmine\utils\TextFormat;
 
 class MapSubCommand extends FactionSubCommand

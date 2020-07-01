@@ -7,7 +7,7 @@ namespace DaPigGuy\PiggyFactions\utils;
 use DaPigGuy\PiggyFactions\claims\ClaimsManager;
 use DaPigGuy\PiggyFactions\factions\Faction;
 use DaPigGuy\PiggyFactions\language\LanguageManager;
-use pocketmine\Player;
+use pocketmine\player\Player;
 use pocketmine\utils\TextFormat;
 
 class AsciiMap
@@ -24,10 +24,10 @@ class AsciiMap
 
     public static function getMap(Player $player, int $width, int $height): array
     {
-        $center = $player->getLevel()->getChunkAtPosition($player);
-        $centerFaction = ($claim = ClaimsManager::getInstance()->getClaimByPosition($player)) === null ? null : $claim->getFaction();
+        $center = $player->getWorld()->getChunkAtPosition($player->getPosition());
+        $centerFaction = ($claim = ClaimsManager::getInstance()->getClaimByPosition($player->getPosition())) === null ? null : $claim->getFaction();
 
-        $compass = AsciiCompass::getAsciiCompass($player->getYaw());
+        $compass = AsciiCompass::getAsciiCompass($player->getLocation()->yaw);
 
         $map = [LanguageManager::getInstance()->getMessage(LanguageManager::getInstance()->getPlayerLanguage($player), "commands.map.header", ["{X}" => $center->getX(), "{Z}" => $center->getZ(), "{FACTION}" => $centerFaction === null ? "Wilderness" : $centerFaction->getName()])];
 
@@ -45,7 +45,7 @@ class AsciiMap
                     continue;
                 }
 
-                $faction = ($claim = ClaimsManager::getInstance()->getClaim($chunkX, $chunkZ, $player->getLevel()->getFolderName())) === null ? null : $claim->getFaction();
+                $faction = ($claim = ClaimsManager::getInstance()->getClaim($chunkX, $chunkZ, $player->getWorld()->getFolderName())) === null ? null : $claim->getFaction();
 
                 if ($faction === null) {
                     $row .= self::MAP_KEY_WILDERNESS;

@@ -9,7 +9,7 @@ use CortexPE\Commando\args\RawStringArgument;
 use DaPigGuy\PiggyFactions\factions\Faction;
 use DaPigGuy\PiggyFactions\flags\Flag;
 use pocketmine\command\CommandSender;
-use pocketmine\Player;
+use pocketmine\player\Player;
 use pocketmine\utils\TextFormat;
 
 class TopSubCommand extends FactionSubCommand
