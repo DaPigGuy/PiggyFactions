@@ -68,13 +68,13 @@ commands:
     success: "{GREEN}{FACTION} a été changé pour un ennemi."
   flag:
     invalid-flag: "{RED}le flag {FLAG} est introuvable."
-    not-editable: "{RED}Flag {FLAG} is not editable."
-    toggled: "{GREEN}Flag {FLAG} has been enabled."
-    toggled-off: "{GREEN}Flag {FLAG} has been disabled."
+    not-editable: "{RED}le flag {FLAG} n'est pas éditable."
+    toggled: "{GREEN}le flag {FLAG} a été activé."
+    toggled-off: "{GREEN}le flag {FLAG} a été désactivé."
   fly:
-    not-allowed: "{RED}You are not permitted to fly here."
-    toggled: "{GREEN}Flight has been enabled."
-    toggled-off: "{RED}Flight has been disabled."
+    not-allowed: "{RED}Vous n'avez pas la permisson de voler ici."
+    toggled: "{GREEN}Le fly a été activé."
+    toggled-off: "{RED}Le fly a été désactivé."
   help:
     header: "{GOLD}____________.[{DARK_GREEN}Faction Help ({PAGE}/{MAXPAGE}){GOLD}].____________"
     command: "\n{GREEN}/f {COMMAND} - {RESET}{DESCRIPTION}"
