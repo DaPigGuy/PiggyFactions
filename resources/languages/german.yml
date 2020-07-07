@@ -173,6 +173,8 @@ commands:
     auto:
       toggled: "{GREEN}Du gibst Land nun automatisch frei."
       toggled-off: "{RED}Du gibst Land nicht mehr automatisch frei."
+  unsethome:
+    success: "{GREEN}Faktionsheim wurde entfernt."
   withdraw:
     success: "{GREEN}{MONEY} $ wurden von der Faktionsbank abgehoben."
 death:
