@@ -1,11 +1,16 @@
-![PiggyFactions Banner](https://raw.githubusercontent.com/DaPigGuy/PiggyFactions/master/resources/img/PiggyFactions-banner.png)
+![PiggyFactions Banner](https://raw.githubusercontent.com/Aericio/piggydocs-rtd/master/source/_static/img/piggyfactions/banner.png)
 
 # PiggyFactions [![Poggit-CI](https://poggit.pmmp.io/shield.dl/PiggyFactions)](https://poggit.pmmp.io/p/PiggyFactions) [![Discord](https://img.shields.io/discord/330850307607363585?logo=discord)](https://discord.gg/qmnDsSD)
 
 PiggyFactions is an open-sourced factions plugin for [PocketMine-MP](https://github.com/pmmp/PocketMine-MP).
 
 ## Disclaimer
-PiggyFactions is currently in beta. While we have tested quite thoroughly, there may exist some bugs. Please report any issue on GitHub. 
+PiggyFactions is currently in beta. While we have tested quite thoroughly, there may exist some bugs. Please report any issue on GitHub.
+
+## Notices
+
+* Content in [Table of Contents](#table-of-contents) are now deprecated and may no longer be accurate. Please refer to [piggydocs-rtd](https://rtdx.aericio.net/en/latest/plugins/piggyfactions/index.html) for the documentation instead.
+* As of Version 1.1.1, there are be BC-Breaks with the PureChat PR-15 build. Please update to PR-17 immediately. [Click here to download.](https://poggit.pmmp.io/r/95436/PureChat_pr-17.phar)
 
 ## Table of Contents
 * [Prerequisites](#prerequisites)
@@ -175,6 +180,7 @@ To enable Admin mode, use the command `/f admin`. Admin mode will allow you to m
 
 ## HRKChat Tags
 Sample Format: `&6{{piggyfacs.rank.symbol}}{{piggyfacs.name}} &r&7{{hrk.displayName}}&r: {{msg}}`
+
 | Tag Name | Description |
 | --- | --- |
 | `piggyfacs.name` | Player's faction name |
@@ -185,9 +191,13 @@ Sample Format: `&6{{piggyfacs.rank.symbol}}{{piggyfacs.name}} &r&7{{hrk.displayN
 | `piggyfacs.members.online` | Online member count |
 
 ## PureChat Tags
-You will need to download our fork of PureChat for PiggyFactions integration [here](https://poggit.pmmp.io/r/88189/PureChat_pr-15.phar). <br/>
+You will need to download our fork of PureChat for PiggyFactions integration.
+ * For Versions 1.1.1+: [Download PR-17](https://poggit.pmmp.io/r/95436/PureChat_pr-17.phar)
+ * For Versions pre-1.1.1: [Download PR-15](https://poggit.pmmp.io/r/88189/PureChat_pr-15.phar)
+ 
 Make sure to change `default-factions-plugin` to `PiggyFactions` in PureChat's `config.yml` <br/>
 Sample Format: `&6{fac_rank}{fac_name} &r&7{display_name}&r: {msg}`
+
 | Tag Name | Description |
 | --- | --- |
 | `{fac_name}` | Player's faction name |
