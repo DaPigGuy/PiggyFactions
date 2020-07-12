@@ -212,11 +212,10 @@ An addon for [JackMD's ScoreHud](https://github.com/JackMD/ScoreHud) can be foun
     * If you wish to run it via source, check out [DEVirion](https://github.com/poggit/devirion).
 
 ## Translators
-Translations for PiggyFactions are powered by our community translators:
 * **Chinese (Simplified)** - @Taylarity, @Aericio, TGPNG, prprprprprprpr
 * **Chinese (Traditional)** - @Taylarity, @Aericio, TGPNG, prprprprprprpr
 <!-- **Dutch** - @KingOfTurkey38 -->
-<!-- **French** - Thouv (@adeynes), @ItsMax123 -->
+* **French** - Thouv (@adeynes), @ItsMax123, steelfri_031, @superbobby2000
 * **German** - @SalmonDE
 * **Indonesian** - @MrAshshiddiq, @SillierShark195
 <!-- **Korean** - @Nabibobettau -->
