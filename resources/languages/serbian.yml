@@ -173,6 +173,8 @@ commands:
     auto:
       toggled: "{GREEN}Ti sad automatski unclaimaš"
       toggled-off: "{RED}Ti više ne automatski claimaš"
+  unsethome:
+    success: "{GREEN}Frakcijina kuća je uklonjena."
   withdraw:
     success: "{GREEN}${MONEY} je uzeto iz frakcijine banke."
 death:

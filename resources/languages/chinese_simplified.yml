@@ -173,6 +173,8 @@ commands:
     auto:
       toggled: "{GREEN}你现在已在自动撤销领地占有权."
       toggled-off: "{RED}你不再自动撤销领地占有权."
+  unsethome:
+    success: "{GREEN}成功取消公会家园设定"
   withdraw:
     success: "{GREEN}${MONEY} 已从公会银行中取出."
 death:

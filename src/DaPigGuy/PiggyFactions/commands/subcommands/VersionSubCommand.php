@@ -15,11 +15,15 @@ class VersionSubCommand extends FactionSubCommand
     public function onBasicRun(CommandSender $sender, array $args): void
     {
         $translators = [
+            "adeynes" => ["French"],
             "Aericio" => ["Chinese (Simplified)", "Chinese (Traditional)"],
+            "ItsMax123" => ["French"],
             "MrAshshiddiq" => ["Indonesian"],
             "prprprprprprpr" => ["Chinese (Simplified)", "Chinese (Traditional)"],
             "SalmonDE" => ["German"],
             "SillierShark195" => ["Indonesian"],
+            "steelfri_031" => ["French"],
+            "superbobby2000" => ["French"],
             "Taylarity" => ["Chinese (Simplified)", "Chinese (Traditional)"],
             "TGPNG" => ["Chinese (Simplified)", "Chinese (Traditional)"],
             "UnEnanoMas" => ["Spanish"],

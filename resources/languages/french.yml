@@ -1,0 +1,219 @@
+chat:
+  ally: "{BOLD}{GOLD}ALLIÉ {RESET}{LIGHT_PURPLE}{RANK_SYMBOL}{FACTION} {RESET}{PLAYER}: {MESSAGE}"
+  faction: "{BOLD}{GOLD}FACTION {RESET}{RANK_SYMBOL}{PLAYER}: {MESSAGE}"
+claims:
+  command-denied: "{RED}Vous ne pouvez pas utiliser {COMMAND} dans le territoire d'un {RELATION}."
+  flight-disable-warning: "{RED}Vous n'êtes pas dans le territoire de votre faction. Le vol sera désactivé dans {AMOUNT}..."
+commands:
+  invalid-player: "{RED}Joueur {PLAYER} pas trouvé."
+  invalid-faction: "{RED}Faction {FACTION} pas trouvée."
+  member-not-found: "{RED}Membre {PLAYER} pas trouvé."
+  not-in-faction: "{RED}Vous n'êtes pas dans une faction."
+  already-in-faction: "{RED}Vous êtes déjà dans une faction."
+  not-leader: "{RED}Vous n'êtes pas le chef de la faction!"
+  no-permission: "{RED}Vous n'avez pas les permissions pour faire ça."
+  player-is-banned: "{RED}{PLAYER} est banni de la faction."
+  you-are-banned: "{RED}Vous êtes banni de la faction."
+  faction-full: "{RED}La faction est pleine."
+  admin:
+    toggled: "{GREEN}Vous êtes maintenant en mode administrateur."
+    toggled-off: "{RED}Vous n'êtes plus en mode administrateur."
+  ally:
+    self: "{RED}Vous ne pouvez pas être votre propre allié."
+    already-allied: "{RED}Vous êtes déjà alliés!"
+    request: "{GREEN}{FACTION} a envoyé une demande d'allié. Fais /f ally {FACTION} pour accepter."
+    allied: "{GREEN}Ta faction est maintenant alliée avec {ALLY}."
+    success: "{GREEN}Vous avez envoyé une demande d'alliance à {FACTION}."
+  ban:
+    cant-ban-higher: "{RED}Vous ne pouvez pas bannir des membres de rang supérieur au vôtre."
+    already-banned: "{RED}{PLAYER} est déjà banni."
+    announcement: "{YELLOW}{PLAYER} a été banni de la faction."
+    banned: "{RED}Vous avez été banni de votre faction."
+  chat:
+    already-in-chat: "{RED}Vous êtes déjà dans ce tchat!"
+    toggled: "{GREEN}Vous êtes maintenant dans le tchat: {CHAT}."
+    toggled-off: "{RED}Vous n'êtes plus dans le tchat: {CHAT}."
+  claim:
+    blacklisted-world: "{RED}Vous ne pouvez pas claim dans ce monde."
+    max-claimed: "{RED}Vous ne pouvez pas claim plus de territoires."
+    already-claimed: "{RED}Ce territoire est déjà occupé."
+    no-power: "{RED}Ta faction n'a pas assez de pouvoir."
+    radius-less-than-one: "{RED}Le rayon doit être supérieur à un."
+    over-claimed: "{GREEN}Ce chunk a été overclaim."
+    success: "{GREEN}Ce chunk a été claim."
+    claimed-multiple: "{GREEN}{AMOUNT} chunks on été claim avec {COMMAND}."
+    auto:
+      toggled: "{GREEN}Vous êtes maintenant en mode auto-claim."
+      toggled-off: "{RED}Vous n'êtes plus en mode auto-claim."
+  create:
+    name-taken: "{RED}Il existe déjà une faction appélée {NAME}."
+    alphanumeric-only: "{RED}Le nom de la faction doit contenir des caractères alphanumériques seulement. "
+    name-blacklisted: "{RED}Le nom {NAME} est banni."
+    name-too-long: "{RED}Le nom {NAME} est trop long."
+    success: "{GREEN}La faction {NAME} a été créée."
+  demote:
+    cant-demote-higher: "{RED}Vous ne pouvez pas rétrograder des membres de rang supérieur au vôtre."
+    already-lowest: "{RED}{PLAYER} est déjà au rang le plus bas."
+    success: "{GREEN}{PLAYER} a été rétrogradé au rang {ROLE}."
+    demoted: "{RED}Vous avez été rétrogradé au rang {ROLE}."
+  deposit:
+    success: "{GREEN}${MONEY} ont été versés dans la tirelire de la faction."
+  description:
+    success: "{GREEN}La description de la faction est maintenant {DESCRIPTION}"
+  disband:
+    success: "{YELLOW}Ta faction a été dissoute!"
+  enemy:
+    self: "{RED}Vous ne pouvez pas être votre propre ennemi."
+    already-enemy: "{RED}{FACTION} est déjà un ennemi!"
+    success: "{GREEN}{FACTION} est maintenant un ennemi."
+  flag:
+    invalid-flag: "{RED}Option {FLAG} pas trouvée."
+    not-editable: "{RED}L'option {FLAG} n'est pas modifiable."
+    toggled: "{GREEN}L'option {FLAG} a été activée."
+    toggled-off: "{GREEN}L'option {FLAG} a été désactivée."
+  fly:
+    not-allowed: "{RED}Vous n'avez pas la permission de voler ici."
+    toggled: "{RED}Vol activé."
+    toggled-off: "{RED}Vol désactivé."
+  help:
+    header: "{GOLD}____________.[{DARK_GREEN}Aide Faction ({PAGE}/{MAXPAGE}){GOLD}].____________"
+    command: "\n{GREEN}/f {COMMAND} - {RESET}{DESCRIPTION}"
+  home:
+    not-set: "{RED}La base de la faction n'est pas établie."
+  info:
+    message: "{GOLD}____________.[{DARK_GREEN}Faction {FACTION}{GOLD}].____________\n{GOLD}Description: {YELLOW}{DESCRIPTION}\n{GOLD}Territoire / Pouvoir / Pouvoir max: {YELLOW}{CLAIMS}/{POWER}/{TOTALPOWER}\n{GOLD}Age: {YELLOW}{AGE}\n{GOLD}En ligne: {YELLOW}{ONLINECOUNT}/{TOTALPLAYERS}\n{GOLD}Chef: {YELLOW}{LEADER}\n{GOLD}Relations: {RELATIONS}\n{GOLD}Membres: {YELLOW}{PLAYERS}"
+    description-not-set: "aucune description"
+  invite:
+    already-in-faction: "{RED}{PLAYER} est déjà dans une faction."
+    already-sent: "{RED}Une invitation a déjà été envoyée à {PLAYER}."
+    success: "{GREEN}L'invitation a été envoyée à {PLAYER}."
+    invited: "{GREEN}Vous avez été invité à rejoindre {FACTION}. Faites /f join {FACTION} pour la rejoindre."
+  join:
+    no-invite: "{RED}Vous n'avez pas d'invitation de la part de {FACTION}."
+    joined: "{GREEN}{PLAYER} a rejoint la faction!"
+  kick:
+    cant-kick-higher: "{RED}Vous ne pouvez pas virer des membres de rang supérieur au vôtre."
+    announcement: "{YELLOW}{PLAYER} a été viré de la faction."
+    kicked: "{RED}Vous avez été viré de la faction."
+  language:
+    invalid-language: "{RED}Langue pas trouvée."
+    success: "{GREEN}Langue changée en français."
+  leader:
+    offline: "{RED}Le joueur doit être en ligne pour un changement de chef."
+    recipient: "{GREEN}Vous êtes maintenant le chef de votre faction."
+    success: "{GREEN}La direction de la faction a été transférée à {PLAYER}."
+  leave:
+    is-leader: "{RED}Vous êtes le chef de votre faction."
+    success: "{YELLOW}Vous avez quitté votre faction."
+  map:
+    header: "{GOLD}____________.[ {GREEN}({X},{Z}) {FACTION} {GOLD}].____________"
+  money:
+    balance: "{GREEN}Solde de la faction: ${MONEY}"
+  motd:
+    success: "{GREEN}Le MOTD de la faction est maintenant {MOTD}"
+  name:
+    success: "{FACTION}La faction a été renommée {FACTION}."
+  neutral:
+    already-neutral: "{RED}Ta faction n'a pas de relation avec {FACTION}."
+    success: "{GREEN}Ta faction est maintenant neutre envers {FACTION}."
+  permission:
+    role-not-found: "{RED}Ce rôle est introuvable."
+    permission-not-found: "{RED}Permission pas trouvée."
+    toggled: "{GREEN}La permission {PERMISSION} a été activée pour le rôle {ROLE}."
+    toggled-off: "{RED}La permission {PERMISSION} a été désactivée pour le rôle {ROLE}."
+  player:
+    message: "\n{GOLD}____________.[{DARK_GREEN}Joueur {RANKSYMBOL}{PLAYER}{GOLD}].____________\n{GOLD}Faction: {YELLOW}{FACTION}\n{GOLD}Pouvoir: {YELLOW}{POWER}/{TOTALPOWER} {TIMETOMAXPOWER}"
+    time-to-max-power: "({TIME} heure avant le maximum)"
+  promote:
+    cant-promote-higher: "{RED}Vous ne pouvez pas promouvoir au-dessus de votre propre rang."
+    already-maxed: "{RED}{PLAYER} est déjà au rang maximum."
+    success: "{GREEN}{PLAYER} a été promu au rang {ROLE}."
+    promoted: "{GREEN}Vous avez été promu au rang {ROLE}."
+  sethome:
+    not-within-territory: "{RED}La base de la faction doit être dans le territoire de la faction."
+    success: "{GREEN}La base de la faction a été établie."
+  setpower:
+    success: "{GREEN}Le pouvoir de {PLAYER} a été configuré à {POWER}."
+    power-set: "{GREEN}Votre pouvoir a été configuré à {POWER}."
+  addpower:
+    success: "{GREEN}{POWER} de pouvoir a été ajouté à {PLAYER}."
+    power-add: "{GREEN}Votre pouvoir a été augmenté de {ADDEDPOWER}. Vous avez maintenant {POWER} de pouvoir."
+  powerboost:
+    success-player: "{GREEN}Le pouvoir maximum de {PLAYER} a été augmenté de {POWER}."
+    success-faction: "{GREEN}Le pouvoir maximum de la faction {FACTION} a été augmenté de {POWER}."
+    boost-player: "{GREEN}Votre pouvoir maximum a été augmenté de {POWER}."
+    boost-faction: "{GREEN}Le pouvoir de votre faction a été augmenté de {POWER}."
+  top:
+    header: "{GOLD}____________.[{DARK_GREEN}Meilleures factions par {CATEGORY} ({PAGE}/{TOTALPAGES}){GOLD}].____________"
+    line:
+      online: "{GOLD}#{RANK} {RELATIONCOLOR}{FACTION}{GOLD} -{YELLOW} {ONLINE}"
+      members: "{GOLD}#{RANK} {RELATIONCOLOR}{FACTION}{GOLD} -{YELLOW} {MEMBERS}"
+      power: "{GOLD}#{RANK} {RELATIONCOLOR}{FACTION}{GOLD} -{YELLOW} {POWER}/{TOTALPOWER}"
+      money: "{GOLD}#{RANK} {RELATIONCOLOR}{FACTION}{GOLD} -{YELLOW} ${MONEY}"
+  truce:
+    self: "{RED}Tu ne peux pas avoir un pacte de non-agression avec ta propre faction."
+    already-truced: "{RED}Vous avez déjà un pacte de non-agression!"
+    request: "{GREEN}{FACTION} a proposé un pacte de non-agression. Fais /f truce {FACTION} pour l'accepter."
+    truced: "{GREEN}Ta faction a maintenant un pacte de non-agression avec {TRUCED}."
+    success: "{GREEN}Un pacte de non-agression a été proposé à {FACTION}."
+  unally:
+    not-allied: "{RED}Ta faction n'est pas alliée avec {FACTION}."
+    unallied: "{RED}Ta faction n'est plus alliée avec {FACTION}."
+  unban:
+    not-banned: "{RED}{PLAYER} n'est pas banni."
+    announcement: "{YELLOW}{PLAYER} a été débanni de la faction."
+  unclaim:
+    blacklisted-world: "{RED}Le unclaim n'est pas autorisé dans ce monde."
+    not-claimed: "{RED}Ce chunk n'est pas claim"
+    other-faction: "{RED}Ce chunk est claim par une autre faction."
+    success: "{GREEN}Ce chunk a été unclaim."
+    claimed-multiple: "{GREEN}{AMOUNT} chunks ont été unclaim avec {COMMAND}."
+    all:
+      success: "{GREEN}Tous les claims de {FACTION} ont été unclaim."
+    auto:
+      toggled: "{GREEN}Vous êtes maintenant en mode auto-claim."
+      toggled-off: "{RED}Vous n'êtes plus en mode auto-claim."
+  unsethome:
+    success: "{GREEN}La base de la faction a été supprimée."
+  withdraw:
+    success: "{GREEN}${MONEY} ont été retirés de la tirelire de la faction."
+death:
+  power: "{RED}Ton pouvoir est maintenant {POWER}."
+economy:
+  not-enough-money: "{RED}Tu n'as pas assez d'argent. Il te manque {DIFFERENCE}."
+  negative-money: "{RED}Quantité négative d'argent fournie."
+forms:
+  title: "PiggyFactions UI"
+motd: "{GOLD}____________.[{DARK_GREEN}{FACTION} MOTD{GOLD}].____________\n{WHITE}{MOTD}"
+pvp:
+  attacker-factionless: "{RED}Tu ne peux pas attaquer d'autres joueurs avant d'être dans une faction."
+  target-factionless: "{RED}Tu ne peux pas attaquer de joueurs qui ne sont pas dans une faction."
+  cant-attack-in-territory: "{RED}Tu ne peux pas attaquer {PLAYER} dans leur propre territoire à moins de les déclarer comme ennemi."
+relation:
+  ally: "allié"
+  truce: "pacte de non-agression"
+  neutral: "neutre"
+  enemy: "ennemi"
+role:
+  leader: "chef"
+  officer: "officier"
+  member: "membre"
+  recruit: "recrue"
+  none: "aucun"
+territory-titles:
+  wilderness-title: "{DARK_GREEN}Nature"
+  wilderness-subtitle: "{YELLOW}C'est dangereux d'y aller tout seul."
+  faction-title: "{RELATION}{FACTION}"
+  faction-subtitle: "{ITALIC}{DESCRIPTION}"
+logs:
+  page-too-low: "{RED}Le numéro de la page doit être supérieur à zéro."
+  invalid-log: "{RED}Type d'archive ou numéro de page invalide! \nUtilisation: /f logs <kick|ban|invite|join|leave|unban|leader_change> <page>"
+  title: "{GOLD}Archive de la faction: {AQUA}Page {CURRENTPAGE}/{TOTALPAGES}"
+  actions:
+    kick: "{GOLD}{TIME} => {GREEN} {KICKED} {AQUA}a été viré par {GREEN}{KICKER}."
+    ban: "{GOLD}{TIME} => {GREEN}{BANNED} {AQUA}a été banni par {GREEN}{BANNEDBY}."
+    join: "{GOLD}{TIME} => {GREEN}{JOINED} {AQUA}a rejoint la faction."
+    leave: "{GOLD}{TIME} => {GREEN}{LEFT} {AQUA}a quitté la faction."
+    unban: "{GOLD}{TIME} => {GREEN}{UNBANNED} {AQUA}a été débanni par {GREEN}{UNBANNEDBY}."
+    invite: "{GOLD}{TIME} => {GREEN}{INVITED} {AQUA}a été invité par {GREEN}{INVITEDBY}."
+    leader_change: "{GOLD}{TIME} => {AQUA}La direction de la faction a été transférée de {GREEN}{OLD} {AQUA}à {GREEN}{NEW}."

@@ -173,6 +173,8 @@ commands:
     auto:
       toggled: "{GREEN}Ahora estás eliminando el reclamo automáticamente."
       toggled-off: "{RED}Ya no estás eliminando el reclamo automáticamente."
+  unsethome:
+    success: "{GREEN}El hogar de facciones ha sido removido."
   withdraw:
     success: "{GREEN}Se ha retirado {MONEY}$ del banco de facciones."
 death:

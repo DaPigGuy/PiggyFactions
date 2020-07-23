@@ -3,3 +3,6 @@ contact_links:
   - name: Discord Support Server
     url: https://discord.gg/qmnDsSD
     about: If you have any questions, please join our Discord server instead of creating an issue.
+  - name: Documentation
+    url: https://rtdx.aericio.net/en/latest/plugins/piggyfactions/
+    about: PiggyFactions Documentation
