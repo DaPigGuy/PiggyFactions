@@ -60,6 +60,11 @@ class PiggyFactions extends PluginBase
     /** @var LogsManager */
     private $logsManager;
 
+    public function onLoad(): void
+    {
+        self::$instance = $this;
+    }
+
     public function onEnable(): void
     {
         foreach (
@@ -76,7 +81,6 @@ class PiggyFactions extends PluginBase
             }
         }
 
-        self::$instance = $this;
         $this->poggitBuildInfo = new PoggitBuildInfo($this, $this->getFile(), $this->isPhar());
 
         $this->saveDefaultConfig();
