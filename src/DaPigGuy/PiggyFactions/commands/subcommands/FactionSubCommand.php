@@ -128,6 +128,8 @@ abstract class FactionSubCommand extends BaseSubCommand
                             $args[$argument->getName()] = (int)$data[$position];
                         } elseif ($wrappedArgument instanceof FloatArgument) {
                             $args[$argument->getName()] = (float)$data[$position];
+                        } elseif (!isset($data[$position])) {
+                            return;
                         } else {
                             $args[$argument->getName()] = $data[$position];
                         }
