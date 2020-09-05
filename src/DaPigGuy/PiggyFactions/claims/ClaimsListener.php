@@ -67,6 +67,7 @@ class ClaimsListener implements Listener
     public function onInteract(PlayerInteractEvent $event): void
     {
         $tile = $event->getBlock()->getLevel()->getTile($event->getBlock());
+        if ($event->getAction() === PlayerInteractEvent::RIGHT_CLICK_AIR) return;
         if (!$this->canAffectArea($event->getPlayer(), $event->getBlock(), $tile instanceof Container ? FactionPermission::CONTAINERS : FactionPermission::INTERACT)) $event->setCancelled();
     }
 
