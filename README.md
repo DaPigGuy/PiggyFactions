@@ -15,7 +15,6 @@ PiggyFactions is currently in beta. While we have tested quite thoroughly, there
   * [Functionality](https://rtdx.aericio.net/en/latest/plugins/piggyfactions/docs/functionality.html)
     * How do I overclaim other factions? How does power work? --> Functionality
 * As of Version 1.1.1, there are BC-Breaks with the PureChat PR-15 build. Please update to PR-17 immediately. [Click here to download](https://poggit.pmmp.io/r/95436/PureChat_pr-17.phar).
-* PureChat version information is incorrect on [piggydocs-rtd](https://rtdx.aericio.net/en/latest/plugins/piggyfactions/index.html), please disregard those notices.
 
 ## Features
 | Feature | PiggyFactions | FactionsPro |
