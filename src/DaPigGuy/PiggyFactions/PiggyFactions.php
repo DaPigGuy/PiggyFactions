@@ -75,7 +75,7 @@ class PiggyFactions extends PluginBase
             ] as $virion => $class
         ) {
             if (!class_exists($class)) {
-                $this->getLogger()->error($virion . " virion not found. Please download PiggyFactions from Poggit-CI or use DEVirion (not recommended).");
+                $this->getLogger()->error($virion . " virion was not found. Download PiggyFactions at https://poggit.pmmp.io/p/PiggyFactions for pre-compiled phars.");
                 $this->getServer()->getPluginManager()->disablePlugin($this);
                 return;
             }

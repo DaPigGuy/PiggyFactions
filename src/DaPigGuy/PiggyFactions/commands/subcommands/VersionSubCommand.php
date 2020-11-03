@@ -31,7 +31,7 @@ class VersionSubCommand extends FactionSubCommand
         ];
 
         $sender->sendMessage(TextFormat::GOLD . "____________.[" . TextFormat::DARK_GREEN . "PiggyFactions " . TextFormat::GREEN . "v" . $this->plugin->getDescription()->getVersion() . " (" . $this->plugin->getPoggitBuildInfo()->getSpecificVersion() . ")" . TextFormat::GOLD . "].____________" . TextFormat::EOL .
-            TextFormat::GOLD . "PiggyFactions is a modern factions plugin developed by " . TextFormat::YELLOW . "DaPigGuy (MCPEPIG) " . TextFormat::GOLD . "and " . TextFormat::YELLOW . "Aericio" . TextFormat::GOLD . "."  . TextFormat::EOL .
+            TextFormat::GOLD . "PiggyFactions is a modern factions plugin developed by " . TextFormat::YELLOW . "DaPigGuy (MCPEPIG) " . TextFormat::GOLD . "and " . TextFormat::YELLOW . "Aericio" . TextFormat::GOLD . "." . TextFormat::EOL .
             TextFormat::GOLD . "Translations provided by " . implode(", ", array_map(function (string $translator, array $languages): string {
                 return TextFormat::YELLOW . $translator . " (" . implode(", ", $languages) . ")" . TextFormat::GOLD;
             }, array_keys($translators), $translators)) . TextFormat::EOL .

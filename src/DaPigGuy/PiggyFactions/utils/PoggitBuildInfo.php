@@ -38,7 +38,8 @@ class PoggitBuildInfo
         }
     }
 
-    public function getSpecificVersion(): string {
+    public function getSpecificVersion(): string
+    {
         $specificVersion = "";
         if ($this->isRunningFromSource()) {
             $specificVersion = "SOURCE";
