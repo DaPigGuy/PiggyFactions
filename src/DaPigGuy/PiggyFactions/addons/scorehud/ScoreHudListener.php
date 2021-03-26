@@ -27,8 +27,8 @@ class ScoreHudListener implements Listener
 
     public function onTagResolve(TagsResolveEvent $event): void
     {
-        $member = $this->plugin->getPlayerManager()->getPlayer($event->getPlayer());
-        $faction = $member === null ?: $member->getFaction();
+        if (($member = $this->plugin->getPlayerManager()->getPlayer($event->getPlayer())) === null) return;
+        $faction = $member->getFaction();
         $tag = $event->getTag();
         switch ($tag->getName()) {
             case ScoreHudTags::FACTION:
