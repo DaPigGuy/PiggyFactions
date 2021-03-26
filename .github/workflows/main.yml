@@ -17,7 +17,7 @@ jobs:
       - name: wget PiggyCustomEnchants
         uses: wei/wget@v1
         with:
-          args: -O vendor/PiggyCustomEnchants.phar https://poggit.pmmp.io/r/82514/PiggyCustomEnchants_dev-439.phar
+          args: -O vendor/PiggyCustomEnchants.phar https://poggit.pmmp.io/r/94058/PiggyCustomEnchants.phar
       - name: wget HRKChat
         uses: wei/wget@v1
         with:
@@ -26,10 +26,14 @@ jobs:
         uses: wei/wget@v1
         with:
           args: -O vendor/Hierarchy.phar https://poggit.pmmp.io/r/81611/Hierarchy_dev-81.phar
+      - name: wget ScoreHud
+        uses: wei/wget@v1
+        with:
+          args: -O vendor/ScoreHud.phar https://poggit.pmmp.io/r/119552/ScoreHud.phar
       - name: wget virions, libasynql
         uses: wei/wget@v1
         with:
-          args: -O vendor/libasynql.phar https://poggit.pmmp.io/r/81738/libasynql_dev-119.phar
+          args: -O vendor/libasynql.phar https://poggit.pmmp.io/r/108791/libasynql.phar
       - name: wget virions, FormAPI
         uses: wei/wget@v1
         with:
