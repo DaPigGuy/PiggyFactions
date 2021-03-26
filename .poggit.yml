@@ -6,7 +6,7 @@ projects:
     path: ""
     icon: "resources/PiggyFactions-icon.png"
     libs:
-      - src: ParoxityTeam/Commando/Commando
+      - src: Paroxity/Commando/Commando
         version: ^2.1.0
       - src: poggit/libasynql/libasynql
         version: ^3.3.1
