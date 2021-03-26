@@ -167,7 +167,7 @@ class PiggyFactions extends PluginBase
             $version = $scorehud->getDescription()->getVersion();
             if (version_compare($version, "6.0.0") === 1) {
                 if (version_compare($version, "6.1.0") === -1) {
-                    $this->getLogger()->warning("Outdated version of ScoreHud (v" . $version . ") detected, requires <= v6.1.0. Integration disabled.");
+                    $this->getLogger()->warning("Outdated version of ScoreHud (v" . $version . ") detected, requires >= v6.1.0. Integration disabled.");
                     return;
                 }
                 $this->getServer()->getPluginManager()->registerEvents(new ScoreHudListener($this), $this);
