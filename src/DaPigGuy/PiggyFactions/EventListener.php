@@ -105,7 +105,6 @@ class EventListener implements Listener
     {
         $player = $event->getPlayer();
         $member = $this->plugin->getPlayerManager()->getPlayer($player);
-
         if ($member !== null) {
             $ev = new PowerChangeEvent($member, PowerChangeEvent::CAUSE_DEATH, $member->getPower() + $this->plugin->getConfig()->getNested("factions.power.per.death", -2));
             $ev->call();

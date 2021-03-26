@@ -18,7 +18,7 @@ class HRKChatTagListener implements Listener
         $this->tagManager = $tagManager;
     }
 
-    public function OnTagResolveEvent(PlaceholderResolveEvent $event): void
+    public function onTagResolve(PlaceholderResolveEvent $event): void
     {
         $player = $event->getMember()->getPlayer();
         if (!$player instanceof Player) return;

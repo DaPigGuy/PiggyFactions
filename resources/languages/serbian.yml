@@ -101,7 +101,7 @@ commands:
   leader:
     offline: "{RED}Igrač mora biti online da se prebaci vodjstvo."
     recipient: "{GREEN}Ti si sad lider tvoje frakcije."
-    success: "{GREEN}Frakcija je prebačena {PLAYER}. ok im not sure how to translate this yet ok"
+    success: "{GREEN}Frakcija je prebačena {PLAYER}."
   leave:
     is-leader: "{RED}Ti si lider tvoje frakcije."
     success: "{YELLOW}Izašao si iz tvoje frakcije."

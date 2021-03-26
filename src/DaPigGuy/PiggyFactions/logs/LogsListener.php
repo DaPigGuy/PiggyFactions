@@ -25,7 +25,6 @@ class LogsListener implements Listener
     }
 
     /**
-     * @param FactionBanEvent $event
      * @priority MONITOR
      */
     public function onBan(FactionBanEvent $event): void
@@ -36,7 +35,6 @@ class LogsListener implements Listener
     }
 
     /**
-     * @param FactionKickEvent $event
      * @priority MONITOR
      */
     public function onKick(FactionKickEvent $event): void
@@ -47,7 +45,6 @@ class LogsListener implements Listener
     }
 
     /**
-     * @param FactionInviteEvent $event
      * @priority MONITOR
      */
     public function onInvite(FactionInviteEvent $event): void
@@ -58,7 +55,6 @@ class LogsListener implements Listener
     }
 
     /**
-     * @param FactionJoinEvent $event
      * @priority MONITOR
      */
     public function onJoin(FactionJoinEvent $event): void
@@ -69,7 +65,6 @@ class LogsListener implements Listener
     }
 
     /**
-     * @param FactionLeaveEvent $event
      * @priority MONITOR
      */
     public function onLeave(FactionLeaveEvent $event): void
@@ -80,7 +75,6 @@ class LogsListener implements Listener
     }
 
     /**
-     * @param FactionLeadershipTransferEvent $event
      * @priority MONITOR
      */
     public function onLeadershipChange(FactionLeadershipTransferEvent $event): void
@@ -91,7 +85,6 @@ class LogsListener implements Listener
     }
 
     /**
-     * @param FactionUnbanEvent $event
      * @priority MONITOR
      */
     public function onUnban(FactionUnbanEvent $event): void
