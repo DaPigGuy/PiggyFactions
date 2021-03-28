@@ -7,6 +7,7 @@ namespace DaPigGuy\PiggyFactions\tag;
 use DaPigGuy\PiggyFactions\factions\Faction;
 use DaPigGuy\PiggyFactions\PiggyFactions;
 use DaPigGuy\PiggyFactions\players\FactionsPlayer;
+use DaPigGuy\PiggyFactions\utils\RoundValue;
 use pocketmine\Player;
 
 class TagManager
@@ -70,7 +71,7 @@ class TagManager
 
     public function getFactionPower(?FactionsPlayer $member): ?string
     {
-        return ($faction = $this->getFaction($member)) === null ? null : (string)round($faction->getPower(), 2, PHP_ROUND_HALF_DOWN);
+        return ($faction = $this->getFaction($member)) === null ? null : RoundValue::roundToString($faction->getPower());
     }
 
     public function getFactionSizeTotal(?FactionsPlayer $member): ?string
@@ -85,11 +86,11 @@ class TagManager
 
     public function getPlayerRankName(?FactionsPlayer $member): ?string
     {
-        return ($faction = $this->getFaction($member)) === null ? null : (string)$member->getRole();
+        return $this->getFaction($member) === null ? null : (string)$member->getRole();
     }
 
     public function getPlayerRankSymbol(?FactionsPlayer $member): ?string
     {
-        return ($faction = $this->getFaction($member)) === null ? null : ($this->rankSymbols[$member->getRole()] ?? null);
+        return $this->getFaction($member) === null ? null : ($this->rankSymbols[$member->getRole()] ?? null);
     }
 }

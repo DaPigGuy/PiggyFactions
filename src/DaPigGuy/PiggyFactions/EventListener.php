@@ -8,6 +8,7 @@ use DaPigGuy\PiggyFactions\event\member\PowerChangeEvent;
 use DaPigGuy\PiggyFactions\factions\Faction;
 use DaPigGuy\PiggyFactions\flags\Flag;
 use DaPigGuy\PiggyFactions\utils\ChatTypes;
+use DaPigGuy\PiggyFactions\utils\RoundValue;
 use pocketmine\event\entity\EntityDamageByEntityEvent;
 use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerChatEvent;
@@ -110,7 +111,7 @@ class EventListener implements Listener
             $ev->call();
             if ($ev->isCancelled()) return;
             $member->setPower($ev->getPower());
-            $member->sendMessage("death.power", ["{POWER}" => round($member->getPower(), 2, PHP_ROUND_HALF_DOWN)]);
+            $member->sendMessage("death.power", ["{POWER}" => RoundValue::round($member->getPower())]);
         }
 
         $cause = $player->getLastDamageCause();
