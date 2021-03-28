@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace DaPigGuy\PiggyFactions\tag;
+namespace DaPigGuy\PiggyFactions\addons\hrkchat;
 
 use DaPigGuy\PiggyFactions\factions\Faction;
 use DaPigGuy\PiggyFactions\PiggyFactions;

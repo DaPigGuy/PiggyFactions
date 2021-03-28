@@ -20,7 +20,7 @@ use DaPigGuy\PiggyFactions\logs\LogsListener;
 use DaPigGuy\PiggyFactions\logs\LogsManager;
 use DaPigGuy\PiggyFactions\permissions\PermissionFactory;
 use DaPigGuy\PiggyFactions\players\PlayerManager;
-use DaPigGuy\PiggyFactions\tag\TagManager;
+use DaPigGuy\PiggyFactions\addons\hrkchat\TagManager;
 use DaPigGuy\PiggyFactions\tasks\CheckUpdatesTask;
 use DaPigGuy\PiggyFactions\tasks\ShowChunksTask;
 use DaPigGuy\PiggyFactions\tasks\UpdatePowerTask;

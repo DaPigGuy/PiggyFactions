@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace DaPigGuy\PiggyFactions\tag;
+namespace DaPigGuy\PiggyFactions\addons\hrkchat;
 
 use CortexPE\HRKChat\event\PlaceholderResolveEvent;
 use pocketmine\event\Listener;
