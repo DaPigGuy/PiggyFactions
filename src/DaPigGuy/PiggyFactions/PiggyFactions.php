@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace DaPigGuy\PiggyFactions;
 
+use function class_exists;
 use CortexPE\Commando\BaseCommand;
 use CortexPE\Commando\PacketHooker;
 use DaPigGuy\libPiggyEconomy\libPiggyEconomy;
@@ -98,6 +99,11 @@ class PiggyFactions extends PluginBase
 
         $this->languageManager = new LanguageManager($this);
         $this->tagManager = new TagManager($this);
+
+        if(class_exists(\SOFe\InfoAPI\InfoAPI::class)) {
+            info\FactionInfo::register();
+            info\FactionMemberInfo::register($this->playerManager);
+        }
 
         $this->checkSoftDependencies();
 

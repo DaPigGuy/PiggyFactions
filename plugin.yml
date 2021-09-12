@@ -3,7 +3,7 @@ main: DaPigGuy\PiggyFactions\PiggyFactions
 version: 1.1.1
 api: 4.0.0
 author: DaPigGuy
-softdepend: [EconomyAPI, MultiEconomy, PiggyCustomEnchants, HRKChat]
+softdepend: [EconomyAPI, MultiEconomy, PiggyCustomEnchants, HRKChat, InfoAPI]
 website: "https://github.com/DaPigGuy/PiggyFactions"
 permissions:
   piggyfactions:
