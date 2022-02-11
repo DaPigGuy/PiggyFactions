@@ -1,6 +1,7 @@
 --- # Poggit-CI Manifest. Open the CI at https://poggit.pmmp.io/ci/DaPigGuy/PiggyFactions
 branches:
   - master
+  - pmmp-4.0
 projects:
   PiggyFactions:
     path: ""
