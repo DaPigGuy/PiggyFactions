@@ -42,7 +42,7 @@ class PiggyFactions extends PluginBase
     private PoggitBuildInfo $poggitBuildInfo;
 
     private DataConnector $database;
-    private EconomyProvider $economyProvider;
+    private ?EconomyProvider $economyProvider = null;
 
     private FactionsManager $factionsManager;
     private ClaimsManager $claimsManager;
@@ -180,7 +180,7 @@ class PiggyFactions extends PluginBase
         return $this->database;
     }
 
-    public function getEconomyProvider(): EconomyProvider
+    public function getEconomyProvider(): ?EconomyProvider
     {
         return $this->economyProvider;
     }
