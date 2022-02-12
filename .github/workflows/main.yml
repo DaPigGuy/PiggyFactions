@@ -1,4 +1,4 @@
-name: PHPStan
+name: PHPStan 4.0.0
 
 on: [push, pull_request]
 
@@ -10,39 +10,20 @@ jobs:
         with:
           ref: ${{ github.ref }}
       - name: Create Vendor Directory
+        run: mkdir vendor
+      - name: Download Plugin Dependencies
         run: |
-          echo Making directory...
-          mkdir vendor
-          echo Directory made.
-      - name: wget PiggyCustomEnchants
-        uses: wei/wget@v1
-        with:
-          args: -O vendor/PiggyCustomEnchants.phar https://poggit.pmmp.io/r/94443/PiggyCustomEnchants_dev-468.phar
-      - name: wget HRKChat
-        uses: wei/wget@v1
-        with:
-          args: -O vendor/HRKChat.phar https://poggit.pmmp.io/r/80529/HRKChat_dev-31.phar
-      - name: wget Hierarchy
-        uses: wei/wget@v1
-        with:
-          args: -O vendor/Hierarchy.phar https://poggit.pmmp.io/r/81611/Hierarchy_dev-81.phar
-      - name: wget virions, libasynql
-        uses: wei/wget@v1
-        with:
-          args: -O vendor/libasynql.phar https://poggit.pmmp.io/r/94448/libasynql_dev-1.phar
-      - name: wget virions, FormAPI
-        uses: wei/wget@v1
-        with:
-          args: -O vendor/FormAPI.phar https://poggit.pmmp.io/r/77082/FormAPI_dev-1.phar
-      - name: wget virions, libPiggyEconomy
-        uses: wei/wget@v1
-        with:
-          args: -O vendor/libPiggyEconomy.phar https://poggit.pmmp.io/r/94380/libPiggyEconomy_dev-10.phar
-      - name: wget virions, Commando
-        uses: wei/wget@v1
-        with:
-          args: -O vendor/Commando.phar https://poggit.pmmp.io/r/90966/Commando_dev-2.phar
+          wget -O vendor/PiggyCustomEnchants.phar https://poggit.pmmp.io/r/94443/PiggyCustomEnchants_dev-468.phar
+          wget -O vendor/HRKChat.phar https://poggit.pmmp.io/r/80529/HRKChat_dev-31.phar
+          wget -O vendor/Hierarchy.phar https://poggit.pmmp.io/r/81611/Hierarchy_dev-81.phar
+          wget -O vendor/ScoreHud.phar https://poggit.pmmp.io/r/134708/ScoreHud_dev-70.phar
+      - name: Download Virion Dependencies
+        run: |
+          wget -O vendor/libasynql.phar https://poggit.pmmp.io/r/94448/libasynql_dev-1.phar
+          wget -O vendor/FormAPI.phar https://poggit.pmmp.io/r/77082/FormAPI_dev-1.phar
+          wget -O vendor/libPiggyEconomy.phar https://poggit.pmmp.io/r/94380/libPiggyEconomy_dev-10.phar
+          wget -O vendor/Commando.phar https://poggit.pmmp.io/r/90966/Commando_dev-2.phar
       - name: Run PHPStan
-        uses: nxtlvlsoftware/pmmp-phpstan-action@master
+        uses: paroxity/pmmp-phpstan-action@4.2.0
         with:
           phpstan-config: phpstan.neon.dist
