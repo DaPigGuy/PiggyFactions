@@ -39,7 +39,7 @@ class DebugSubCommand extends FactionSubCommand
                 "PROTOCOL: " . ProtocolInfo::CURRENT_PROTOCOL . PHP_EOL .
                 "-- SYSTEM INFO --" . PHP_EOL .
                 "OS TYPE: " . PHP_OS . ", " . Utils::getOS() . PHP_EOL .
-                "OS VERSION: " . php_uname("v") . PHP_EOL .
+                "OS VERSION: " . php_uname("r") . PHP_EOL .
                 "PHP VERSION: " . PHP_VERSION . PHP_EOL .
                 "-- PLUGINS --" . PHP_EOL .
                 implode(", ", array_map(function (Plugin $plugin): string {
