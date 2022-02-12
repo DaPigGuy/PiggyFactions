@@ -24,7 +24,7 @@ class CheckUpdatesTask extends AsyncTask
             if ($plugin->isEnabled()) {
                 $results = $this->getResult();
 
-                $error = $results[1]->getError();
+                $error = $results[1];
                 if ($error !== null) throw new Exception($error);
 
                 $data = json_decode($results[0]->getBody(), true);
