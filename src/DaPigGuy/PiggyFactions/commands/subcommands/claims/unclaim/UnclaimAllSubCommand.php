@@ -26,6 +26,5 @@ class UnclaimAllSubCommand extends FactionSubCommand
             $this->plugin->getClaimsManager()->deleteClaim($claim);
         }
         $member->sendMessage("commands.unclaim.all.success");
-        return;
     }
 }

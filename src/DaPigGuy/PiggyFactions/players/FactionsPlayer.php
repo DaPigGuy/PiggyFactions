@@ -11,11 +11,11 @@ use DaPigGuy\PiggyFactions\PiggyFactions;
 use DaPigGuy\PiggyFactions\utils\ChatTypes;
 use pocketmine\player\Player;
 use pocketmine\Server;
-use pocketmine\uuid\UUID;
+use Ramsey\Uuid\UuidInterface;
 
 class FactionsPlayer
 {
-    /** @var UUID */
+    /** @var UuidInterface */
     private $uuid;
     /** @var string */
     private $username;
@@ -46,7 +46,7 @@ class FactionsPlayer
     /** @var bool */
     private $adminMode = false;
 
-    public function __construct(UUID $uuid, string $username, ?string $faction, ?string $role, float $power, float $powerboost, string $language)
+    public function __construct(UuidInterface $uuid, string $username, ?string $faction, ?string $role, float $power, float $powerboost, string $language)
     {
         $this->uuid = $uuid;
         $this->username = $username;
@@ -57,7 +57,7 @@ class FactionsPlayer
         $this->language = $language;
     }
 
-    public function getUuid(): UUID
+    public function getUuid(): UuidInterface
     {
         return $this->uuid;
     }
@@ -80,7 +80,7 @@ class FactionsPlayer
 
     public function setFaction(?Faction $faction): void
     {
-        $this->faction = $faction === null ? null : $faction->getId();
+        $this->faction = $faction?->getId();
         $this->update();
     }
 

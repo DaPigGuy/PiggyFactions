@@ -16,8 +16,9 @@ use DaPigGuy\PiggyFactions\players\PlayerManager;
 use DaPigGuy\PiggyFactions\utils\Relations;
 use DaPigGuy\PiggyFactions\utils\Roles;
 use pocketmine\player\Player;
-use pocketmine\uuid\UUID;
 use pocketmine\world\Position;
+use Ramsey\Uuid\Uuid;
+use Ramsey\Uuid\UuidInterface;
 
 class Faction
 {
@@ -31,7 +32,7 @@ class Faction
     private $description;
     /** @var ?string */
     private $motd;
-    /** @var UUID[] */
+    /** @var UuidInterface[] */
     private $members;
     /** @var FactionPermission[] */
     private $permissions;
@@ -64,8 +65,8 @@ class Faction
         $this->creationTime = $creationTime;
         $this->description = $description;
         $this->motd = $motd;
-        $this->members = array_map(function (string $uuid): UUID {
-            return UUID::fromString($uuid);
+        $this->members = array_map(function (string $uuid): UuidInterface {
+            return Uuid::fromString($uuid);
         }, $members);
         foreach (PermissionFactory::getPermissions() as $name => $permission) {
             $permission = clone $permission;
@@ -159,7 +160,7 @@ class Faction
      */
     public function getMembers(): array
     {
-        return array_map(function (UUID $uuid): FactionsPlayer {
+        return array_map(function (UuidInterface $uuid): FactionsPlayer {
             return PlayerManager::getInstance()->getPlayerByUUID($uuid);
         }, $this->members);
     }
@@ -191,7 +192,7 @@ class Faction
         return null;
     }
 
-    public function getMemberByUUID(UUID $uuid): ?FactionsPlayer
+    public function getMemberByUUID(UuidInterface $uuid): ?FactionsPlayer
     {
         foreach ($this->getMembers() as $m) {
             if ($m->getUuid()->equals($uuid)) return $m;
@@ -208,7 +209,7 @@ class Faction
         $this->update();
     }
 
-    public function removeMember(UUID $uuid): void
+    public function removeMember(UuidInterface $uuid): void
     {
         unset($this->members[array_search($uuid, $this->members)]);
         PlayerManager::getInstance()->getPlayerByUUID($uuid)->setFaction(null);
@@ -385,18 +386,18 @@ class Faction
         return $this->banned;
     }
 
-    public function isBanned(UUID $uuid): bool
+    public function isBanned(UuidInterface $uuid): bool
     {
         return in_array($uuid->toString(), $this->banned);
     }
 
-    public function banPlayer(UUID $uuid): void
+    public function banPlayer(UuidInterface $uuid): void
     {
         $this->banned[] = $uuid->toString();
         $this->update();
     }
 
-    public function unbanPlayer(UUID $uuid): void
+    public function unbanPlayer(UuidInterface $uuid): void
     {
         $key = array_search($uuid->toString(), $this->banned);
         if ($key !== false) unset($this->banned[$key]);
@@ -437,7 +438,7 @@ class Faction
         foreach ($this->relations as $id => $relation) {
             if ($relation === Relations::ALLY || $relation === Relations::TRUCE) {
                 $faction = FactionsManager::getInstance()->getFaction($id);
-                if ($faction !== null) $faction->revokeRelation($this);
+                $faction?->revokeRelation($this);
             }
         }
         FactionsManager::getInstance()->deleteFaction($this->getId());

@@ -8,7 +8,8 @@ use DaPigGuy\PiggyFactions\factions\Faction;
 use DaPigGuy\PiggyFactions\language\LanguageManager;
 use DaPigGuy\PiggyFactions\PiggyFactions;
 use pocketmine\player\Player;
-use pocketmine\uuid\UUID;
+use Ramsey\Uuid\Uuid;
+use Ramsey\Uuid\UuidInterface;
 
 class PlayerManager
 {
@@ -28,7 +29,7 @@ class PlayerManager
         $this->plugin = $plugin;
         $plugin->getDatabase()->executeSelect("piggyfactions.players.load", [], function (array $rows): void {
             foreach ($rows as $row) {
-                $this->players[$row["uuid"]] = new FactionsPlayer(UUID::fromString($row["uuid"]), $row["username"], $row["faction"], $row["role"], $row["power"], $row["powerboost"], $row["language"]);
+                $this->players[$row["uuid"]] = new FactionsPlayer(Uuid::fromString($row["uuid"]), $row["username"], $row["faction"], $row["role"], $row["power"], $row["powerboost"], $row["language"]);
             }
             $this->plugin->getLogger()->debug("Loaded " . count($rows) . " players");
         });
@@ -58,7 +59,7 @@ class PlayerManager
         return $this->getPlayerByUUID($player->getUniqueId());
     }
 
-    public function getPlayerByUUID(UUID $uuid): ?FactionsPlayer
+    public function getPlayerByUUID(UuidInterface $uuid): ?FactionsPlayer
     {
         return $this->players[$uuid->toString()] ?? null;
     }
@@ -71,7 +72,7 @@ class PlayerManager
         return null;
     }
 
-    public function getPlayerFaction(UUID $uuid): ?Faction
+    public function getPlayerFaction(UuidInterface $uuid): ?Faction
     {
         return ($player = $this->getPlayerByUUID($uuid)) === null ? null : $player->getFaction();
     }

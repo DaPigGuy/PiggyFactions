@@ -9,8 +9,9 @@ use DaPigGuy\PiggyFactions\flags\FlagFactory;
 use DaPigGuy\PiggyFactions\permissions\FactionPermission;
 use DaPigGuy\PiggyFactions\permissions\PermissionFactory;
 use DaPigGuy\PiggyFactions\PiggyFactions;
-use pocketmine\uuid\UUID;
 use pocketmine\world\Position;
+use Ramsey\Uuid\Uuid;
+use Ramsey\Uuid\UuidInterface;
 
 class FactionsManager
 {
@@ -70,8 +71,8 @@ class FactionsManager
     public function createFaction(string $name, array $members, ?array $flags = null): void
     {
         $flags = $flags ?? FlagFactory::getFlags();
-        $id = UUID::fromRandom()->toString();
-        while (isset($this->factions[$id])) $id = UUID::fromRandom()->toString();
+        $id = Uuid::uuid4()->toString();
+        while (isset($this->factions[$id])) $id = Uuid::uuid4()->toString();
         $this->factions[$id] = new Faction($id, $name, time(), null, null, $members,
             array_map(function (FactionPermission $permission): array {
                 return $permission->getHolders();

@@ -24,7 +24,6 @@ class PowerBoostPlayerSubCommand extends FactionSubCommand
         $player->setPowerBoost($args["power"]);
         $this->plugin->getLanguageManager()->sendMessage($sender, "commands.powerboost.success-player", ["{PLAYER}" => $player->getUsername(), "{POWER}" => $args["power"]]);
         $player->sendMessage("commands.powerboost.boost-player", ["{POWER}" => $args["power"]]);
-        return;
     }
 
     protected function prepare(): void

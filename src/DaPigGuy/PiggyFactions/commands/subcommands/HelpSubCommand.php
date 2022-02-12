@@ -36,7 +36,7 @@ class HelpSubCommand extends FactionSubCommand
         $commandsPerPage = $sender instanceof Player ? self::COMMANDS_PER_PAGE : count($subcommands);
         $maxPages = (int)ceil(count($subcommands) / $commandsPerPage);
         $page = $args["page"] ?? 1;
-        $page = $page > $maxPages ? $maxPages : $page;
+        $page = min($page, $maxPages);
         $pageCommands = array_slice($subcommands, $commandsPerPage * ($page - 1), $commandsPerPage);
 
         $language = $sender instanceof Player ? $this->plugin->getLanguageManager()->getPlayerLanguage($sender) : $this->plugin->getLanguageManager()->getDefaultLanguage();

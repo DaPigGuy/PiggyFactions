@@ -24,7 +24,6 @@ class PowerBoostFactionSubCommand extends FactionSubCommand
         $faction->setPowerBoost($args["power"]);
         $this->plugin->getLanguageManager()->sendMessage($sender, "commands.powerboost.success-faction", ["{FACTION}" => $faction->getName(), "{POWER}" => $args["power"]]);
         $faction->broadcastMessage("commands.powerboost.boost-faction", ["{POWER}" => $args["power"]]);
-        return;
     }
 
     protected function prepare(): void
