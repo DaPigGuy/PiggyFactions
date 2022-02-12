@@ -12,6 +12,7 @@ parameters:
     - phar:///source/vendor/FormAPI.phar/src/
     - phar:///source/vendor/libasynql.phar/src/
     - phar:///source/vendor/libPiggyEconomy.phar/src/
-  excludes_analyse:
-    - source/vendor
+  excludePaths:
+    analyse:
+     - source/vendor
   checkMissingIterableValueType: false
