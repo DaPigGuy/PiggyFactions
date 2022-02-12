@@ -17,6 +17,9 @@ use DaPigGuy\PiggyFactions\players\FactionsPlayer;
 use DaPigGuy\PiggyFactions\utils\PiggyArgument;
 use jojoe77777\FormAPI\CustomForm;
 use pocketmine\command\CommandSender;
+use pocketmine\permission\DefaultPermissions;
+use pocketmine\permission\Permission;
+use pocketmine\permission\PermissionManager;
 use pocketmine\player\Player;
 use pocketmine\utils\TextFormat;
 
@@ -33,6 +36,7 @@ abstract class FactionSubCommand extends BaseSubCommand
 
     public function __construct(PiggyFactions $plugin, string $name, string $description = "", array $aliases = [])
     {
+        PermissionManager::getInstance()->addPermission(new Permission("piggyfactions.command.faction." . $name));
         $this->setPermission("piggyfactions.command.faction." . $name);
         parent::__construct($plugin, $name, $description, $aliases);
     }
