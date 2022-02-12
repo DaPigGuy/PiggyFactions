@@ -47,7 +47,7 @@ class AsciiMap
                     continue;
                 }
 
-                $faction = ($claim = ClaimsManager::getInstance()->getClaim($chunkX, $chunkZ, $player->getWorld()->getFolderName())) === null ? null : $claim->getFaction();
+                $faction = ($claim = ClaimsManager::getInstance()->getClaim((int)$chunkX, (int)$chunkZ, $player->getWorld()->getFolderName())) === null ? null : $claim->getFaction();
 
                 if ($faction === null) {
                     $row .= self::MAP_KEY_WILDERNESS;
