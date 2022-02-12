@@ -12,8 +12,8 @@ use pocketmine\player\Player;
 
 class FlySubCommand extends FactionSubCommand
 {
-    /** @var bool */
-    protected ?bool $factionPermission = false;
+    /** @var ?bool */
+    protected $factionPermission = false;
 
     public function onNormalRun(Player $sender, ?Faction $faction, FactionsPlayer $member, string $aliasUsed, array $args): void
     {

@@ -33,10 +33,10 @@ class ClaimSubCommand extends FactionSubCommand
         $claim = $this->plugin->getClaimsManager()->getClaimByPosition($sender->getPosition());
         if ($claim !== null) {
             if ($claim->canBeOverClaimed() && $claim->getFaction() !== $faction) {
-                $adjacentChunks = $sender->getWorld()->getAdjacentChunks($claim->getChunkX(), $claim->getChunkZ());
-                foreach ($adjacentChunks as $chunk) {
-                    if ($chunk instanceof Chunk) {
-                        $adjacentClaim = $this->plugin->getClaimsManager()->getClaim($chunk->getX(), $chunk->getZ(), $sender->getWorld()->getFolderName());
+                for ($adjX = -1; $adjX <= 1; ++$adjX) {
+                    for ($adjZ = -1; $adjZ <= 1; ++$adjZ) {
+                        if ($adjX === 0 && $adjZ === 0) continue;
+                        $adjacentClaim = $this->plugin->getClaimsManager()->getClaim($claim->getChunkX() + $adjX, $claim->getChunkZ() + $adjZ, $sender->getWorld()->getFolderName());
                         if ($adjacentClaim !== null && $adjacentClaim->getFaction() === $faction) {
                             $ev = new ChunkOverclaimEvent($faction, $member, $claim);
                             $ev->call();
@@ -52,11 +52,14 @@ class ClaimSubCommand extends FactionSubCommand
             $member->sendMessage("commands.claim.already-claimed");
             return;
         }
-        $ev = new ClaimChunkEvent($faction, $member, $sender->chunk->getX(), $sender->chunk->getZ());
+        $chunkX = $sender->getPosition()->getFloorX() >> Chunk::COORD_BIT_SIZE;
+        $chunkZ = $sender->getPosition()->getFloorZ() >> Chunk::COORD_BIT_SIZE;
+
+        $ev = new ClaimChunkEvent($faction, $member, $chunkX, $chunkZ);
         $ev->call();
         if ($ev->isCancelled()) return;
 
-        $this->plugin->getClaimsManager()->createClaim($faction, $sender->getWorld(), $sender->chunk->getX(), $sender->chunk->getZ());
+        $this->plugin->getClaimsManager()->createClaim($faction, $sender->getWorld(), $chunkX, $chunkZ);
         $member->sendMessage("commands.claim.success");
     }
 
