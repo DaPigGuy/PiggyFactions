@@ -12,9 +12,6 @@ use pocketmine\player\Player;
 
 class FlySubCommand extends FactionSubCommand
 {
-    /** @var ?bool */
-    protected $factionPermission = false;
-
     public function onNormalRun(Player $sender, ?Faction $faction, FactionsPlayer $member, string $aliasUsed, array $args): void
     {
         $claim = $this->plugin->getClaimsManager()->getClaimByPosition($sender->getPosition());

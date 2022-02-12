@@ -28,7 +28,7 @@ abstract class FactionSubCommand extends BaseSubCommand
     protected $requiresPlayer = true;
     /** @var bool */
     protected $requiresFaction = true;
-    /** @var ?bool */
+    /** @var ?string */
     protected $factionPermission = null;
 
     public function __construct(PiggyFactions $plugin, string $name, string $description = "", array $aliases = [])
