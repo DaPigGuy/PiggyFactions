@@ -72,7 +72,7 @@ commands:
     toggled: "{GREEN}Bandera {FLAG} ha sido habilitada."
     toggled-off: "{GREEN}Bandera {FLAG} ha sido deshabilitada."
   fly:
-    not-allowed: "{ROJO}No tienes permitido volar aquí."
+    not-allowed: "{RED}No tienes permitido volar aquí."
     toggled: "{GREEN}Se ha habilitado el vuelo."
     toggled-off: "{RED}El vuelo ha sido deshabilitado."
   help:
@@ -186,7 +186,7 @@ forms:
   title: "PiggyFactions UI"
 motd: "{GOLD}____________.[{DARK_GREEN}{FACTION} MOTD{GOLD}].____________\n{WHITE}{MOTD}"
 pvp:
-  attacker-factionless: "{ROJO}No puedes dañar a otros jugadores hasta que te hayas unido a una facción."
+  attacker-factionless: "{RED}No puedes dañar a otros jugadores hasta que te hayas unido a una facción."
   target-factionless: "{RED}No puedes dañar a jugadores que no están actualmente en una facción."
   cant-attack-in-territory: "{RED}No puedes dañar a {PLAYER} en su propio territorio a menos que los declares como enemigos."
 relation:

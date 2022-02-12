@@ -8,6 +8,7 @@ use CortexPE\Commando\args\TextArgument;
 use DaPigGuy\PiggyFactions\factions\Faction;
 use DaPigGuy\PiggyFactions\utils\FormattedTime;
 use DaPigGuy\PiggyFactions\utils\Roles;
+use DaPigGuy\PiggyFactions\utils\RoundValue;
 use pocketmine\command\CommandSender;
 use pocketmine\player\Player;
 
@@ -42,12 +43,12 @@ class InfoSubCommand extends FactionSubCommand
             "{FACTION}" => $faction->getName(),
             "{DESCRIPTION}" => $faction->getDescription() ?? $this->plugin->getLanguageManager()->getMessage($sender instanceof Player ? $this->plugin->getPlayerManager()->getPlayer($sender)->getLanguage() : $this->plugin->getLanguageManager()->getDefaultLanguage(), "commands.info.description-not-set"),
             "{CLAIMS}" => count($this->plugin->getClaimsManager()->getFactionClaims($faction)),
-            "{POWER}" => round($faction->getPower(), 2, PHP_ROUND_HALF_DOWN),
+            "{POWER}" => RoundValue::round($faction->getPower()),
             "{TOTALPOWER}" => $faction->getMaxPower(),
             "{CREATIONDATE}" => date("F j, Y @ g:i a T", $faction->getCreationTime()),
             "{AGE}" => FormattedTime::getLong($faction->getCreationTime()),
             "{SIMPLEAGE}" => FormattedTime::getShort($faction->getCreationTime()),
-            "{MONEY}" => round($faction->getMoney(), 2, PHP_ROUND_HALF_DOWN),
+            "{MONEY}" => RoundValue::round($faction->getMoney()),
             "{LEADER}" => ($leader = $faction->getLeader()) === null ? "" : $leader->getUsername(),
             "{ALLIES}" => implode(", ", array_map(function (Faction $f): string {
                 return $f->getName();

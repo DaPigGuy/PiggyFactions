@@ -38,6 +38,20 @@ class PoggitBuildInfo
         }
     }
 
+    public function getSpecificVersion(): string
+    {
+        $specificVersion = "";
+        if ($this->isRunningFromSource()) {
+            $specificVersion = "SOURCE";
+        } elseif ($this->isRunningPoggitPhar()) {
+            $metadata = $this->getPoggitPharMetadata();
+            $specificVersion = "BUILD #" . $metadata["projectBuildNumber"];
+        } elseif ($this->isRunningPhar()) {
+            $specificVersion = "CUSTOM PHAR";
+        }
+        return $specificVersion;
+    }
+
     public function isRunningFromSource(): bool
     {
         return $this->runningFromSource;

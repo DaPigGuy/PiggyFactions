@@ -69,6 +69,6 @@ class FactionPermission implements JsonSerializable
 
     public function jsonSerialize(): array
     {
-        return $this->holders;
+        return array_values($this->holders);
     }
 }

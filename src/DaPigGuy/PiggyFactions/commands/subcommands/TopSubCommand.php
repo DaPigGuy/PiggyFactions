@@ -8,6 +8,7 @@ use CortexPE\Commando\args\IntegerArgument;
 use CortexPE\Commando\args\RawStringArgument;
 use DaPigGuy\PiggyFactions\factions\Faction;
 use DaPigGuy\PiggyFactions\flags\Flag;
+use DaPigGuy\PiggyFactions\utils\RoundValue;
 use pocketmine\command\CommandSender;
 use pocketmine\player\Player;
 use pocketmine\utils\TextFormat;
@@ -55,9 +56,9 @@ class TopSubCommand extends FactionSubCommand
                     "{FACTION}" => $faction->getName(),
                     "{ONLINE}" => count($faction->getOnlineMembers()),
                     "{MEMBERS}" => count($faction->getMembers()),
-                    "{POWER}" => round($faction->getPower(), 2, PHP_ROUND_HALF_DOWN),
+                    "{POWER}" => RoundValue::round($faction->getPower()),
                     "{TOTALPOWER}" => count($faction->getMembers()) * $this->plugin->getConfig()->getNested("factions.power.max"),
-                    "{MONEY}" => round($faction->getMoney(), 2, PHP_ROUND_HALF_DOWN)
+                    "{MONEY}" => RoundValue::round($faction->getMoney())
                 ]);
         }
         $sender->sendMessage($message);

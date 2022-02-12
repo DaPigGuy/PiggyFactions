@@ -119,6 +119,7 @@ abstract class FactionSubCommand extends BaseSubCommand
             if ($data !== null) {
                 $args = [];
                 foreach ($this->getArgumentList() as $position => $arguments) {
+                    if (!isset($data[$position])) continue;
                     /** @var PiggyArgument $argument */
                     foreach ($arguments as $argument) {
                         $wrappedArgument = $argument->getWrappedArgument();

@@ -22,12 +22,11 @@ Please make sure your issue complies with these guidelines:
 1. ...
 2. ...
 
+<!-- Run `/f debug` in console and paste the contents inside the code block below. -->
 ### OS and Versions
-<!-- Use `/version` for PMMP version & `/version PiggyFactions` for PiggyFactions version -->
-* PocketMine-MP:
-* PiggyFactions:
-* PHP:
-* Server OS:
+```
+
+```
 
 <!--- Provide any extra information below  -->
 ### Extra Information

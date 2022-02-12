@@ -9,6 +9,8 @@ use CortexPE\Commando\PacketHooker;
 use DaPigGuy\libPiggyEconomy\libPiggyEconomy;
 use DaPigGuy\libPiggyEconomy\providers\EconomyProvider;
 use DaPigGuy\PiggyCustomEnchants\utils\AllyChecks;
+use DaPigGuy\PiggyFactions\addons\scorehud\ScoreHudListener;
+use DaPigGuy\PiggyFactions\addons\scorehud\ScoreHudManager;
 use DaPigGuy\PiggyFactions\claims\ClaimsManager;
 use DaPigGuy\PiggyFactions\commands\FactionCommand;
 use DaPigGuy\PiggyFactions\factions\FactionsManager;
@@ -18,7 +20,7 @@ use DaPigGuy\PiggyFactions\logs\LogsListener;
 use DaPigGuy\PiggyFactions\logs\LogsManager;
 use DaPigGuy\PiggyFactions\permissions\PermissionFactory;
 use DaPigGuy\PiggyFactions\players\PlayerManager;
-use DaPigGuy\PiggyFactions\tag\TagManager;
+use DaPigGuy\PiggyFactions\addons\hrkchat\TagManager;
 use DaPigGuy\PiggyFactions\tasks\CheckUpdatesTask;
 use DaPigGuy\PiggyFactions\tasks\ShowChunksTask;
 use DaPigGuy\PiggyFactions\tasks\UpdatePowerTask;
@@ -60,6 +62,14 @@ class PiggyFactions extends PluginBase
     /** @var LogsManager */
     private $logsManager;
 
+    /** @var ScoreHudManager */
+    private $scoreHudManager;
+
+    public function onLoad(): void
+    {
+        self::$instance = $this;
+    }
+
     public function onEnable(): void
     {
         foreach (
@@ -70,7 +80,7 @@ class PiggyFactions extends PluginBase
             ] as $virion => $class
         ) {
             if (!class_exists($class)) {
-                $this->getLogger()->error($virion . " virion not found. Please download PiggyFactions from Poggit-CI or use DEVirion (not recommended).");
+                $this->getLogger()->error($virion . " virion was not found. Download PiggyFactions at https://poggit.pmmp.io/p/PiggyFactions for pre-compiled phars.");
                 $this->getServer()->getPluginManager()->disablePlugin($this);
                 return;
             }
@@ -94,10 +104,12 @@ class PiggyFactions extends PluginBase
         $this->factionsManager = new FactionsManager($this);
         $this->claimsManager = new ClaimsManager($this);
         $this->playerManager = new PlayerManager($this);
-        $this->logsManager = new LogsManager($this);
 
         $this->languageManager = new LanguageManager($this);
         $this->tagManager = new TagManager($this);
+        $this->logsManager = new LogsManager($this);
+
+        $this->scoreHudManager = new ScoreHudManager($this);
 
         $this->checkSoftDependencies();
 
@@ -152,6 +164,16 @@ class PiggyFactions extends PluginBase
                 return false;
             });
         }
+        if (($scorehud = $this->getServer()->getPluginManager()->getPlugin("ScoreHud")) !== null) {
+            $version = $scorehud->getDescription()->getVersion();
+            if (version_compare($version, "6.0.0") === 1) {
+                if (version_compare($version, "6.1.0") === -1) {
+                    $this->getLogger()->warning("Outdated version of ScoreHud (v" . $version . ") detected, requires >= v6.1.0. Integration disabled.");
+                    return;
+                }
+                $this->getServer()->getPluginManager()->registerEvents(new ScoreHudListener($this), $this);
+            }
+        }
     }
 
     public static function getInstance(): PiggyFactions
@@ -202,6 +224,11 @@ class PiggyFactions extends PluginBase
     public function getLogsManager(): LogsManager
     {
         return $this->logsManager;
+    }
+
+    public function getScoreHudManager(): ScoreHudManager
+    {
+        return $this->scoreHudManager;
     }
 
     public function areFormsEnabled(): bool
