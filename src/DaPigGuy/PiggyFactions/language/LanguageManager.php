@@ -71,8 +71,8 @@ class LanguageManager
 
             $this->messages[$language] = new Config($plugin->getDataFolder() . $file);
         }
-        foreach ((new ReflectionClass(TextFormat::class))->getConstants() as $color => $code) {
-            if (is_string($code)) $this->colorTags["{" . $color . "}"] = $code;
+        foreach (TextFormat::COLORS as $color => $code) {
+            $this->colorTags["{" . $color . "}"] = $code;
         }
     }
 
