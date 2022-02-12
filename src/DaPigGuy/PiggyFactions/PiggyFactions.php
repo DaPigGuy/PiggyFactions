@@ -135,7 +135,7 @@ class PiggyFactions extends PluginBase
 
         $this->saveResource("internals.yml");
         $config = new Config($this->getDataFolder() . "internals.yml");
-        for ($i = $config->get("database-version", 0); $i < self::CURRENT_DB_VERSION; $i++) {
+        for ($i = $config->get("database-version", 4); $i < self::CURRENT_DB_VERSION; $i++) {
             $this->database->executeGeneric("piggyfactions.patches." . $i, [], null, function (): void {
             });
         }
