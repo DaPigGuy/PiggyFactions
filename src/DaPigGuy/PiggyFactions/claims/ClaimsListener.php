@@ -18,6 +18,7 @@ use pocketmine\event\player\PlayerCommandPreprocessEvent;
 use pocketmine\event\player\PlayerInteractEvent;
 use pocketmine\event\player\PlayerMoveEvent;
 use pocketmine\player\Player;
+use pocketmine\world\format\Chunk;
 use pocketmine\world\Position;
 
 class ClaimsListener implements Listener
@@ -35,12 +36,12 @@ class ClaimsListener implements Listener
 
     public function onBreak(BlockBreakEvent $event): void
     {
-        if (!$this->canAffectArea($event->getPlayer(), $event->getBlock()->getPos())) $event->cancel();
+        if (!$this->canAffectArea($event->getPlayer(), $event->getBlock()->getPosition())) $event->cancel();
     }
 
     public function onPlace(BlockPlaceEvent $event): void
     {
-        if (!$this->canAffectArea($event->getPlayer(), $event->getBlock()->getPos())) $event->cancel();
+        if (!$this->canAffectArea($event->getPlayer(), $event->getBlock()->getPosition())) $event->cancel();
     }
 
     public function onCommandPreprocess(PlayerCommandPreprocessEvent $event): void
@@ -66,8 +67,8 @@ class ClaimsListener implements Listener
 
     public function onInteract(PlayerInteractEvent $event): void
     {
-        $tile = $event->getBlock()->getPos()->getWorld()->getTile($event->getBlock()->getPos());
-        if (!$this->canAffectArea($event->getPlayer(), $event->getBlock()->getPos(), $tile instanceof Container ? FactionPermission::CONTAINERS : FactionPermission::INTERACT)) $event->cancel();
+        $tile = $event->getBlock()->getPosition()->getWorld()->getTile($event->getBlock()->getPosition());
+        if (!$this->canAffectArea($event->getPlayer(), $event->getBlock()->getPosition(), $tile instanceof Container ? FactionPermission::CONTAINERS : FactionPermission::INTERACT)) $event->cancel();
     }
 
     public function onMove(PlayerMoveEvent $event): void
@@ -95,10 +96,12 @@ class ClaimsListener implements Listener
                             }
                         }
                         if ($newClaim === null) {
-                            $ev = new ClaimChunkEvent($faction, $member, ($newChunk = $player->getWorld()->getChunkAtPosition($event->getTo()))->getX(), $newChunk->getZ());
+                            $newChunkX = $event->getTo()->getFloorX() >> Chunk::COORD_BIT_SIZE;
+                            $newChunkZ = $event->getTo()->getFloorZ() >> Chunk::COORD_BIT_SIZE;
+                            $ev = new ClaimChunkEvent($faction, $member, $newChunkX, $newChunkZ);
                             $ev->call();
                             if (!$ev->isCancelled()) {
-                                $newClaim = $this->manager->createClaim($faction, $player->getWorld(), $newChunk->getX(), $newChunk->getZ());
+                                $newClaim = $this->manager->createClaim($faction, $player->getWorld(), $newChunkX, $newChunkZ);
                                 $member->sendMessage("commands.claim.success");
                             }
                         } else {
