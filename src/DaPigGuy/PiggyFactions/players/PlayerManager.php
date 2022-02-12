@@ -13,14 +13,11 @@ use Ramsey\Uuid\UuidInterface;
 
 class PlayerManager
 {
-    /** @var PiggyFactions */
-    private $plugin;
-
-    /** @var self */
-    private static $instance;
+    private PiggyFactions $plugin;
+    private static PlayerManager $instance;
 
     /** @var FactionsPlayer[] */
-    private $players = [];
+    private array $players = [];
 
     public function __construct(PiggyFactions $plugin)
     {

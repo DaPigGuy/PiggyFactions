@@ -15,11 +15,9 @@ class HelpSubCommand extends FactionSubCommand
 {
     const COMMANDS_PER_PAGE = 7;
 
-    /** @var FactionCommand */
-    private $parentCommand;
+    private FactionCommand $parentCommand;
 
-    /** @var bool */
-    protected $requiresPlayer = false;
+    protected bool $requiresPlayer = false;
 
     public function __construct(PiggyFactions $plugin, FactionCommand $parentCommand, string $name, string $description = "", array $aliases = [])
     {

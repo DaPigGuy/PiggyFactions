@@ -11,13 +11,10 @@ use pocketmine\event\Cancellable;
 
 class FactionRoleChangeEvent extends FactionMemberEvent implements Cancellable
 {
-    /** @var FactionsPlayer */
-    private $changedBy;
+    private FactionsPlayer $changedBy;
 
-    /** @var string|null */
-    private $oldRole;
-    /** @var string|null */
-    private $newRole;
+    private ?string $oldRole;
+    private ?string $newRole;
 
     public function __construct(Faction $faction, FactionsPlayer $member, FactionsPlayer $changedBy, ?string $oldRole, ?string $newRole)
     {

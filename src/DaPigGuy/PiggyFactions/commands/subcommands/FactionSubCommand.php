@@ -17,25 +17,19 @@ use DaPigGuy\PiggyFactions\players\FactionsPlayer;
 use DaPigGuy\PiggyFactions\utils\PiggyArgument;
 use jojoe77777\FormAPI\CustomForm;
 use pocketmine\command\CommandSender;
-use pocketmine\permission\PermissibleDelegateTrait;
 use pocketmine\player\Player;
 use pocketmine\utils\TextFormat;
 
 abstract class FactionSubCommand extends BaseSubCommand
 {
-    use PermissibleDelegateTrait;
-
     /** @var PiggyFactions */
     protected $plugin;
-    /** @var bool */
-    protected $requiresPlayer = true;
-    /** @var bool */
-    protected $requiresFaction = true;
-    /** @var bool */
-    protected $factionPermission = true;
 
-    /** @var ?string */
-    protected $parentNode = null;
+    protected bool $requiresPlayer = true;
+    protected bool $requiresFaction = true;
+    protected bool $factionPermission = true;
+
+    protected ?string $parentNode = null;
 
     public function __construct(PiggyFactions $plugin, string $name, string $description = "", array $aliases = [])
     {

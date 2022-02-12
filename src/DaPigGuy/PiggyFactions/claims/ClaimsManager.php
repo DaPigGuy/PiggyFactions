@@ -11,14 +11,11 @@ use pocketmine\world\World;
 
 class ClaimsManager
 {
-    /** @var PiggyFactions */
-    private $plugin;
-
-    /** @var ClaimsManager */
-    private static $instance;
+    private PiggyFactions $plugin;
+    private static ClaimsManager $instance;
 
     /** @var Claim[] */
-    private $claims = [];
+    private array $claims = [];
 
     public function __construct(PiggyFactions $plugin)
     {

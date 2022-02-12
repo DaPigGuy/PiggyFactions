@@ -11,18 +11,15 @@ use DaPigGuy\PiggyFactions\permissions\PermissionFactory;
 use DaPigGuy\PiggyFactions\PiggyFactions;
 use pocketmine\world\Position;
 use Ramsey\Uuid\Uuid;
-use Ramsey\Uuid\UuidInterface;
 
 class FactionsManager
 {
-    /** @var PiggyFactions */
-    private $plugin;
+    private PiggyFactions $plugin;
 
-    /** @var self */
-    private static $instance;
+    private static FactionsManager $instance;
 
     /** @var Faction[] */
-    private $factions = [];
+    private array $factions = [];
 
     public function __construct(PiggyFactions $plugin)
     {

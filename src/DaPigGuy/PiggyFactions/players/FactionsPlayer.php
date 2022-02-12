@@ -15,36 +15,23 @@ use Ramsey\Uuid\UuidInterface;
 
 class FactionsPlayer
 {
-    /** @var UuidInterface */
-    private $uuid;
-    /** @var string */
-    private $username;
-    /** @var ?string */
-    private $faction;
-    /** @var ?string */
-    private $role;
-    /** @var float */
-    private $power;
-    /** @var float */
-    private $powerboost;
+    private UuidInterface $uuid;
+    private string $username;
+    private ?string $faction;
+    private ?string $role;
+    private float $power;
+    private float $powerboost;
 
-    /** @var string */
-    private $language;
+    private string $language;
 
-    /** @var bool */
-    private $canSeeChunks = false;
-    /** @var bool */
-    private $isAutoClaiming = false;
-    /** @var bool */
-    private $isAutoUnclaiming = false;
-    /** @var bool */
-    private $flying = false;
+    private bool $canSeeChunks = false;
+    private bool $isAutoClaiming = false;
+    private bool $isAutoUnclaiming = false;
+    private bool $flying = false;
 
-    /** @var string */
-    private $chat = ChatTypes::ALL;
+    private string $chat = ChatTypes::ALL;
 
-    /** @var bool */
-    private $adminMode = false;
+    private bool $adminMode = false;
 
     public function __construct(UuidInterface $uuid, string $username, ?string $faction, ?string $role, float $power, float $powerboost, string $language)
     {

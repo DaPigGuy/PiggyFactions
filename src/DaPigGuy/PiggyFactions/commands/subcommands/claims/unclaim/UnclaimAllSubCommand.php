@@ -12,8 +12,7 @@ use pocketmine\player\Player;
 
 class UnclaimAllSubCommand extends FactionSubCommand
 {
-    /** @var string */
-    protected $parentNode = "unclaim";
+    protected ?string $parentNode = "unclaim";
 
     public function onNormalRun(Player $sender, ?Faction $faction, FactionsPlayer $member, string $aliasUsed, array $args): void
     {

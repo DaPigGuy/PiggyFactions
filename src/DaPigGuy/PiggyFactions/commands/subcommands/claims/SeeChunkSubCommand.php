@@ -11,8 +11,7 @@ use pocketmine\player\Player;
 
 class SeeChunkSubCommand extends FactionSubCommand
 {
-    /** @var bool */
-    protected $requiresFaction = false;
+    protected bool $requiresFaction = false;
 
     public function onNormalRun(Player $sender, ?Faction $faction, FactionsPlayer $member, string $aliasUsed, array $args): void
     {

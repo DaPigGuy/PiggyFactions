@@ -14,7 +14,6 @@ use pocketmine\player\Player;
 
 class DemoteSubCommand extends FactionSubCommand
 {
-
     public function onNormalRun(Player $sender, ?Faction $faction, FactionsPlayer $member, string $aliasUsed, array $args): void
     {
         $targetMember = $faction->getMember($args["name"]);

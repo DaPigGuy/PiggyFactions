@@ -13,8 +13,7 @@ use pocketmine\player\Player;
 
 abstract class ClaimMultipleSubCommand extends FactionSubCommand
 {
-    /** @var string */
-    protected $parentNode = "claim";
+    protected ?string $parentNode = "claim";
 
     public function onNormalRun(Player $sender, ?Faction $faction, FactionsPlayer $member, string $aliasUsed, array $args): void
     {

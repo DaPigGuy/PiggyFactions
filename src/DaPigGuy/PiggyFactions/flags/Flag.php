@@ -13,12 +13,9 @@ class Flag implements JsonSerializable
     const WARZONE = "warzone";
     const SAFEZONE = "safezone";
 
-    /** @var string */
-    private $name;
-    /** @var bool */
-    private $editable;
-    /** @var bool */
-    private $value;
+    private string $name;
+    private bool $editable;
+    private bool $value;
 
     public function __construct(string $name, bool $editable, bool $value)
     {

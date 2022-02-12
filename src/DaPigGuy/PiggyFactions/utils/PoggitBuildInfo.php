@@ -9,16 +9,11 @@ use pocketmine\plugin\Plugin;
 
 class PoggitBuildInfo
 {
-    /** @var bool */
-    private $runningFromSource = false;
-    /** @var bool */
-    private $runningPhar = false;
-    /** @var bool */
-    private $runningPoggitPhar = false;
-    /** @var bool */
-    private $isPoggitRelease = false;
-    /** @var array */
-    private $poggitPharMetadata;
+    private bool $runningFromSource = false;
+    private bool $runningPhar = false;
+    private bool $runningPoggitPhar = false;
+    private bool $isPoggitRelease = false;
+    private array $poggitPharMetadata;
 
     public function __construct(Plugin $plugin, string $file, bool $isPhar)
     {

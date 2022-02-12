@@ -17,8 +17,7 @@ class TopSubCommand extends FactionSubCommand
 {
     const PAGE_LENGTH = 10;
 
-    /** @var bool */
-    protected $requiresPlayer = false;
+    protected bool $requiresPlayer = false;
 
     public function onBasicRun(CommandSender $sender, array $args): void
     {

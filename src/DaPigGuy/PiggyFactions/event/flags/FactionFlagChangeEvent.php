@@ -11,10 +11,8 @@ use pocketmine\event\Cancellable;
 
 class FactionFlagChangeEvent extends FactionMemberEvent implements Cancellable
 {
-    /** @var string */
-    private $flag;
-    /** @var bool */
-    private $value;
+    private string $flag;
+    private bool $value;
 
     public function __construct(Faction $faction, FactionsPlayer $member, string $flag, bool $value)
     {

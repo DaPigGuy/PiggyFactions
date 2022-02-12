@@ -38,19 +38,14 @@ class LanguageManager
         "zh_TW" => "chinese_traditional"
     ];
 
-    /** @var self */
-    private static $instance;
+    private static LanguageManager $instance;
+    private PiggyFactions $plugin;
 
-    /** @var PiggyFactions */
-    private $plugin;
-
-    /** @var string */
-    private $defaultLanguage;
+    private string $defaultLanguage;
 
     /** @var Config[] */
-    private $messages;
-    /** @var array */
-    private $colorTags;
+    private array $messages;
+    private array $colorTags;
 
     public function __construct(PiggyFactions $plugin)
     {

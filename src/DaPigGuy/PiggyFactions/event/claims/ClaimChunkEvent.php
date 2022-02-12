@@ -11,10 +11,8 @@ use pocketmine\event\Cancellable;
 
 class ClaimChunkEvent extends FactionMemberEvent implements Cancellable
 {
-    /** @var int */
-    private $chunkX;
-    /** @var int */
-    private $chunkZ;
+    private int $chunkX;
+    private int $chunkZ;
 
     public function __construct(Faction $faction, FactionsPlayer $member, int $chunkX, int $chunkZ)
     {

@@ -12,8 +12,7 @@ use pocketmine\player\Player;
 
 class ChatSubCommand extends FactionSubCommand
 {
-    /** @var string */
-    private $chat;
+    private string $chat;
 
     public function __construct(PiggyFactions $plugin, string $chat, string $name, string $description = "", array $aliases = [])
     {

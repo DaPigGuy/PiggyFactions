@@ -13,11 +13,8 @@ use pocketmine\player\Player;
 
 class LogsManager
 {
-    /** @var PiggyFactions */
-    private $plugin;
-
-    /** @var LogsManager */
-    private static $instance;
+    private PiggyFactions $plugin;
+    private static LogsManager $instance;
 
     public function __construct(PiggyFactions $plugin)
     {
@@ -123,23 +120,15 @@ class LogsManager
 
     private function parseMessageFromAction(string $action, array $data, string $language): string
     {
-        switch ($action) {
-            case FactionLog::KICK:
-                return LanguageManager::getInstance()->getMessage($language, "logs.actions.kick", ["{KICKED}" => $data["kicked"], "{KICKER}" => $data["kicker"]]);
-            case FactionLog::BAN:
-                return LanguageManager::getInstance()->getMessage($language, "logs.actions.ban", ["{BANNED}" => $data["banned"], "{BANNEDBY}" => $data["bannedBy"]]);
-            case FactionLog::UNBAN:
-                return LanguageManager::getInstance()->getMessage($language, "logs.actions.unban", ["{UNBANNED}" => $data["unbanned"], "{UNBANNEDBY}" => $data["unbannedBy"]]);
-            case FactionLog::INVITE:
-                return LanguageManager::getInstance()->getMessage($language, "logs.actions.invite", ["{INVITED}" => $data["invited"], "{INVITEDBY}" => $data["invitedBy"]]);
-            case FactionLog::LEADER_CHANGE:
-                return LanguageManager::getInstance()->getMessage($language, "logs.actions.leader_change", ["{NEW}" => $data["new"], "{OLD}" => $data["old"]]);
-            case FactionLog::JOIN:
-                return LanguageManager::getInstance()->getMessage($language, "logs.actions.join", ["{JOINED}" => $data["joined"]]);
-            case FactionLog::LEAVE:
-                return LanguageManager::getInstance()->getMessage($language, "logs.actions.leave", ["{LEFT}" => $data["left"]]);
-            default:
-                return "";
-        }
+        return match ($action) {
+            FactionLog::KICK => LanguageManager::getInstance()->getMessage($language, "logs.actions.kick", ["{KICKED}" => $data["kicked"], "{KICKER}" => $data["kicker"]]),
+            FactionLog::BAN => LanguageManager::getInstance()->getMessage($language, "logs.actions.ban", ["{BANNED}" => $data["banned"], "{BANNEDBY}" => $data["bannedBy"]]),
+            FactionLog::UNBAN => LanguageManager::getInstance()->getMessage($language, "logs.actions.unban", ["{UNBANNED}" => $data["unbanned"], "{UNBANNEDBY}" => $data["unbannedBy"]]),
+            FactionLog::INVITE => LanguageManager::getInstance()->getMessage($language, "logs.actions.invite", ["{INVITED}" => $data["invited"], "{INVITEDBY}" => $data["invitedBy"]]),
+            FactionLog::LEADER_CHANGE => LanguageManager::getInstance()->getMessage($language, "logs.actions.leader_change", ["{NEW}" => $data["new"], "{OLD}" => $data["old"]]),
+            FactionLog::JOIN => LanguageManager::getInstance()->getMessage($language, "logs.actions.join", ["{JOINED}" => $data["joined"]]),
+            FactionLog::LEAVE => LanguageManager::getInstance()->getMessage($language, "logs.actions.leave", ["{LEFT}" => $data["left"]]),
+            default => "",
+        };
     }
 }

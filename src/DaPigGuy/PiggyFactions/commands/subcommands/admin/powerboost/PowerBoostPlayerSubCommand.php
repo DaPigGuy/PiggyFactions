@@ -11,10 +11,8 @@ use pocketmine\command\CommandSender;
 
 class PowerBoostPlayerSubCommand extends FactionSubCommand
 {
-    /** @var bool */
-    protected $requiresPlayer = false;
-    /** @var string */
-    protected $parentNode = "powerboost";
+    protected bool $requiresPlayer = false;
+    protected ?string $parentNode = "powerboost";
 
     public function onBasicRun(CommandSender $sender, array $args): void
     {

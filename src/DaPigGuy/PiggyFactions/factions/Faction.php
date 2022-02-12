@@ -22,41 +22,31 @@ use Ramsey\Uuid\UuidInterface;
 
 class Faction
 {
-    /** @var string */
-    private $id;
-    /** @var string */
-    private $name;
-    /** @var int */
-    private $creationTime;
-    /** @var ?string */
-    private $description;
-    /** @var ?string */
-    private $motd;
+    private string $id;
+    private string $name;
+    private int $creationTime;
+    private ?string $description;
+    private ?string $motd;
+
     /** @var UuidInterface[] */
-    private $members;
+    private array $members;
     /** @var FactionPermission[] */
-    private $permissions;
+    private array $permissions;
     /** @var Flag[] */
-    private $flags;
-    /** @var ?Position */
-    private $home;
+    private array $flags;
 
-    /** @var array */
-    private $relations;
-    /** @var array */
-    private $relationWish;
+    private ?Position $home;
 
-    /** @var array */
-    private $banned;
+    private array $relations;
+    private array $relationWish;
 
-    /** @var float */
-    private $money;
+    private array $banned;
 
-    /** @var float */
-    private $powerboost;
+    private float $money;
 
-    /** @var array */
-    private $invitedPlayers;
+    private float $powerboost;
+
+    private array $invitedPlayers;
 
     public function __construct(string $id, string $name, int $creationTime, ?string $description, ?string $motd, array $members, array $permissions, array $flags, ?Position $home, array $relations, array $banned, float $money, float $powerboost)
     {

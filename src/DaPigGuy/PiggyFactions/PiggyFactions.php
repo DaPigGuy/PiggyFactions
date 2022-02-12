@@ -38,32 +38,21 @@ class PiggyFactions extends PluginBase
 {
     const CURRENT_DB_VERSION = 4;
 
-    /** @var self */
-    private static $instance;
-    /** @var PoggitBuildInfo */
-    private $poggitBuildInfo;
+    private static PiggyFactions $instance;
+    private PoggitBuildInfo $poggitBuildInfo;
 
-    /** @var DataConnector */
-    private $database;
-    /** @var EconomyProvider */
-    private $economyProvider;
+    private DataConnector $database;
+    private EconomyProvider $economyProvider;
 
-    /** @var FactionsManager */
-    private $factionsManager;
-    /** @var ClaimsManager */
-    private $claimsManager;
-    /** @var PlayerManager */
-    private $playerManager;
+    private FactionsManager $factionsManager;
+    private ClaimsManager $claimsManager;
+    private PlayerManager $playerManager;
 
-    /** @var LanguageManager */
-    private $languageManager;
-    /** @var TagManager */
-    private $tagManager;
-    /** @var LogsManager */
-    private $logsManager;
+    private LanguageManager $languageManager;
+    private TagManager $tagManager;
+    private LogsManager $logsManager;
 
-    /** @var ScoreHudManager */
-    private $scoreHudManager;
+    private ScoreHudManager $scoreHudManager;
 
     public function onLoad(): void
     {
@@ -87,7 +76,7 @@ class PiggyFactions extends PluginBase
         }
 
         self::$instance = $this;
-        $this->poggitBuildInfo = new PoggitBuildInfo($this, $this->getFile(), strpos($this->getFile(), "phar://") === 0);
+        $this->poggitBuildInfo = new PoggitBuildInfo($this, $this->getFile(), str_starts_with($this->getFile(), "phar://"));
 
         $this->saveDefaultConfig();
         $this->initDatabase();

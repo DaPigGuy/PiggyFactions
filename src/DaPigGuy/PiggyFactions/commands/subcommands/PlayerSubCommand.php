@@ -12,8 +12,7 @@ use pocketmine\player\Player;
 
 class PlayerSubCommand extends FactionSubCommand
 {
-    /** @var bool */
-    protected $requiresPlayer = false;
+    protected bool $requiresPlayer = false;
 
     public function onBasicRun(CommandSender $sender, array $args): void
     {

@@ -12,8 +12,7 @@ abstract class FactionEvent extends Event
 {
     use CancellableTrait;
 
-    /** @var Faction */
-    private $faction;
+    private Faction $faction;
 
     public function __construct(Faction $faction)
     {
