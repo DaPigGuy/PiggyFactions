@@ -22,7 +22,7 @@ jobs:
           wget -O vendor/libasynql.phar https://poggit.pmmp.io/r/159125/libasynql_dev-174.phar
           wget -O vendor/FormAPI.phar https://poggit.pmmp.io/r/77082/FormAPI_dev-1.phar
           wget -O vendor/libPiggyEconomy.phar https://poggit.pmmp.io/r/94380/libPiggyEconomy_dev-10.phar
-          wget -O vendor/Commando.phar https://poggit.pmmp.io/r/90966/Commando_dev-2.phar
+          wget -O vendor/Commando.phar https://poggit.pmmp.io/r/94451/Commando_dev-3.phar
       - name: Run PHPStan
         uses: paroxity/pmmp-phpstan-action@4.2.0
         with:

@@ -13,6 +13,8 @@ class PowerBoostPlayerSubCommand extends FactionSubCommand
 {
     /** @var bool */
     protected $requiresPlayer = false;
+    /** @var string */
+    protected $parentNode = "powerboost";
 
     public function onBasicRun(CommandSender $sender, array $args): void
     {

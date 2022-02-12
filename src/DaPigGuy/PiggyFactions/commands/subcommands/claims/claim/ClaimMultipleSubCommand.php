@@ -13,6 +13,9 @@ use pocketmine\player\Player;
 
 abstract class ClaimMultipleSubCommand extends FactionSubCommand
 {
+    /** @var string */
+    protected $parentNode = "claim";
+
     public function onNormalRun(Player $sender, ?Faction $faction, FactionsPlayer $member, string $aliasUsed, array $args): void
     {
         if (in_array($sender->getWorld()->getFolderName(), $this->plugin->getConfig()->getNested("factions.claims.blacklisted-worlds"))) {

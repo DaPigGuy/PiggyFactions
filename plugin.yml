@@ -39,6 +39,15 @@ permissions:
   piggyfactions.command.faction.claim:
     default: true
     description: Allow usage of /f claim
+  piggyfactions.command.faction.claim.auto:
+    default: true
+    description: Allow usage of /f claim auto
+  piggyfactions.command.faction.claim.circle:
+    default: true
+    description: Allow usage of /f claim circle
+  piggyfactions.command.faction.claim.square:
+    default: true
+    description: Allow usage of /f claim square
   piggyfactions.command.faction.create:
     default: true
     description: Allow usage of /f create
@@ -120,6 +129,12 @@ permissions:
   piggyfactions.command.faction.powerboost:
     default: op
     description: Allow usage of /f powerboost
+  piggyfactions.command.faction.powerboost.faction:
+    default: op
+    description: Allow usage of /f powerboost faction
+  piggyfactions.command.faction.powerboost.player:
+    default: op
+    description: Allow usage of /f powerboost player
   piggyfactions.command.faction.promote:
     default: true
     description: Allow usage of /f promote
@@ -147,6 +162,21 @@ permissions:
   piggyfactions.command.faction.unclaim:
     default: true
     description: Allow usage of /f unclaim
+  piggyfactions.command.faction.unclaim.all:
+    default: true
+    description: Allow usage of /f unclaim all
+  piggyfactions.command.faction.unclaim.auto:
+    default: true
+    description: Allow usage of /f unclaim auto
+  piggyfactions.command.faction.unclaim.circle:
+    default: true
+    description: Allow usage of /f unclaim circle
+  piggyfactions.command.faction.unclaim.square:
+    default: true
+    description: Allow usage of /f unclaim square
+  piggyfactions.command.faction.unsethome:
+    default: true
+    description: Allow usage of /f unsethome
   piggyfactions.command.faction.version:
     default: true
     description: Allow usage of /f version

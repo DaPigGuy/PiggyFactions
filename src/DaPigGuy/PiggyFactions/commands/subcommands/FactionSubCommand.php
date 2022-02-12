@@ -17,14 +17,14 @@ use DaPigGuy\PiggyFactions\players\FactionsPlayer;
 use DaPigGuy\PiggyFactions\utils\PiggyArgument;
 use jojoe77777\FormAPI\CustomForm;
 use pocketmine\command\CommandSender;
-use pocketmine\permission\DefaultPermissions;
-use pocketmine\permission\Permission;
-use pocketmine\permission\PermissionManager;
+use pocketmine\permission\PermissibleDelegateTrait;
 use pocketmine\player\Player;
 use pocketmine\utils\TextFormat;
 
 abstract class FactionSubCommand extends BaseSubCommand
 {
+    use PermissibleDelegateTrait;
+
     /** @var PiggyFactions */
     protected $plugin;
     /** @var bool */
@@ -34,16 +34,14 @@ abstract class FactionSubCommand extends BaseSubCommand
     /** @var bool */
     protected $factionPermission = true;
 
+    /** @var ?string */
+    protected $parentNode = null;
+
     public function __construct(PiggyFactions $plugin, string $name, string $description = "", array $aliases = [])
     {
-        if ($this->parent) {
-            $permissionPrefix = "piggyfactions.command.faction." . $this->parent->getName();
-            PermissionManager::getInstance()->addPermission(new Permission($permissionPrefix . "." . $name, $description, [$permissionPrefix, true]));
-            $this->setPermission($permissionPrefix . "." . $name);
-        } else {
-            $this->setPermission("piggyfactions.command.faction." . $name);
-        }
-
+        $permissionPrefix = "piggyfactions.command.faction.";
+        if ($this->parentNode !== null) $permissionPrefix = $permissionPrefix . $this->parentNode . ".";
+        $this->setPermission($permissionPrefix . $name);
         parent::__construct($plugin, $name, $description, $aliases);
     }
 

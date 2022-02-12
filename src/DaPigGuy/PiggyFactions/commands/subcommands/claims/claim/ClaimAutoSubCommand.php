@@ -11,6 +11,9 @@ use pocketmine\player\Player;
 
 class ClaimAutoSubCommand extends FactionSubCommand
 {
+    /** @var string */
+    protected $parentNode = "claim";
+
     public function onNormalRun(Player $sender, ?Faction $faction, FactionsPlayer $member, string $aliasUsed, array $args): void
     {
         $member->setAutoClaiming(!$member->isAutoClaiming());
