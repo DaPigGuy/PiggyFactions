@@ -15,7 +15,7 @@ class InviteSubCommand extends FactionSubCommand
 {
     public function onNormalRun(Player $sender, ?Faction $faction, FactionsPlayer $member, string $aliasUsed, array $args): void
     {
-        $target = $this->plugin->getServer()->getPlayer($args["name"]);
+        $target = $this->plugin->getServer()->getPlayerExact($args["name"]);
         if (!$target instanceof Player) {
             $member->sendMessage("commands.invalid-player", ["{PLAYER}" => $args["name"]]);
             return;

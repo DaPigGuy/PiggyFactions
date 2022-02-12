@@ -105,7 +105,7 @@ class PiggyFactions extends PluginBase
         $this->getServer()->getCommandMap()->register("piggyfactions", new FactionCommand($this, "faction", "The PiggyFactions command", ["f", "factions"]));
 
         $this->getServer()->getPluginManager()->registerEvents(new EventListener($this), $this);
-        $this->getServer()->getPluginManager()->registerEvents(new LogsListener($this), $this);
+        $this->getServer()->getPluginManager()->registerEvents(new LogsListener(), $this);
 
         $this->getScheduler()->scheduleRepeatingTask(new ShowChunksTask($this), 10);
         $this->getScheduler()->scheduleRepeatingTask(new UpdatePowerTask($this), UpdatePowerTask::INTERVAL);

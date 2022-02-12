@@ -451,7 +451,7 @@ class Faction
             "name" => $this->name,
             "description" => $this->description,
             "motd" => $this->motd,
-            "members" => json_encode(array_values(array_map(function (UUID $uuid): string {
+            "members" => json_encode(array_values(array_map(function (UuidInterface $uuid): string {
                 return $uuid->toString();
             }, $this->members))),
             "permissions" => json_encode($this->permissions),

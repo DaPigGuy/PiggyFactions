@@ -28,8 +28,8 @@ abstract class FactionSubCommand extends BaseSubCommand
     protected $requiresPlayer = true;
     /** @var bool */
     protected $requiresFaction = true;
-    /** @var null */
-    protected $factionPermission = null;
+    /** @var bool */
+    protected $factionPermission = false;
 
     public function __construct(PiggyFactions $plugin, string $name, string $description = "", array $aliases = [])
     {
@@ -45,7 +45,7 @@ abstract class FactionSubCommand extends BaseSubCommand
         }
 
         $member = $sender instanceof Player ? $this->plugin->getPlayerManager()->getPlayer($sender) : null;
-        $faction = $member === null ? null : $member->getFaction();
+        $faction = $member?->getFaction();
 
         if ($this->requiresFaction && $this->requiresPlayer) {
             if ($faction === null) {
