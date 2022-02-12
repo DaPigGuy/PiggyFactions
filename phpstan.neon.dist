@@ -4,7 +4,6 @@ parameters:
   level: 7
   bootstrapFiles:
     - phar:///pocketmine/PocketMine-MP.phar/vendor/autoload.php
-    - phpstan/bootstrap.php
   scanDirectories:
     - phar:///source/vendor/PiggyCustomEnchants.phar/src/
     - phar:///source/vendor/Hierarchy.phar/src/

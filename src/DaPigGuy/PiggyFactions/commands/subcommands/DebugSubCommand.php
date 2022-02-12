@@ -10,7 +10,7 @@ use pocketmine\network\mcpe\protocol\ProtocolInfo;
 use pocketmine\plugin\Plugin;
 use pocketmine\utils\TextFormat;
 use pocketmine\utils\Utils;
-use const pocketmine\GIT_COMMIT;
+use pocketmine\VersionInfo;
 
 class DebugSubCommand extends FactionSubCommand
 {
@@ -33,7 +33,7 @@ class DebugSubCommand extends FactionSubCommand
                 "-- PMMP INFO --" . PHP_EOL .
                 "NAME: " . $plugin->getServer()->getName() . PHP_EOL .
                 "VERSION: " . $plugin->getServer()->getApiVersion() . PHP_EOL .
-                "GIT COMMIT: " . GIT_COMMIT . PHP_EOL .
+                "GIT COMMIT: " . VersionInfo::GIT_HASH() . PHP_EOL .
                 "-- MC INFO --" . PHP_EOL .
                 "VERSION: " . ProtocolInfo::MINECRAFT_VERSION_NETWORK . PHP_EOL .
                 "PROTOCOL: " . ProtocolInfo::CURRENT_PROTOCOL . PHP_EOL .
