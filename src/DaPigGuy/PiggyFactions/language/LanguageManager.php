@@ -72,7 +72,7 @@ class LanguageManager
             $this->messages[$language] = new Config($plugin->getDataFolder() . $file);
         }
         foreach ((new ReflectionClass(TextFormat::class))->getConstants() as $color => $code) {
-            $this->colorTags["{" . $color . "}"] = $code;
+            if (is_string($code)) $this->colorTags["{" . $color . "}"] = $code;
         }
     }
 
@@ -122,8 +122,6 @@ class LanguageManager
             $relation = "warzone";
         } elseif ($faction->getFlag(Flag::SAFEZONE)) {
             $relation = "safezone";
-        } elseif ($playerFaction === null) {
-            $relation = "neutral";
         } elseif ($playerFaction->getId() === $faction->getId()) {
             $relation = "member";
         } elseif ($playerFaction->isAllied($faction)) {

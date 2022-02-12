@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace DaPigGuy\PiggyFactions\commands\subcommands;
 
 use pocketmine\command\CommandSender;
-use pocketmine\command\ConsoleCommandSender;
+use pocketmine\console\ConsoleCommandSender;
 use pocketmine\network\mcpe\protocol\ProtocolInfo;
 use pocketmine\plugin\Plugin;
 use pocketmine\utils\TextFormat;
