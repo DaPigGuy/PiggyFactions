@@ -80,6 +80,7 @@ commands:
     command: "\n{GREEN}/f {COMMAND} - {RESET}{DESCRIPTION}"
   home:
     not-set: "{RED}并未设定公会家园."
+    world-not-found: "{RED}World could not be found."
   info:
     message: "{GOLD}____________.[{DARK_GREEN}Faction {FACTION}{GOLD}].____________\n{GOLD}描述: {YELLOW}{DESCRIPTION}{RESET}\n{GOLD}领地/ 力量/ 最大力量: {YELLOW} {CLAIMS}/{POWER}/{TOTALPOWER}\n{GOLD}年代: {YELLOW}{AGE}\n{GOLD}在线: {YELLOW}{ONLINECOUNT}/{TOTALPLAYERS}\n{GOLD}领袖: {YELLOW }{LEADER}\n{GOLD}关系: {RELATIONS}\n{GOLD}会员: {YELLOW}{PLAYERS}"
     description-not-set: "没有描述集"

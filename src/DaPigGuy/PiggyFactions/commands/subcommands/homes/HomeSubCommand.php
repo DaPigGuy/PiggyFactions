@@ -14,10 +14,15 @@ class HomeSubCommand extends FactionSubCommand
 {
     public function onNormalRun(Player $sender, ?Faction $faction, FactionsPlayer $member, string $aliasUsed, array $args): void
     {
-        if (($home = $faction->getHome()) === null) {
+        if (!$faction->getHomeWorld()) {
+            $member->sendMessage("commands.home.world-not-found");
+            return;
+        }
+        if (!($home = $faction->getHome())) {
             $member->sendMessage("commands.home.not-set");
             return;
         }
+
         $ev = new FactionHomeTeleportEvent($faction, $sender);
         $ev->call();
         if ($ev->isCancelled()) return;

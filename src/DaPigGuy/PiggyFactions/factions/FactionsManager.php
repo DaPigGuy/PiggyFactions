@@ -28,11 +28,13 @@ class FactionsManager
         $this->plugin = $plugin;
         $plugin->getDatabase()->executeSelect("piggyfactions.factions.load", [], function (array $rows): void {
             foreach ($rows as $row) {
+                $homeWorld = null;
                 if ($row["home"] !== null) {
                     $decodedHome = json_decode($row["home"], true);
-                    $row["home"] = new Position($decodedHome["x"], $decodedHome["y"], $decodedHome["z"], $this->plugin->getServer()->getWorldManager()->getWorldByName($decodedHome["level"]));
+                    $homeWorld = $this->plugin->getServer()->getWorldManager()->getWorldByName($decodedHome["level"]);
+                    $row["home"] = new Position($decodedHome["x"], $decodedHome["y"], $decodedHome["z"], $homeWorld);
                 }
-                $this->factions[$row["id"]] = new Faction($row["id"], $row["name"], $row["creation_time"], $row["description"], $row["motd"], json_decode($row["members"], true), json_decode($row["permissions"], true), json_decode($row["flags"], true), $row["home"], isset($row["relations"]) ? json_decode($row["relations"], true) : [], isset($row["banned"]) ? json_decode($row["banned"], true) : [], $row["money"], $row["powerboost"]);
+                $this->factions[$row["id"]] = new Faction($row["id"], $row["name"], $row["creation_time"], $row["description"], $row["motd"], json_decode($row["members"], true), json_decode($row["permissions"], true), json_decode($row["flags"], true), $row["home"], $homeWorld, isset($row["relations"]) ? json_decode($row["relations"], true) : [], isset($row["banned"]) ? json_decode($row["banned"], true) : [], $row["money"], $row["powerboost"]);
             }
             $this->plugin->getLogger()->debug("Loaded " . count($rows) . " factions");
         });

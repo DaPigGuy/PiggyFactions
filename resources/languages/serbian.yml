@@ -80,6 +80,7 @@ commands:
     command: "\n{GREEN}/f {COMMAND} - {RESET}{DESCRIPTION}"
   home:
     not-set: "{RED}Frakcijina kuća nije postavljena."
+    world-not-found: "{RED}World could not be found."
   info:
     message: "{GOLD}____________.[{DARK_GREEN}Frakcija {FACTION}{GOLD}].____________\n{GOLD}Deskripcija: {YELLOW}{DESCRIPTION}{RESET}\n{GOLD}Zemljište / Moć / Maksimalna moć: {YELLOW}{CLAIMS}/{POWER}/{TOTALPOWER}\n{GOLD}Starost: {YELLOW}{AGE}\n{GOLD}Online: {YELLOW}{ONLINECOUNT}/{TOTALPLAYERS}\n{GOLD}Lider: {YELLOW}{LEADER}\n{GOLD}Veze: {RELATIONS}\n{GOLD}Memberi: {YELLOW}{PLAYERS}"
     description-not-set: "nije postavljen opis"

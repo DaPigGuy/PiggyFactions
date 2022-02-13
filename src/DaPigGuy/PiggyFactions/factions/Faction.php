@@ -17,6 +17,7 @@ use DaPigGuy\PiggyFactions\utils\Relations;
 use DaPigGuy\PiggyFactions\utils\Roles;
 use pocketmine\player\Player;
 use pocketmine\world\Position;
+use pocketmine\world\World;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
 
@@ -36,6 +37,7 @@ class Faction
     private array $flags;
 
     private ?Position $home;
+    private ?World $homeWorld;
 
     private array $relations;
     private array $relationWish;
@@ -48,7 +50,7 @@ class Faction
 
     private array $invitedPlayers;
 
-    public function __construct(string $id, string $name, int $creationTime, ?string $description, ?string $motd, array $members, array $permissions, array $flags, ?Position $home, array $relations, array $banned, float $money, float $powerboost)
+    public function __construct(string $id, string $name, int $creationTime, ?string $description, ?string $motd, array $members, array $permissions, array $flags, ?Position $home, ?World $homeWorld, array $relations, array $banned, float $money, float $powerboost)
     {
         $this->id = $id;
         $this->name = $name;
@@ -69,6 +71,7 @@ class Faction
             $this->flags[$name] = $flag;
         }
         $this->home = $home;
+        $this->homeWorld = $homeWorld;
         $this->relations = $relations;
         $this->banned = $banned;
         $this->money = $money;
@@ -269,6 +272,11 @@ class Faction
     public function getHome(): ?Position
     {
         return $this->home;
+    }
+
+    public function getHomeWorld(): ?World
+    {
+        return $this->homeWorld;
     }
 
     public function setHome(Position $home): void
