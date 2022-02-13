@@ -117,13 +117,13 @@ class LanguageManager
             $relation = "warzone";
         } elseif ($faction->getFlag(Flag::SAFEZONE)) {
             $relation = "safezone";
-        } elseif ($playerFaction->getId() === $faction->getId()) {
+        } elseif ($playerFaction?->getId() === $faction->getId()) {
             $relation = "member";
-        } elseif ($playerFaction->isAllied($faction)) {
+        } elseif ($playerFaction?->isAllied($faction)) {
             $relation = "ally";
-        } else if ($playerFaction->isTruced($faction)) {
+        } else if ($playerFaction?->isTruced($faction)) {
             $relation = "truce";
-        } elseif ($playerFaction->isEnemy($faction)) {
+        } elseif ($playerFaction?->isEnemy($faction)) {
             $relation = "enemy";
         }
         return $this->translateColorTags($this->plugin->getConfig()->getNested("symbols.colors.relations." . $relation, ""));
