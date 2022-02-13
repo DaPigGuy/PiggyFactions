@@ -5,7 +5,7 @@ branches:
 projects:
   PiggyFactions:
     path: ""
-    icon: "https://raw.githubusercontent.com/Aericio/piggydocs-rtd/master/source/_static/img/piggyfactions/icon.png"
+    icon: "resources/PiggyFactions-icon.png"
     libs:
       - src: DaPigGuy/Commando-4.0.0/Commando
         version: ^2.1.0
