@@ -6,11 +6,13 @@ namespace DaPigGuy\PiggyFactions\event;
 
 use DaPigGuy\PiggyFactions\factions\Faction;
 use DaPigGuy\PiggyFactions\players\FactionsPlayer;
+use pocketmine\event\CancellableTrait;
 
 abstract class FactionMemberEvent extends FactionEvent
 {
-    /** @var FactionsPlayer */
-    private $member;
+    use CancellableTrait;
+
+    private FactionsPlayer $member;
 
     public function __construct(Faction $faction, FactionsPlayer $member)
     {

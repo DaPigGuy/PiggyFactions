@@ -15,12 +15,11 @@ use pocketmine\event\player\PlayerChatEvent;
 use pocketmine\event\player\PlayerDeathEvent;
 use pocketmine\event\player\PlayerJoinEvent;
 use pocketmine\event\player\PlayerRespawnEvent;
-use pocketmine\Player;
+use pocketmine\player\Player;
 
 class EventListener implements Listener
 {
-    /** @var PiggyFactions */
-    private $plugin;
+    private PiggyFactions $plugin;
 
     public function __construct(PiggyFactions $plugin)
     {
@@ -66,14 +65,14 @@ class EventListener implements Listener
         $damager = $event->getDamager();
         if ($entity instanceof Player && $damager instanceof Player) {
             if ($this->plugin->getPlayerManager()->areAlliedOrTruced($entity, $damager)) {
-                $event->setCancelled();
+                $event->cancel();
                 return;
             }
 
             $entityFaction = $this->plugin->getPlayerManager()->getPlayerFaction($entity->getUniqueId());
             $damagerFaction = $this->plugin->getPlayerManager()->getPlayerFaction($damager->getUniqueId());
             if (($entityFaction === null || $damagerFaction === null) && !$this->plugin->getConfig()->getNested("factions.pvp.factionless", true)) {
-                $event->setCancelled();
+                $event->cancel();
                 if ($damagerFaction === null) {
                     $this->plugin->getLanguageManager()->sendMessage($damager, "pvp.attacker-factionless");
                 } else {
@@ -82,21 +81,21 @@ class EventListener implements Listener
                 return;
             }
             if ($entityFaction === null && $damagerFaction === null && !$this->plugin->getConfig()->getNested("factions.pvp.between-factionless", true)) {
-                $event->setCancelled();
+                $event->cancel();
                 return;
             }
 
-            $claim = $this->plugin->getClaimsManager()->getClaimByPosition($entity);
+            $claim = $this->plugin->getClaimsManager()->getClaimByPosition($entity->getPosition());
             if ($claim !== null) {
                 if ($claim->getFaction() === $entityFaction) {
                     if ($damagerFaction === null || !$damagerFaction->isEnemy($entityFaction)) {
-                        $event->setCancelled();
+                        $event->cancel();
                         $this->plugin->getLanguageManager()->sendMessage($damager, "pvp.cant-attack-in-territory", ["{PLAYER}" => $entity->getDisplayName()]);
                         return;
                     }
                     $event->setModifier(-$this->plugin->getConfig()->getNested("factions.claims.shield-factor", 0.1), 56789);
                 } elseif ($claim->getFaction()->getFlag(Flag::SAFEZONE)) {
-                    $event->setCancelled();
+                    $event->cancel();
                 }
             }
         }

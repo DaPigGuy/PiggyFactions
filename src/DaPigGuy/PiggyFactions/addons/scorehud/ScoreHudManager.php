@@ -9,15 +9,12 @@ use DaPigGuy\PiggyFactions\players\FactionsPlayer;
 use Ifera\ScoreHud\event\PlayerTagsUpdateEvent;
 use Ifera\ScoreHud\event\PlayerTagUpdateEvent;
 use Ifera\ScoreHud\scoreboard\ScoreTag;
-use pocketmine\Player;
+use pocketmine\player\Player;
 
 class ScoreHudManager
 {
-    /** @var PiggyFactions */
-    private $plugin;
-
-    /** @var self */
-    private static $instance;
+    private PiggyFactions $plugin;
+    private static ScoreHudManager $instance;
 
     public function __construct(PiggyFactions $plugin)
     {
@@ -30,7 +27,7 @@ class ScoreHudManager
         return self::$instance;
     }
 
-    public function getPlayer(FactionsPlayer $member): ?Player
+    public function getPlayer(FactionsPlayer $member): Player
     {
         return $this->plugin->getServer()->getPlayerByUUID($member->getUuid());
     }

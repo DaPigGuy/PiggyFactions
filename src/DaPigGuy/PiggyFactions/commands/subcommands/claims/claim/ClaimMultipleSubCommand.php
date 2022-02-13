@@ -9,13 +9,15 @@ use DaPigGuy\PiggyFactions\event\claims\ChunkOverclaimEvent;
 use DaPigGuy\PiggyFactions\event\claims\ClaimChunkEvent;
 use DaPigGuy\PiggyFactions\factions\Faction;
 use DaPigGuy\PiggyFactions\players\FactionsPlayer;
-use pocketmine\Player;
+use pocketmine\player\Player;
 
 abstract class ClaimMultipleSubCommand extends FactionSubCommand
 {
+    protected ?string $parentNode = "claim";
+
     public function onNormalRun(Player $sender, ?Faction $faction, FactionsPlayer $member, string $aliasUsed, array $args): void
     {
-        if (in_array($sender->getLevel()->getFolderName(), $this->plugin->getConfig()->getNested("factions.claims.blacklisted-worlds"))) {
+        if (in_array($sender->getWorld()->getFolderName(), $this->plugin->getConfig()->getNested("factions.claims.blacklisted-worlds"))) {
             $member->sendMessage("commands.claim.blacklisted-world");
             return;
         }
@@ -31,7 +33,7 @@ abstract class ClaimMultipleSubCommand extends FactionSubCommand
                     break;
                 }
             }
-            $claim = $this->plugin->getClaimsManager()->getClaim($chunk[0], $chunk[1], $sender->getLevel()->getFolderName());
+            $claim = $this->plugin->getClaimsManager()->getClaim($chunk[0], $chunk[1], $sender->getWorld()->getFolderName());
             if ($claim !== null) {
                 if (($claim->canBeOverClaimed() || $member->isInAdminMode()) && $claim->getFaction() !== $faction) {
                     $ev = new ChunkOverclaimEvent($faction, $member, $claim);
@@ -48,7 +50,7 @@ abstract class ClaimMultipleSubCommand extends FactionSubCommand
             $ev->call();
             if ($ev->isCancelled()) continue;
 
-            $this->plugin->getClaimsManager()->createClaim($faction, $sender->getLevel(), $chunk[0], $chunk[1]);
+            $this->plugin->getClaimsManager()->createClaim($faction, $sender->getWorld(), $chunk[0], $chunk[1]);
             $claimed++;
         }
         $member->sendMessage("commands.claim.claimed-multiple", ["{AMOUNT}" => $claimed, "{COMMAND}" => $this->getName()]);

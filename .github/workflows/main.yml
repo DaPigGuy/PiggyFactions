@@ -1,12 +1,6 @@
 name: PHPStan
 
-on:
-  push:
-    branches:
-      - master
-  pull_request:
-    branches:
-      - master
+on: [push, pull_request]
 
 jobs:
   phpstan:
@@ -19,17 +13,17 @@ jobs:
         run: mkdir vendor
       - name: Download Plugin Dependencies
         run: |
-          wget -O vendor/PiggyCustomEnchants.phar https://poggit.pmmp.io/r/94058/PiggyCustomEnchants.phar
+          wget -O vendor/PiggyCustomEnchants.phar https://poggit.pmmp.io/r/94443/PiggyCustomEnchants_dev-468.phar
           wget -O vendor/HRKChat.phar https://poggit.pmmp.io/r/80529/HRKChat_dev-31.phar
           wget -O vendor/Hierarchy.phar https://poggit.pmmp.io/r/81611/Hierarchy_dev-81.phar
-          wget -O vendor/ScoreHud.phar https://poggit.pmmp.io/r/134708/ScoreHud_dev-70.phar
+          wget -O vendor/ScoreHud.phar https://poggit.pmmp.io/r/161570/ScoreHud_dev-71.phar
       - name: Download Virion Dependencies
         run: |
-          wget -O vendor/libasynql.phar https://poggit.pmmp.io/r/108791/libasynql.phar
-          wget -O vendor/FormAPI.phar https://poggit.pmmp.io/r/54589/FormApi_dev-9.phar
-          wget -O vendor/libPiggyEconomy.phar https://poggit.pmmp.io/r/78540/libPiggyEconomy_dev-7.phar
-          wget -O vendor/Commando.phar https://poggit.pmmp.io/r/120160/Commando_dev-24.phar
+          wget -O vendor/libasynql.phar https://poggit.pmmp.io/r/159125/libasynql_dev-174.phar
+          wget -O vendor/FormAPI.phar https://poggit.pmmp.io/r/77082/FormAPI_dev-1.phar
+          wget -O vendor/libPiggyEconomy.phar https://poggit.pmmp.io/r/94380/libPiggyEconomy_dev-10.phar
+          wget -O vendor/Commando.phar https://poggit.pmmp.io/r/94451/Commando_dev-3.phar
       - name: Run PHPStan
-        uses: paroxity/pmmp-phpstan-action@3.22.1
+        uses: paroxity/pmmp-phpstan-action@4.2.0
         with:
           phpstan-config: phpstan.neon.dist

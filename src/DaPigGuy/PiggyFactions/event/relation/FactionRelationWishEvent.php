@@ -10,10 +10,8 @@ use pocketmine\event\Cancellable;
 
 class FactionRelationWishEvent extends FactionEvent implements Cancellable
 {
-    /** @var Faction */
-    private $target;
-    /** @var string */
-    private $wish;
+    private Faction $target;
+    private string $wish;
 
     public function __construct(Faction $faction, Faction $target, string $wish)
     {

@@ -5,17 +5,16 @@ declare(strict_types=1);
 namespace DaPigGuy\PiggyFactions\commands\subcommands;
 
 use pocketmine\command\CommandSender;
-use pocketmine\command\ConsoleCommandSender;
+use pocketmine\console\ConsoleCommandSender;
 use pocketmine\network\mcpe\protocol\ProtocolInfo;
 use pocketmine\plugin\Plugin;
 use pocketmine\utils\TextFormat;
 use pocketmine\utils\Utils;
-use const pocketmine\GIT_COMMIT;
+use pocketmine\VersionInfo;
 
 class DebugSubCommand extends FactionSubCommand
 {
-    /** @var bool */
-    protected $requiresPlayer = false;
+    protected bool $requiresPlayer = false;
 
     public function onBasicRun(CommandSender $sender, array $args): void
     {
@@ -33,13 +32,13 @@ class DebugSubCommand extends FactionSubCommand
                 "-- PMMP INFO --" . PHP_EOL .
                 "NAME: " . $plugin->getServer()->getName() . PHP_EOL .
                 "VERSION: " . $plugin->getServer()->getApiVersion() . PHP_EOL .
-                "GIT COMMIT: " . GIT_COMMIT . PHP_EOL .
+                "GIT COMMIT: " . VersionInfo::GIT_HASH() . PHP_EOL .
                 "-- MC INFO --" . PHP_EOL .
                 "VERSION: " . ProtocolInfo::MINECRAFT_VERSION_NETWORK . PHP_EOL .
                 "PROTOCOL: " . ProtocolInfo::CURRENT_PROTOCOL . PHP_EOL .
                 "-- SYSTEM INFO --" . PHP_EOL .
                 "OS TYPE: " . PHP_OS . ", " . Utils::getOS() . PHP_EOL .
-                "OS VERSION: " . php_uname("v") . PHP_EOL .
+                "OS VERSION: " . php_uname("r") . PHP_EOL .
                 "PHP VERSION: " . PHP_VERSION . PHP_EOL .
                 "-- PLUGINS --" . PHP_EOL .
                 implode(", ", array_map(function (Plugin $plugin): string {

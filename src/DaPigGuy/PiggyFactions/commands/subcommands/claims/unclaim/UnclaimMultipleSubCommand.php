@@ -8,13 +8,15 @@ use DaPigGuy\PiggyFactions\commands\subcommands\FactionSubCommand;
 use DaPigGuy\PiggyFactions\event\claims\UnclaimChunkEvent;
 use DaPigGuy\PiggyFactions\factions\Faction;
 use DaPigGuy\PiggyFactions\players\FactionsPlayer;
-use pocketmine\Player;
+use pocketmine\player\Player;
 
 abstract class UnclaimMultipleSubCommand extends FactionSubCommand
 {
+    protected ?string $parentNode = "unclaim";
+
     public function onNormalRun(Player $sender, ?Faction $faction, FactionsPlayer $member, string $aliasUsed, array $args): void
     {
-        if (in_array($sender->getLevel()->getFolderName(), $this->plugin->getConfig()->getNested("factions.claims.blacklisted-worlds"))) {
+        if (in_array($sender->getWorld()->getFolderName(), $this->plugin->getConfig()->getNested("factions.claims.blacklisted-worlds"))) {
             $member->sendMessage("commands.unclaim.blacklisted-world");
             return;
         }
@@ -22,7 +24,7 @@ abstract class UnclaimMultipleSubCommand extends FactionSubCommand
         $chunks = $this->getChunks($sender, $args);
         if (empty($chunks)) return;
         foreach ($chunks as $chunk) {
-            $claim = $this->plugin->getClaimsManager()->getClaim($chunk[0], $chunk[1], $sender->getLevel()->getFolderName());
+            $claim = $this->plugin->getClaimsManager()->getClaim($chunk[0], $chunk[1], $sender->getWorld()->getFolderName());
             if ($claim !== null) {
                 if ($claim->getFaction() === $faction || $member->isInAdminMode()) {
                     $ev = new UnclaimChunkEvent($faction, $member, $claim);

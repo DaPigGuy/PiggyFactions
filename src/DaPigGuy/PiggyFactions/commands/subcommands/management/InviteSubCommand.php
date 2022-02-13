@@ -9,13 +9,13 @@ use DaPigGuy\PiggyFactions\commands\subcommands\FactionSubCommand;
 use DaPigGuy\PiggyFactions\event\management\FactionInviteEvent;
 use DaPigGuy\PiggyFactions\factions\Faction;
 use DaPigGuy\PiggyFactions\players\FactionsPlayer;
-use pocketmine\Player;
+use pocketmine\player\Player;
 
 class InviteSubCommand extends FactionSubCommand
 {
     public function onNormalRun(Player $sender, ?Faction $faction, FactionsPlayer $member, string $aliasUsed, array $args): void
     {
-        $target = $this->plugin->getServer()->getPlayer($args["name"]);
+        $target = $this->plugin->getServer()->getPlayerExact($args["name"]);
         if (!$target instanceof Player) {
             $member->sendMessage("commands.invalid-player", ["{PLAYER}" => $args["name"]]);
             return;

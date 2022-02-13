@@ -11,19 +11,10 @@ use DaPigGuy\PiggyFactions\event\management\FactionUnbanEvent;
 use DaPigGuy\PiggyFactions\event\member\FactionJoinEvent;
 use DaPigGuy\PiggyFactions\event\member\FactionLeaveEvent;
 use DaPigGuy\PiggyFactions\event\role\FactionLeadershipTransferEvent;
-use DaPigGuy\PiggyFactions\PiggyFactions;
 use pocketmine\event\Listener;
 
 class LogsListener implements Listener
 {
-    /** @var PiggyFactions */
-    private $plugin;
-
-    public function __construct(PiggyFactions $plugin)
-    {
-        $this->plugin = $plugin;
-    }
-
     /**
      * @priority MONITOR
      */

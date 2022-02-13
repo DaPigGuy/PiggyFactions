@@ -9,8 +9,7 @@ use pocketmine\command\CommandSender;
 
 class PowerBoostSubCommand extends FactionSubCommand
 {
-    /** @var bool */
-    protected $requiresPlayer = false;
+    protected bool $requiresPlayer = false;
 
     public function onBasicRun(CommandSender $sender, array $args): void
     {

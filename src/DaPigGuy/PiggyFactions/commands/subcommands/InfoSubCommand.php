@@ -10,12 +10,11 @@ use DaPigGuy\PiggyFactions\utils\FormattedTime;
 use DaPigGuy\PiggyFactions\utils\Roles;
 use DaPigGuy\PiggyFactions\utils\RoundValue;
 use pocketmine\command\CommandSender;
-use pocketmine\Player;
+use pocketmine\player\Player;
 
 class InfoSubCommand extends FactionSubCommand
 {
-    /** @var bool */
-    protected $requiresPlayer = false;
+    protected bool $requiresPlayer = false;
 
     public function onBasicRun(CommandSender $sender, array $args): void
     {

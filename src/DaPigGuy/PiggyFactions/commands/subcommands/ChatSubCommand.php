@@ -8,12 +8,11 @@ use DaPigGuy\PiggyFactions\factions\Faction;
 use DaPigGuy\PiggyFactions\PiggyFactions;
 use DaPigGuy\PiggyFactions\players\FactionsPlayer;
 use DaPigGuy\PiggyFactions\utils\ChatTypes;
-use pocketmine\Player;
+use pocketmine\player\Player;
 
 class ChatSubCommand extends FactionSubCommand
 {
-    /** @var string */
-    private $chat;
+    private string $chat;
 
     public function __construct(PiggyFactions $plugin, string $chat, string $name, string $description = "", array $aliases = [])
     {

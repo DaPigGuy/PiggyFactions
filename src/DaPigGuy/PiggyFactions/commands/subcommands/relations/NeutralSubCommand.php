@@ -10,7 +10,7 @@ use DaPigGuy\PiggyFactions\event\relation\FactionRelationEvent;
 use DaPigGuy\PiggyFactions\factions\Faction;
 use DaPigGuy\PiggyFactions\players\FactionsPlayer;
 use DaPigGuy\PiggyFactions\utils\Relations;
-use pocketmine\Player;
+use pocketmine\player\Player;
 
 class NeutralSubCommand extends FactionSubCommand
 {

@@ -8,18 +8,14 @@ use DaPigGuy\PiggyFactions\factions\Faction;
 use DaPigGuy\PiggyFactions\factions\FactionsManager;
 use DaPigGuy\PiggyFactions\flags\Flag;
 use DaPigGuy\PiggyFactions\PiggyFactions;
-use pocketmine\level\Level;
+use pocketmine\world\World;
 
 class Claim
 {
-    /** @var string */
-    private $faction;
-    /** @var int */
-    private $chunkX;
-    /** @var int */
-    private $chunkZ;
-    /** @var string */
-    private $level;
+    private string $faction;
+    private int $chunkX;
+    private int $chunkZ;
+    private string $level;
 
     public function __construct(string $faction, int $chunkX, int $chunkZ, string $level)
     {
@@ -40,9 +36,9 @@ class Claim
         PiggyFactions::getInstance()->getDatabase()->executeChange("piggyfactions.claims.update", ["chunkX" => $this->chunkX, "chunkZ" => $this->chunkZ, "level" => $this->level, "faction" => $this->faction]);
     }
 
-    public function getLevel(): ?Level
+    public function getLevel(): ?World
     {
-        return PiggyFactions::getInstance()->getServer()->getLevelByName($this->level);
+        return PiggyFactions::getInstance()->getServer()->getWorldManager()->getWorldByName($this->level);
     }
 
     public function getChunkX(): int

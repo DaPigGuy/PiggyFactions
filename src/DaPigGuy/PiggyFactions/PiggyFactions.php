@@ -28,7 +28,7 @@ use DaPigGuy\PiggyFactions\utils\PoggitBuildInfo;
 use Exception;
 use jojoe77777\FormAPI\Form;
 use pocketmine\entity\Entity;
-use pocketmine\Player;
+use pocketmine\player\Player;
 use pocketmine\plugin\PluginBase;
 use pocketmine\utils\Config;
 use poggit\libasynql\DataConnector;
@@ -38,32 +38,21 @@ class PiggyFactions extends PluginBase
 {
     const CURRENT_DB_VERSION = 4;
 
-    /** @var self */
-    private static $instance;
-    /** @var PoggitBuildInfo */
-    private $poggitBuildInfo;
+    private static PiggyFactions $instance;
+    private PoggitBuildInfo $poggitBuildInfo;
 
-    /** @var DataConnector */
-    private $database;
-    /** @var EconomyProvider */
-    private $economyProvider;
+    private DataConnector $database;
+    private ?EconomyProvider $economyProvider = null;
 
-    /** @var FactionsManager */
-    private $factionsManager;
-    /** @var ClaimsManager */
-    private $claimsManager;
-    /** @var PlayerManager */
-    private $playerManager;
+    private FactionsManager $factionsManager;
+    private ClaimsManager $claimsManager;
+    private PlayerManager $playerManager;
 
-    /** @var LanguageManager */
-    private $languageManager;
-    /** @var TagManager */
-    private $tagManager;
-    /** @var LogsManager */
-    private $logsManager;
+    private LanguageManager $languageManager;
+    private TagManager $tagManager;
+    private LogsManager $logsManager;
 
-    /** @var ScoreHudManager */
-    private $scoreHudManager;
+    private ScoreHudManager $scoreHudManager;
 
     public function onLoad(): void
     {
@@ -86,7 +75,8 @@ class PiggyFactions extends PluginBase
             }
         }
 
-        $this->poggitBuildInfo = new PoggitBuildInfo($this, $this->getFile(), $this->isPhar());
+        self::$instance = $this;
+        $this->poggitBuildInfo = new PoggitBuildInfo($this, $this->getFile(), str_starts_with($this->getFile(), "phar://"));
 
         $this->saveDefaultConfig();
         $this->initDatabase();
@@ -116,7 +106,7 @@ class PiggyFactions extends PluginBase
         $this->getServer()->getCommandMap()->register("piggyfactions", new FactionCommand($this, "faction", "The PiggyFactions command", ["f", "factions"]));
 
         $this->getServer()->getPluginManager()->registerEvents(new EventListener($this), $this);
-        $this->getServer()->getPluginManager()->registerEvents(new LogsListener($this), $this);
+        $this->getServer()->getPluginManager()->registerEvents(new LogsListener(), $this);
 
         $this->getScheduler()->scheduleRepeatingTask(new ShowChunksTask($this), 10);
         $this->getScheduler()->scheduleRepeatingTask(new UpdatePowerTask($this), UpdatePowerTask::INTERVAL);
@@ -190,7 +180,7 @@ class PiggyFactions extends PluginBase
         return $this->database;
     }
 
-    public function getEconomyProvider(): EconomyProvider
+    public function getEconomyProvider(): ?EconomyProvider
     {
         return $this->economyProvider;
     }

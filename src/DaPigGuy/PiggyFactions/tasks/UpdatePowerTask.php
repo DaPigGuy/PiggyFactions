@@ -12,15 +12,14 @@ class UpdatePowerTask extends Task
 {
     const INTERVAL = 5 * 60 * 20;
 
-    /** @var PiggyFactions */
-    private $plugin;
+    private PiggyFactions $plugin;
 
     public function __construct(PiggyFactions $plugin)
     {
         $this->plugin = $plugin;
     }
 
-    public function onRun(int $currentTick)
+    public function onRun(): void
     {
         foreach ($this->plugin->getServer()->getOnlinePlayers() as $p) {
             $member = $this->plugin->getPlayerManager()->getPlayer($p);

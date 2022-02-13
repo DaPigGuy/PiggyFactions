@@ -4,7 +4,6 @@ parameters:
   level: 7
   bootstrapFiles:
     - phar:///pocketmine/PocketMine-MP.phar/vendor/autoload.php
-    - phpstan/bootstrap.php
   scanDirectories:
     - phar:///source/vendor/PiggyCustomEnchants.phar/src/
     - phar:///source/vendor/Hierarchy.phar/src/
@@ -14,6 +13,7 @@ parameters:
     - phar:///source/vendor/FormAPI.phar/src/
     - phar:///source/vendor/libasynql.phar/src/
     - phar:///source/vendor/libPiggyEconomy.phar/src/
-  excludes_analyse:
-    - source/vendor
+  excludePaths:
+    analyse:
+     - source/vendor
   checkMissingIterableValueType: false

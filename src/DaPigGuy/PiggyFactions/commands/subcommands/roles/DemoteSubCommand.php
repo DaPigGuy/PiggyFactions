@@ -10,11 +10,10 @@ use DaPigGuy\PiggyFactions\event\role\FactionRoleChangeEvent;
 use DaPigGuy\PiggyFactions\factions\Faction;
 use DaPigGuy\PiggyFactions\players\FactionsPlayer;
 use DaPigGuy\PiggyFactions\utils\Roles;
-use pocketmine\Player;
+use pocketmine\player\Player;
 
 class DemoteSubCommand extends FactionSubCommand
 {
-
     public function onNormalRun(Player $sender, ?Faction $faction, FactionsPlayer $member, string $aliasUsed, array $args): void
     {
         $targetMember = $faction->getMember($args["name"]);

@@ -7,7 +7,7 @@ namespace DaPigGuy\PiggyFactions\flags;
 class FlagFactory
 {
     /** @var Flag[] */
-    public static $flags;
+    public static array $flags;
 
     public static function init(): void
     {

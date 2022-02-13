@@ -8,10 +8,12 @@ use DaPigGuy\PiggyFactions\commands\subcommands\FactionSubCommand;
 use DaPigGuy\PiggyFactions\event\claims\UnclaimAllChunksEvent;
 use DaPigGuy\PiggyFactions\factions\Faction;
 use DaPigGuy\PiggyFactions\players\FactionsPlayer;
-use pocketmine\Player;
+use pocketmine\player\Player;
 
 class UnclaimAllSubCommand extends FactionSubCommand
 {
+    protected ?string $parentNode = "unclaim";
+
     public function onNormalRun(Player $sender, ?Faction $faction, FactionsPlayer $member, string $aliasUsed, array $args): void
     {
         if ($member->getFaction() !== $faction && !$member->isInAdminMode()) {
@@ -26,6 +28,5 @@ class UnclaimAllSubCommand extends FactionSubCommand
             $this->plugin->getClaimsManager()->deleteClaim($claim);
         }
         $member->sendMessage("commands.unclaim.all.success");
-        return;
     }
 }

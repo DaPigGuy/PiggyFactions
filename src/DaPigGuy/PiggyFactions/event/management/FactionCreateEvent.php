@@ -5,13 +5,15 @@ declare(strict_types=1);
 namespace DaPigGuy\PiggyFactions\event\management;
 
 use pocketmine\event\Cancellable;
+use pocketmine\event\CancellableTrait;
 use pocketmine\event\player\PlayerEvent;
-use pocketmine\Player;
+use pocketmine\player\Player;
 
 class FactionCreateEvent extends PlayerEvent implements Cancellable
 {
-    /** @var string */
-    private $name;
+    use CancellableTrait;
+
+    private string $name;
 
     public function __construct(Player $player, string $name)
     {

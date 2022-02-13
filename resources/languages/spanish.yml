@@ -80,8 +80,9 @@ commands:
     command: "\n{GREEN}/f {COMMAND} - {RESET}{DESCRIPTION}"
   home:
     not-set: "{RED}El hogar de la facción no está establecido."
+    world-not-found: "{RED}World could not be found."
   info:
-    message: "{GOLD}____________.[{DARK_GREEN}Facción {FACTION}{GOLD}].____________\n{GOLD}Descripción: {YELLOW}{DESCRIPTION}\n{GOLD}Tierra / Poder / Poder Maximo: {YELLOW}{CLAIMS}/{POWER}/{TOTALPOWER}\n{GOLD}Años: {YELLOW}{AGE}\n{GOLD}En linea: {YELLOW}{ONLINECOUNT}/{TOTALPLAYERS}\n{GOLD}Líder: {YELLOW}{LEADER}\n{GOLD}Relaciones: {RELATIONS}\n{GOLD}Miembros: {YELLOW}{PLAYERS}"
+    message: "{GOLD}____________.[{DARK_GREEN}Facción {FACTION}{GOLD}].____________\n{GOLD}Descripción: {YELLOW}{DESCRIPTION}{RESET}\n{GOLD}Tierra / Poder / Poder Maximo: {YELLOW}{CLAIMS}/{POWER}/{TOTALPOWER}\n{GOLD}Años: {YELLOW}{AGE}\n{GOLD}En linea: {YELLOW}{ONLINECOUNT}/{TOTALPLAYERS}\n{GOLD}Líder: {YELLOW}{LEADER}\n{GOLD}Relaciones: {RELATIONS}\n{GOLD}Miembros: {YELLOW}{PLAYERS}"
     description-not-set: "sin descripción establecida"
   invite:
     already-in-faction: "{RED} {PLAYER} ya está en una facción."

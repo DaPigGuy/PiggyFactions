@@ -7,12 +7,11 @@ namespace DaPigGuy\PiggyFactions\event\home;
 use DaPigGuy\PiggyFactions\event\FactionEvent;
 use DaPigGuy\PiggyFactions\factions\Faction;
 use pocketmine\event\Cancellable;
-use pocketmine\Player;
+use pocketmine\player\Player;
 
 class FactionHomeTeleportEvent extends FactionEvent implements Cancellable
 {
-    /** @var Player */
-    private $player;
+    private Player $player;
 
     public function __construct(Faction $faction, Player $player)
     {

@@ -7,8 +7,9 @@ namespace DaPigGuy\PiggyFactions\utils;
 use DaPigGuy\PiggyFactions\claims\ClaimsManager;
 use DaPigGuy\PiggyFactions\factions\Faction;
 use DaPigGuy\PiggyFactions\language\LanguageManager;
-use pocketmine\Player;
+use pocketmine\player\Player;
 use pocketmine\utils\TextFormat;
+use pocketmine\world\format\Chunk;
 
 class AsciiMap
 {
@@ -24,12 +25,13 @@ class AsciiMap
 
     public static function getMap(Player $player, int $width, int $height): array
     {
-        $center = $player->getLevel()->getChunkAtPosition($player);
-        $centerFaction = ($claim = ClaimsManager::getInstance()->getClaimByPosition($player)) === null ? null : $claim->getFaction();
+        $centerX = $player->getPosition()->getFloorX() >> Chunk::COORD_BIT_SIZE;
+        $centerZ = $player->getPosition()->getFloorZ() >> Chunk::COORD_BIT_SIZE;
+        $centerFaction = ($claim = ClaimsManager::getInstance()->getClaimByPosition($player->getPosition())) === null ? null : $claim->getFaction();
 
-        $compass = AsciiCompass::getAsciiCompass($player->getYaw());
+        $compass = AsciiCompass::getAsciiCompass($player->getLocation()->yaw);
 
-        $map = [LanguageManager::getInstance()->getMessage(LanguageManager::getInstance()->getPlayerLanguage($player), "commands.map.header", ["{X}" => $center->getX(), "{Z}" => $center->getZ(), "{FACTION}" => $centerFaction === null ? "Wilderness" : $centerFaction->getName()])];
+        $map = [LanguageManager::getInstance()->getMessage(LanguageManager::getInstance()->getPlayerLanguage($player), "commands.map.header", ["{X}" => $centerX, "{Z}" => $centerZ, "{FACTION}" => $centerFaction === null ? "Wilderness" : $centerFaction->getName()])];
 
         $legend = [];
         $characterIndex = 0;
@@ -38,14 +40,14 @@ class AsciiMap
         for ($dz = 0; $dz < $height; $dz++) {
             $row = "";
             for ($dx = 0; $dx < $width; $dx++) {
-                $chunkX = $center->getX() - ($width / 2) + $dx;
-                $chunkZ = $center->getZ() - ($height / 2) + $dz;
-                if ($chunkX === $center->getX() && $chunkZ === $center->getZ()) {
+                $chunkX = $centerX - ($width / 2) + $dx;
+                $chunkZ = $centerZ - ($height / 2) + $dz;
+                if ($chunkX === $centerX && $chunkZ === $centerZ) {
                     $row .= self::MAP_KEY_MIDDLE;
                     continue;
                 }
 
-                $faction = ($claim = ClaimsManager::getInstance()->getClaim($chunkX, $chunkZ, $player->getLevel()->getFolderName())) === null ? null : $claim->getFaction();
+                $faction = ($claim = ClaimsManager::getInstance()->getClaim((int)$chunkX, (int)$chunkZ, $player->getWorld()->getFolderName())) === null ? null : $claim->getFaction();
 
                 if ($faction === null) {
                     $row .= self::MAP_KEY_WILDERNESS;

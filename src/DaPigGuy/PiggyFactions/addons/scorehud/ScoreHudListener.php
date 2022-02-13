@@ -17,8 +17,7 @@ use pocketmine\event\Listener;
 
 class ScoreHudListener implements Listener
 {
-    /** @var PiggyFactions */
-    private $plugin;
+    private PiggyFactions $plugin;
 
     public function __construct(PiggyFactions $plugin)
     {

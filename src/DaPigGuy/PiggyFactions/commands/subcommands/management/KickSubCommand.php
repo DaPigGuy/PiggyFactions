@@ -10,7 +10,7 @@ use DaPigGuy\PiggyFactions\event\management\FactionKickEvent;
 use DaPigGuy\PiggyFactions\factions\Faction;
 use DaPigGuy\PiggyFactions\players\FactionsPlayer;
 use DaPigGuy\PiggyFactions\utils\Roles;
-use pocketmine\Player;
+use pocketmine\player\Player;
 
 class KickSubCommand extends FactionSubCommand
 {

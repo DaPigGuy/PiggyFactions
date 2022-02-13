@@ -11,7 +11,7 @@ use DaPigGuy\PiggyFactions\event\flags\FactionFlagChangeEvent;
 use DaPigGuy\PiggyFactions\factions\Faction;
 use DaPigGuy\PiggyFactions\flags\FlagFactory;
 use DaPigGuy\PiggyFactions\players\FactionsPlayer;
-use pocketmine\Player;
+use pocketmine\player\Player;
 
 class FlagSubCommand extends FactionSubCommand
 {

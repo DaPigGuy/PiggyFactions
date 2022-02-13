@@ -11,7 +11,7 @@ use DaPigGuy\PiggyFactions\event\relation\FactionRelationWishEvent;
 use DaPigGuy\PiggyFactions\factions\Faction;
 use DaPigGuy\PiggyFactions\players\FactionsPlayer;
 use DaPigGuy\PiggyFactions\utils\Relations;
-use pocketmine\Player;
+use pocketmine\player\Player;
 
 class AllySubCommand extends FactionSubCommand
 {

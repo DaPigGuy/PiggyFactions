@@ -8,13 +8,13 @@ use DaPigGuy\PiggyFactions\commands\subcommands\FactionSubCommand;
 use DaPigGuy\PiggyFactions\event\claims\UnclaimChunkEvent;
 use DaPigGuy\PiggyFactions\factions\Faction;
 use DaPigGuy\PiggyFactions\players\FactionsPlayer;
-use pocketmine\Player;
+use pocketmine\player\Player;
 
 class UnclaimSubCommand extends FactionSubCommand
 {
     public function onNormalRun(Player $sender, ?Faction $faction, FactionsPlayer $member, string $aliasUsed, array $args): void
     {
-        $claim = $this->plugin->getClaimsManager()->getClaimByPosition($sender);
+        $claim = $this->plugin->getClaimsManager()->getClaimByPosition($sender->getPosition());
         if ($claim === null) {
             $member->sendMessage("commands.unclaim.not-claimed");
             return;

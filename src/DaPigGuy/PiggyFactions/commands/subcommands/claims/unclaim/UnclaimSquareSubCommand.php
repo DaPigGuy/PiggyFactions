@@ -5,7 +5,8 @@ declare(strict_types=1);
 namespace DaPigGuy\PiggyFactions\commands\subcommands\claims\unclaim;
 
 use CortexPE\Commando\args\IntegerArgument;
-use pocketmine\Player;
+use pocketmine\player\Player;
+use pocketmine\world\format\Chunk;
 
 class UnclaimSquareSubCommand extends UnclaimMultipleSubCommand
 {
@@ -17,11 +18,12 @@ class UnclaimSquareSubCommand extends UnclaimMultipleSubCommand
         }
         $radius--;
 
-        $center = $player->getLevel()->getChunkAtPosition($player);
+        $centerX = $player->getPosition()->getFloorX() >> Chunk::COORD_BIT_SIZE;
+        $centerZ = $player->getPosition()->getFloorZ() >> Chunk::COORD_BIT_SIZE;
         $chunks = [];
         for ($dx = -$radius; $dx <= $radius; $dx++) {
             for ($dz = -$radius; $dz <= $radius; $dz++) {
-                $chunks[] = [$center->getX() + $dx, $center->getZ() + $dz];
+                $chunks[] = [$centerX + $dx, $centerZ + $dz];
             }
         }
         return $chunks;

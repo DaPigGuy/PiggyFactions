@@ -9,14 +9,14 @@ use DaPigGuy\PiggyFactions\event\claims\ChunkOverclaimEvent;
 use DaPigGuy\PiggyFactions\event\claims\ClaimChunkEvent;
 use DaPigGuy\PiggyFactions\factions\Faction;
 use DaPigGuy\PiggyFactions\players\FactionsPlayer;
-use pocketmine\level\format\Chunk;
-use pocketmine\Player;
+use pocketmine\player\Player;
+use pocketmine\world\format\Chunk;
 
 class ClaimSubCommand extends FactionSubCommand
 {
     public function onNormalRun(Player $sender, ?Faction $faction, FactionsPlayer $member, string $aliasUsed, array $args): void
     {
-        if (in_array($sender->getLevel()->getFolderName(), $this->plugin->getConfig()->getNested("factions.claims.blacklisted-worlds"))) {
+        if (in_array($sender->getWorld()->getFolderName(), $this->plugin->getConfig()->getNested("factions.claims.blacklisted-worlds"))) {
             $member->sendMessage("commands.claim.blacklisted-world");
             return;
         }
@@ -30,13 +30,13 @@ class ClaimSubCommand extends FactionSubCommand
                 return;
             }
         }
-        $claim = $this->plugin->getClaimsManager()->getClaimByPosition($sender);
+        $claim = $this->plugin->getClaimsManager()->getClaimByPosition($sender->getPosition());
         if ($claim !== null) {
             if ($claim->canBeOverClaimed() && $claim->getFaction() !== $faction) {
-                $adjacentChunks = $sender->getLevel()->getAdjacentChunks($claim->getChunkX(), $claim->getChunkZ());
-                foreach ($adjacentChunks as $chunk) {
-                    if ($chunk instanceof Chunk) {
-                        $adjacentClaim = $this->plugin->getClaimsManager()->getClaim($chunk->getX(), $chunk->getZ(), $sender->getLevel()->getFolderName());
+                for ($adjX = -1; $adjX <= 1; ++$adjX) {
+                    for ($adjZ = -1; $adjZ <= 1; ++$adjZ) {
+                        if ($adjX === 0 && $adjZ === 0) continue;
+                        $adjacentClaim = $this->plugin->getClaimsManager()->getClaim($claim->getChunkX() + $adjX, $claim->getChunkZ() + $adjZ, $sender->getWorld()->getFolderName());
                         if ($adjacentClaim !== null && $adjacentClaim->getFaction() === $faction) {
                             $ev = new ChunkOverclaimEvent($faction, $member, $claim);
                             $ev->call();
@@ -52,11 +52,14 @@ class ClaimSubCommand extends FactionSubCommand
             $member->sendMessage("commands.claim.already-claimed");
             return;
         }
-        $ev = new ClaimChunkEvent($faction, $member, $sender->chunk->getX(), $sender->chunk->getZ());
+        $chunkX = $sender->getPosition()->getFloorX() >> Chunk::COORD_BIT_SIZE;
+        $chunkZ = $sender->getPosition()->getFloorZ() >> Chunk::COORD_BIT_SIZE;
+
+        $ev = new ClaimChunkEvent($faction, $member, $chunkX, $chunkZ);
         $ev->call();
         if ($ev->isCancelled()) return;
 
-        $this->plugin->getClaimsManager()->createClaim($faction, $sender->getLevel(), $sender->chunk->getX(), $sender->chunk->getZ());
+        $this->plugin->getClaimsManager()->createClaim($faction, $sender->getWorld(), $chunkX, $chunkZ);
         $member->sendMessage("commands.claim.success");
     }
 

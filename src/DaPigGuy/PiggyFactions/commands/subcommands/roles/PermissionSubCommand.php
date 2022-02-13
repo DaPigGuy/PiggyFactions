@@ -14,7 +14,7 @@ use DaPigGuy\PiggyFactions\permissions\PermissionFactory;
 use DaPigGuy\PiggyFactions\players\FactionsPlayer;
 use DaPigGuy\PiggyFactions\utils\Relations;
 use DaPigGuy\PiggyFactions\utils\Roles;
-use pocketmine\Player;
+use pocketmine\player\Player;
 
 class PermissionSubCommand extends FactionSubCommand
 {

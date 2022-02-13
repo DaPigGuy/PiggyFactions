@@ -6,19 +6,16 @@ namespace DaPigGuy\PiggyFactions\claims;
 
 use DaPigGuy\PiggyFactions\factions\Faction;
 use DaPigGuy\PiggyFactions\PiggyFactions;
-use pocketmine\level\Level;
-use pocketmine\level\Position;
+use pocketmine\world\Position;
+use pocketmine\world\World;
 
 class ClaimsManager
 {
-    /** @var PiggyFactions */
-    private $plugin;
-
-    /** @var ClaimsManager */
-    private static $instance;
+    private PiggyFactions $plugin;
+    private static ClaimsManager $instance;
 
     /** @var Claim[] */
-    private $claims = [];
+    private array $claims = [];
 
     public function __construct(PiggyFactions $plugin)
     {
@@ -46,7 +43,7 @@ class ClaimsManager
 
     public function getClaimByPosition(Position $position): ?Claim
     {
-        return $this->getClaim($position->getFloorX() >> 4, $position->getFloorZ() >> 4, $position->getLevel()->getFolderName());
+        return $this->getClaim($position->getFloorX() >> 4, $position->getFloorZ() >> 4, $position->getWorld()->getFolderName());
     }
 
     /**
@@ -59,13 +56,13 @@ class ClaimsManager
         });
     }
 
-    public function createClaim(Faction $faction, Level $level, int $chunkX, int $chunkZ): Claim
+    public function createClaim(Faction $faction, World $world, int $chunkX, int $chunkZ): Claim
     {
         $args = [
             "faction" => $faction->getId(),
             "chunkX" => $chunkX,
             "chunkZ" => $chunkZ,
-            "level" => $level->getFolderName()
+            "level" => $world->getFolderName()
         ];
         $this->claims[$args["chunkX"] . ":" . $args["chunkZ"] . ":" . $args["level"]] = new Claim($args["faction"], $args["chunkX"], $args["chunkZ"], $args["level"]);
         $this->plugin->getDatabase()->executeInsert("piggyfactions.claims.create", $args);

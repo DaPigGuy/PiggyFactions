@@ -6,12 +6,11 @@ namespace DaPigGuy\PiggyFactions\addons\hrkchat;
 
 use CortexPE\HRKChat\event\PlaceholderResolveEvent;
 use pocketmine\event\Listener;
-use pocketmine\Player;
+use pocketmine\player\Player;
 
 class HRKChatTagListener implements Listener
 {
-    /** @var TagManager */
-    private $tagManager;
+    private TagManager $tagManager;
 
     public function __construct(TagManager $tagManager)
     {

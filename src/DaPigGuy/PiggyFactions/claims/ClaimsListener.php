@@ -10,22 +10,21 @@ use DaPigGuy\PiggyFactions\event\claims\UnclaimChunkEvent;
 use DaPigGuy\PiggyFactions\permissions\FactionPermission;
 use DaPigGuy\PiggyFactions\PiggyFactions;
 use DaPigGuy\PiggyFactions\utils\Relations;
+use pocketmine\block\tile\Container;
 use pocketmine\event\block\BlockBreakEvent;
 use pocketmine\event\block\BlockPlaceEvent;
 use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerCommandPreprocessEvent;
 use pocketmine\event\player\PlayerInteractEvent;
 use pocketmine\event\player\PlayerMoveEvent;
-use pocketmine\level\Position;
-use pocketmine\Player;
-use pocketmine\tile\Container;
+use pocketmine\player\Player;
+use pocketmine\world\format\Chunk;
+use pocketmine\world\Position;
 
 class ClaimsListener implements Listener
 {
-    /** @var PiggyFactions */
-    private $plugin;
-    /** @var ClaimsManager */
-    private $manager;
+    private PiggyFactions $plugin;
+    private ClaimsManager $manager;
 
     public function __construct(PiggyFactions $plugin, ClaimsManager $claimsManager)
     {
@@ -35,12 +34,12 @@ class ClaimsListener implements Listener
 
     public function onBreak(BlockBreakEvent $event): void
     {
-        if (!$this->canAffectArea($event->getPlayer(), $event->getBlock())) $event->setCancelled();
+        if (!$this->canAffectArea($event->getPlayer(), $event->getBlock()->getPosition())) $event->cancel();
     }
 
     public function onPlace(BlockPlaceEvent $event): void
     {
-        if (!$this->canAffectArea($event->getPlayer(), $event->getBlock())) $event->setCancelled();
+        if (!$this->canAffectArea($event->getPlayer(), $event->getBlock()->getPosition())) $event->cancel();
     }
 
     public function onCommandPreprocess(PlayerCommandPreprocessEvent $event): void
@@ -50,14 +49,14 @@ class ClaimsListener implements Listener
         $member = $this->plugin->getPlayerManager()->getPlayer($player);
         if ($member !== null) {
             $faction = $member->getFaction();
-            $claim = $this->manager->getClaimByPosition($player);
+            $claim = $this->manager->getClaimByPosition($player->getPosition());
             if (!$member->isInAdminMode() && $claim !== null && $claim->getFaction() !== $faction) {
                 $relation = $faction === null ? Relations::NONE : $faction->getRelation($claim->getFaction());
-                if (substr($message, 0, 1) === "/") {
+                if (str_starts_with($message, "/")) {
                     $command = substr(explode(" ", $message)[0], 1);
                     if (in_array($command, $this->plugin->getConfig()->getNested("factions.claims.denied-commands." . $relation, []))) {
                         $member->sendMessage("claims.command-denied", ["{COMMAND}" => $command, "{RELATION}" => $relation === "none" ? "neutral" : $relation]);
-                        $event->setCancelled();
+                        $event->cancel();
                     }
                 }
             }
@@ -66,9 +65,8 @@ class ClaimsListener implements Listener
 
     public function onInteract(PlayerInteractEvent $event): void
     {
-        $tile = $event->getBlock()->getLevel()->getTile($event->getBlock());
-        if ($event->getAction() === PlayerInteractEvent::RIGHT_CLICK_AIR) return;
-        if (!$this->canAffectArea($event->getPlayer(), $event->getBlock(), $tile instanceof Container ? FactionPermission::CONTAINERS : FactionPermission::INTERACT)) $event->setCancelled();
+        $tile = $event->getBlock()->getPosition()->getWorld()->getTile($event->getBlock()->getPosition());
+        if (!$this->canAffectArea($event->getPlayer(), $event->getBlock()->getPosition(), $tile instanceof Container ? FactionPermission::CONTAINERS : FactionPermission::INTERACT)) $event->cancel();
     }
 
     public function onMove(PlayerMoveEvent $event): void
@@ -96,10 +94,12 @@ class ClaimsListener implements Listener
                             }
                         }
                         if ($newClaim === null) {
-                            $ev = new ClaimChunkEvent($faction, $member, ($newChunk = $player->getLevel()->getChunkAtPosition($event->getTo()))->getX(), $newChunk->getZ());
+                            $newChunkX = $event->getTo()->getFloorX() >> Chunk::COORD_BIT_SIZE;
+                            $newChunkZ = $event->getTo()->getFloorZ() >> Chunk::COORD_BIT_SIZE;
+                            $ev = new ClaimChunkEvent($faction, $member, $newChunkX, $newChunkZ);
                             $ev->call();
                             if (!$ev->isCancelled()) {
-                                $newClaim = $this->manager->createClaim($faction, $player->getLevel(), $newChunk->getX(), $newChunk->getZ());
+                                $newClaim = $this->manager->createClaim($faction, $player->getWorld(), $newChunkX, $newChunkZ);
                                 $member->sendMessage("commands.claim.success");
                             }
                         } else {
@@ -125,8 +125,8 @@ class ClaimsListener implements Listener
                 }
 
                 $language = $member->getLanguage();
-                $oldFaction = $oldClaim === null ? null : $oldClaim->getFaction();
-                $newFaction = $newClaim === null ? null : $newClaim->getFaction();
+                $oldFaction = $oldClaim?->getFaction();
+                $newFaction = $newClaim?->getFaction();
                 if ($oldFaction !== $newFaction) {
                     if ($newClaim === null) {
                         $player->sendTitle($this->plugin->getLanguageManager()->getMessage($language, "territory-titles.wilderness-title"), $this->plugin->getLanguageManager()->getMessage($language, "territory-titles.wilderness-subtitle"), 5, 60, 5);
@@ -148,7 +148,7 @@ class ClaimsListener implements Listener
     {
         $member = $this->plugin->getPlayerManager()->getPlayer($player);
         $claim = $this->manager->getClaimByPosition($position);
-        if ($claim !== null) return $member === null ? false : $claim->getFaction()->hasPermission($member, $type);
+        if ($claim !== null) return $member !== null && $claim->getFaction()->hasPermission($member, $type);
         return true;
     }
 }

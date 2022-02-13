@@ -11,8 +11,8 @@ use pocketmine\command\CommandSender;
 
 class PowerBoostPlayerSubCommand extends FactionSubCommand
 {
-    /** @var bool */
-    protected $requiresPlayer = false;
+    protected bool $requiresPlayer = false;
+    protected ?string $parentNode = "powerboost";
 
     public function onBasicRun(CommandSender $sender, array $args): void
     {
@@ -24,7 +24,6 @@ class PowerBoostPlayerSubCommand extends FactionSubCommand
         $player->setPowerBoost($args["power"]);
         $this->plugin->getLanguageManager()->sendMessage($sender, "commands.powerboost.success-player", ["{PLAYER}" => $player->getUsername(), "{POWER}" => $args["power"]]);
         $player->sendMessage("commands.powerboost.boost-player", ["{POWER}" => $args["power"]]);
-        return;
     }
 
     protected function prepare(): void
