@@ -148,7 +148,7 @@ class ClaimsListener implements Listener
     {
         $member = $this->plugin->getPlayerManager()->getPlayer($player);
         $claim = $this->manager->getClaimByPosition($position);
-        if ($claim !== null) return !($member === null) && $claim->getFaction()->hasPermission($member, $type);
+        if ($claim !== null) return $member !== null && $claim->getFaction()->hasPermission($member, $type);
         return true;
     }
 }
