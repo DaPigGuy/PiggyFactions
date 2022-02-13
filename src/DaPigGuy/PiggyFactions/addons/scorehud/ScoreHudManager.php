@@ -6,6 +6,7 @@ namespace DaPigGuy\PiggyFactions\addons\scorehud;
 
 use DaPigGuy\PiggyFactions\PiggyFactions;
 use DaPigGuy\PiggyFactions\players\FactionsPlayer;
+use DaPigGuy\PiggyFactions\utils\RoundValue;
 use Ifera\ScoreHud\event\PlayerTagsUpdateEvent;
 use Ifera\ScoreHud\event\PlayerTagUpdateEvent;
 use Ifera\ScoreHud\scoreboard\ScoreTag;
@@ -32,27 +33,38 @@ class ScoreHudManager
         return $this->plugin->getServer()->getPlayerByUUID($member->getUuid());
     }
 
-    public function updatePlayerTags(Player $player, string $faction = null, string $rank = null, float $power = null): void
+    public function updateAllTags(Player $player, string $faction = null, string $rank = null, float $power = null, float $maxpower = null): void
     {
         (new PlayerTagsUpdateEvent($player, [
-            new ScoreTag(ScoreHudTags::FACTION, $faction ?? "N/A"),
-            new ScoreTag(ScoreHudTags::FACTION_RANK, $rank ?? "N/A"),
-            new ScoreTag(ScoreHudTags::FACTION_POWER, $power === null ? "N/A" : (string)round($power, 2, PHP_ROUND_HALF_DOWN))
+            new ScoreTag(ScoreHudTags::FACTION_NAME, $faction ?? "N/A"),
+            new ScoreTag(ScoreHudTags::FACTION_LEADER, $leader ?? "N/A"),
+            new ScoreTag(ScoreHudTags::FACTION_POWER, $power === null ? "N/A" : RoundValue::roundToString($power)),
+            new ScoreTag(ScoreHudTags::FACTION_MAX_POWER, $maxpower === null ? "N/A" : RoundValue::roundToString($maxpower)),
+            new ScoreTag(ScoreHudTags::MEMBER_RANK, $rank ?? "N/A")
         ]))->call();
     }
 
-    public function updatePlayerFactionTag(Player $player, string $faction = null): void
+    // Faction
+
+    public function updateFactionTag(Player $player, string $faction = null): void
     {
-        (new PlayerTagUpdateEvent($player, new ScoreTag(ScoreHudTags::FACTION, $faction ?? "N/A")))->call();
+        (new PlayerTagUpdateEvent($player, new ScoreTag(ScoreHudTags::FACTION_NAME, $faction ?? "N/A")))->call();
     }
 
-    public function updatePlayerFactionRankTag(Player $player, string $rank = null): void
+    public function updateFactionLeaderTag(Player $player, string $leader = null): void
     {
-        (new PlayerTagUpdateEvent($player, new ScoreTag(ScoreHudTags::FACTION_RANK, $rank ?? "N/A")))->call();
+        (new PlayerTagUpdateEvent($player, new ScoreTag(ScoreHudTags::FACTION_LEADER, $leader ?? "N/A")))->call();
     }
 
-    public function updatePlayerFactionPowerTag(Player $player, float $power = null): void
+    public function updateFactionPowerTag(Player $player, float $power = null): void
     {
-        (new PlayerTagUpdateEvent($player, new ScoreTag(ScoreHudTags::FACTION_POWER, $power === null ? "N/A" : (string)round($power, 2, PHP_ROUND_HALF_DOWN))))->call();
+        (new PlayerTagUpdateEvent($player, new ScoreTag(ScoreHudTags::FACTION_POWER, $power === null ? "N/A" : RoundValue::roundToString($power))))->call();
+    }
+
+    // Member
+
+    public function updateMemberRankTag(Player $player, string $rank = null): void
+    {
+        (new PlayerTagUpdateEvent($player, new ScoreTag(ScoreHudTags::MEMBER_RANK, $rank ?? "N/A")))->call();
     }
 }
