@@ -81,7 +81,7 @@ commands:
   home:
     not-set: "{RED}Frakcijina kuća nije postavljena."
   info:
-    message: "{GOLD}____________.[{DARK_GREEN}Frakcija {FACTION}{GOLD}].____________\n{GOLD}Deskripcija: {YELLOW}{DESCRIPTION}\n{GOLD}Zemljište / Moć / Maksimalna moć: {YELLOW}{CLAIMS}/{POWER}/{TOTALPOWER}\n{GOLD}Starost: {YELLOW}{AGE}\n{GOLD}Online: {YELLOW}{ONLINECOUNT}/{TOTALPLAYERS}\n{GOLD}Lider: {YELLOW}{LEADER}\n{GOLD}Veze: {RELATIONS}\n{GOLD}Memberi: {YELLOW}{PLAYERS}"
+    message: "{GOLD}____________.[{DARK_GREEN}Frakcija {FACTION}{GOLD}].____________\n{GOLD}Deskripcija: {YELLOW}{DESCRIPTION}{RESET}\n{GOLD}Zemljište / Moć / Maksimalna moć: {YELLOW}{CLAIMS}/{POWER}/{TOTALPOWER}\n{GOLD}Starost: {YELLOW}{AGE}\n{GOLD}Online: {YELLOW}{ONLINECOUNT}/{TOTALPLAYERS}\n{GOLD}Lider: {YELLOW}{LEADER}\n{GOLD}Veze: {RELATIONS}\n{GOLD}Memberi: {YELLOW}{PLAYERS}"
     description-not-set: "nije postavljen opis"
   invite:
     already-in-faction: "{RED}{PLAYER} Je već u frakciji."

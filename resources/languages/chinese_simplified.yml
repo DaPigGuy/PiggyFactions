@@ -81,7 +81,7 @@ commands:
   home:
     not-set: "{RED}并未设定公会家园."
   info:
-    message: "{GOLD}____________.[{DARK_GREEN}Faction {FACTION}{GOLD}].____________\n{GOLD}描述: {YELLOW}{DESCRIPTION}\n{GOLD}领地/ 力量/ 最大力量: {YELLOW} {CLAIMS}/{POWER}/{TOTALPOWER}\n{GOLD}年代: {YELLOW}{AGE}\n{GOLD}在线: {YELLOW}{ONLINECOUNT}/{TOTALPLAYERS}\n{GOLD}领袖: {YELLOW }{LEADER}\n{GOLD}关系: {RELATIONS}\n{GOLD}会员: {YELLOW}{PLAYERS}"
+    message: "{GOLD}____________.[{DARK_GREEN}Faction {FACTION}{GOLD}].____________\n{GOLD}描述: {YELLOW}{DESCRIPTION}{RESET}\n{GOLD}领地/ 力量/ 最大力量: {YELLOW} {CLAIMS}/{POWER}/{TOTALPOWER}\n{GOLD}年代: {YELLOW}{AGE}\n{GOLD}在线: {YELLOW}{ONLINECOUNT}/{TOTALPLAYERS}\n{GOLD}领袖: {YELLOW }{LEADER}\n{GOLD}关系: {RELATIONS}\n{GOLD}会员: {YELLOW}{PLAYERS}"
     description-not-set: "没有描述集"
   invite:
     already-in-faction: "{RED}{PLAYER} 玩家已在公会内."

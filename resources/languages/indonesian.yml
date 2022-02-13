@@ -81,7 +81,7 @@ commands:
   home:
     not-set: "{RED}Rumah Faction tidak diatur."
   info:
-    message: "{GOLD}____________.[{DARK_GREEN}Faction {FACTION}{GOLD}].____________\n{GOLD}Deskripsi: {YELLOW}{DESCRIPTION}\n{GOLD}Lahan / Kekuatan / Kekuatan Penuh: {YELLOW}{CLAIMS}/{POWER}/{TOTALPOWER}\n{GOLD}Umur: {YELLOW}{AGE}\n{GOLD}Online: {YELLOW}{ONLINECOUNT}/{TOTALPLAYERS}\n{GOLD}Ketua: {YELLOW}{LEADER}\n{GOLD}Hubungan: {RELATIONS}\n{GOLD}Anggota: {YELLOW}{PLAYERS}"
+    message: "{GOLD}____________.[{DARK_GREEN}Faction {FACTION}{GOLD}].____________\n{GOLD}Deskripsi: {YELLOW}{DESCRIPTION}{RESET}\n{GOLD}Lahan / Kekuatan / Kekuatan Penuh: {YELLOW}{CLAIMS}/{POWER}/{TOTALPOWER}\n{GOLD}Umur: {YELLOW}{AGE}\n{GOLD}Online: {YELLOW}{ONLINECOUNT}/{TOTALPLAYERS}\n{GOLD}Ketua: {YELLOW}{LEADER}\n{GOLD}Hubungan: {RELATIONS}\n{GOLD}Anggota: {YELLOW}{PLAYERS}"
     description-not-set: "tidak ada deskripsi yang ditetapkan"
   invite:
     already-in-faction: "{RED}{PLAYER} sudah ada didalam Faction."
