@@ -77,7 +77,7 @@ class FactionsManager
             }, PermissionFactory::getPermissions()),
             array_map(function (Flag $flag): bool {
                 return $flag->getValue();
-            }, $flags), null, [], [], 0, 0);
+            }, $flags), null, null, [], [], 0, 0);
         foreach ($members as $member) {
             $this->plugin->getPlayerManager()->getPlayerByUUID(UUID::fromString($member))->setFaction($this->factions[$id]);
         }
