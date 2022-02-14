@@ -2,25 +2,23 @@
 
 declare(strict_types=1);
 
-namespace DaPigGuy\PiggyFactions\tag;
+namespace DaPigGuy\PiggyFactions\addons\hrkchat;
 
 use DaPigGuy\PiggyFactions\factions\Faction;
 use DaPigGuy\PiggyFactions\PiggyFactions;
 use DaPigGuy\PiggyFactions\players\FactionsPlayer;
 use pocketmine\player\Player;
+use DaPigGuy\PiggyFactions\utils\RoundValue;
 
 class TagManager
 {
     /** @var PiggyFactions */
-    private $plugin;
+    private PiggyFactions $plugin;
 
-    /** @var array */
-    private $rankSymbols;
+    private array $rankSymbols;
 
-    /** @var string */
-    private $factionless;
-    /** @var string */
-    private $powerless;
+    private string $factionless;
+    private string $powerless;
 
     public function __construct(PiggyFactions $plugin)
     {
@@ -40,27 +38,20 @@ class TagManager
         if ($tags[0] !== 'piggyfacs' || count($tags) < 2) return null;
 
         $member = $this->plugin->getPlayerManager()->getPlayer($player);
-        switch ($tags[1]) {
-            case "name":
-                return $this->getFactionName($member) ?? $this->factionless;
-            case "power":
-                return $this->getFactionPower($member) ?? $this->powerless;
-            case "rank.name":
-                return $this->getPlayerRankName($member) ?? $this->rankSymbols["none"] ?? "";
-            case "rank.symbol":
-                return $this->getPlayerRankSymbol($member) ?? $this->rankSymbols["none"] ?? "";
-            case "members.all":
-                return $this->getFactionSizeTotal($member) ?? $this->powerless;
-            case "members.online":
-                return $this->getFactionSizeOnline($member) ?? $this->powerless;
-            default:
-                return null;
-        }
+        return match ($tags[1]) {
+            "name" => $this->getFactionName($member) ?? $this->factionless,
+            "power" => $this->getFactionPower($member) ?? $this->powerless,
+            "rank.name" => $this->getPlayerRankName($member) ?? $this->rankSymbols["none"] ?? "",
+            "rank.symbol" => $this->getPlayerRankSymbol($member) ?? $this->rankSymbols["none"] ?? "",
+            "members.all" => $this->getFactionSizeTotal($member) ?? $this->powerless,
+            "members.online" => $this->getFactionSizeOnline($member) ?? $this->powerless,
+            default => null,
+        };
     }
 
     public function getFaction(?FactionsPlayer $member): ?Faction
     {
-        return $member === null ? null : $member->getFaction();
+        return $member?->getFaction();
     }
 
     public function getFactionName(?FactionsPlayer $member): ?string
@@ -70,7 +61,7 @@ class TagManager
 
     public function getFactionPower(?FactionsPlayer $member): ?string
     {
-        return ($faction = $this->getFaction($member)) === null ? null : (string)round($faction->getPower(), 2, PHP_ROUND_HALF_DOWN);
+        return ($faction = $this->getFaction($member)) === null ? null : RoundValue::roundToString($faction->getPower());
     }
 
     public function getFactionSizeTotal(?FactionsPlayer $member): ?string
@@ -85,11 +76,11 @@ class TagManager
 
     public function getPlayerRankName(?FactionsPlayer $member): ?string
     {
-        return ($faction = $this->getFaction($member)) === null ? null : (string)$member->getRole();
+        return $this->getFaction($member) === null ? null : (string)$member->getRole();
     }
 
     public function getPlayerRankSymbol(?FactionsPlayer $member): ?string
     {
-        return ($faction = $this->getFaction($member)) === null ? null : ($this->rankSymbols[$member->getRole()] ?? null);
+        return $this->getFaction($member) === null ? null : ($this->rankSymbols[$member->getRole()] ?? null);
     }
 }

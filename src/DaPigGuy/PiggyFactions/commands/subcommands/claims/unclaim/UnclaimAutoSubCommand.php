@@ -11,6 +11,8 @@ use pocketmine\player\Player;
 
 class UnclaimAutoSubCommand extends FactionSubCommand
 {
+    protected ?string $parentNode = "unclaim";
+
     public function onNormalRun(Player $sender, ?Faction $faction, FactionsPlayer $member, string $aliasUsed, array $args): void
     {
         $member->setAutoUnclaiming(!$member->isAutoUnclaiming());

@@ -11,8 +11,7 @@ use pocketmine\event\Cancellable;
 
 class FactionBanEvent extends FactionMemberEvent implements Cancellable
 {
-    /** @var FactionsPlayer */
-    private $bannedBy;
+    private FactionsPlayer $bannedBy;
 
     public function __construct(Faction $faction, FactionsPlayer $member, FactionsPlayer $bannedBy)
     {

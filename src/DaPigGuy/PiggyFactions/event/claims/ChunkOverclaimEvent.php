@@ -12,8 +12,7 @@ use pocketmine\event\Cancellable;
 
 class ChunkOverclaimEvent extends FactionMemberEvent implements Cancellable
 {
-    /** @var Claim */
-    private $claim;
+    private Claim $claim;
 
     public function __construct(Faction $faction, FactionsPlayer $member, Claim $claim)
     {

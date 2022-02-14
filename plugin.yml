@@ -1,155 +1,185 @@
 name: PiggyFactions
 main: DaPigGuy\PiggyFactions\PiggyFactions
-version: 1.1.1
-api: 4.0.0
+version: 1.2.0
+api: 4.2.0
 author: DaPigGuy
-softdepend: [EconomyAPI, MultiEconomy, PiggyCustomEnchants, HRKChat, InfoAPI]
+softdepend: [EconomyAPI, MultiEconomy, PiggyCustomEnchants, HRKChat, ScoreHud, InfoAPI]
 website: "https://github.com/DaPigGuy/PiggyFactions"
 permissions:
   piggyfactions:
     default: op
-    description: "Allow usage of all PiggyFactions features"
-    children:
-      piggyfactions.command:
-        default: op
-        description: "Allow usage of all PiggyFactions commands"
-        children:
-          piggyfactions.command.faction:
-            default: op
-            description: "Allow usage of all /f subcommands"
-            children:
-              piggyfactions.command.faction.use:
-                default: true
-                description: "Allow usage of /f"
-              piggyfactions.command.faction.addpower:
-                default: op
-                description: "Allow usage of /f addpower"
-              piggyfactions.command.faction.admin:
-                default: op
-                description: "Allow usage of /f admin"
-              piggyfactions.command.faction.ally:
-                default: true
-                description: "Allow usage of /f ally"
-              piggyfactions.command.faction.allychat:
-                default: true
-                description: "Allow usage of /f allychat"
-              piggyfactions.command.faction.ban:
-                default: true
-                description: "Allow usage of /f ban"
-              piggyfactions.command.faction.chat:
-                default: true
-                description: "Allow usage of /f chat"
-              piggyfactions.command.faction.claim:
-                default: true
-                description: "Allow usage of /f claim"
-              piggyfactions.command.faction.create:
-                default: true
-                description: "Allow usage of /f create"
-              piggyfactions.command.faction.demote:
-                default: true
-                description: "Allow usage of /f demote"
-              piggyfactions.command.faction.deposit:
-                default: true
-                description: "Allow usage of /f deposit"
-              piggyfactions.command.faction.description:
-                default: true
-                description: "Allow usage of /f description"
-              piggyfactions.command.faction.disband:
-                default: true
-                description: "Allow usage of /f disband"
-              piggyfactions.command.faction.enemy:
-                default: true
-                description: "Allow usage of /f enemy"
-              piggyfactions.command.faction.flag:
-                default: true
-                description: "Allow usage of /f flag"
-              piggyfactions.command.faction.fly:
-                default: true
-                description: "Allow usage of /f fly"
-              piggyfactions.command.faction.help:
-                default: true
-                description: "Allow usage of /f help"
-              piggyfactions.command.faction.home:
-                default: true
-                description: "Allow usage of /f home"
-              piggyfactions.command.faction.info:
-                default: true
-                description: "Allow usage of /f info"
-              piggyfactions.command.faction.invite:
-                default: true
-                description: "Allow usage of /f invite"
-              piggyfactions.command.faction.join:
-                default: true
-                description: "Allow usage of /f join"
-              piggyfactions.command.faction.kick:
-                default: true
-                description: "Allow usage of /f kick"
-              piggyfactions.command.faction.language:
-                default: true
-                description: "Allow usage of /f language"
-              piggyfactions.command.faction.leader:
-                default: true
-                description: "Allow usage of /f leader"
-              piggyfactions.command.faction.leave:
-                default: true
-                description: "Allow usage of /f leave"
-              piggyfactions.command.faction.logs:
-                default: true
-                description: "Allow usage of /f logs"
-              piggyfactions.command.faction.map:
-                default: true
-                description: "Allow usage of /f map"
-              piggyfactions.command.faction.money:
-                default: true
-                description: "Allow usage of /f money"
-              piggyfactions.command.faction.motd:
-                default: true
-                description: "Allow usage of /f motd"
-              piggyfactions.command.faction.name:
-                default: true
-                description: "Allow usage of /f name"
-              piggyfactions.command.faction.neutral:
-                default: true
-                description: "Allow usage of /f neutral"
-              piggyfactions.command.faction.permission:
-                default: true
-                description: "Allow usage of /f permission"
-              piggyfactions.command.faction.player:
-                default: true
-                description: "Allow usage of /f player"
-              piggyfactions.command.faction.powerboost:
-                default: op
-                description: "Allow usage of /f powerboost"
-              piggyfactions.command.faction.promote:
-                default: true
-                description: "Allow usage of /f promote"
-              piggyfactions.command.faction.seechunk:
-                default: true
-                description: "Allow usage of /f seechunk"
-              piggyfactions.command.faction.sethome:
-                default: true
-                description: "Allow usage of /f sethome"
-              piggyfactions.command.faction.setpower:
-                default: op
-                description: "Allow usage of /f setpower"
-              piggyfactions.command.faction.top:
-                default: true
-                description: "Allow usage of /f top"
-              piggyfactions.command.faction.truce:
-                default: true
-                description: "Allow usage of /f truce"
-              piggyfactions.command.faction.unally:
-                default: true
-                description: "Allow usage of /f unally"
-              piggyfactions.command.faction.unban:
-                default: true
-                description: "Allow usage of /f unban"
-              piggyfactions.command.faction.unclaim:
-                default: true
-                description: "Allow usage of /f unclaim"
-              piggyfactions.command.faction.version:
-                default: true
-                description: "Allow usage of /f version"
-              piggyfactions.command.faction.withdraw:
-                default: true
-                description: "Allow usage of /f withdraw"
+    description: Allow usage of all PiggyFactions features
+  piggyfactions.command:
+    default: op
+    description: Allow usage of all PiggyFactions commands
+  piggyfactions.command.faction:
+    default: op
+    description: Allow usage of all /f subcommands
+  piggyfactions.command.faction.use:
+    default: true
+    description: Allow usage of /f
+  piggyfactions.command.faction.addpower:
+    default: op
+    description: Allow usage of /f addpower
+  piggyfactions.command.faction.admin:
+    default: op
+    description: Allow usage of /f admin
+  piggyfactions.command.faction.ally:
+    default: true
+    description: Allow usage of /f ally
+  piggyfactions.command.faction.allychat:
+    default: true
+    description: Allow usage of /f allychat
+  piggyfactions.command.faction.ban:
+    default: true
+    description: Allow usage of /f ban
+  piggyfactions.command.faction.chat:
+    default: true
+    description: Allow usage of /f chat
+  piggyfactions.command.faction.claim:
+    default: true
+    description: Allow usage of /f claim
+  piggyfactions.command.faction.claim.auto:
+    default: true
+    description: Allow usage of /f claim auto
+  piggyfactions.command.faction.claim.circle:
+    default: true
+    description: Allow usage of /f claim circle
+  piggyfactions.command.faction.claim.square:
+    default: true
+    description: Allow usage of /f claim square
+  piggyfactions.command.faction.create:
+    default: true
+    description: Allow usage of /f create
+  piggyfactions.command.faction.debug:
+    default: op
+    description: Allow usage of /f debug
+  piggyfactions.command.faction.demote:
+    default: true
+    description: Allow usage of /f demote
+  piggyfactions.command.faction.deposit:
+    default: true
+    description: Allow usage of /f deposit
+  piggyfactions.command.faction.description:
+    default: true
+    description: Allow usage of /f description
+  piggyfactions.command.faction.disband:
+    default: true
+    description: Allow usage of /f disband
+  piggyfactions.command.faction.enemy:
+    default: true
+    description: Allow usage of /f enemy
+  piggyfactions.command.faction.flag:
+    default: true
+    description: Allow usage of /f flag
+  piggyfactions.command.faction.fly:
+    default: true
+    description: Allow usage of /f fly
+  piggyfactions.command.faction.help:
+    default: true
+    description: Allow usage of /f help
+  piggyfactions.command.faction.home:
+    default: true
+    description: Allow usage of /f home
+  piggyfactions.command.faction.info:
+    default: true
+    description: Allow usage of /f info
+  piggyfactions.command.faction.invite:
+    default: true
+    description: Allow usage of /f invite
+  piggyfactions.command.faction.join:
+    default: true
+    description: Allow usage of /f join
+  piggyfactions.command.faction.kick:
+    default: true
+    description: Allow usage of /f kick
+  piggyfactions.command.faction.language:
+    default: true
+    description: Allow usage of /f language
+  piggyfactions.command.faction.leader:
+    default: true
+    description: Allow usage of /f leader
+  piggyfactions.command.faction.leave:
+    default: true
+    description: Allow usage of /f leave
+  piggyfactions.command.faction.logs:
+    default: true
+    description: Allow usage of /f logs
+  piggyfactions.command.faction.map:
+    default: true
+    description: Allow usage of /f map
+  piggyfactions.command.faction.money:
+    default: true
+    description: Allow usage of /f money
+  piggyfactions.command.faction.motd:
+    default: true
+    description: Allow usage of /f motd
+  piggyfactions.command.faction.name:
+    default: true
+    description: Allow usage of /f name
+  piggyfactions.command.faction.neutral:
+    default: true
+    description: Allow usage of /f neutral
+  piggyfactions.command.faction.permission:
+    default: true
+    description: Allow usage of /f permission
+  piggyfactions.command.faction.player:
+    default: true
+    description: Allow usage of /f player
+  piggyfactions.command.faction.powerboost:
+    default: op
+    description: Allow usage of /f powerboost
+  piggyfactions.command.faction.powerboost.faction:
+    default: op
+    description: Allow usage of /f powerboost faction
+  piggyfactions.command.faction.powerboost.player:
+    default: op
+    description: Allow usage of /f powerboost player
+  piggyfactions.command.faction.promote:
+    default: true
+    description: Allow usage of /f promote
+  piggyfactions.command.faction.seechunk:
+    default: true
+    description: Allow usage of /f seechunk
+  piggyfactions.command.faction.sethome:
+    default: true
+    description: Allow usage of /f sethome
+  piggyfactions.command.faction.setpower:
+    default: op
+    description: Allow usage of /f setpower
+  piggyfactions.command.faction.top:
+    default: true
+    description: Allow usage of /f top
+  piggyfactions.command.faction.truce:
+    default: true
+    description: Allow usage of /f truce
+  piggyfactions.command.faction.unally:
+    default: true
+    description: Allow usage of /f unally
+  piggyfactions.command.faction.unban:
+    default: true
+    description: Allow usage of /f unban
+  piggyfactions.command.faction.unclaim:
+    default: true
+    description: Allow usage of /f unclaim
+  piggyfactions.command.faction.unclaim.all:
+    default: true
+    description: Allow usage of /f unclaim all
+  piggyfactions.command.faction.unclaim.auto:
+    default: true
+    description: Allow usage of /f unclaim auto
+  piggyfactions.command.faction.unclaim.circle:
+    default: true
+    description: Allow usage of /f unclaim circle
+  piggyfactions.command.faction.unclaim.square:
+    default: true
+    description: Allow usage of /f unclaim square
+  piggyfactions.command.faction.unsethome:
+    default: true
+    description: Allow usage of /f unsethome
+  piggyfactions.command.faction.version:
+    default: true
+    description: Allow usage of /f version
+  piggyfactions.command.faction.withdraw:
+    default: true
+    description: Allow usage of /f withdraw

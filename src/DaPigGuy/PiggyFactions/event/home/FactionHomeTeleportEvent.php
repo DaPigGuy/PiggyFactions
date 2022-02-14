@@ -11,8 +11,7 @@ use pocketmine\player\Player;
 
 class FactionHomeTeleportEvent extends FactionEvent implements Cancellable
 {
-    /** @var Player */
-    private $player;
+    private Player $player;
 
     public function __construct(Faction $faction, Player $player)
     {

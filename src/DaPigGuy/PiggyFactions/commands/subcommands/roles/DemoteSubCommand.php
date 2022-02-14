@@ -14,7 +14,6 @@ use pocketmine\player\Player;
 
 class DemoteSubCommand extends FactionSubCommand
 {
-
     public function onNormalRun(Player $sender, ?Faction $faction, FactionsPlayer $member, string $aliasUsed, array $args): void
     {
         $targetMember = $faction->getMember($args["name"]);
@@ -34,6 +33,7 @@ class DemoteSubCommand extends FactionSubCommand
         $ev = new FactionRoleChangeEvent($faction, $targetMember, $member, $currentRole, ($role = array_keys(Roles::ALL)[Roles::ALL[$currentRole] - 2]));
         $ev->call();
         if ($ev->isCancelled()) return;
+
         $targetMember->setRole($role);
         $member->sendMessage("commands.demote.success", ["{PLAYER}" => $targetMember->getUsername(), "{ROLE}" => $role]);
         $targetMember->sendMessage("commands.demote.demoted", ["{ROLE}" => $role]);

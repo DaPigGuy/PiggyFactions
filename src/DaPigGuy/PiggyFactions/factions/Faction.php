@@ -16,56 +16,49 @@ use DaPigGuy\PiggyFactions\players\PlayerManager;
 use DaPigGuy\PiggyFactions\utils\Relations;
 use DaPigGuy\PiggyFactions\utils\Roles;
 use pocketmine\player\Player;
-use pocketmine\uuid\UUID;
 use pocketmine\world\Position;
+use pocketmine\world\World;
+use Ramsey\Uuid\Uuid;
+use Ramsey\Uuid\UuidInterface;
 
 class Faction
 {
-    /** @var string */
-    private $id;
-    /** @var string */
-    private $name;
-    /** @var int */
-    private $creationTime;
-    /** @var ?string */
-    private $description;
-    /** @var ?string */
-    private $motd;
-    /** @var UUID[] */
-    private $members;
+    private string $id;
+    private string $name;
+    private int $creationTime;
+    private ?string $description;
+    private ?string $motd;
+
+    /** @var UuidInterface[] */
+    private array $members;
     /** @var FactionPermission[] */
-    private $permissions;
+    private array $permissions;
     /** @var Flag[] */
-    private $flags;
-    /** @var ?Position */
-    private $home;
+    private array $flags;
 
-    /** @var array */
-    private $relations;
-    /** @var array */
-    private $relationWish;
+    private ?Position $home;
+    private ?World $homeWorld;
 
-    /** @var array */
-    private $banned;
+    private array $relations;
+    private array $relationWish;
 
-    /** @var float */
-    private $money;
+    private array $banned;
 
-    /** @var float */
-    private $powerboost;
+    private float $money;
 
-    /** @var array */
-    private $invitedPlayers;
+    private float $powerboost;
 
-    public function __construct(string $id, string $name, int $creationTime, ?string $description, ?string $motd, array $members, array $permissions, array $flags, ?Position $home, array $relations, array $banned, float $money, float $powerboost)
+    private array $invitedPlayers;
+
+    public function __construct(string $id, string $name, int $creationTime, ?string $description, ?string $motd, array $members, array $permissions, array $flags, ?Position $home, ?World $homeWorld, array $relations, array $banned, float $money, float $powerboost)
     {
         $this->id = $id;
         $this->name = $name;
         $this->creationTime = $creationTime;
         $this->description = $description;
         $this->motd = $motd;
-        $this->members = array_map(function (string $uuid): UUID {
-            return UUID::fromString($uuid);
+        $this->members = array_map(function (string $uuid): UuidInterface {
+            return Uuid::fromString($uuid);
         }, $members);
         foreach (PermissionFactory::getPermissions() as $name => $permission) {
             $permission = clone $permission;
@@ -78,6 +71,7 @@ class Faction
             $this->flags[$name] = $flag;
         }
         $this->home = $home;
+        $this->homeWorld = $homeWorld;
         $this->relations = $relations;
         $this->banned = $banned;
         $this->money = $money;
@@ -159,7 +153,7 @@ class Faction
      */
     public function getMembers(): array
     {
-        return array_map(function (UUID $uuid): FactionsPlayer {
+        return array_map(function (UuidInterface $uuid): FactionsPlayer {
             return PlayerManager::getInstance()->getPlayerByUUID($uuid);
         }, $this->members);
     }
@@ -191,7 +185,7 @@ class Faction
         return null;
     }
 
-    public function getMemberByUUID(UUID $uuid): ?FactionsPlayer
+    public function getMemberByUUID(UuidInterface $uuid): ?FactionsPlayer
     {
         foreach ($this->getMembers() as $m) {
             if ($m->getUuid()->equals($uuid)) return $m;
@@ -208,7 +202,7 @@ class Faction
         $this->update();
     }
 
-    public function removeMember(UUID $uuid): void
+    public function removeMember(UuidInterface $uuid): void
     {
         unset($this->members[array_search($uuid, $this->members)]);
         PlayerManager::getInstance()->getPlayerByUUID($uuid)->setFaction(null);
@@ -278,6 +272,11 @@ class Faction
     public function getHome(): ?Position
     {
         return $this->home;
+    }
+
+    public function getHomeWorld(): ?World
+    {
+        return $this->homeWorld;
     }
 
     public function setHome(Position $home): void
@@ -385,18 +384,18 @@ class Faction
         return $this->banned;
     }
 
-    public function isBanned(UUID $uuid): bool
+    public function isBanned(UuidInterface $uuid): bool
     {
         return in_array($uuid->toString(), $this->banned);
     }
 
-    public function banPlayer(UUID $uuid): void
+    public function banPlayer(UuidInterface $uuid): void
     {
         $this->banned[] = $uuid->toString();
         $this->update();
     }
 
-    public function unbanPlayer(UUID $uuid): void
+    public function unbanPlayer(UuidInterface $uuid): void
     {
         $key = array_search($uuid->toString(), $this->banned);
         if ($key !== false) unset($this->banned[$key]);
@@ -437,7 +436,7 @@ class Faction
         foreach ($this->relations as $id => $relation) {
             if ($relation === Relations::ALLY || $relation === Relations::TRUCE) {
                 $faction = FactionsManager::getInstance()->getFaction($id);
-                if ($faction !== null) $faction->revokeRelation($this);
+                $faction?->revokeRelation($this);
             }
         }
         FactionsManager::getInstance()->deleteFaction($this->getId());
@@ -450,7 +449,7 @@ class Faction
             "name" => $this->name,
             "description" => $this->description,
             "motd" => $this->motd,
-            "members" => json_encode(array_values(array_map(function (UUID $uuid): string {
+            "members" => json_encode(array_values(array_map(function (UuidInterface $uuid): string {
                 return $uuid->toString();
             }, $this->members))),
             "permissions" => json_encode($this->permissions),

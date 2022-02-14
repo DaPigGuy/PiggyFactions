@@ -6,13 +6,13 @@ namespace DaPigGuy\PiggyFactions\commands\subcommands;
 
 use CortexPE\Commando\args\TextArgument;
 use DaPigGuy\PiggyFactions\utils\FormattedTime;
+use DaPigGuy\PiggyFactions\utils\RoundValue;
 use pocketmine\command\CommandSender;
 use pocketmine\player\Player;
 
 class PlayerSubCommand extends FactionSubCommand
 {
-    /** @var bool */
-    protected $requiresPlayer = false;
+    protected bool $requiresPlayer = false;
 
     public function onBasicRun(CommandSender $sender, array $args): void
     {
@@ -30,18 +30,18 @@ class PlayerSubCommand extends FactionSubCommand
         }
 
         $config = $this->plugin->getConfig();
-        $time = round(($player->getMaxPower() - $player->getPower()) / $config->getNested("factions.power.per.hour"), 2, PHP_ROUND_HALF_DOWN);
+        $time = RoundValue::round(($player->getMaxPower() - $player->getPower()) / $config->getNested("factions.power.per.hour"));
         $firstPlayed = (int)($this->plugin->getServer()->getOfflinePlayer($player->getUsername())->getFirstPlayed() / 1000);
         $faction = $player->getFaction();
         $this->plugin->getLanguageManager()->sendMessage($sender, "commands.player.message", [
             "{PLAYER}" => $player->getUsername(),
             "{FACTION}" => $faction === null ? "None" : $faction->getName(),
             "{RANKSYMBOL}" => $this->plugin->getTagManager()->getPlayerRankSymbol($player),
-            "{POWER}" => round($player->getPower(), 2, PHP_ROUND_HALF_DOWN),
+            "{POWER}" => RoundValue::round($player->getPower()),
             "{TOTALPOWER}" => $player->getMaxPower(),
             "{TIMETOMAXPOWER}" => $time <= 0 ? "" : $this->plugin->getLanguageManager()->getMessage($sender instanceof Player ? $this->plugin->getPlayerManager()->getPlayer($sender)->getLanguage() : $this->plugin->getLanguageManager()->getDefaultLanguage(), "commands.player.time-to-max-power", ["{TIME}" => $time]),
-            "{POWERPERHOUR}" => round($config->getNested("factions.power.per.hour"), 2, PHP_ROUND_HALF_DOWN),
-            "{POWERPERDEATH}" => round($config->getNested("factions.power.per.death"), 2, PHP_ROUND_HALF_DOWN),
+            "{POWERPERHOUR}" => RoundValue::round($config->getNested("factions.power.per.hour")),
+            "{POWERPERDEATH}" => RoundValue::round($config->getNested("factions.power.per.death")),
             "{CREATIONDATE}" => date("F j, Y @ g:i a T", $firstPlayed),
             "{AGE}" => FormattedTime::getLong($firstPlayed),
             "{SIMPLEAGE}" => FormattedTime::getShort($firstPlayed)

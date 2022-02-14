@@ -11,10 +11,8 @@ use pocketmine\event\Cancellable;
 
 class FactionLeadershipTransferEvent extends FactionEvent implements Cancellable
 {
-    /** @var FactionsPlayer */
-    private $old;
-    /** @var FactionsPlayer */
-    private $new;
+    private FactionsPlayer $old;
+    private FactionsPlayer $new;
 
     public function __construct(Faction $faction, FactionsPlayer $old, FactionsPlayer $new)
     {

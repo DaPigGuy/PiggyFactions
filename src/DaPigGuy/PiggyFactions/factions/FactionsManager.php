@@ -9,19 +9,17 @@ use DaPigGuy\PiggyFactions\flags\FlagFactory;
 use DaPigGuy\PiggyFactions\permissions\FactionPermission;
 use DaPigGuy\PiggyFactions\permissions\PermissionFactory;
 use DaPigGuy\PiggyFactions\PiggyFactions;
-use pocketmine\uuid\UUID;
 use pocketmine\world\Position;
+use Ramsey\Uuid\Uuid;
 
 class FactionsManager
 {
-    /** @var PiggyFactions */
-    private $plugin;
+    private PiggyFactions $plugin;
 
-    /** @var self */
-    private static $instance;
+    private static FactionsManager $instance;
 
     /** @var Faction[] */
-    private $factions = [];
+    private array $factions = [];
 
     public function __construct(PiggyFactions $plugin)
     {
@@ -30,12 +28,13 @@ class FactionsManager
         $this->plugin = $plugin;
         $plugin->getDatabase()->executeSelect("piggyfactions.factions.load", [], function (array $rows): void {
             foreach ($rows as $row) {
+                $homeWorld = null;
                 if ($row["home"] !== null) {
                     $decodedHome = json_decode($row["home"], true);
-                    $row["home"] = new Position($decodedHome["x"], $decodedHome["y"], $decodedHome["z"], $this->plugin->getServer()->getWorldManager()->getWorldByName($decodedHome["level"]));
+                    $homeWorld = $this->plugin->getServer()->getWorldManager()->getWorldByName($decodedHome["level"]);
+                    $row["home"] = new Position($decodedHome["x"], $decodedHome["y"], $decodedHome["z"], $homeWorld);
                 }
-
-                $this->factions[$row["id"]] = new Faction($row["id"], $row["name"], $row["creation_time"], $row["description"], $row["motd"], json_decode($row["members"], true), json_decode($row["permissions"], true), json_decode($row["flags"], true), $row["home"], isset($row["relations"]) ? json_decode($row["relations"], true) : [], isset($row["banned"]) ? json_decode($row["banned"], true) : [], $row["money"], $row["powerboost"]);
+                $this->factions[$row["id"]] = new Faction($row["id"], $row["name"], $row["creation_time"], $row["description"], $row["motd"], json_decode($row["members"], true), json_decode($row["permissions"], true), json_decode($row["flags"], true), $row["home"], $homeWorld, isset($row["relations"]) ? json_decode($row["relations"], true) : [], isset($row["banned"]) ? json_decode($row["banned"], true) : [], $row["money"], $row["powerboost"]);
             }
             $this->plugin->getLogger()->debug("Loaded " . count($rows) . " factions");
         });
@@ -70,15 +69,15 @@ class FactionsManager
     public function createFaction(string $name, array $members, ?array $flags = null): void
     {
         $flags = $flags ?? FlagFactory::getFlags();
-        $id = UUID::fromRandom()->toString();
-        while (isset($this->factions[$id])) $id = UUID::fromRandom()->toString();
+        $id = Uuid::uuid4()->toString();
+        while (isset($this->factions[$id])) $id = Uuid::uuid4()->toString();
         $this->factions[$id] = new Faction($id, $name, time(), null, null, $members,
             array_map(function (FactionPermission $permission): array {
                 return $permission->getHolders();
             }, PermissionFactory::getPermissions()),
             array_map(function (Flag $flag): bool {
                 return $flag->getValue();
-            }, $flags), null, [], [], 0, 0);
+            }, $flags), null, null, [], [], 0, 0);
         foreach ($members as $member) {
             $this->plugin->getPlayerManager()->getPlayerByUUID(UUID::fromString($member))->setFaction($this->factions[$id]);
         }

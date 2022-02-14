@@ -18,12 +18,9 @@ class PowerChangeEvent extends Event implements Cancellable
     const CAUSE_KILL = 2;
     const CAUSE_ADMIN = 3;
 
-    /** @var FactionsPlayer */
-    private $member;
-    /** @var int */
-    private $cause;
-    /** @var float */
-    private $power;
+    private FactionsPlayer $member;
+    private int $cause;
+    private float $power;
 
     public function __construct(FactionsPlayer $member, int $cause, float $power)
     {

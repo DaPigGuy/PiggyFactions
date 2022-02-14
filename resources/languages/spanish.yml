@@ -72,7 +72,7 @@ commands:
     toggled: "{GREEN}Bandera {FLAG} ha sido habilitada."
     toggled-off: "{GREEN}Bandera {FLAG} ha sido deshabilitada."
   fly:
-    not-allowed: "{ROJO}No tienes permitido volar aquí."
+    not-allowed: "{RED}No tienes permitido volar aquí."
     toggled: "{GREEN}Se ha habilitado el vuelo."
     toggled-off: "{RED}El vuelo ha sido deshabilitado."
   help:
@@ -80,8 +80,9 @@ commands:
     command: "\n{GREEN}/f {COMMAND} - {RESET}{DESCRIPTION}"
   home:
     not-set: "{RED}El hogar de la facción no está establecido."
+    world-not-found: "{RED}World could not be found."
   info:
-    message: "{GOLD}____________.[{DARK_GREEN}Facción {FACTION}{GOLD}].____________\n{GOLD}Descripción: {YELLOW}{DESCRIPTION}\n{GOLD}Tierra / Poder / Poder Maximo: {YELLOW}{CLAIMS}/{POWER}/{TOTALPOWER}\n{GOLD}Años: {YELLOW}{AGE}\n{GOLD}En linea: {YELLOW}{ONLINECOUNT}/{TOTALPLAYERS}\n{GOLD}Líder: {YELLOW}{LEADER}\n{GOLD}Relaciones: {RELATIONS}\n{GOLD}Miembros: {YELLOW}{PLAYERS}"
+    message: "{GOLD}____________.[{DARK_GREEN}Facción {FACTION}{GOLD}].____________\n{GOLD}Descripción: {YELLOW}{DESCRIPTION}{RESET}\n{GOLD}Tierra / Poder / Poder Maximo: {YELLOW}{CLAIMS}/{POWER}/{TOTALPOWER}\n{GOLD}Años: {YELLOW}{AGE}\n{GOLD}En linea: {YELLOW}{ONLINECOUNT}/{TOTALPLAYERS}\n{GOLD}Líder: {YELLOW}{LEADER}\n{GOLD}Relaciones: {RELATIONS}\n{GOLD}Miembros: {YELLOW}{PLAYERS}"
     description-not-set: "sin descripción establecida"
   invite:
     already-in-faction: "{RED} {PLAYER} ya está en una facción."
@@ -186,7 +187,7 @@ forms:
   title: "PiggyFactions UI"
 motd: "{GOLD}____________.[{DARK_GREEN}{FACTION} MOTD{GOLD}].____________\n{WHITE}{MOTD}"
 pvp:
-  attacker-factionless: "{ROJO}No puedes dañar a otros jugadores hasta que te hayas unido a una facción."
+  attacker-factionless: "{RED}No puedes dañar a otros jugadores hasta que te hayas unido a una facción."
   target-factionless: "{RED}No puedes dañar a jugadores que no están actualmente en una facción."
   cant-attack-in-territory: "{RED}No puedes dañar a {PLAYER} en su propio territorio a menos que los declares como enemigos."
 relation:

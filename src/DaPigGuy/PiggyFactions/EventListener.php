@@ -8,6 +8,7 @@ use DaPigGuy\PiggyFactions\event\member\PowerChangeEvent;
 use DaPigGuy\PiggyFactions\factions\Faction;
 use DaPigGuy\PiggyFactions\flags\Flag;
 use DaPigGuy\PiggyFactions\utils\ChatTypes;
+use DaPigGuy\PiggyFactions\utils\RoundValue;
 use pocketmine\event\entity\EntityDamageByEntityEvent;
 use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerChatEvent;
@@ -18,8 +19,7 @@ use pocketmine\player\Player;
 
 class EventListener implements Listener
 {
-    /** @var PiggyFactions */
-    private $plugin;
+    private PiggyFactions $plugin;
 
     public function __construct(PiggyFactions $plugin)
     {
@@ -65,14 +65,14 @@ class EventListener implements Listener
         $damager = $event->getDamager();
         if ($entity instanceof Player && $damager instanceof Player) {
             if ($this->plugin->getPlayerManager()->areAlliedOrTruced($entity, $damager)) {
-                $event->setCancelled();
+                $event->cancel();
                 return;
             }
 
             $entityFaction = $this->plugin->getPlayerManager()->getPlayerFaction($entity->getUniqueId());
             $damagerFaction = $this->plugin->getPlayerManager()->getPlayerFaction($damager->getUniqueId());
             if (($entityFaction === null || $damagerFaction === null) && !$this->plugin->getConfig()->getNested("factions.pvp.factionless", true)) {
-                $event->setCancelled();
+                $event->cancel();
                 if ($damagerFaction === null) {
                     $this->plugin->getLanguageManager()->sendMessage($damager, "pvp.attacker-factionless");
                 } else {
@@ -81,7 +81,7 @@ class EventListener implements Listener
                 return;
             }
             if ($entityFaction === null && $damagerFaction === null && !$this->plugin->getConfig()->getNested("factions.pvp.between-factionless", true)) {
-                $event->setCancelled();
+                $event->cancel();
                 return;
             }
 
@@ -89,13 +89,13 @@ class EventListener implements Listener
             if ($claim !== null) {
                 if ($claim->getFaction() === $entityFaction) {
                     if ($damagerFaction === null || !$damagerFaction->isEnemy($entityFaction)) {
-                        $event->setCancelled();
+                        $event->cancel();
                         $this->plugin->getLanguageManager()->sendMessage($damager, "pvp.cant-attack-in-territory", ["{PLAYER}" => $entity->getDisplayName()]);
                         return;
                     }
                     $event->setModifier(-$this->plugin->getConfig()->getNested("factions.claims.shield-factor", 0.1), 56789);
                 } elseif ($claim->getFaction()->getFlag(Flag::SAFEZONE)) {
-                    $event->setCancelled();
+                    $event->cancel();
                 }
             }
         }
@@ -105,13 +105,12 @@ class EventListener implements Listener
     {
         $player = $event->getPlayer();
         $member = $this->plugin->getPlayerManager()->getPlayer($player);
-
         if ($member !== null) {
             $ev = new PowerChangeEvent($member, PowerChangeEvent::CAUSE_DEATH, $member->getPower() + $this->plugin->getConfig()->getNested("factions.power.per.death", -2));
             $ev->call();
             if ($ev->isCancelled()) return;
             $member->setPower($ev->getPower());
-            $member->sendMessage("death.power", ["{POWER}" => round($member->getPower(), 2, PHP_ROUND_HALF_DOWN)]);
+            $member->sendMessage("death.power", ["{POWER}" => RoundValue::round($member->getPower())]);
         }
 
         $cause = $player->getLastDamageCause();

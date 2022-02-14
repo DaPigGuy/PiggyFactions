@@ -80,8 +80,9 @@ commands:
     command: "\n{GREEN}/f {COMMAND} - {RESET}{DESCRIPTION}"
   home:
     not-set: "{RED}Faktionsheim ist nicht gesetzt."
+    world-not-found: "{RED}World could not be found."
   info:
-    message: "{GOLD}____________.[{DARK_GREEN}Faktion {FACTION}{GOLD}].____________\n{GOLD}Beschreibung: {YELLOW}{DESCRIPTION}\n{GOLD}Land / Stärke / max Stärke: {YELLOW}{CLAIMS}/{POWER}/{TOTALPOWER}\n{GOLD}Alter: {YELLOW}{AGE}\n{GOLD}Online: {YELLOW}{ONLINECOUNT}/{TOTALPLAYERS}\n{GOLD}Leiter: {YELLOW}{LEADER}\n{GOLD}Beziehungen: {RELATIONS}\n{GOLD}Mitglieder: {YELLOW}{PLAYERS}"
+    message: "{GOLD}____________.[{DARK_GREEN}Faktion {FACTION}{GOLD}].____________\n{GOLD}Beschreibung: {YELLOW}{DESCRIPTION}{RESET}\n{GOLD}Land / Stärke / max Stärke: {YELLOW}{CLAIMS}/{POWER}/{TOTALPOWER}\n{GOLD}Alter: {YELLOW}{AGE}\n{GOLD}Online: {YELLOW}{ONLINECOUNT}/{TOTALPLAYERS}\n{GOLD}Leiter: {YELLOW}{LEADER}\n{GOLD}Beziehungen: {RELATIONS}\n{GOLD}Mitglieder: {YELLOW}{PLAYERS}"
     description-not-set: "keine Beschreibung vorhanden"
   invite:
     already-in-faction: "{RED}{PLAYER} ist bereits in einer Faktion."

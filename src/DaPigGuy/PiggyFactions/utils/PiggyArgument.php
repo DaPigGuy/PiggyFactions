@@ -10,8 +10,7 @@ use pocketmine\command\CommandSender;
 
 class PiggyArgument extends BaseArgument
 {
-    /** @var BaseArgument */
-    private $argument;
+    private BaseArgument $argument;
 
     public function __construct(BaseArgument $argument)
     {

@@ -18,5 +18,5 @@ $RECYCLE.BIN/
 *.lnk
 
 # JetBrains IDE
-\.idea/
-transfer.bat
+.idea
+.dependencies

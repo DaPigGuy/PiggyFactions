@@ -27,7 +27,7 @@ class CheckUpdatesTask extends AsyncTask
                 $error = $results[1];
                 if ($error !== null) throw new Exception($error);
 
-                $data = json_decode($results[0], true);
+                $data = json_decode($results[0]->getBody(), true);
                 if (version_compare($plugin->getDescription()->getVersion(), $data[0]["version"]) === -1) {
                     if (ApiVersion::isCompatible($plugin->getServer()->getApiVersion(), $data[0]["api"][0])) {
                         PiggyFactions::getInstance()->getLogger()->info("PiggyFactions v" . $data[0]["version"] . " is available for download at " . $data[0]["artifact_url"] . "/PiggyFactions.phar");

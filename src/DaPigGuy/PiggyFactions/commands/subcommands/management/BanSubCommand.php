@@ -21,7 +21,7 @@ class BanSubCommand extends FactionSubCommand
             $member->sendMessage("commands.invalid-player", ["{PLAYER}" => $args["name"]]);
             return;
         }
-        if (Roles::ALL[$target->getRole()] >= Roles::ALL[$member->getRole()] && !$member->isInAdminMode()) {
+        if ($target->getFaction() !== null && (Roles::ALL[$target->getRole()] >= Roles::ALL[$member->getRole()] && !$member->isInAdminMode())) {
             $member->sendMessage("commands.ban.cant-ban-higher", ["{PLAYER}" => $target->getUsername()]);
             return;
         }
@@ -35,7 +35,7 @@ class BanSubCommand extends FactionSubCommand
 
         $faction->banPlayer($target->getUuid());
         $faction->broadcastMessage("commands.ban.announcement", ["{PLAYER}" => $target->getUsername()]);
-        if ($faction->getId() === $target->getFaction()->getId()) {
+        if ($faction === $target->getFaction()) {
             $faction->removeMember($target->getUuid());
             $target->sendMessage("commands.ban.banned");
         }

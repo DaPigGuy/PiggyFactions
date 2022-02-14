@@ -10,7 +10,7 @@ use DaPigGuy\PiggyFactions\utils\Roles;
 class PermissionFactory
 {
     /** @var FactionPermission[] */
-    public static $permissions;
+    public static array $permissions;
 
     public static function init(): void
     {

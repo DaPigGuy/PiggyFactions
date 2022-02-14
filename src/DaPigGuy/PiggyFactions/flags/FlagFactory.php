@@ -7,13 +7,13 @@ namespace DaPigGuy\PiggyFactions\flags;
 class FlagFactory
 {
     /** @var Flag[] */
-    public static $flags;
+    public static array $flags;
 
     public static function init(): void
     {
-        self::registerPermission(new Flag(Flag::OPEN, true, false));
-        self::registerPermission(new Flag(Flag::WARZONE, false, false));
-        self::registerPermission(new Flag(Flag::SAFEZONE, false, false));
+        self::registerFlag(new Flag(Flag::OPEN, true, false));
+        self::registerFlag(new Flag(Flag::WARZONE, false, false));
+        self::registerFlag(new Flag(Flag::SAFEZONE, false, false));
     }
 
     /**
@@ -29,7 +29,7 @@ class FlagFactory
         return (self::$flags[$name] ?? null) === null ? null : clone self::$flags[$name];
     }
 
-    public static function registerPermission(Flag $flag): void
+    public static function registerFlag(Flag $flag): void
     {
         self::$flags[$flag->getName()] = $flag;
     }

@@ -38,19 +38,14 @@ class LanguageManager
         "zh_TW" => "chinese_traditional"
     ];
 
-    /** @var self */
-    private static $instance;
+    private static LanguageManager $instance;
+    private PiggyFactions $plugin;
 
-    /** @var PiggyFactions */
-    private $plugin;
-
-    /** @var string */
-    private $defaultLanguage;
+    private string $defaultLanguage;
 
     /** @var Config[] */
-    private $messages;
-    /** @var array */
-    private $colorTags;
+    private array $messages;
+    private array $colorTags;
 
     public function __construct(PiggyFactions $plugin)
     {
@@ -72,7 +67,7 @@ class LanguageManager
             $this->messages[$language] = new Config($plugin->getDataFolder() . $file);
         }
         foreach ((new ReflectionClass(TextFormat::class))->getConstants() as $color => $code) {
-            $this->colorTags["{" . $color . "}"] = $code;
+            if (is_string($code)) $this->colorTags["{" . $color . "}"] = $code;
         }
     }
 
@@ -122,15 +117,13 @@ class LanguageManager
             $relation = "warzone";
         } elseif ($faction->getFlag(Flag::SAFEZONE)) {
             $relation = "safezone";
-        } elseif ($playerFaction === null) {
-            $relation = "neutral";
-        } elseif ($playerFaction->getId() === $faction->getId()) {
+        } elseif ($playerFaction?->getId() === $faction->getId()) {
             $relation = "member";
-        } elseif ($playerFaction->isAllied($faction)) {
+        } elseif ($playerFaction?->isAllied($faction)) {
             $relation = "ally";
-        } else if ($playerFaction->isTruced($faction)) {
+        } else if ($playerFaction?->isTruced($faction)) {
             $relation = "truce";
-        } elseif ($playerFaction->isEnemy($faction)) {
+        } elseif ($playerFaction?->isEnemy($faction)) {
             $relation = "enemy";
         }
         return $this->translateColorTags($this->plugin->getConfig()->getNested("symbols.colors.relations." . $relation, ""));

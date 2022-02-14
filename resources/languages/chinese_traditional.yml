@@ -80,8 +80,9 @@ commands:
     command: "\n{GREEN}/f {COMMAND} - {RESET}{DESCRIPTION}"
   home:
     not-set: "{RED}並未設定公會家園."
+    world-not-found: "{RED}World could not be found."
   info:
-    message: "{GOLD}____________.[{DARK_GREEN}Faction {FACTION}{GOLD}].____________\n{GOLD}描述: {YELLOW}{DESCRIPTION}\n{GOLD}領地 / 力量 / 最大力量: {YELLOW}{CLAIMS}/{POWER}/{TOTALPOWER}\n{GOLD}年代: {YELLOW}{AGE}\n{GOLD}在線: {YELLOW}{ONLINECOUNT}/{TOTALPLAYERS}\n{GOLD}領袖: {YELLOW}{LEADER}\n{GOLD}关系: {RELATIONS}\n{GOLD}會員: {YELLOW}{PLAYERS}"
+    message: "{GOLD}____________.[{DARK_GREEN}Faction {FACTION}{GOLD}].____________\n{GOLD}描述: {YELLOW}{DESCRIPTION}{RESET}\n{GOLD}領地 / 力量 / 最大力量: {YELLOW}{CLAIMS}/{POWER}/{TOTALPOWER}\n{GOLD}年代: {YELLOW}{AGE}\n{GOLD}在線: {YELLOW}{ONLINECOUNT}/{TOTALPLAYERS}\n{GOLD}領袖: {YELLOW}{LEADER}\n{GOLD}关系: {RELATIONS}\n{GOLD}會員: {YELLOW}{PLAYERS}"
     description-not-set: "沒有描述集"
   invite:
     already-in-faction: "{RED}{PLAYER} 玩家已在公會內."

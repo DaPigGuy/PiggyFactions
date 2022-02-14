@@ -11,21 +11,11 @@ use DaPigGuy\PiggyFactions\event\management\FactionUnbanEvent;
 use DaPigGuy\PiggyFactions\event\member\FactionJoinEvent;
 use DaPigGuy\PiggyFactions\event\member\FactionLeaveEvent;
 use DaPigGuy\PiggyFactions\event\role\FactionLeadershipTransferEvent;
-use DaPigGuy\PiggyFactions\PiggyFactions;
 use pocketmine\event\Listener;
 
 class LogsListener implements Listener
 {
-    /** @var PiggyFactions */
-    private $plugin;
-
-    public function __construct(PiggyFactions $plugin)
-    {
-        $this->plugin = $plugin;
-    }
-
     /**
-     * @param FactionBanEvent $event
      * @priority MONITOR
      */
     public function onBan(FactionBanEvent $event): void
@@ -36,7 +26,6 @@ class LogsListener implements Listener
     }
 
     /**
-     * @param FactionKickEvent $event
      * @priority MONITOR
      */
     public function onKick(FactionKickEvent $event): void
@@ -47,7 +36,6 @@ class LogsListener implements Listener
     }
 
     /**
-     * @param FactionInviteEvent $event
      * @priority MONITOR
      */
     public function onInvite(FactionInviteEvent $event): void
@@ -58,7 +46,6 @@ class LogsListener implements Listener
     }
 
     /**
-     * @param FactionJoinEvent $event
      * @priority MONITOR
      */
     public function onJoin(FactionJoinEvent $event): void
@@ -69,7 +56,6 @@ class LogsListener implements Listener
     }
 
     /**
-     * @param FactionLeaveEvent $event
      * @priority MONITOR
      */
     public function onLeave(FactionLeaveEvent $event): void
@@ -80,7 +66,6 @@ class LogsListener implements Listener
     }
 
     /**
-     * @param FactionLeadershipTransferEvent $event
      * @priority MONITOR
      */
     public function onLeadershipChange(FactionLeadershipTransferEvent $event): void
@@ -91,7 +76,6 @@ class LogsListener implements Listener
     }
 
     /**
-     * @param FactionUnbanEvent $event
      * @priority MONITOR
      */
     public function onUnban(FactionUnbanEvent $event): void

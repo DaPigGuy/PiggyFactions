@@ -24,16 +24,18 @@ abstract class FactionSubCommand extends BaseSubCommand
 {
     /** @var PiggyFactions */
     protected $plugin;
-    /** @var bool */
-    protected $requiresPlayer = true;
-    /** @var bool */
-    protected $requiresFaction = true;
-    /** @var null */
-    protected $factionPermission = null;
+
+    protected bool $requiresPlayer = true;
+    protected bool $requiresFaction = true;
+    protected bool $factionPermission = true;
+
+    protected ?string $parentNode = null;
 
     public function __construct(PiggyFactions $plugin, string $name, string $description = "", array $aliases = [])
     {
-        $this->setPermission("piggyfactions.command.faction." . $name);
+        $permissionPrefix = "piggyfactions.command.faction.";
+        if ($this->parentNode !== null) $permissionPrefix = $permissionPrefix . $this->parentNode . ".";
+        $this->setPermission($permissionPrefix . $name);
         parent::__construct($plugin, $name, $description, $aliases);
     }
 
@@ -45,7 +47,7 @@ abstract class FactionSubCommand extends BaseSubCommand
         }
 
         $member = $sender instanceof Player ? $this->plugin->getPlayerManager()->getPlayer($sender) : null;
-        $faction = $member === null ? null : $member->getFaction();
+        $faction = $member?->getFaction();
 
         if ($this->requiresFaction && $this->requiresPlayer) {
             if ($faction === null) {
@@ -53,17 +55,13 @@ abstract class FactionSubCommand extends BaseSubCommand
                 return;
             }
 
-            $permission = $this->factionPermission;
-            if ($permission === null) {
+            if (!$this->factionPermission) {
                 $parent = $this->getParent();
                 $permission = $this->getName();
                 while ($parent instanceof BaseSubCommand) {
                     $permission = $parent->getName();
                     $parent = $parent->getParent();
                 }
-            }
-
-            if ($permission !== false) {
                 if (PermissionFactory::getPermission($permission) !== null) {
                     if (!$faction->hasPermission($member, $permission)) {
                         $member->sendMessage("commands.no-permission");
@@ -119,6 +117,7 @@ abstract class FactionSubCommand extends BaseSubCommand
             if ($data !== null) {
                 $args = [];
                 foreach ($this->getArgumentList() as $position => $arguments) {
+                    if (!isset($data[$position])) continue;
                     /** @var PiggyArgument $argument */
                     foreach ($arguments as $argument) {
                         $wrappedArgument = $argument->getWrappedArgument();

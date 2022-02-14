@@ -12,14 +12,10 @@ use pocketmine\world\World;
 
 class Claim
 {
-    /** @var string */
-    private $faction;
-    /** @var int */
-    private $chunkX;
-    /** @var int */
-    private $chunkZ;
-    /** @var string */
-    private $level;
+    private string $faction;
+    private int $chunkX;
+    private int $chunkZ;
+    private string $level;
 
     public function __construct(string $faction, int $chunkX, int $chunkZ, string $level)
     {

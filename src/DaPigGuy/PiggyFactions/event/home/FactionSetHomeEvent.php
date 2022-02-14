@@ -12,8 +12,7 @@ use pocketmine\world\Position;
 
 class FactionSetHomeEvent extends FactionMemberEvent implements Cancellable
 {
-    /** @var Position */
-    private $position;
+    private Position $position;
 
     public function __construct(Faction $faction, FactionsPlayer $member, Position $position)
     {

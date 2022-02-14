@@ -8,12 +8,12 @@ use CortexPE\Commando\args\FloatArgument;
 use CortexPE\Commando\args\RawStringArgument;
 use DaPigGuy\PiggyFactions\commands\subcommands\FactionSubCommand;
 use DaPigGuy\PiggyFactions\event\member\PowerChangeEvent;
+use DaPigGuy\PiggyFactions\utils\RoundValue;
 use pocketmine\command\CommandSender;
 
 class AddPowerSubCommand extends FactionSubCommand
 {
-    /** @var bool */
-    protected $requiresPlayer = false;
+    protected bool $requiresPlayer = false;
 
     public function onBasicRun(CommandSender $sender, array $args): void
     {
@@ -28,7 +28,7 @@ class AddPowerSubCommand extends FactionSubCommand
 
         $player->setPower($ev->getPower());
         $this->plugin->getLanguageManager()->sendMessage($sender, "commands.addpower.success", ["{PLAYER}" => $player->getUsername(), "{POWER}" => $args["power"]]);
-        $player->sendMessage("commands.addpower.power-add", ["{ADDEDPOWER}" => $args["power"], "{POWER}" => round($player->getPower(), 2, PHP_ROUND_HALF_DOWN)]);
+        $player->sendMessage("commands.addpower.power-add", ["{ADDEDPOWER}" => $args["power"], "{POWER}" => RoundValue::round($player->getPower())]);
     }
 
     protected function prepare(): void

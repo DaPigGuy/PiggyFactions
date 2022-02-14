@@ -6,6 +6,7 @@ namespace DaPigGuy\PiggyFactions\commands\subcommands\claims\claim;
 
 use CortexPE\Commando\args\IntegerArgument;
 use pocketmine\player\Player;
+use pocketmine\world\format\Chunk;
 
 class ClaimSquareSubCommand extends ClaimMultipleSubCommand
 {
@@ -17,11 +18,12 @@ class ClaimSquareSubCommand extends ClaimMultipleSubCommand
         }
         $radius--;
 
-        $center = $player->getWorld()->getChunkAtPosition($player->getPosition());
+        $centerX = $player->getPosition()->getFloorX() >> Chunk::COORD_BIT_SIZE;
+        $centerZ = $player->getPosition()->getFloorZ() >> Chunk::COORD_BIT_SIZE;
         $chunks = [];
         for ($dx = -$radius; $dx <= $radius; $dx++) {
             for ($dz = -$radius; $dz <= $radius; $dz++) {
-                $chunks[] = [$center->getX() + $dx, $center->getZ() + $dz];
+                $chunks[] = [$centerX + $dx, $centerZ + $dz];
             }
         }
         return $chunks;

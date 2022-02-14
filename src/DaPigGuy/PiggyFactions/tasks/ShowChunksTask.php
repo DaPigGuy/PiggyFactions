@@ -7,12 +7,12 @@ namespace DaPigGuy\PiggyFactions\tasks;
 use DaPigGuy\PiggyFactions\PiggyFactions;
 use pocketmine\math\Vector3;
 use pocketmine\scheduler\Task;
+use pocketmine\world\format\Chunk;
 use pocketmine\world\particle\RedstoneParticle;
 
 class ShowChunksTask extends Task
 {
-    /** @var PiggyFactions */
-    private $plugin;
+    private PiggyFactions $plugin;
 
     public function __construct(PiggyFactions $plugin)
     {
@@ -23,11 +23,12 @@ class ShowChunksTask extends Task
     {
         foreach ($this->plugin->getServer()->getOnlinePlayers() as $p) {
             if (($member = $this->plugin->getPlayerManager()->getPlayer($p)) !== null && $member->canSeeChunks()) {
-                $chunk = $p->getWorld()->getChunkAtPosition($p->getPosition());
+                $chunkX = $p->getPosition()->getFloorX() >> Chunk::COORD_BIT_SIZE;
+                $chunkZ = $p->getPosition()->getFloorZ() >> Chunk::COORD_BIT_SIZE;
 
-                $minX = (float)$chunk->getX() * 16;
+                $minX = (float)$chunkX * 16;
                 $maxX = (float)$minX + 16;
-                $minZ = (float)$chunk->getZ() * 16;
+                $minZ = (float)$chunkZ * 16;
                 $maxZ = (float)$minZ + 16;
 
                 for ($x = $minX; $x <= $maxX; $x += 0.5) {
