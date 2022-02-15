@@ -5,12 +5,26 @@
 PiggyFactions is an open-sourced factions plugin for [PocketMine-MP](https://github.com/pmmp/PocketMine-MP).
 
 ## Documentation
+*Documentation is currently not up to date as of version 2.0.0*
 * PiggyFaction's documentation is available at [piggydocs-rtd](https://rtdx.aericio.net/en/latest/plugins/piggyfactions/index.html).
   * [Prerequisites](https://rtdx.aericio.net/en/latest/plugins/piggyfactions/docs/prerequisites.html)
   * [Quick Start Guide](https://rtdx.aericio.net/en/latest/plugins/piggyfactions/docs/quickstart.html)
   * [Commands & Permissions](https://rtdx.aericio.net/en/latest/plugins/piggyfactions/docs/commands-and-permissions.html)
   * [Functionality](https://rtdx.aericio.net/en/latest/plugins/piggyfactions/docs/functionality.html)
     * How do I overclaim other factions? How does power work? --> Functionality
+
+## Addons
+| Plugin | Description | Installation |
+|-|-|:-:|
+| [![Download] PiggyCustomEnchants](https://poggit.pmmp.io/p/PiggyCustomEnchants) | AllyChecks Integration | Automatically enabled. |
+| [![Download] HRKChat](https://poggit.pmmp.io/ci/CortexPE/HRKChat) | Chat Integration | Requires [Hierarchy](https://poggit.pmmp.io/ci/CortexPE/Hierarchy). [Additional setup required](https://rtdx.aericio.net/en/latest/plugins/piggyfactions/docs/quickstart.html#hrkchat). |
+| [![Download] PureChat-PiggyFactions](https://github.com/Heisenburger69/PureChat/releases/download/2.0.0/PureChat-PiggyFactions_v2.0.0.phar) | Chat Integration | Requires [PurePerms](https://poggit.pmmp.io/ci/Heisenburger69/PureChat). [Additional setup required](https://rtdx.aericio.net/en/latest/plugins/piggyfactions/docs/quickstart.html#purechat). |
+| [![Download] ScoreHud v5](https://poggit.pmmp.io/p/ScoreHud/5.2.0) | Scoreboard Integration | Requires [Addon Script](https://gist.github.com/DaPigGuy/07442f8b98a70e5973a528e4516e35d1). See [installation steps](https://github.com/Ifera/ScoreHud/tree/v5#how-to-use-addons) and [tags](https://rtdx.aericio.net/en/latest/plugins/piggyfactions/docs/addons.html#scorehud-v5-legacy). |
+| [![Download] ScoreHud v6](https://poggit.pmmp.io/p/ScoreHud) | Scoreboard Integration (recommended) | Automatically enabled. See [tags](https://rtdx.aericio.net/en/latest/plugins/piggyfactions/docs/addons.html#scorehud-v6). |
+| [![Download] EconomyAPI](https://poggit.pmmp.io/p/EconomyAPI) | Economy Integration | [Additional setup required](https://rtdx.aericio.net/en/latest/plugins/piggyfactions/docs/further-configuration.html#economy). |
+| [![Download] MultiEconomy](https://poggit.pmmp.io/p/MultiEconomy) | Economy Integration | [Additional setup required](https://rtdx.aericio.net/en/latest/plugins/piggyfactions/docs/further-configuration.html#economy). |
+
+[Download]: https://i.imgur.com/PnWVUhK.png
 
 ## Features
 | Feature | PiggyFactions | SimpleFactions | FactionsPro |
@@ -30,19 +44,6 @@ PiggyFactions is an open-sourced factions plugin for [PocketMine-MP](https://git
 | Multi-Language Support | ✔ | ✔ | ❌ |
 | Developer Friendly | ✔ | ❌ | ❌ |
 
-## Addons
-| Plugin | Description | Installation |
-|-|-|:-:|
-| [![Download] PiggyCustomEnchants](https://poggit.pmmp.io/p/PiggyCustomEnchants) | AllyChecks Integration | Automatically enabled. |
-| [![Download] HRKChat](https://poggit.pmmp.io/ci/CortexPE/HRKChat) | Chat Integration | Requires [Hierarchy](https://poggit.pmmp.io/ci/CortexPE/Hierarchy). [Additional setup required](https://rtdx.aericio.net/en/latest/plugins/piggyfactions/docs/quickstart.html#hrkchat). |
-| [![Download] PureChat PR-17](https://poggit.pmmp.io/r/95436/PureChat_pr-17.phar) | Chat Integration | Requires [PurePerms](https://poggit.pmmp.io/ci/Heisenburger69/PureChat). [Additional setup required](https://rtdx.aericio.net/en/latest/plugins/piggyfactions/docs/quickstart.html#purechat). |
-| [![Download] ScoreHud v5](https://poggit.pmmp.io/p/ScoreHud/5.2.0) | Scoreboard Integration (slower) | Requires [Addon Script](https://gist.github.com/DaPigGuy/07442f8b98a70e5973a528e4516e35d1). See [installation steps](https://github.com/Ifera/ScoreHud/tree/v5#how-to-use-addons) and [tags](https://rtdx.aericio.net/en/latest/plugins/piggyfactions/docs/addons.html#scorehud-v5-legacy). |
-| [![Download] ScoreHud v6](https://poggit.pmmp.io/p/ScoreHud) | Scoreboard Integration (faster) | Automatically enabled. See [tags](https://rtdx.aericio.net/en/latest/plugins/piggyfactions/docs/addons.html#scorehud-v6). |
-| [![Download] EconomyAPI](https://poggit.pmmp.io/p/EconomyAPI) | Economy Integration | [Additional setup required](https://rtdx.aericio.net/en/latest/plugins/piggyfactions/docs/further-configuration.html#economy). |
-| [![Download] MultiEconomy](https://poggit.pmmp.io/p/MultiEconomy) | Economy Integration | [Additional setup required](https://rtdx.aericio.net/en/latest/plugins/piggyfactions/docs/further-configuration.html#economy). |
-
-[Download]: https://i.imgur.com/PnWVUhK.png
-
 ## Issue Reporting
 * If you experience an unexpected non-crash behavior with PiggyFactions, click [here](https://github.com/DaPigGuy/PiggyFactions/issues/new?assignees=DaPigGuy&labels=bug&template=bug_report.md&title=).
 * If you experience a crash in PiggyFactions, click [here](https://github.com/DaPigGuy/PiggyFactions/issues/new?assignees=DaPigGuy&labels=bug&template=crash.md&title=).
@@ -54,7 +55,7 @@ PiggyFactions is an open-sourced factions plugin for [PocketMine-MP](https://git
 
 ## Additional Information
 * We do not support any spoons. Anything to do with spoons (Issues or PRs) will be ignored.
-* We are using the following virions: [Commando](https://github.com/ParoxityTeam/Commando), [libasynql](https://github.com/poggit/libasynql), and [libFormAPI](https://github.com/jojoe77777/FormAPI).
+* We are using the following virions: [Commando](https://github.com/DaPigGuy/Commando-4.0.0), [libasynql](https://github.com/poggit/libasynql), [libPiggyEconomy](https://github.com/DaPigGuy/libPiggyEconomy) and [libFormAPI](https://github.com/DaPigGuy/FormAPI-4.0.0).
     * **Unless you know what you are doing, use the pre-compiled phar from [Poggit-CI](https://poggit.pmmp.io/ci/DaPigGuy/PiggyFactions/~) and not GitHub.**
     * If you wish to run it via source, check out [DEVirion](https://github.com/poggit/devirion).
 
