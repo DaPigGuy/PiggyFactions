@@ -18,15 +18,21 @@ class DepositSubCommand extends FactionSubCommand
             $member->sendMessage("economy.negative-money");
             return;
         }
-        $balance = $this->plugin->getEconomyProvider()->getMoney($sender);
-        if ($balance < $args["money"]) {
-            $member->sendMessage("economy.not-enough-money", ["{DIFFERENCE}" => $args["money"] - $balance]);
-            return;
-        }
-        $this->plugin->getEconomyProvider()->takeMoney($sender, $args["money"]);
-        $faction->addMoney($args["money"]);
-        $member->sendMessage("commands.deposit.success", ["{MONEY}" => $args["money"]]);
+        $this->plugin->getEconomyProvider()->getMoney($sender, function (float|int $balance) use ($args, $member, $sender, $faction) {
+            if ($balance < $args["money"]) {
+                $member->sendMessage("economy.not-enough-money", ["{DIFFERENCE}" => $args["money"] - $balance]);
+                return;
+            }
+            $this->plugin->getEconomyProvider()->takeMoney($sender, $args["money"], function (bool $success) use ($member, $args, $faction) {
+                if (!$success) {
+                    $member->sendMessage("generic-error");
+                    return;
+                }
+                $faction->addMoney($args["money"]);
+                $member->sendMessage("commands.deposit.success", ["{MONEY}" => $args["money"]]);
+            });
 
+        });
     }
 
     protected function prepare(): void

@@ -23,9 +23,14 @@ class WithdrawSubCommand extends FactionSubCommand
             $member->sendMessage("economy.not-enough-money", ["{DIFFERENCE}" => $args["money"] - $balance]);
             return;
         }
-        $this->plugin->getEconomyProvider()->giveMoney($sender, $args["money"]);
-        $faction->removeMoney($args["money"]);
-        $member->sendMessage("commands.withdraw.success", ["{MONEY}" => $args["money"]]);
+        $this->plugin->getEconomyProvider()->giveMoney($sender, $args["money"], function(bool $success) use ($member, $args, $faction): void {
+            if (!$success) {
+                $member->sendMessage("generic-error");
+                return;
+            }
+            $faction->removeMoney($args["money"]);
+            $member->sendMessage("commands.withdraw.success", ["{MONEY}" => $args["money"]]);
+        });
     }
 
     protected function prepare(): void
