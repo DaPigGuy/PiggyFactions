@@ -1,3 +1,4 @@
+generic-error: "{RED}发生了一件意外的错误."
 chat:
   ally: "{BOLD}{GOLD}盟友 {RESET}{LIGHT_PURPLE}{RANK_SYMBOL}{FACTION} {RESET}{PLAYER}: {MESSAGE}"
   faction: "{BOLD}{GOLD}公会 {RESET}{RANK_SYMBOL}{PLAYER}: {MESSAGE}"

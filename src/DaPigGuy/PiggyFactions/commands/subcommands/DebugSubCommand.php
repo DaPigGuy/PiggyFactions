@@ -27,7 +27,7 @@ class DebugSubCommand extends FactionSubCommand
                 "VERSION: " . $plugin->getDescription()->getVersion() . PHP_EOL .
                 "VIA: " . $plugin->getPoggitBuildInfo()->getSpecificVersion() . PHP_EOL .
                 "DATABASE: " . $config->getNested("database.type") . PHP_EOL .
-                "ECONOMY: " . ($config->getNested("economy.enabled") ? $config->getNested("economy.economyapi") : "DISABLED") . PHP_EOL .
+                "ECONOMY: " . ($config->getNested("economy.enabled") ? $config->getNested("economy.provider") : "DISABLED") . PHP_EOL .
                 "FORMS: " . ($config->get("forms") ? "ENABLED" : "DISABLED") . PHP_EOL .
                 "-- PMMP INFO --" . PHP_EOL .
                 "NAME: " . $plugin->getServer()->getName() . PHP_EOL .
