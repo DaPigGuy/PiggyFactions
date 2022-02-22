@@ -29,4 +29,9 @@ class LanguageEnumArgument extends StringEnumArgument
     {
         return LanguageManager::LANGUAGES;
     }
+
+    public function getEnumName(): string
+    {
+        return "language";
+    }
 }

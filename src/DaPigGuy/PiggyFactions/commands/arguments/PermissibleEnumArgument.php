@@ -31,4 +31,9 @@ class PermissibleEnumArgument extends StringEnumArgument
     {
         return "permissible";
     }
+
+    public function getEnumName(): string
+    {
+        return "permissible";
+    }
 }
