@@ -8,6 +8,7 @@ use CortexPE\Commando\BaseCommand;
 use CortexPE\Commando\PacketHooker;
 use DaPigGuy\libPiggyEconomy\libPiggyEconomy;
 use DaPigGuy\libPiggyEconomy\providers\EconomyProvider;
+use DaPigGuy\libPiggyUpdateChecker\libPiggyUpdateChecker;
 use DaPigGuy\PiggyCustomEnchants\utils\AllyChecks;
 use DaPigGuy\PiggyFactions\addons\scorehud\ScoreHudListener;
 use DaPigGuy\PiggyFactions\addons\scorehud\ScoreHudManager;
@@ -21,7 +22,6 @@ use DaPigGuy\PiggyFactions\logs\LogsManager;
 use DaPigGuy\PiggyFactions\permissions\PermissionFactory;
 use DaPigGuy\PiggyFactions\players\PlayerManager;
 use DaPigGuy\PiggyFactions\addons\hrkchat\TagManager;
-use DaPigGuy\PiggyFactions\tasks\CheckUpdatesTask;
 use DaPigGuy\PiggyFactions\tasks\ShowChunksTask;
 use DaPigGuy\PiggyFactions\tasks\UpdatePowerTask;
 use DaPigGuy\PiggyFactions\utils\PoggitBuildInfo;
@@ -41,7 +41,7 @@ class PiggyFactions extends PluginBase
     private static PiggyFactions $instance;
     private PoggitBuildInfo $poggitBuildInfo;
 
-    private DataConnector $database;
+    private ?DataConnector $database = null;
     private ?EconomyProvider $economyProvider = null;
 
     private FactionsManager $factionsManager;
@@ -78,6 +78,8 @@ class PiggyFactions extends PluginBase
         self::$instance = $this;
         $this->poggitBuildInfo = new PoggitBuildInfo($this, $this->getFile(), str_starts_with($this->getFile(), "phar://"));
 
+        libPiggyUpdateChecker::init($this);
+
         $this->saveDefaultConfig();
         $this->initDatabase();
         libPiggyEconomy::init();
@@ -110,12 +112,11 @@ class PiggyFactions extends PluginBase
 
         $this->getScheduler()->scheduleRepeatingTask(new ShowChunksTask($this), 10);
         $this->getScheduler()->scheduleRepeatingTask(new UpdatePowerTask($this), UpdatePowerTask::INTERVAL);
-        $this->getServer()->getAsyncPool()->submitTask(new CheckUpdatesTask());
     }
 
     public function onDisable(): void
     {
-        if ($this->database !== null) {
+        if ($this->database) {
             $this->database->waitAll();
             $this->database->close();
         }
@@ -175,7 +176,7 @@ class PiggyFactions extends PluginBase
         return $this->poggitBuildInfo;
     }
 
-    public function getDatabase(): DataConnector
+    public function getDatabase(): ?DataConnector
     {
         return $this->database;
     }

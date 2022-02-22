@@ -1,7 +1,6 @@
 --- # Poggit-CI Manifest. Open the CI at https://poggit.pmmp.io/ci/DaPigGuy/PiggyFactions
 branches:
   - master
-  - pmmp-4.0.0
 projects:
   PiggyFactions:
     path: ""
@@ -15,6 +14,8 @@ projects:
         version: ^2.1.0
       - src: DaPigGuy/libPiggyEconomy/libPiggyEconomy
         version: ^3.0.0
+      - src: DaPigGuy/libPiggyUpdateChecker/libPiggyUpdateChecker
+        version: ^1.0.0
     lint:
       phpstan: false
 ...
