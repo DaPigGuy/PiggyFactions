@@ -30,6 +30,10 @@ class Faction
     /** @var Flag[] */
     private array $flags;
 
+    /** @var string[] */
+    private array $relationWish;
+
+    /** @var Player[] */
     private array $invitedPlayers;
 
     public function __construct(private string $id, private string $name, private int $creationTime, private ?string $description, private ?string $motd, array $members, array $permissions, array $flags, private ?Position $home, private ?World $homeWorld, private array $relations, private array $banned, private float $money, private float $powerboost)
