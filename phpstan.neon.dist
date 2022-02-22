@@ -13,6 +13,7 @@ parameters:
     - phar:///source/vendor/FormAPI.phar/src/
     - phar:///source/vendor/libasynql.phar/src/
     - phar:///source/vendor/libPiggyEconomy.phar/src/
+    - phar:///source/vendor/libPiggyUpdateChecker.phar/src/
   excludePaths:
     analyse:
      - source/vendor
