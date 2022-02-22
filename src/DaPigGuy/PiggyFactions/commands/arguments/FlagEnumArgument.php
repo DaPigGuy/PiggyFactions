@@ -32,4 +32,9 @@ class FlagEnumArgument extends StringEnumArgument
             return $flag->getName();
         }, FlagFactory::getFlags()));
     }
+
+    public function getEnumName(): string
+    {
+        return "flag";
+    }
 }

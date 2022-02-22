@@ -32,4 +32,9 @@ class PermissionEnumArgument extends StringEnumArgument
             return $permission->getName();
         }, PermissionFactory::getPermissions()));
     }
+
+    public function getEnumName(): string
+    {
+        return "permission";
+    }
 }
