@@ -11,17 +11,9 @@ use pocketmine\event\Cancellable;
 
 class FactionRoleChangeEvent extends FactionMemberEvent implements Cancellable
 {
-    private FactionsPlayer $changedBy;
-
-    private ?string $oldRole;
-    private ?string $newRole;
-
-    public function __construct(Faction $faction, FactionsPlayer $member, FactionsPlayer $changedBy, ?string $oldRole, ?string $newRole)
+    public function __construct(Faction $faction, FactionsPlayer $member, private FactionsPlayer $changedBy, private ?string $oldRole, private ?string $newRole)
     {
         parent::__construct($faction, $member);
-        $this->changedBy = $changedBy;
-        $this->oldRole = $oldRole;
-        $this->newRole = $newRole;
     }
 
     public function getChangedBy(): FactionsPlayer

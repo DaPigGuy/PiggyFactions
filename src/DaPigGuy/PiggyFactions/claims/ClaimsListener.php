@@ -23,13 +23,8 @@ use pocketmine\world\Position;
 
 class ClaimsListener implements Listener
 {
-    private PiggyFactions $plugin;
-    private ClaimsManager $manager;
-
-    public function __construct(PiggyFactions $plugin, ClaimsManager $claimsManager)
+    public function __construct(private PiggyFactions $plugin, private ClaimsManager $claimsManager)
     {
-        $this->plugin = $plugin;
-        $this->manager = $claimsManager;
     }
 
     public function onBreak(BlockBreakEvent $event): void

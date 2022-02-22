@@ -10,16 +10,9 @@ use pocketmine\event\Cancellable;
 
 class FactionPermissionChangeEvent extends FactionEvent implements Cancellable
 {
-    private string $role;
-    private string $permission;
-    private bool $value;
-
-    public function __construct(Faction $faction, string $role, string $permission, bool $value)
+    public function __construct(Faction $faction, private string $role, private string $permission, private bool $value)
     {
         parent::__construct($faction);
-        $this->role = $role;
-        $this->permission = $permission;
-        $this->value = $value;
     }
 
     public function getRole(): string

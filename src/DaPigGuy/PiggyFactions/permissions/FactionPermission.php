@@ -31,13 +31,8 @@ class FactionPermission implements JsonSerializable
     const UNBAN = "unban";
     const UNCLAIM = "unclaim";
 
-    private string $name;
-    private array $holders;
-
-    public function __construct(string $name, array $holders = [Roles::OFFICER])
+    public function __construct(private string $name, private array $holders = [Roles::OFFICER])
     {
-        $this->name = $name;
-        $this->holders = $holders;
     }
 
     public function getName(): string

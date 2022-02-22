@@ -13,13 +13,11 @@ use pocketmine\player\Player;
 
 class LogsManager
 {
-    private PiggyFactions $plugin;
     private static LogsManager $instance;
 
-    public function __construct(PiggyFactions $plugin)
+    public function __construct(private PiggyFactions $plugin)
     {
         self::$instance = $this;
-        $this->plugin = $plugin;
     }
 
     public static function getInstance(): LogsManager

@@ -16,13 +16,8 @@ class FactionLog implements JsonSerializable
     const LEAVE = "leave";
     const LEADER_CHANGE = "leader_change";
 
-    private string $name;
-    private array $data;
-
-    public function __construct(string $name, array $data = [])
+    public function __construct(private string $name, private array $data = [])
     {
-        $this->name = $name;
-        $this->data = $data;
     }
 
     public function getName(): string

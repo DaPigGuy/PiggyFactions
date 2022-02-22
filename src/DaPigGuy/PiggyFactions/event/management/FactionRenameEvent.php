@@ -11,12 +11,9 @@ use pocketmine\event\Cancellable;
 
 class FactionRenameEvent extends FactionMemberEvent implements Cancellable
 {
-    private string $name;
-
-    public function __construct(Faction $faction, FactionsPlayer $member, string $name)
+    public function __construct(Faction $faction, FactionsPlayer $member, private string $name)
     {
         parent::__construct($faction, $member);
-        $this->name = $name;
     }
 
     public function getName(): string

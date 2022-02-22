@@ -10,11 +10,8 @@ use pocketmine\player\Player;
 
 class HRKChatTagListener implements Listener
 {
-    private TagManager $tagManager;
-
-    public function __construct(TagManager $tagManager)
+    public function __construct(private TagManager $tagManager)
     {
-        $this->tagManager = $tagManager;
     }
 
     public function onTagResolve(PlaceholderResolveEvent $event): void

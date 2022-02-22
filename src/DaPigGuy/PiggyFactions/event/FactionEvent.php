@@ -12,11 +12,8 @@ abstract class FactionEvent extends Event
 {
     use CancellableTrait;
 
-    private Faction $faction;
-
-    public function __construct(Faction $faction)
+    public function __construct(private Faction $faction)
     {
-        $this->faction = $faction;
     }
 
     public function getFaction(): Faction

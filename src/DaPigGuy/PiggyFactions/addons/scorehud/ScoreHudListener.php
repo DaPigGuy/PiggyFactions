@@ -17,11 +17,8 @@ use pocketmine\event\Listener;
 
 class ScoreHudListener implements Listener
 {
-    private PiggyFactions $plugin;
-
-    public function __construct(PiggyFactions $plugin)
+    public function __construct(private PiggyFactions $plugin)
     {
-        $this->plugin = $plugin;
     }
 
     public function onTagResolve(TagsResolveEvent $event): void

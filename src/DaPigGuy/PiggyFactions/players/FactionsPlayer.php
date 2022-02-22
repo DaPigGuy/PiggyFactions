@@ -15,15 +15,6 @@ use Ramsey\Uuid\UuidInterface;
 
 class FactionsPlayer
 {
-    private UuidInterface $uuid;
-    private string $username;
-    private ?string $faction;
-    private ?string $role;
-    private float $power;
-    private float $powerboost;
-
-    private string $language;
-
     private bool $canSeeChunks = false;
     private bool $isAutoClaiming = false;
     private bool $isAutoUnclaiming = false;
@@ -33,15 +24,8 @@ class FactionsPlayer
 
     private bool $adminMode = false;
 
-    public function __construct(UuidInterface $uuid, string $username, ?string $faction, ?string $role, float $power, float $powerboost, string $language)
+    public function __construct(private UuidInterface $uuid, private string $username, private ?string $faction, private ?string $role, private float $power, private float $powerboost, private string $language)
     {
-        $this->uuid = $uuid;
-        $this->username = $username;
-        $this->faction = $faction;
-        $this->role = $role;
-        $this->power = $power;
-        $this->powerboost = $powerboost;
-        $this->language = $language;
     }
 
     public function getUuid(): UuidInterface

@@ -14,18 +14,15 @@ use Ramsey\Uuid\Uuid;
 
 class FactionsManager
 {
-    private PiggyFactions $plugin;
-
     private static FactionsManager $instance;
 
     /** @var Faction[] */
     private array $factions = [];
 
-    public function __construct(PiggyFactions $plugin)
+    public function __construct(private PiggyFactions $plugin)
     {
         self::$instance = $this;
 
-        $this->plugin = $plugin;
         $plugin->getDatabase()->executeSelect("piggyfactions.factions.load", [], function (array $rows): void {
             foreach ($rows as $row) {
                 $homeWorld = null;

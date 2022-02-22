@@ -12,12 +12,9 @@ abstract class FactionMemberEvent extends FactionEvent
 {
     use CancellableTrait;
 
-    private FactionsPlayer $member;
-
-    public function __construct(Faction $faction, FactionsPlayer $member)
+    public function __construct(Faction $faction, private FactionsPlayer $member)
     {
         parent::__construct($faction);
-        $this->member = $member;
     }
 
     public function getMember(): FactionsPlayer

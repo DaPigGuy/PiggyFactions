@@ -11,14 +11,9 @@ use pocketmine\event\Cancellable;
 
 class FactionLeadershipTransferEvent extends FactionEvent implements Cancellable
 {
-    private FactionsPlayer $old;
-    private FactionsPlayer $new;
-
-    public function __construct(Faction $faction, FactionsPlayer $old, FactionsPlayer $new)
+    public function __construct(Faction $faction, private FactionsPlayer $old, private FactionsPlayer $new)
     {
         parent::__construct($faction);
-        $this->old = $old;
-        $this->new = $new;
     }
 
     public function getOld(): FactionsPlayer

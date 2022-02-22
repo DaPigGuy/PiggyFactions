@@ -12,17 +12,8 @@ use pocketmine\world\World;
 
 class Claim
 {
-    private string $faction;
-    private int $chunkX;
-    private int $chunkZ;
-    private string $level;
-
-    public function __construct(string $faction, int $chunkX, int $chunkZ, string $level)
+    public function __construct(private string $faction, private int $chunkX, private int $chunkZ, private string $level)
     {
-        $this->faction = $faction;
-        $this->chunkX = $chunkX;
-        $this->chunkZ = $chunkZ;
-        $this->level = $level;
     }
 
     public function getFaction(): ?Faction

@@ -23,12 +23,6 @@ use Ramsey\Uuid\UuidInterface;
 
 class Faction
 {
-    private string $id;
-    private string $name;
-    private int $creationTime;
-    private ?string $description;
-    private ?string $motd;
-
     /** @var UuidInterface[] */
     private array $members;
     /** @var FactionPermission[] */
@@ -36,27 +30,10 @@ class Faction
     /** @var Flag[] */
     private array $flags;
 
-    private ?Position $home;
-    private ?World $homeWorld;
-
-    private array $relations;
-    private array $relationWish;
-
-    private array $banned;
-
-    private float $money;
-
-    private float $powerboost;
-
     private array $invitedPlayers;
 
-    public function __construct(string $id, string $name, int $creationTime, ?string $description, ?string $motd, array $members, array $permissions, array $flags, ?Position $home, ?World $homeWorld, array $relations, array $banned, float $money, float $powerboost)
+    public function __construct(private string $id, private string $name, private int $creationTime, private ?string $description, private ?string $motd, array $members, array $permissions, array $flags, private ?Position $home, private ?World $homeWorld, private array $relations, private array $banned, private float $money, private float $powerboost)
     {
-        $this->id = $id;
-        $this->name = $name;
-        $this->creationTime = $creationTime;
-        $this->description = $description;
-        $this->motd = $motd;
         $this->members = array_map(function (string $uuid): UuidInterface {
             return Uuid::fromString($uuid);
         }, $members);
@@ -70,12 +47,6 @@ class Faction
             if (isset($flags[$name])) $flag->setValue($flags[$name]);
             $this->flags[$name] = $flag;
         }
-        $this->home = $home;
-        $this->homeWorld = $homeWorld;
-        $this->relations = $relations;
-        $this->banned = $banned;
-        $this->money = $money;
-        $this->powerboost = $powerboost;
     }
 
     public function getId(): string

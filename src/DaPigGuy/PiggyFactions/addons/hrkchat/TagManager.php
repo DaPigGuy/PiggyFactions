@@ -7,23 +7,18 @@ namespace DaPigGuy\PiggyFactions\addons\hrkchat;
 use DaPigGuy\PiggyFactions\factions\Faction;
 use DaPigGuy\PiggyFactions\PiggyFactions;
 use DaPigGuy\PiggyFactions\players\FactionsPlayer;
-use pocketmine\player\Player;
 use DaPigGuy\PiggyFactions\utils\RoundValue;
+use pocketmine\player\Player;
 
 class TagManager
 {
-    /** @var PiggyFactions */
-    private PiggyFactions $plugin;
-
     private array $rankSymbols;
 
     private string $factionless;
     private string $powerless;
 
-    public function __construct(PiggyFactions $plugin)
+    public function __construct(private PiggyFactions $plugin)
     {
-        $this->plugin = $plugin;
-
         $config = $plugin->getConfig()->getNested("symbols", []);
         $this->rankSymbols = $config["ranks"] ?? [];
         $this->factionless = $config["factionless"] ?? "";

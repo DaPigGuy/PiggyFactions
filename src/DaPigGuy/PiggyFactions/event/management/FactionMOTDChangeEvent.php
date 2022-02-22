@@ -11,12 +11,9 @@ use pocketmine\event\Cancellable;
 
 class FactionMOTDChangeEvent extends FactionMemberEvent implements Cancellable
 {
-    private string $motd;
-
-    public function __construct(Faction $faction, FactionsPlayer $member, string $motd)
+    public function __construct(Faction $faction, FactionsPlayer $member, private string $motd)
     {
         parent::__construct($faction, $member);
-        $this->motd = $motd;
     }
 
     public function getMotd(): string

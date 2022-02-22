@@ -11,12 +11,9 @@ use pocketmine\player\Player;
 
 class FactionHomeTeleportEvent extends FactionEvent implements Cancellable
 {
-    private Player $player;
-
-    public function __construct(Faction $faction, Player $player)
+    public function __construct(Faction $faction, private Player $player)
     {
         parent::__construct($faction);
-        $this->player = $player;
     }
 
     public function getPlayer(): Player

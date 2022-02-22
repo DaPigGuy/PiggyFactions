@@ -13,17 +13,15 @@ use Ramsey\Uuid\UuidInterface;
 
 class PlayerManager
 {
-    private PiggyFactions $plugin;
     private static PlayerManager $instance;
 
     /** @var FactionsPlayer[] */
     private array $players = [];
 
-    public function __construct(PiggyFactions $plugin)
+    public function __construct(private PiggyFactions $plugin)
     {
         self::$instance = $this;
 
-        $this->plugin = $plugin;
         $plugin->getDatabase()->executeSelect("piggyfactions.players.load", [], function (array $rows): void {
             foreach ($rows as $row) {
                 $this->players[$row["uuid"]] = new FactionsPlayer(Uuid::fromString($row["uuid"]), $row["username"], $row["faction"], $row["role"], $row["power"], $row["powerboost"], $row["language"]);

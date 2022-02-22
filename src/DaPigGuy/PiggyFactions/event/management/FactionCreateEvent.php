@@ -13,12 +13,9 @@ class FactionCreateEvent extends PlayerEvent implements Cancellable
 {
     use CancellableTrait;
 
-    private string $name;
-
-    public function __construct(Player $player, string $name)
+    public function __construct(Player $player, private string $name)
     {
         $this->player = $player;
-        $this->name = $name;
     }
 
     public function getName(): string

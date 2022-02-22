@@ -12,14 +12,9 @@ use pocketmine\player\Player;
 
 class FactionInviteEvent extends FactionEvent implements Cancellable
 {
-    private FactionsPlayer $invitedBy;
-    private Player $invited;
-
-    public function __construct(Faction $faction, FactionsPlayer $invitedBy, Player $invited)
+    public function __construct(Faction $faction, private FactionsPlayer $invitedBy, private Player $invited)
     {
         parent::__construct($faction);
-        $this->invitedBy = $invitedBy;
-        $this->invited = $invited;
     }
 
     public function getInvitedBy(): FactionsPlayer

@@ -39,7 +39,6 @@ class LanguageManager
     ];
 
     private static LanguageManager $instance;
-    private PiggyFactions $plugin;
 
     private string $defaultLanguage;
 
@@ -47,11 +46,9 @@ class LanguageManager
     private array $messages;
     private array $colorTags;
 
-    public function __construct(PiggyFactions $plugin)
+    public function __construct(private PiggyFactions $plugin)
     {
         self::$instance = $this;
-
-        $this->plugin = $plugin;
 
         $defaultLanguage = $plugin->getConfig()->getNested("languages.default", "english");
         if (!in_array($defaultLanguage, self::LANGUAGES)) {

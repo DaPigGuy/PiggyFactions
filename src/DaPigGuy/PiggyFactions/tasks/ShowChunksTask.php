@@ -12,11 +12,8 @@ use pocketmine\world\particle\RedstoneParticle;
 
 class ShowChunksTask extends Task
 {
-    private PiggyFactions $plugin;
-
-    public function __construct(PiggyFactions $plugin)
+    public function __construct(private PiggyFactions $plugin)
     {
-        $this->plugin = $plugin;
     }
 
     public function onRun(): void

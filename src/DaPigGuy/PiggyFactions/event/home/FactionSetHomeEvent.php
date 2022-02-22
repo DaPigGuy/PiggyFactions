@@ -12,12 +12,9 @@ use pocketmine\world\Position;
 
 class FactionSetHomeEvent extends FactionMemberEvent implements Cancellable
 {
-    private Position $position;
-
-    public function __construct(Faction $faction, FactionsPlayer $member, Position $position)
+    public function __construct(Faction $faction, FactionsPlayer $member, private Position $position)
     {
         parent::__construct($faction, $member);
-        $this->position = $position;
     }
 
     public function getPosition(): Position

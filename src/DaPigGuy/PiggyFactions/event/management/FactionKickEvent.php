@@ -11,12 +11,9 @@ use pocketmine\event\Cancellable;
 
 class FactionKickEvent extends FactionMemberEvent implements Cancellable
 {
-    private FactionsPlayer $kickedBy;
-
-    public function __construct(Faction $faction, FactionsPlayer $member, FactionsPlayer $kickedBy)
+    public function __construct(Faction $faction, FactionsPlayer $member, private FactionsPlayer $kickedBy)
     {
         parent::__construct($faction, $member);
-        $this->kickedBy = $kickedBy;
     }
 
     public function getKickedBy(): FactionsPlayer

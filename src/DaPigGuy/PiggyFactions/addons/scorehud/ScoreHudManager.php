@@ -13,13 +13,11 @@ use pocketmine\player\Player;
 
 class ScoreHudManager
 {
-    private PiggyFactions $plugin;
     private static ScoreHudManager $instance;
 
-    public function __construct(PiggyFactions $plugin)
+    public function __construct(private PiggyFactions $plugin)
     {
         self::$instance = $this;
-        $this->plugin = $plugin;
     }
 
     public static function getInstance(): ScoreHudManager

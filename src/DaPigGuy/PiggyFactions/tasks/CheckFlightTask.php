@@ -13,15 +13,10 @@ use pocketmine\scheduler\Task;
 
 class CheckFlightTask extends Task
 {
-    private Player $player;
-    private FactionsPlayer $member;
-
     private int $duration = 5;
 
-    public function __construct(Player $player, FactionsPlayer $member)
+    public function __construct(private Player $player, private FactionsPlayer $member)
     {
-        $this->player = $player;
-        $this->member = $member;
     }
 
     public function onRun(): void

@@ -11,12 +11,9 @@ use pocketmine\event\Cancellable;
 
 class FactionUnbanEvent extends FactionMemberEvent implements Cancellable
 {
-    private FactionsPlayer $unbannedBy;
-
-    public function __construct(Faction $faction, FactionsPlayer $member, FactionsPlayer $unbannedBy)
+    public function __construct(Faction $faction, FactionsPlayer $member, private FactionsPlayer $unbannedBy)
     {
         parent::__construct($faction, $member);
-        $this->unbannedBy = $unbannedBy;
     }
 
     public function getUnbannedBy(): FactionsPlayer
