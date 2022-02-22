@@ -14,29 +14,24 @@ class CheckUpdatesTask extends AsyncTask
 {
     public function onRun(): void
     {
-        $this->setResult([Internet::getURL("https://poggit.pmmp.io/releases.json?name=PiggyFactions", 10, [], $error), $error]);
+        $result = Internet::getURL("https://poggit.pmmp.io/releases.json?name=PiggyFactions", 10, [], $error);
+        $this->setResult([$result?->getBody(), $error]);
     }
 
     public function onCompletion(): void
     {
         $plugin = PiggyFactions::getInstance();
-        try {
-            if ($plugin->isEnabled()) {
-                $results = $this->getResult();
-
-                $error = $results[1];
-                if ($error !== null) throw new Exception($error);
-
-                $data = json_decode($results[0]->getBody(), true);
-                if (version_compare($plugin->getDescription()->getVersion(), $data[0]["version"]) === -1) {
-                    if (ApiVersion::isCompatible($plugin->getServer()->getApiVersion(), $data[0]["api"][0])) {
-                        PiggyFactions::getInstance()->getLogger()->info("PiggyFactions v" . $data[0]["version"] . " is available for download at " . $data[0]["artifact_url"] . "/PiggyFactions.phar");
-                    }
+        [$body, $error] = $this->getResult();
+        if ($error) {
+            $plugin->getLogger()->warning("Auto-update check failed.");
+            $plugin->getLogger()->debug($error);
+        } else if ($plugin->isEnabled()) {
+            $data = json_decode($body, true);
+            if (version_compare($plugin->getDescription()->getVersion(), $data[0]["version"]) === -1) {
+                if (ApiVersion::isCompatible($plugin->getServer()->getApiVersion(), $data[0]["api"][0])) {
+                    $plugin->getLogger()->info("PiggyFactions v" . $data[0]["version"] . " is available for download at " . $data[0]["artifact_url"] . "/PiggyFactions.phar");
                 }
             }
-        } catch (Exception $exception) {
-            $plugin->getLogger()->warning("Auto-update check failed.");
-            $plugin->getLogger()->debug((string)$exception);
         }
     }
 }
