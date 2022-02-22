@@ -12,7 +12,7 @@ projects:
       - src: poggit/libasynql/libasynql
         version: ^3.4.0
       - src: DaPigGuy/FormAPI-4.0.0/libFormAPI
-        version: ^1.3
+        version: ^2.1.0
       - src: DaPigGuy/libPiggyEconomy/libPiggyEconomy
         version: ^3.0.0
     lint:
