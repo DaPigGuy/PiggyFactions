@@ -10,6 +10,7 @@ use DaPigGuy\libPiggyEconomy\libPiggyEconomy;
 use DaPigGuy\libPiggyEconomy\providers\EconomyProvider;
 use DaPigGuy\libPiggyUpdateChecker\libPiggyUpdateChecker;
 use DaPigGuy\PiggyCustomEnchants\utils\AllyChecks;
+use DaPigGuy\PiggyFactions\addons\hrkchat\TagManager;
 use DaPigGuy\PiggyFactions\addons\scorehud\ScoreHudListener;
 use DaPigGuy\PiggyFactions\addons\scorehud\ScoreHudManager;
 use DaPigGuy\PiggyFactions\claims\ClaimsManager;
@@ -21,7 +22,6 @@ use DaPigGuy\PiggyFactions\logs\LogsListener;
 use DaPigGuy\PiggyFactions\logs\LogsManager;
 use DaPigGuy\PiggyFactions\permissions\PermissionFactory;
 use DaPigGuy\PiggyFactions\players\PlayerManager;
-use DaPigGuy\PiggyFactions\addons\hrkchat\TagManager;
 use DaPigGuy\PiggyFactions\tasks\ShowChunksTask;
 use DaPigGuy\PiggyFactions\tasks\UpdatePowerTask;
 use DaPigGuy\PiggyFactions\utils\PoggitBuildInfo;
@@ -63,9 +63,10 @@ class PiggyFactions extends PluginBase
     {
         foreach (
             [
-                "libasynql" => libasynql::class,
                 "Commando" => BaseCommand::class,
-                "libformapi" => Form::class
+                "libformapi" => Form::class,
+                "libasynql" => libasynql::class,
+                "libPiggyUpdateChecker" => libPiggyUpdateChecker::class
             ] as $virion => $class
         ) {
             if (!class_exists($class)) {
