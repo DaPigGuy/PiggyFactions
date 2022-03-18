@@ -10,7 +10,7 @@ database:
   worker-limit: 1
 economy:
   enabled: false
-  provider: economyapi
+  provider: bedrockeconomy
   faction-bank:
     enabled: true
 factions:
