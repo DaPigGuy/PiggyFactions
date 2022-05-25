@@ -6,7 +6,7 @@ jobs:
   phpstan:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           ref: ${{ github.ref }}
       - name: Create Vendor Directory
@@ -21,10 +21,10 @@ jobs:
         run: |
           wget -O vendor/libasynql.phar https://poggit.pmmp.io/r/159125/libasynql_dev-174.phar
           wget -O vendor/FormAPI.phar https://poggit.pmmp.io/r/163460/FormAPI_dev-2.phar
-          wget -O vendor/libPiggyEconomy.phar https://poggit.pmmp.io/r/163250/libPiggyEconomy_dev-12.phar
+          wget -O vendor/libPiggyEconomy.phar https://poggit.pmmp.io/r/177191/libPiggyEconomy_dev-18.phar
           wget -O vendor/libPiggyUpdateChecker.phar https://poggit.pmmp.io/r/163495/libPiggyUpdateChecker_dev-1.phar
           wget -O vendor/Commando.phar https://poggit.pmmp.io/r/162923/Commando_dev-30.phar
       - name: Run PHPStan
-        uses: paroxity/pmmp-phpstan-action@4.2.0
+        uses: paroxity/pmmp-phpstan-action@4.3.4
         with:
           phpstan-config: phpstan.neon.dist

@@ -13,7 +13,7 @@ projects:
       - src: DaPigGuy/FormAPI-4.0.0/libFormAPI
         version: ^2.1.0
       - src: DaPigGuy/libPiggyEconomy/libPiggyEconomy
-        version: ^3.0.0
+        version: ^3.0.1
       - src: DaPigGuy/libPiggyUpdateChecker/libPiggyUpdateChecker
         version: ^1.0.0
     lint:
