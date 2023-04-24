@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace DaPigGuy\PiggyFactions\commands\subcommands\roles;
 
-use DaPigGuy\PiggyFactions\libs\CortexPE\Commando\args\TextArgument;
+use CortexPE\Commando\args\TextArgument;
 use DaPigGuy\PiggyFactions\commands\subcommands\FactionSubCommand;
 use DaPigGuy\PiggyFactions\event\role\FactionRoleChangeEvent;
 use DaPigGuy\PiggyFactions\factions\Faction;

@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace DaPigGuy\PiggyFactions\commands;
 
-use DaPigGuy\PiggyFactions\libs\CortexPE\Commando\BaseCommand;
-use DaPigGuy\PiggyFactions\libs\CortexPE\Commando\BaseSubCommand;
+use CortexPE\Commando\BaseCommand;
+use CortexPE\Commando\BaseSubCommand;
 use DaPigGuy\PiggyFactions\commands\subcommands\admin\AddPowerSubCommand;
 use DaPigGuy\PiggyFactions\commands\subcommands\admin\AdminSubCommand;
 use DaPigGuy\PiggyFactions\commands\subcommands\admin\powerboost\PowerBoostSubCommand;
@@ -53,7 +53,7 @@ use DaPigGuy\PiggyFactions\commands\subcommands\TopSubCommand;
 use DaPigGuy\PiggyFactions\commands\subcommands\VersionSubCommand;
 use DaPigGuy\PiggyFactions\PiggyFactions;
 use DaPigGuy\PiggyFactions\utils\ChatTypes;
-use DaPigGuy\PiggyFactions\libs\jojoe77777\FormAPI\SimpleForm;
+use jojoe77777\FormAPI\SimpleForm;
 use pocketmine\command\CommandSender;
 use pocketmine\player\Player;
 
@@ -100,13 +100,9 @@ class FactionCommand extends BaseCommand
         if ($this->plugin->isFactionBankEnabled()) $this->registerSubCommand(new DepositSubCommand($this->plugin, "deposit", "Deposit money into faction bank"));
         $this->registerSubCommand(new DescriptionSubCommand($this->plugin, "description", "Set faction description", ["desc"]));
         $this->registerSubCommand(new DisbandSubCommand($this->plugin, "disband", "Disband your faction"));
-        //$this->registerSubCommand(new EnemySubCommand($this->plugin, "enemy", "Mark faction as an enemy"));
+        $this->registerSubCommand(new EnemySubCommand($this->plugin, "enemy", "Mark faction as an enemy"));
         $this->registerSubCommand(new FlagSubCommand($this->plugin, "flag", "Manage faction flags"));
-
-
-        if ($this->plugin->getConfig()->getNested("fly", false)) {
-            $this->registerSubCommand(new FlySubCommand($this->plugin, "fly", "Fly dans son territoire"));
-        }
+        $this->registerSubCommand(new FlySubCommand($this->plugin, "fly", "Fly within faction territories"));
         $this->registerSubCommand(new HelpSubCommand($this->plugin, $this, "help", "Display command information"));
         $this->registerSubCommand(new HomeSubCommand($this->plugin, "home", "Teleport to faction home"));
         $this->registerSubCommand(new InfoSubCommand($this->plugin, "info", "Display faction info", ["who"]));

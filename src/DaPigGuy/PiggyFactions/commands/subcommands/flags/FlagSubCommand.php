@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace DaPigGuy\PiggyFactions\commands\subcommands\flags;
 
-use DaPigGuy\PiggyFactions\libs\CortexPE\Commando\args\BooleanArgument;
+use CortexPE\Commando\args\BooleanArgument;
 use DaPigGuy\PiggyFactions\commands\arguments\FlagEnumArgument;
 use DaPigGuy\PiggyFactions\commands\subcommands\FactionSubCommand;
 use DaPigGuy\PiggyFactions\event\flags\FactionFlagChangeEvent;

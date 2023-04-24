@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace DaPigGuy\PiggyFactions\utils;
 
-use DaPigGuy\PiggyFactions\libs\CortexPE\Commando\args\BaseArgument;
+use CortexPE\Commando\args\BaseArgument;
 use DaPigGuy\PiggyFactions\PiggyFactions;
 use pocketmine\command\CommandSender;
 

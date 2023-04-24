@@ -8,7 +8,7 @@ use DaPigGuy\PiggyFactions\commands\subcommands\management\LogsSubCommand;
 use DaPigGuy\PiggyFactions\factions\Faction;
 use DaPigGuy\PiggyFactions\language\LanguageManager;
 use DaPigGuy\PiggyFactions\PiggyFactions;
-use DaPigGuy\PiggyFactions\libs\jojoe77777\FormAPI\SimpleForm;
+use jojoe77777\FormAPI\SimpleForm;
 use pocketmine\player\Player;
 
 class LogsManager

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace DaPigGuy\PiggyFactions\commands\subcommands\claims\unclaim;
 
-use DaPigGuy\PiggyFactions\libs\CortexPE\Commando\args\IntegerArgument;
+use CortexPE\Commando\args\IntegerArgument;
 use pocketmine\player\Player;
 use pocketmine\world\format\Chunk;
 

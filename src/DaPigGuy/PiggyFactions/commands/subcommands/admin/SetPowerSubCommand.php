@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace DaPigGuy\PiggyFactions\commands\subcommands\admin;
 
-use DaPigGuy\PiggyFactions\libs\CortexPE\Commando\args\FloatArgument;
-use DaPigGuy\PiggyFactions\libs\CortexPE\Commando\args\RawStringArgument;
+use CortexPE\Commando\args\FloatArgument;
+use CortexPE\Commando\args\RawStringArgument;
 use DaPigGuy\PiggyFactions\commands\subcommands\FactionSubCommand;
 use DaPigGuy\PiggyFactions\event\member\PowerChangeEvent;
 use DaPigGuy\PiggyFactions\utils\RoundValue;

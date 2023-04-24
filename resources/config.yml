@@ -8,10 +8,6 @@ database:
     password: ""
     schema: "piggyfactions"
   worker-limit: 1
-
-limit-page: 10
-limit-page-message: "You cannot load more than 10 pages."
-fly: false
 economy:
   enabled: false
   provider: bedrockeconomy

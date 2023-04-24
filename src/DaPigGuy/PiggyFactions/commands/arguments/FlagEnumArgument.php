@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace DaPigGuy\PiggyFactions\commands\arguments;
 
-use DaPigGuy\PiggyFactions\libs\CortexPE\Commando\args\StringEnumArgument;
+use CortexPE\Commando\args\StringEnumArgument;
 use DaPigGuy\PiggyFactions\flags\Flag;
 use DaPigGuy\PiggyFactions\flags\FlagFactory;
 use pocketmine\command\CommandSender;

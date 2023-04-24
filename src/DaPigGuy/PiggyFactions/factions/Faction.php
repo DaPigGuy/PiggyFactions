@@ -257,14 +257,12 @@ class Faction
     public function setHome(Position $home): void
     {
         $this->home = $home;
-        $this->homeWorld = $home->getWorld();
         $this->update();
     }
 
     public function unsetHome(): void
     {
         $this->home = null;
-        $this->homeWorld = null;
         $this->update();
     }
 
