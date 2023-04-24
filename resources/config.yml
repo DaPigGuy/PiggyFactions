@@ -8,6 +8,9 @@ database:
     password: ""
     schema: "piggyfactions"
   worker-limit: 1
+
+limit:
+  limit-page-top: 10
 economy:
   enabled: false
   provider: bedrockeconomy

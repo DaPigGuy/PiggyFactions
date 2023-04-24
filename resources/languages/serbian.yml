@@ -147,6 +147,7 @@ commands:
     boost-faction: "{GREEN}TFrakcijina moć se povećala za {POWER}."
   top:
     header: "{GOLD}____________.[{DARK_GREEN}Najbolja frakcija{CATEGORY} ({PAGE}/{TOTALPAGES}){GOLD}].____________"
+    limit-page-message: "Ne možete čitati više od stranica."
     line:
       online: "{GOLD}#{RANK} {RELATIONCOLOR}{FACTION}{GOLD} -{YELLOW} {ONLINE}"
       members: "{GOLD}#{RANK} {RELATIONCOLOR}{FACTION}{GOLD} -{YELLOW} {MEMBERS}"

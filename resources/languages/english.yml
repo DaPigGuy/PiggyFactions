@@ -147,6 +147,7 @@ commands:
     boost-faction: "{GREEN}Your faction's power has been increased by {POWER}."
   top:
     header: "{GOLD}____________.[{DARK_GREEN}Top Factions by {CATEGORY} ({PAGE}/{TOTALPAGES}){GOLD}].____________"
+    limit-page-message: "You cannot load more than pages."
     line:
       online: "{GOLD}#{RANK} {RELATIONCOLOR}{FACTION}{GOLD} -{YELLOW} {ONLINE}"
       members: "{GOLD}#{RANK} {RELATIONCOLOR}{FACTION}{GOLD} -{YELLOW} {MEMBERS}"

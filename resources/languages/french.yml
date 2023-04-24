@@ -146,6 +146,7 @@ commands:
     boost-player: "{GREEN}Votre pouvoir maximum a été augmenté de {POWER}."
     boost-faction: "{GREEN}Le pouvoir de votre faction a été augmenté de {POWER}."
   top:
+    limit-page-message: "Vous ne pouvez pas chargez plus de pages."
     header: "{GOLD}____________.[{DARK_GREEN}Meilleures factions par {CATEGORY} ({PAGE}/{TOTALPAGES}){GOLD}].____________"
     line:
       online: "{GOLD}#{RANK} {RELATIONCOLOR}{FACTION}{GOLD} -{YELLOW} {ONLINE}"

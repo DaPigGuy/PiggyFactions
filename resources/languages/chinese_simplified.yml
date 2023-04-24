@@ -147,6 +147,7 @@ commands:
     boost-faction: "{GREEN}你的工会的力量已被增加了{POWER}."
   top:
     header: "{GOLD}____________.[{DARK_GREEN}{CATEGORY} 类别最高排名公会 ({PAGE}/{TOTALPAGES}){GOLD}].____________"
+    limit-page-message: "您不能加载超过 页。"
     line:
       online: "{GOLD}#{RANK} {RELATIONCOLOR}{FACTION}{GOLD} -{YELLOW} {ONLINE}"
       members: "{GOLD}#{RANK} {RELATIONCOLOR}{FACTION}{GOLD} -{YELLOW} {MEMBERS}"
