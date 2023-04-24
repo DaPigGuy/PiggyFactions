@@ -9,6 +9,8 @@ database:
     schema: "piggyfactions"
   worker-limit: 1
 
+fly: true
+
 limit:
   limit-page-top: 10
 economy:
