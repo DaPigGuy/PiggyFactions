@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace DaPigGuy\PiggyFactions\commands\subcommands;
 
-use CortexPE\Commando\args\IntegerArgument;
-use CortexPE\Commando\BaseSubCommand;
+use DaPigGuy\PiggyFactions\libs\CortexPE\Commando\args\IntegerArgument;
+use DaPigGuy\PiggyFactions\libs\CortexPE\Commando\BaseSubCommand;
 use DaPigGuy\PiggyFactions\commands\FactionCommand;
 use DaPigGuy\PiggyFactions\PiggyFactions;
 use pocketmine\command\CommandSender;

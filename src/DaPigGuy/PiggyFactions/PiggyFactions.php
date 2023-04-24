@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace DaPigGuy\PiggyFactions;
 
-use CortexPE\Commando\BaseCommand;
-use CortexPE\Commando\PacketHooker;
-use DaPigGuy\libPiggyEconomy\libPiggyEconomy;
-use DaPigGuy\libPiggyEconomy\providers\EconomyProvider;
-use DaPigGuy\libPiggyUpdateChecker\libPiggyUpdateChecker;
+use DaPigGuy\PiggyFactions\libs\CortexPE\Commando\BaseCommand;
+use DaPigGuy\PiggyFactions\libs\CortexPE\Commando\PacketHooker;
+use DaPigGuy\PiggyFactions\libs\DaPigGuy\libPiggyEconomy\libPiggyEconomy;
+use DaPigGuy\PiggyFactions\libs\DaPigGuy\libPiggyEconomy\providers\EconomyProvider;
+use DaPigGuy\PiggyFactions\libs\DaPigGuy\libPiggyUpdateChecker\libPiggyUpdateChecker;
 use DaPigGuy\PiggyCustomEnchants\utils\AllyChecks;
 use DaPigGuy\PiggyFactions\addons\hrkchat\TagManager;
 use DaPigGuy\PiggyFactions\addons\scorehud\ScoreHudListener;
@@ -26,13 +26,13 @@ use DaPigGuy\PiggyFactions\tasks\ShowChunksTask;
 use DaPigGuy\PiggyFactions\tasks\UpdatePowerTask;
 use DaPigGuy\PiggyFactions\utils\PoggitBuildInfo;
 use Exception;
-use jojoe77777\FormAPI\Form;
+use DaPigGuy\PiggyFactions\libs\jojoe77777\FormAPI\Form;
 use pocketmine\entity\Entity;
 use pocketmine\player\Player;
 use pocketmine\plugin\PluginBase;
 use pocketmine\utils\Config;
-use poggit\libasynql\DataConnector;
-use poggit\libasynql\libasynql;
+use DaPigGuy\PiggyFactions\libs\poggit\libasynql\DataConnector;
+use DaPigGuy\PiggyFactions\libs\poggit\libasynql\libasynql;
 
 class PiggyFactions extends PluginBase
 {

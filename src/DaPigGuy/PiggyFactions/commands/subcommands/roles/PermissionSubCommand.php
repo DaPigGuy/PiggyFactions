@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace DaPigGuy\PiggyFactions\commands\subcommands\roles;
 
-use CortexPE\Commando\args\BooleanArgument;
+use DaPigGuy\PiggyFactions\libs\CortexPE\Commando\args\BooleanArgument;
 use DaPigGuy\PiggyFactions\commands\arguments\PermissibleEnumArgument;
 use DaPigGuy\PiggyFactions\commands\arguments\PermissionEnumArgument;
 use DaPigGuy\PiggyFactions\commands\subcommands\FactionSubCommand;

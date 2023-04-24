@@ -34,9 +34,9 @@ class UnclaimSubCommand extends FactionSubCommand
 
     protected function prepare(): void
     {
-        $this->registerSubCommand(new UnclaimAllSubCommand($this->plugin, "all", "Unclaims all claims"));
+        /*$this->registerSubCommand(new UnclaimAllSubCommand($this->plugin, "all", "Unclaims all claims"));
         $this->registerSubCommand(new UnclaimAutoSubCommand($this->plugin, "auto", "Automatically unclaim chunks", ["a"]));
         $this->registerSubCommand(new UnclaimCircleSubCommand($this->plugin, "circle", "Unclaims chunks in a circle radius", ["c"]));
-        $this->registerSubCommand(new UnclaimSquareSubCommand($this->plugin, "square", "Unclaims chunks in a square radius", ["s"]));
+        $this->registerSubCommand(new UnclaimSquareSubCommand($this->plugin, "square", "Unclaims chunks in a square radius", ["s"]));*/
     }
 }

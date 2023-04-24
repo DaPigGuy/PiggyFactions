@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace DaPigGuy\PiggyFactions\commands\subcommands\management;
 
-use CortexPE\Commando\args\IntegerArgument;
-use CortexPE\Commando\args\RawStringArgument;
+use DaPigGuy\PiggyFactions\libs\CortexPE\Commando\args\IntegerArgument;
+use DaPigGuy\PiggyFactions\libs\CortexPE\Commando\args\RawStringArgument;
 use DaPigGuy\PiggyFactions\commands\subcommands\FactionSubCommand;
 use DaPigGuy\PiggyFactions\factions\Faction;
 use DaPigGuy\PiggyFactions\logs\LogsManager;
 use DaPigGuy\PiggyFactions\players\FactionsPlayer;
-use jojoe77777\FormAPI\SimpleForm;
+use DaPigGuy\PiggyFactions\libs\jojoe77777\FormAPI\SimpleForm;
 use pocketmine\player\Player;
 use pocketmine\utils\TextFormat;
 

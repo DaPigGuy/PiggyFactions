@@ -1,10 +1,17 @@
+---
 name: PiggyFactions
 main: DaPigGuy\PiggyFactions\PiggyFactions
 version: 2.0.3
-api: 4.2.0
+api:
+- 4.2.0
 author: DaPigGuy
-softdepend: [EconomyAPI, BedrockEconomy, PiggyCustomEnchants, HRKChat, ScoreHud]
-website: "https://github.com/DaPigGuy/PiggyFactions"
+softdepend:
+- EconomyAPI
+- BedrockEconomy
+- PiggyCustomEnchants
+- HRKChat
+- ScoreHud
+website: https://github.com/DaPigGuy/PiggyFactions
 permissions:
   piggyfactions:
     default: op
@@ -183,3 +190,4 @@ permissions:
   piggyfactions.command.faction.withdraw:
     default: true
     description: Allow usage of /f withdraw
+...
