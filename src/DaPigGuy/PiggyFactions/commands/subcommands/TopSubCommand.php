@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace DaPigGuy\PiggyFactions\commands\subcommands;
 
-use DaPigGuy\PiggyFactions\libs\CortexPE\Commando\args\IntegerArgument;
-use DaPigGuy\PiggyFactions\libs\CortexPE\Commando\args\RawStringArgument;
+use CortexPE\Commando\args\IntegerArgument;
+use CortexPE\Commando\args\RawStringArgument;
 use DaPigGuy\PiggyFactions\factions\Faction;
 use DaPigGuy\PiggyFactions\flags\Flag;
 use DaPigGuy\PiggyFactions\utils\RoundValue;
