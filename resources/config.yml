@@ -10,6 +10,7 @@ database:
   worker-limit: 1
 
 fly: true
+enemy: true
 
 limit:
   limit-page-top: 10

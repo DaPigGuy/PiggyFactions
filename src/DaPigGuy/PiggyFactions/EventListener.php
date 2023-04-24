@@ -82,17 +82,19 @@ class EventListener implements Listener
                 return;
             }
 
-            $claim = $this->plugin->getClaimsManager()->getClaimByPosition($entity->getPosition());
-            if ($claim !== null) {
-                if ($claim->getFaction() === $entityFaction) {
-                    if ($damagerFaction === null || !$damagerFaction->isEnemy($entityFaction)) {
+            if ($this->plugin->getConfig()->getNested("enemy", false)) {
+                $claim = $this->plugin->getClaimsManager()->getClaimByPosition($entity->getPosition());
+                if ($claim !== null) {
+                    if ($claim->getFaction() === $entityFaction) {
+                        if ($damagerFaction === null || !$damagerFaction->isEnemy($entityFaction)) {
+                            $event->cancel();
+                            $this->plugin->getLanguageManager()->sendMessage($damager, "pvp.cant-attack-in-territory", ["{PLAYER}" => $entity->getDisplayName()]);
+                            return;
+                        }
+                        $event->setModifier(-$this->plugin->getConfig()->getNested("factions.claims.shield-factor", 0.1), 56789);
+                    } elseif ($claim->getFaction()->getFlag(Flag::SAFEZONE)) {
                         $event->cancel();
-                        $this->plugin->getLanguageManager()->sendMessage($damager, "pvp.cant-attack-in-territory", ["{PLAYER}" => $entity->getDisplayName()]);
-                        return;
                     }
-                    $event->setModifier(-$this->plugin->getConfig()->getNested("factions.claims.shield-factor", 0.1), 56789);
-                } elseif ($claim->getFaction()->getFlag(Flag::SAFEZONE)) {
-                    $event->cancel();
                 }
             }
         }

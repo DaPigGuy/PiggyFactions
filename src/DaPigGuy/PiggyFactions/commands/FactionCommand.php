@@ -100,7 +100,9 @@ class FactionCommand extends BaseCommand
         if ($this->plugin->isFactionBankEnabled()) $this->registerSubCommand(new DepositSubCommand($this->plugin, "deposit", "Deposit money into faction bank"));
         $this->registerSubCommand(new DescriptionSubCommand($this->plugin, "description", "Set faction description", ["desc"]));
         $this->registerSubCommand(new DisbandSubCommand($this->plugin, "disband", "Disband your faction"));
-        $this->registerSubCommand(new EnemySubCommand($this->plugin, "enemy", "Mark faction as an enemy"));
+        if ($this->plugin->getConfig()->getNested("enemy", false)) {
+            $this->registerSubCommand(new EnemySubCommand($this->plugin, "enemy", "Mark faction as an enemy"));
+        }
         $this->registerSubCommand(new FlagSubCommand($this->plugin, "flag", "Manage faction flags"));
         if ($this->plugin->getConfig()->getNested("fly", false)) {
             $this->registerSubCommand(new FlySubCommand($this->plugin, "fly", "Fly dans son territoire"));
