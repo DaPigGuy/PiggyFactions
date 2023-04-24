@@ -65,8 +65,14 @@ class ClaimSubCommand extends FactionSubCommand
 
     protected function prepare(): void
     {
-        $this->registerSubCommand(new ClaimAutoSubCommand($this->plugin, "auto", "Automatically claim chunks", ["a"]));
-        $this->registerSubCommand(new ClaimCircleSubCommand($this->plugin, "circle", "Claim chunks in a circle radius", ["c"]));
-        $this->registerSubCommand(new ClaimSquareSubCommand($this->plugin, "square", "Claim chunks in a square radius", ["s"]));
+        if ($this->plugin->getConfig()->getNested("factions.claims.claimauto", false)) {
+            $this->registerSubCommand(new ClaimAutoSubCommand($this->plugin, "auto", "Automatically claim chunks", ["a"]));
+        }
+        if ($this->plugin->getConfig()->getNested("factions.claims.claimcircle", false)) {
+            $this->registerSubCommand(new ClaimCircleSubCommand($this->plugin, "circle", "Claim chunks in a circle radius", ["c"]));
+        }
+        if ($this->plugin->getConfig()->getNested("factions.claims.claimsquare", false)) {
+            $this->registerSubCommand(new ClaimSquareSubCommand($this->plugin, "square", "Claim chunks in a square radius", ["s"]));
+        }
     }
 }
