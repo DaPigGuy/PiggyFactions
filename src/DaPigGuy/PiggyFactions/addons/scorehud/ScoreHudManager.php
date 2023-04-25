@@ -25,7 +25,7 @@ class ScoreHudManager
         return self::$instance;
     }
 
-    public function getPlayer(FactionsPlayer $member): Player
+    public function getPlayer(FactionsPlayer $member): ?Player
     {
         return $this->plugin->getServer()->getPlayerByUUID($member->getUuid());
     }

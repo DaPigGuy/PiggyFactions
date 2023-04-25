@@ -64,7 +64,11 @@ class ScoreHudListener implements Listener
     {
         if ($event->isCancelled()) return;
         $member = $event->getMember();
-        ScoreHudManager::getInstance()->updatePlayerTags(ScoreHudManager::getInstance()->getPlayer($member),
+        $player = ScoreHudManager::getInstance()->getPlayer($member);
+        if ($player === null) {
+            return;
+        }
+        ScoreHudManager::getInstance()->updatePlayerTags($player,
             $event->getFaction()->getName(),
             $this->plugin->getLanguageManager()->getMessage($member->getLanguage(), "role.recruit"),
             $member->getPower()
@@ -73,14 +77,26 @@ class ScoreHudListener implements Listener
 
     public function onFactionLeave(FactionLeaveEvent $event): void
     {
-        if ($event->isCancelled()) return;
-        ScoreHudManager::getInstance()->updatePlayerTags(ScoreHudManager::getInstance()->getPlayer($event->getMember()));
+        if ($event->isCancelled()) {
+            return;
+        }
+        $player = ScoreHudManager::getInstance()->getPlayer($event->getMember());
+        if ($player === null) {
+            return;
+        }
+        ScoreHudManager::getInstance()->updatePlayerTags($player);
     }
 
     public function onFactionRename(FactionRenameEvent $event): void
     {
-        if ($event->isCancelled()) return;
-        ScoreHudManager::getInstance()->updatePlayerFactionTag(ScoreHudManager::getInstance()->getPlayer($event->getMember()), $event->getName());
+        if ($event->isCancelled()) {
+            return;
+        }
+        $player = ScoreHudManager::getInstance()->getPlayer($event->getMember());
+        if ($player === null) {
+            return;
+        }
+        ScoreHudManager::getInstance()->updatePlayerFactionTag($player, $event->getName());
     }
 
     public function onPowerChange(PowerChangeEvent $event): void
@@ -88,13 +104,25 @@ class ScoreHudListener implements Listener
         if ($event->isCancelled()) return;
         $member = $event->getMember();
         $faction = $member->getFaction();
-        if ($faction === null) return;
-        ScoreHudManager::getInstance()->updatePlayerFactionPowerTag(ScoreHudManager::getInstance()->getPlayer($member), $faction->getPower() + ($event->getPower() - $member->getPower()));
+        if ($faction === null) {
+            return;
+        }
+        $player = ScoreHudManager::getInstance()->getPlayer($member);
+        if ($player === null) {
+            return;
+        }
+        ScoreHudManager::getInstance()->updatePlayerFactionPowerTag($player, $faction->getPower() + ($event->getPower() - $member->getPower()));
     }
 
     public function onFactionRoleChange(FactionRoleChangeEvent $event): void
     {
-        if ($event->isCancelled()) return;
-        ScoreHudManager::getInstance()->updatePlayerFactionRankTag(ScoreHudManager::getInstance()->getPlayer($event->getMember()), $event->getNewRole());
+        if ($event->isCancelled()) {
+            return;
+        }
+        $player = ScoreHudManager::getInstance()->getPlayer($event->getMember());
+        if ($player === null) {
+            return;
+        }
+        ScoreHudManager::getInstance()->updatePlayerFactionRankTag($player, $event->getNewRole());
     }
 }
