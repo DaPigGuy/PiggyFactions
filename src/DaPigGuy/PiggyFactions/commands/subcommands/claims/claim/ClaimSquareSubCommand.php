@@ -18,7 +18,7 @@ class ClaimSquareSubCommand extends ClaimMultipleSubCommand
             return [];
         }
 
-        if ($rad > $this->plugin->getConfig()->get("limit.limit-square-radius")) {
+        if ($rad > $this->plugin->getConfig()->getNested("limit.limit-square-radius")) {
             return [];
         }
         $radius--;

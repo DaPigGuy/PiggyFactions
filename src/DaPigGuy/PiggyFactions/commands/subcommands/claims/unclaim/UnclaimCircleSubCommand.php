@@ -18,7 +18,7 @@ class UnclaimCircleSubCommand extends UnclaimMultipleSubCommand
             return [];
         }
 
-        if ($rad > $this->plugin->getConfig()->get("limit.limit-circle-radius")) {
+        if ($rad > $this->plugin->getConfig()->getNested("limit.limit-circle-radius")) {
             return [];
         }
 
