@@ -105,7 +105,7 @@ class FactionCommand extends BaseCommand
         }
         $this->registerSubCommand(new FlagSubCommand($this->plugin, "flag", "Manage faction flags"));
         if ($this->plugin->getConfig()->getNested("fly", false)) {
-            $this->registerSubCommand(new FlySubCommand($this->plugin, "fly", "Fly dans son territoire"));
+            $this->registerSubCommand(new FlySubCommand($this->plugin, "fly", "Fly within faction territories"));
         }
         $this->registerSubCommand(new HelpSubCommand($this->plugin, $this, "help", "Display command information"));
         $this->registerSubCommand(new HomeSubCommand($this->plugin, "home", "Teleport to faction home"));
