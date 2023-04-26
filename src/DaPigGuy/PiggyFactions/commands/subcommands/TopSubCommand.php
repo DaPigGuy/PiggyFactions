@@ -41,7 +41,7 @@ class TopSubCommand extends FactionSubCommand
             return;
         }
 
-        if ($page > $this->plugin->getConfig()->get("limit.limit-page-top")) {
+        if ($page > $this->plugin->getConfig()->getNested("limit.limit-page-top", 10)) {
             $this->plugin->getLanguageManager()->sendMessage($sender, "commands.top.limit-page-message");
             return;
         }

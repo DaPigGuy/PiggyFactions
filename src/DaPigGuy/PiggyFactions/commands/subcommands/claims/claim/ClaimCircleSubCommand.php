@@ -12,16 +12,16 @@ class ClaimCircleSubCommand extends ClaimMultipleSubCommand
 {
     public function getChunks(Player $player, array $args): array
     {
-        $rad = $radius = (int)$args["radius"];
-        if ($rad < 1) {
+        $radius = (int)$args["radius"];
+        if ($radius < 1) {
             $this->plugin->getLanguageManager()->sendMessage($player, "commands.claim.radius-less-than-one");
             return [];
         }
 
-        if ($rad > $this->plugin->getConfig()->getNested("limit.limit-circle-radius")) {
+        if ($radius > $this->plugin->getConfig()->getNested("limit.limit-circle-radius", 15)) {
+            $this->plugin->getLanguageManager()->sendMessage($player, "commands.claim.radius-limit");
             return [];
         }
-
         $radius--;
 
         $centerX = $player->getPosition()->getFloorX() >> Chunk::COORD_BIT_SIZE;

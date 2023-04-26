@@ -40,6 +40,7 @@ commands:
     already-claimed: "{RED}Ovaj komad je već uzet."
     no-power: "{RED}Tvoja frakcija nema dovoljno moći."
     radius-less-than-one: "{RED}Radijus mora biti veći od jedan."
+    radius-limit: "{RED}Радијус не би требало да буде већи од 15."
     over-claimed: "{GREEN}Ovaj komad je preuzet."
     success: "{GREEN}Ovaj komad je sad uzet."
     claimed-multiple: "{GREEN}{AMOUNT} komada zemje uzeto od strane {COMMAND}."

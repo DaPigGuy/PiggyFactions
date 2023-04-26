@@ -40,6 +40,7 @@ commands:
     already-claimed: "{RED}Dieser Chunk ist bereits beansprucht."
     no-power: "{RED}Deine Faktion hat unzureichende Stärke."
     radius-less-than-one: "{RED}Der Radius muss größer als eins sein."
+    radius-limit: "{RED}Der Radius sollte nicht größer als 15 sein."
     over-claimed: "{GREEN}Dieser Chunk wurde überbeansprucht."
     success: "{GREEN}Dieser Chunk wurde beansprucht."
     claimed-multiple: "{GREEN}{AMOUNT} Chunks beansprucht durch {COMMAND}."

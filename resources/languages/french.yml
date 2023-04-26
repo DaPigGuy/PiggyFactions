@@ -40,6 +40,7 @@ commands:
     already-claimed: "{RED}Ce territoire est déjà occupé."
     no-power: "{RED}Ta faction n'a pas assez de pouvoir."
     radius-less-than-one: "{RED}Le rayon doit être supérieur à un."
+    radius-limit: "{RED}Le rayon ne doit pas etre supérieur à 15."
     over-claimed: "{GREEN}Ce chunk a été overclaim."
     success: "{GREEN}Ce chunk a été claim."
     claimed-multiple: "{GREEN}{AMOUNT} chunks on été claim avec {COMMAND}."

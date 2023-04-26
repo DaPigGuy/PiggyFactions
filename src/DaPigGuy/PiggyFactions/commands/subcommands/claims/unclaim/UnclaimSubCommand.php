@@ -34,16 +34,16 @@ class UnclaimSubCommand extends FactionSubCommand
 
     protected function prepare(): void
     {
-        if ($this->plugin->getConfig()->getNested("factions.claims.unclaimall", false)) {
+        if ($this->plugin->getConfig()->getNested("factions.claims.unclaimall", true)) {
             $this->registerSubCommand(new UnclaimAllSubCommand($this->plugin, "all", "Unclaims all claims"));
         }
-        if ($this->plugin->getConfig()->getNested("factions.claims.claimauto", false)) {
+        if ($this->plugin->getConfig()->getNested("factions.claims.claimauto", true)) {
             $this->registerSubCommand(new UnclaimAutoSubCommand($this->plugin, "auto", "Automatically unclaim chunks", ["a"]));
         }
-        if ($this->plugin->getConfig()->getNested("factions.claims.claimcircle", false)) {
+        if ($this->plugin->getConfig()->getNested("factions.claims.claimcircle", true)) {
             $this->registerSubCommand(new UnclaimCircleSubCommand($this->plugin, "circle", "Unclaims chunks in a circle radius", ["c"]));
         }
-        if ($this->plugin->getConfig()->getNested("factions.claims.claimsquare", false)) {
+        if ($this->plugin->getConfig()->getNested("factions.claims.claimsquare", true)) {
             $this->registerSubCommand(new UnclaimSquareSubCommand($this->plugin, "square", "Unclaims chunks in a square radius", ["s"]));
         }
     }

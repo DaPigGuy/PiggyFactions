@@ -12,13 +12,14 @@ class ClaimSquareSubCommand extends ClaimMultipleSubCommand
 {
     public function getChunks(Player $player, array $args): array
     {
-        $rad = $radius = (int)$args["radius"];
-        if ($rad < 1) {
+        $radius = (int)$args["radius"];
+        if ($radius < 1) {
             $this->plugin->getLanguageManager()->sendMessage($player, "commands.claim.radius-less-than-one");
             return [];
         }
 
-        if ($rad > $this->plugin->getConfig()->getNested("limit.limit-square-radius")) {
+        if ($radius > $this->plugin->getConfig()->getNested("limit.limit-square-radius", 15)) {
+            $this->plugin->getLanguageManager()->sendMessage($player, "commands.claim.radius-limit");
             return [];
         }
         $radius--;

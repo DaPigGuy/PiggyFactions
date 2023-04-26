@@ -40,6 +40,7 @@ commands:
     already-claimed: "{RED}此區塊已被霸佔及擁有."
     no-power: "{RED}你公會並沒有足夠的力量."
     radius-less-than-one: "{RED}半徑必須大於 1."
+    radius-limit: "{RED}半徑不得大於 15."
     over-claimed: "{GREEN}成功從其他公會霸佔此區塊."
     success: "{GREEN}你已霸佔及擁有此區塊."
     claimed-multiple: "{GREEN}以 {COMMAND} 霸佔及擁有 {AMOUNT} 區塊."
