@@ -46,6 +46,11 @@ class TopSubCommand extends FactionSubCommand
             return;
         }
 
+        if ($page < 0) {
+            $this->plugin->getLanguageManager()->sendMessage($sender, "commands.top.limit-page-message");
+            return;
+        }
+
         $factions = array_filter($this->plugin->getFactionsManager()->getFactions(), function (Faction $faction): bool {
             return !$faction->getFlag(Flag::SAFEZONE) && !$faction->getFlag(Flag::WARZONE);
         });
