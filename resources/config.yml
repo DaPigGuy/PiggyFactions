@@ -8,12 +8,9 @@ database:
     password: ""
     schema: "piggyfactions"
   worker-limit: 1
-
 fly: true
 enemy: true
-
 limit:
-  limit-page-top: 10
   limit-circle-radius: 15
   limit-square-radius: 15
 economy:

@@ -148,7 +148,6 @@ commands:
     boost-faction: "{GREEN}Kekuatan Faction kamu telah meningkat sebesar {POWER}."
   top:
     header: "{GOLD}____________.[{DARK_GREEN}Faction teratas oleh {CATEGORY} ({PAGE}/{TOTALPAGES}){GOLD}].____________"
-    limit-page-message: "Anda tidak dapat memuat lebih dari halaman."
     line:
       online: "{GOLD}#{RANK} {RELATIONCOLOR}{FACTION}{GOLD} -{YELLOW} {ONLINE}"
       members: "{GOLD}#{RANK} {RELATIONCOLOR}{FACTION}{GOLD} -{YELLOW} {MEMBERS}"

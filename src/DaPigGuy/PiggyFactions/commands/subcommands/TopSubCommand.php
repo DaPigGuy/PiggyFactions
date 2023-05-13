@@ -37,19 +37,10 @@ class TopSubCommand extends FactionSubCommand
         };
         $type = $args["type"] ?? "power";
         $page = ($args["page"] ?? 1) - 1;
-        if (!isset($types[$type])) {
-            return;
-        }
 
-        if ($page > $this->plugin->getConfig()->getNested("limit.limit-page-top", 10)) {
-            $this->plugin->getLanguageManager()->sendMessage($sender, "commands.top.limit-page-message");
-            return;
-        }
-
-        if ($page < 0) {
-            $this->plugin->getLanguageManager()->sendMessage($sender, "commands.top.limit-page-message");
-            return;
-        }
+        if (!isset($types[$type])) return;
+        if ($page > PHP_INT_MAX) $page = PHP_INT_MAX;
+        if ($page < 0) $page = 0;
 
         $factions = array_filter($this->plugin->getFactionsManager()->getFactions(), function (Faction $faction): bool {
             return !$faction->getFlag(Flag::SAFEZONE) && !$faction->getFlag(Flag::WARZONE);

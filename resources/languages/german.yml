@@ -148,7 +148,6 @@ commands:
     boost-faction: "{GREEN}Die Stärke deiner Faktion wurde erhöht um {POWER}."
   top:
     header: "{GOLD}____________.[{DARK_GREEN}Beste Faktionen nach {CATEGORY} ({PAGE}/{TOTALPAGES}){GOLD}].____________"
-    limit-page-message: "Sie können nicht mehr als Seiten laden."
     line:
       online: "{GOLD}#{RANK} {RELATIONCOLOR}{FACTION}{GOLD} -{YELLOW} {ONLINE}"
       members: "{GOLD}#{RANK} {RELATIONCOLOR}{FACTION}{GOLD} -{YELLOW} {MEMBERS}"
