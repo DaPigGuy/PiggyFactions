@@ -88,7 +88,7 @@ class FactionCommand extends BaseCommand
     {
         $this->setPermission("piggyfactions.command.faction.use");
 
-        $COMMANDS = [
+        $commands = [
             new AddPowerSubCommand($this->plugin, "addpower", "Add player power"),
             new AdminSubCommand($this->plugin, "admin", "Toggle admin mode"),
             new ChatSubCommand($this->plugin, ChatTypes::ALLY, "allychat", "Toggle ally chat", ["ac"]),
@@ -135,20 +135,20 @@ class FactionCommand extends BaseCommand
             new WithdrawSubCommand($this->plugin, "withdraw", "Withdraw money from faction bank"),
         ];
 
-        $BANK_COMMANDS = [
+        $bank_commands = [
             new DepositSubCommand($this->plugin, "deposit", "Deposit money into faction bank"),
             new MoneySubCommand($this->plugin, "money", "View faction bank balance"),
             new WithdrawSubCommand($this->plugin, "withdraw", "Withdraw money from faction bank")
         ];
 
-        foreach ($COMMANDS as $command) {
+        foreach ($commands as $command) {
             if (!in_array($command->getName(), $this->plugin->getConfig()->getNested("commands.disabled", []))){
                 $this->registerSubCommand($command);
             }
         }
 
         if ($this->plugin->isFactionBankEnabled()) {
-            foreach ($BANK_COMMANDS as $command) {
+            foreach ($bank_commands as $command) {
                 $this->registerSubCommand($command);
             }
         }
