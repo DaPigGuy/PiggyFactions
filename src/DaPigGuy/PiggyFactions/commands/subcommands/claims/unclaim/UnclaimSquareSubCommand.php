@@ -18,7 +18,7 @@ class UnclaimSquareSubCommand extends UnclaimMultipleSubCommand
             return [];
         }
 
-        if ($radius > $this->plugin->getConfig()->getNested("limit.limit-square-radius", 15)) {
+        if ($radius > $this->plugin->getConfig()->getNested("factions.claims.square.max-radius", 15)) {
             $this->plugin->getLanguageManager()->sendMessage($player, "commands.claim.radius-limit");
             return [];
         }

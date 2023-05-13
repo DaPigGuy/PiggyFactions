@@ -18,7 +18,7 @@ class ClaimCircleSubCommand extends ClaimMultipleSubCommand
             return [];
         }
 
-        if ($radius > $this->plugin->getConfig()->getNested("limit.limit-circle-radius", 15)) {
+        if ($radius > $this->plugin->getConfig()->getNested("factions.claims.circle.max-radius", 15)) {
             $this->plugin->getLanguageManager()->sendMessage($player, "commands.claim.radius-limit");
             return [];
         }

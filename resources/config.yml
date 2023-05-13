@@ -10,9 +10,6 @@ database:
   worker-limit: 1
 fly: true
 enemy: true
-limit:
-  limit-circle-radius: 15
-  limit-square-radius: 15
 economy:
   enabled: false
   provider: bedrockeconomy
@@ -51,14 +48,18 @@ factions:
       none: []
       truce: []
       ally: []
-    overclaim: true
-    claimauto: true
-    claimcircle: true
-    claimsquare: true
-    unclaimall: true
     cost: 1
     max: -1
     shield-factor: 0.1
+    overclaim: true
+    autoclaim: true
+    unclaimall: true
+    circle:
+      enabled: true
+      max-radius: 15
+    square:
+      enabled: true
+      max-radius: 15
 languages:
   default: "english"
 symbols:
