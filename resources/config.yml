@@ -8,13 +8,13 @@ database:
     password: ""
     schema: "piggyfactions"
   worker-limit: 1
-fly: true
-enemy: true
+
 economy:
   enabled: false
   provider: bedrockeconomy
   faction-bank:
     enabled: true
+
 factions:
   enforce-alphanumeric-names: false
   blacklisted-names:
@@ -60,8 +60,10 @@ factions:
     square:
       enabled: true
       max-radius: 15
+
 languages:
   default: "english"
+
 symbols:
   colors:
     relations:
@@ -80,4 +82,9 @@ symbols:
     none: ""
   factionless: ""
   powerless: "0"
+
+commands:
+  fly: true
+  enemy: true
+
 forms: true

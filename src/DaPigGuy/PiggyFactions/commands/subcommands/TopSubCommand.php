@@ -40,7 +40,7 @@ class TopSubCommand extends FactionSubCommand
 
         if (!isset($types[$type])) return;
         if ($page > PHP_INT_MAX) $page = PHP_INT_MAX;
-        if ($page < 0) $page = 0;
+        else if ($page < 0) $page = 0;
 
         $factions = array_filter($this->plugin->getFactionsManager()->getFactions(), function (Faction $faction): bool {
             return !$faction->getFlag(Flag::SAFEZONE) && !$faction->getFlag(Flag::WARZONE);
