@@ -40,7 +40,6 @@ commands:
     already-claimed: "{RED}Chunk ini sudah diklaim"
     no-power: "{RED}Faction kamu tidak memiliki kekuatan yang dicukupi"
     radius-less-than-one: "{RED}Radius harus lebih besar dari satu."
-    radius-limit: "{RED}Radius tidak boleh lebih besar dari 15."
     over-claimed: "{GREEN}Chunk ini telah overclaimed"
     success: "{GREEN}Chunk ini telah diklaim"
     claimed-multiple: "{GREEN}{AMOUNT} Chunk diklaim oleh {COMMAND}"

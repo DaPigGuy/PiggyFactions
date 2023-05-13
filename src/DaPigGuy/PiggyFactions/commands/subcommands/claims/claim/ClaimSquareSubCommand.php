@@ -18,8 +18,9 @@ class ClaimSquareSubCommand extends ClaimMultipleSubCommand
             return [];
         }
 
-        if ($radius > $this->plugin->getConfig()->getNested("factions.claims.square.max-radius", 15)) {
-            $this->plugin->getLanguageManager()->sendMessage($player, "commands.claim.radius-limit");
+        $maxRadius = $this->plugin->getConfig()->getNested("factions.claims.square.max-radius", 15);
+        if ($radius > $maxRadius) {
+            $this->plugin->getLanguageManager()->sendMessage($player, "commands.claim.radius-limit", ["{MAX}" => $maxRadius]);
             return [];
         }
         $radius--;

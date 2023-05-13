@@ -40,7 +40,6 @@ commands:
     already-claimed: "{RED}Esta trozo ya está reclamado."
     no-power: "{RED}Tu facción tiene una cantidad de poder insuficiente."
     radius-less-than-one: "{RED}El radio debe ser mayor que uno."
-    radius-limit: "{RED}El radio no debe ser mayor de 15."
     over-claimed: "{GREEN}Esta trozo ha sido reclamado en exceso."
     success: "{GREEN} Este trozo ha sido reclamado."
     claimed-multiple: "{GREEN}{AMOUNT} trozos reclamados por {COMMAND}."
