@@ -84,8 +84,6 @@ symbols:
   powerless: "0"
 
 commands:
-  disabled:
-    - fly
-    - enemy
+  disabled: []
 
 forms: true
