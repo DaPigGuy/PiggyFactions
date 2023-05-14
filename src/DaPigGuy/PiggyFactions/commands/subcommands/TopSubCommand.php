@@ -47,7 +47,7 @@ class TopSubCommand extends FactionSubCommand
         usort($factions, $types[$type]);
 
         $page = ($args["page"] ?? 1) - 1;
-        $maxPages = ceil(count($factions) / self::PAGE_LENGTH);
+        $maxPages = (int)(ceil(count($factions) / self::PAGE_LENGTH));
         if ($page > $maxPages) $page = $maxPages;
         else if ($page < 0) $page = 0;
 
