@@ -12,8 +12,15 @@ class ClaimCircleSubCommand extends ClaimMultipleSubCommand
 {
     public function getChunks(Player $player, array $args): array
     {
-        if (($radius = (int)$args["radius"]) < 1) {
+        $radius = (int)$args["radius"];
+        if ($radius < 1) {
             $this->plugin->getLanguageManager()->sendMessage($player, "commands.claim.radius-less-than-one");
+            return [];
+        }
+
+        $maxRadius = $this->plugin->getConfig()->getNested("factions.claims.circle.max-radius", 15);
+        if ($radius > $maxRadius) {
+            $this->plugin->getLanguageManager()->sendMessage($player, "commands.claim.radius-limit", ["{MAX}" => $maxRadius]);
             return [];
         }
         $radius--;

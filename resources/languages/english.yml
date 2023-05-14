@@ -40,6 +40,7 @@ commands:
     already-claimed: "{RED}This chunk is already claimed."
     no-power: "{RED}Your faction has an insufficient amount of power."
     radius-less-than-one: "{RED}Radius must be greater than one."
+    radius-limit: "{RED}Radius cannot be greater than {MAX}."
     over-claimed: "{GREEN}This chunk has been overclaimed."
     success: "{GREEN}This chunk has been claimed."
     claimed-multiple: "{GREEN}{AMOUNT} chunks claimed by {COMMAND}."

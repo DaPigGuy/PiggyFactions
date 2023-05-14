@@ -32,19 +32,24 @@ class TopSubCommand extends FactionSubCommand
                 return (int)($b->getPower() - $a->getPower());
             }
         ];
-        if ($this->plugin->isFactionBankEnabled()) $types["money"] = function (Faction $a, Faction $b): int {
-            return (int)($b->getMoney() - $a->getMoney());
-        };
         $type = $args["type"] ?? "power";
-        $page = ($args["page"] ?? 1) - 1;
-        if (!isset($types[$type])) {
-            return;
+        if (!isset($types[$type])) return;
+
+        if ($this->plugin->isFactionBankEnabled()) {
+            $types["money"] = function (Faction $a, Faction $b): int {
+                return (int)($b->getMoney() - $a->getMoney());
+            };
         }
 
         $factions = array_filter($this->plugin->getFactionsManager()->getFactions(), function (Faction $faction): bool {
             return !$faction->getFlag(Flag::SAFEZONE) && !$faction->getFlag(Flag::WARZONE);
         });
         usort($factions, $types[$type]);
+
+        $page = (int)(($args["page"] ?? 1) - 1);
+        $maxPages = (int)(ceil(count($factions) / self::PAGE_LENGTH) - 1);
+        if ($page > $maxPages) $page = $maxPages;
+        else if ($page < 0) $page = 0;
 
         $language = $sender instanceof Player ? $this->plugin->getLanguageManager()->getPlayerLanguage($sender) : $this->plugin->getLanguageManager()->getDefaultLanguage();
         $message = $this->plugin->getLanguageManager()->getMessage($language, "commands.top.header", ["{PAGE}" => $page + 1, "{TOTALPAGES}" => ceil(count($factions) / self::PAGE_LENGTH), "{CATEGORY}" => ucfirst($type)]);

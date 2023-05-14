@@ -87,51 +87,70 @@ class FactionCommand extends BaseCommand
     protected function prepare(): void
     {
         $this->setPermission("piggyfactions.command.faction.use");
-        $this->registerSubCommand(new AddPowerSubCommand($this->plugin, "addpower", "Add player power"));
-        $this->registerSubCommand(new AdminSubCommand($this->plugin, "admin", "Toggle admin mode"));
-        $this->registerSubCommand(new ChatSubCommand($this->plugin, ChatTypes::ALLY, "allychat", "Toggle ally chat", ["ac"]));
-        $this->registerSubCommand(new AllySubCommand($this->plugin, "ally", "Ally with other factions"));
-        $this->registerSubCommand(new BanSubCommand($this->plugin, "ban", "Ban a member from your faction"));
-        $this->registerSubCommand(new ChatSubCommand($this->plugin, ChatTypes::FACTION, "chat", "Toggle faction chat", ["c"]));
-        $this->registerSubCommand(new ClaimSubCommand($this->plugin, "claim", "Claim a chunk"));
-        $this->registerSubCommand(new CreateSubCommand($this->plugin, "create", "Create a faction"));
-        $this->registerSubCommand(new DebugSubCommand($this->plugin, "debug", "Dumps information for debugging"));
-        $this->registerSubCommand(new DemoteSubCommand($this->plugin, "demote", "Demote a faction member"));
-        if ($this->plugin->isFactionBankEnabled()) $this->registerSubCommand(new DepositSubCommand($this->plugin, "deposit", "Deposit money into faction bank"));
-        $this->registerSubCommand(new DescriptionSubCommand($this->plugin, "description", "Set faction description", ["desc"]));
-        $this->registerSubCommand(new DisbandSubCommand($this->plugin, "disband", "Disband your faction"));
-        $this->registerSubCommand(new EnemySubCommand($this->plugin, "enemy", "Mark faction as an enemy"));
-        $this->registerSubCommand(new FlagSubCommand($this->plugin, "flag", "Manage faction flags"));
-        $this->registerSubCommand(new FlySubCommand($this->plugin, "fly", "Fly within faction territories"));
-        $this->registerSubCommand(new HelpSubCommand($this->plugin, $this, "help", "Display command information"));
-        $this->registerSubCommand(new HomeSubCommand($this->plugin, "home", "Teleport to faction home"));
-        $this->registerSubCommand(new InfoSubCommand($this->plugin, "info", "Display faction info", ["who"]));
-        $this->registerSubCommand(new InviteSubCommand($this->plugin, "invite", "Invite a player to your faction"));
-        $this->registerSubCommand(new JoinSubCommand($this->plugin, "join", "Join a faction"));
-        $this->registerSubCommand(new KickSubCommand($this->plugin, "kick", "Kick a member from your faction"));
-        $this->registerSubCommand(new LanguageSubCommand($this->plugin, "language", "Change personal language for PiggyFactions", ["lang"]));
-        $this->registerSubCommand(new LeaderSubCommand($this->plugin, "leader", "Transfer leadership of your faction"));
-        $this->registerSubCommand(new LeaveSubCommand($this->plugin, "leave", "Leave your faction"));
-        $this->registerSubCommand(new LogsSubCommand($this->plugin, "logs", "View your Factions logs", ["log"]));
-        $this->registerSubCommand(new MapSubCommand($this->plugin, "map", "View map of area"));
-        if ($this->plugin->isFactionBankEnabled()) $this->registerSubCommand(new MoneySubCommand($this->plugin, "money", "View faction bank balance"));
-        $this->registerSubCommand(new MotdSubCommand($this->plugin, "motd", "Set faction MOTD"));
-        $this->registerSubCommand(new NameSubCommand($this->plugin, "name", "Rename your faction"));
-        $this->registerSubCommand(new NeutralSubCommand($this->plugin, "neutral", "Reset relation with another faction"));
-        $this->registerSubCommand(new PermissionSubCommand($this->plugin, "permission", "Set faction role permissions", ["perms"]));
-        $this->registerSubCommand(new PlayerSubCommand($this->plugin, "player", "Display player info", ["p"]));
-        $this->registerSubCommand(new PowerBoostSubCommand($this->plugin, "powerboost", "Increases max power"));
-        $this->registerSubCommand(new PromoteSubCommand($this->plugin, "promote", "Promote a faction member"));
-        $this->registerSubCommand(new SeeChunkSubCommand($this->plugin, "seechunk", "Toggle chunk visualizer", ["sc"]));
-        $this->registerSubCommand(new SetHomeSubCommand($this->plugin, "sethome", "Set faction home"));
-        $this->registerSubCommand(new SetPowerSubCommand($this->plugin, "setpower", "Set player power"));
-        $this->registerSubCommand(new TopSubCommand($this->plugin, "top", "Display top factions", ["list"]));
-        $this->registerSubCommand(new TruceSubCommand($this->plugin, "truce", "Truce with other factions"));
-        $this->registerSubCommand(new UnallySubCommand($this->plugin, "unally", "End faction alliance"));
-        $this->registerSubCommand(new UnbanSubCommand($this->plugin, "unban", "Unban a member from your faction"));
-        $this->registerSubCommand(new UnclaimSubCommand($this->plugin, "unclaim", "Unclaim a chunk"));
-        $this->registerSubCommand(new UnsetHomeSubCommand($this->plugin, "unsethome", "Unset faction home", ["delhome"]));
-        $this->registerSubCommand(new VersionSubCommand($this->plugin, "version", "Display version & credits for PiggyFactions", ["v", "ver"]));
-        if ($this->plugin->isFactionBankEnabled()) $this->registerSubCommand(new WithdrawSubCommand($this->plugin, "withdraw", "Withdraw money from faction bank"));
+
+        $commands = [
+            new AddPowerSubCommand($this->plugin, "addpower", "Add player power"),
+            new AdminSubCommand($this->plugin, "admin", "Toggle admin mode"),
+            new ChatSubCommand($this->plugin, ChatTypes::ALLY, "allychat", "Toggle ally chat", ["ac"]),
+            new AllySubCommand($this->plugin, "ally", "Ally with other factions"),
+            new BanSubCommand($this->plugin, "ban", "Ban a member from your faction"),
+            new ChatSubCommand($this->plugin, ChatTypes::FACTION, "chat", "Toggle faction chat", ["c"]),
+            new ClaimSubCommand($this->plugin, "claim", "Claim a chunk"),
+            new CreateSubCommand($this->plugin, "create", "Create a faction"),
+            new DebugSubCommand($this->plugin, "debug", "Dumps information for debugging"),
+            new DemoteSubCommand($this->plugin, "demote", "Demote a faction member"),
+            new DescriptionSubCommand($this->plugin, "description", "Set faction description", ["desc"]),
+            new DisbandSubCommand($this->plugin, "disband", "Disband your faction"),
+            new EnemySubCommand($this->plugin, "enemy", "Mark faction as an enemy"),
+            new FlagSubCommand($this->plugin, "flag", "Manage faction flags"),
+            new FlySubCommand($this->plugin, "fly", "Fly within faction territories"),
+            new HelpSubCommand($this->plugin, $this, "help", "Display command information"),
+            new HomeSubCommand($this->plugin, "home", "Teleport to faction home"),
+            new InfoSubCommand($this->plugin, "info", "Display faction info", ["who"]),
+            new InviteSubCommand($this->plugin, "invite", "Invite a player to your faction"),
+            new JoinSubCommand($this->plugin, "join", "Join a faction"),
+            new KickSubCommand($this->plugin, "kick", "Kick a member from your faction"),
+            new LanguageSubCommand($this->plugin, "language", "Change personal language for PiggyFactions", ["lang"]),
+            new LeaderSubCommand($this->plugin, "leader", "Transfer leadership of your faction"),
+            new LeaveSubCommand($this->plugin, "leave", "Leave your faction"),
+            new LogsSubCommand($this->plugin, "logs", "View your Factions logs", ["log"]),
+            new MapSubCommand($this->plugin, "map", "View map of area"),
+            new MotdSubCommand($this->plugin, "motd", "Set faction MOTD"),
+            new NameSubCommand($this->plugin, "name", "Rename your faction"),
+            new NeutralSubCommand($this->plugin, "neutral", "Reset relation with another faction"),
+            new PermissionSubCommand($this->plugin, "permission", "Set faction role permissions", ["perms"]),
+            new PlayerSubCommand($this->plugin, "player", "Display player info", ["p"]),
+            new PowerBoostSubCommand($this->plugin, "powerboost", "Increases max power"),
+            new PromoteSubCommand($this->plugin, "promote", "Promote a faction member"),
+            new SeeChunkSubCommand($this->plugin, "seechunk", "Toggle chunk visualizer", ["sc"]),
+            new SetHomeSubCommand($this->plugin, "sethome", "Set faction home"),
+            new SetPowerSubCommand($this->plugin, "setpower", "Set player power"),
+            new TopSubCommand($this->plugin, "top", "Display top factions", ["list"]),
+            new TruceSubCommand($this->plugin, "truce", "Truce with other factions"),
+            new UnallySubCommand($this->plugin, "unally", "End faction alliance"),
+            new UnbanSubCommand($this->plugin, "unban", "Unban a member from your faction"),
+            new UnclaimSubCommand($this->plugin, "unclaim", "Unclaim a chunk"),
+            new UnsetHomeSubCommand($this->plugin, "unsethome", "Unset faction home", ["delhome"]),
+            new VersionSubCommand($this->plugin, "version", "Display version & credits for PiggyFactions", ["v", "ver"]),
+            new WithdrawSubCommand($this->plugin, "withdraw", "Withdraw money from faction bank"),
+        ];
+
+        $bank_commands = [
+            new DepositSubCommand($this->plugin, "deposit", "Deposit money into faction bank"),
+            new MoneySubCommand($this->plugin, "money", "View faction bank balance"),
+            new WithdrawSubCommand($this->plugin, "withdraw", "Withdraw money from faction bank")
+        ];
+
+        foreach ($commands as $command) {
+            if (!in_array($command->getName(), $this->plugin->getConfig()->getNested("commands.disabled", []))){
+                $this->registerSubCommand($command);
+            }
+        }
+
+        if ($this->plugin->isFactionBankEnabled()) {
+            foreach ($bank_commands as $command) {
+                $this->registerSubCommand($command);
+            }
+        }
     }
 }
