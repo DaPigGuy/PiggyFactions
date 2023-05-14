@@ -21,6 +21,10 @@ class KickSubCommand extends FactionSubCommand
             $member->sendMessage("commands.member-not-found", ["{PLAYER}" => $args["name"]]);
             return;
         }
+        if ($target->getRole() == null || $member->getRole() == null) {
+            $member->sendMessage("generic-error", ["{CONTEXT}" => "Unable to obtain role data."]);
+            return;
+        }
         if (Roles::ALL[$target->getRole()] >= Roles::ALL[$member->getRole()] && !$member->isInAdminMode()) {
             $member->sendMessage("commands.kick.cant-kick-higher", ["{PLAYER}" => $target->getUsername()]);
             return;

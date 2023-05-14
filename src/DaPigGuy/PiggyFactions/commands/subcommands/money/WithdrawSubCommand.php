@@ -25,7 +25,7 @@ class WithdrawSubCommand extends FactionSubCommand
         }
         $this->plugin->getEconomyProvider()->giveMoney($sender, $args["money"], function(bool $success) use ($member, $args, $faction): void {
             if (!$success) {
-                $member->sendMessage("generic-error");
+                $member->sendMessage("generic-error", ["{CONTEXT}" => "Unable to give money to your account."]);
                 return;
             }
             $faction->removeMoney($args["money"]);

@@ -25,7 +25,7 @@ class DepositSubCommand extends FactionSubCommand
             }
             $this->plugin->getEconomyProvider()->takeMoney($sender, $args["money"], function (bool $success) use ($member, $args, $faction) {
                 if (!$success) {
-                    $member->sendMessage("generic-error");
+                    $member->sendMessage("generic-error", ["{CONTEXT}" => "Unable to take money from your account."]);
                     return;
                 }
                 $faction->addMoney($args["money"]);

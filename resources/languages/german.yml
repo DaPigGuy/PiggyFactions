@@ -1,4 +1,4 @@
-generic-error: "{RED}Ein unerwarteter Fehler ist aufgetreten."
+generic-error: "{RED}Ein unerwarteter Fehler ist aufgetreten: {CONTEXT}"
 chat:
   ally: "{BOLD}{GOLD}VERBÜNDETER {RESET}{LIGHT_PURPLE}{RANK_SYMBOL}{FACTION} {RESET}{PLAYER}: {MESSAGE}"
   faction: "{BOLD}{GOLD}FAKTION {RESET}{RANK_SYMBOL}{PLAYER}: {MESSAGE}"
