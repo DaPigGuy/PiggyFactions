@@ -16,6 +16,7 @@ use DaPigGuy\PiggyFactions\players\PlayerManager;
 use DaPigGuy\PiggyFactions\utils\Relations;
 use DaPigGuy\PiggyFactions\utils\Roles;
 use pocketmine\player\Player;
+use pocketmine\utils\TextFormat;
 use pocketmine\world\Position;
 use pocketmine\world\World;
 use Ramsey\Uuid\Uuid;
@@ -65,7 +66,7 @@ class Faction
 
     public function setName(string $name): void
     {
-        $this->name = $name;
+        $this->name = TextFormat::clean($name);
         $this->update();
     }
 
@@ -81,7 +82,7 @@ class Faction
 
     public function setDescription(?string $description): void
     {
-        $this->description = $description;
+        $this->description = TextFormat::clean($description);
         $this->update();
     }
 
@@ -92,7 +93,7 @@ class Faction
 
     public function setMotd(?string $motd): void
     {
-        $this->motd = $motd;
+        $this->motd = TextFormat::clean($motd);
         $this->update();
     }
 
