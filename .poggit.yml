@@ -9,9 +9,9 @@ projects:
       - src: Paroxity/Commando/Commando
         version: ^3.0.0
       - src: poggit/libasynql/libasynql
-        version: ^3.4.0
-      - src: DaPigGuy/FormAPI-4.0.0/libFormAPI
-        version: ^2.1.0
+        version: ^4.1.6
+      - src: jojoe77777/FormAPI/libFormAPI
+        version: ^2.1.1
       - src: DaPigGuy/libPiggyEconomy/libPiggyEconomy
         version: ^3.0.1
       - src: DaPigGuy/libPiggyUpdateChecker/libPiggyUpdateChecker
