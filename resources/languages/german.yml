@@ -1,4 +1,4 @@
-generic-error: "{RED}Ein unerwarteter Fehler ist aufgetreten: {CONTEXT}"
+generic-error: "{RED}Ein unerwarteter Fehler trat auf: {CONTEXT}"
 chat:
   ally: "{BOLD}{GOLD}VERBÜNDETER {RESET}{LIGHT_PURPLE}{RANK_SYMBOL}{FACTION} {RESET}{PLAYER}: {MESSAGE}"
   faction: "{BOLD}{GOLD}FAKTION {RESET}{RANK_SYMBOL}{PLAYER}: {MESSAGE}"
@@ -40,6 +40,7 @@ commands:
     already-claimed: "{RED}Dieser Chunk ist bereits beansprucht."
     no-power: "{RED}Deine Faktion hat unzureichende Stärke."
     radius-less-than-one: "{RED}Der Radius muss größer als eins sein."
+    radius-limit: "{RED}Der Radius darf nicht größer sein als {MAX}."
     over-claimed: "{GREEN}Dieser Chunk wurde überbeansprucht."
     success: "{GREEN}Dieser Chunk wurde beansprucht."
     claimed-multiple: "{GREEN}{AMOUNT} Chunks beansprucht durch {COMMAND}."

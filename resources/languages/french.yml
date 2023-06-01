@@ -1,4 +1,4 @@
-generic-error: "{RED}An unexpected error has occurred: {CONTEXT}"
+generic-error: "{RED}Une erreur inattendue s'est produite: {CONTEXT}"
 chat:
   ally: "{BOLD}{GOLD}ALLIÉ {RESET}{LIGHT_PURPLE}{RANK_SYMBOL}{FACTION} {RESET}{PLAYER}: {MESSAGE}"
   faction: "{BOLD}{GOLD}FACTION {RESET}{RANK_SYMBOL}{PLAYER}: {MESSAGE}"
@@ -40,6 +40,7 @@ commands:
     already-claimed: "{RED}Ce territoire est déjà occupé."
     no-power: "{RED}Ta faction n'a pas assez de pouvoir."
     radius-less-than-one: "{RED}Le rayon doit être supérieur à un."
+    radius-limit: "{RED}Le rayon ne peut être supérieur à {MAX}."
     over-claimed: "{GREEN}Ce chunk a été overclaim."
     success: "{GREEN}Ce chunk a été claim."
     claimed-multiple: "{GREEN}{AMOUNT} chunks on été claim avec {COMMAND}."
@@ -81,7 +82,7 @@ commands:
     command: "\n{GREEN}/f {COMMAND} - {RESET}{DESCRIPTION}"
   home:
     not-set: "{RED}La base de la faction n'est pas établie."
-    world-not-found: "{RED}World could not be found."
+    world-not-found: "{RED}Le monde est introuvable."
   info:
     message: "{GOLD}____________.[{DARK_GREEN}Faction {FACTION}{GOLD}].____________\n{GOLD}Description: {YELLOW}{DESCRIPTION}{RESET}\n{GOLD}Territoire / Pouvoir / Pouvoir max: {YELLOW}{CLAIMS}/{POWER}/{TOTALPOWER}\n{GOLD}Age: {YELLOW}{AGE}\n{GOLD}En ligne: {YELLOW}{ONLINECOUNT}/{TOTALPLAYERS}\n{GOLD}Chef: {YELLOW}{LEADER}\n{GOLD}Relations: {RELATIONS}\n{GOLD}Membres: {YELLOW}{PLAYERS}"
     description-not-set: "aucune description"

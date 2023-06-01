@@ -1,4 +1,4 @@
-generic-error: "{RED}An unexpected error has occurred: {CONTEXT}"
+generic-error: "{RED}Ada kesalahan yang tidak diketahui: {CONTEXT}"
 chat:
   ally: "{BOLD}{GOLD}SEKUTU {RESET}{LIGHT_PURPLE}{RANK_SYMBOL}{FACTION} {RESET}{PLAYER}: {MESSAGE}"
   faction: "{BOLD}{GOLD}FACTION {RESET}{RANK_SYMBOL}{PLAYER}: {MESSAGE}"
@@ -40,6 +40,7 @@ commands:
     already-claimed: "{RED}Chunk ini sudah diklaim"
     no-power: "{RED}Faction kamu tidak memiliki kekuatan yang dicukupi"
     radius-less-than-one: "{RED}Radius harus lebih besar dari satu."
+    radius-limit: "{RED}Radius tidak boleh lebih besar dari {MAX}."
     over-claimed: "{GREEN}Chunk ini telah overclaimed"
     success: "{GREEN}Chunk ini telah diklaim"
     claimed-multiple: "{GREEN}{AMOUNT} Chunk diklaim oleh {COMMAND}"
@@ -81,7 +82,7 @@ commands:
     command: "\n{GREEN}/f {COMMAND} - {RESET}{DESCRIPTION}"
   home:
     not-set: "{RED}Rumah Faction tidak diatur."
-    world-not-found: "{RED}World could not be found."
+    world-not-found: "{RED}Dunia tidak di temukan."
   info:
     message: "{GOLD}____________.[{DARK_GREEN}Faction {FACTION}{GOLD}].____________\n{GOLD}Deskripsi: {YELLOW}{DESCRIPTION}{RESET}\n{GOLD}Lahan / Kekuatan / Kekuatan Penuh: {YELLOW}{CLAIMS}/{POWER}/{TOTALPOWER}\n{GOLD}Umur: {YELLOW}{AGE}\n{GOLD}Online: {YELLOW}{ONLINECOUNT}/{TOTALPLAYERS}\n{GOLD}Ketua: {YELLOW}{LEADER}\n{GOLD}Hubungan: {RELATIONS}\n{GOLD}Anggota: {YELLOW}{PLAYERS}"
     description-not-set: "tidak ada deskripsi yang ditetapkan"
@@ -175,6 +176,8 @@ commands:
     auto:
       toggled: "{GREEN}Kamu sekarang tidak mengklaim secara otomatis."
       toggled-off: "{RED}Kamu tidak lagi tidak mengklaim secara otomatis"
+  unsethome:
+    success: "{GREEN}Rumah Faction telah tidak disetel."
   withdraw:
     success: "{GREEN}${MONEY} telah ditarik dari Bank Faction."
 death:
