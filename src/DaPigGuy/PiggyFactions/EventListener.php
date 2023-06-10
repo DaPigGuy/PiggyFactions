@@ -15,6 +15,7 @@ use pocketmine\event\player\PlayerChatEvent;
 use pocketmine\event\player\PlayerDeathEvent;
 use pocketmine\event\player\PlayerJoinEvent;
 use pocketmine\event\player\PlayerRespawnEvent;
+use pocketmine\player\chat\LegacyRawChatFormatter;
 use pocketmine\player\Player;
 
 class EventListener implements Listener
@@ -45,11 +46,11 @@ class EventListener implements Listener
                         $event->setRecipients(array_merge($faction->getOnlineMembers(), ...array_map(function (Faction $ally): array {
                             return $ally->getOnlineMembers();
                         }, $faction->getAllies())));
-                        $event->setFormat($this->plugin->getLanguageManager()->getMessage($this->plugin->getLanguageManager()->getDefaultLanguage(), "chat.ally", $placeholders));
+                        $event->setFormatter(new LegacyRawChatFormatter($this->plugin->getLanguageManager()->getMessage($this->plugin->getLanguageManager()->getDefaultLanguage(), "chat.ally", $placeholders)));
                         break;
                     case ChatTypes::FACTION:
                         $event->setRecipients($faction->getOnlineMembers());
-                        $event->setFormat($this->plugin->getLanguageManager()->getMessage($this->plugin->getLanguageManager()->getDefaultLanguage(), "chat.faction", $placeholders));
+                        $event->setFormatter(new LegacyRawChatFormatter($this->plugin->getLanguageManager()->getMessage($this->plugin->getLanguageManager()->getDefaultLanguage(), "chat.faction", $placeholders)));
                         break;
                 }
             }
