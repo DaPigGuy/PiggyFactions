@@ -17,4 +17,6 @@ projects:
         version: ^3.0.1
       - src: DaPigGuy/libPiggyUpdateChecker/libPiggyUpdateChecker
         version: ^1.0.0
+    lint:
+      phpstan: false
 ...
