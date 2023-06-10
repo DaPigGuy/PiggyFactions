@@ -53,9 +53,9 @@ use DaPigGuy\PiggyFactions\commands\subcommands\TopSubCommand;
 use DaPigGuy\PiggyFactions\commands\subcommands\VersionSubCommand;
 use DaPigGuy\PiggyFactions\PiggyFactions;
 use DaPigGuy\PiggyFactions\utils\ChatTypes;
-use jojoe77777\FormAPI\SimpleForm;
 use pocketmine\command\CommandSender;
 use pocketmine\player\Player;
+use Vecnavium\FormsUI\SimpleForm;
 
 class FactionCommand extends BaseCommand
 {

@@ -15,10 +15,10 @@ use DaPigGuy\PiggyFactions\permissions\PermissionFactory;
 use DaPigGuy\PiggyFactions\PiggyFactions;
 use DaPigGuy\PiggyFactions\players\FactionsPlayer;
 use DaPigGuy\PiggyFactions\utils\PiggyArgument;
-use jojoe77777\FormAPI\CustomForm;
 use pocketmine\command\CommandSender;
 use pocketmine\player\Player;
 use pocketmine\utils\TextFormat;
+use Vecnavium\FormsUI\CustomForm;
 
 abstract class FactionSubCommand extends BaseSubCommand
 {

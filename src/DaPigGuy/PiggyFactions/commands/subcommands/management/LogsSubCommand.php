@@ -10,9 +10,9 @@ use DaPigGuy\PiggyFactions\commands\subcommands\FactionSubCommand;
 use DaPigGuy\PiggyFactions\factions\Faction;
 use DaPigGuy\PiggyFactions\logs\LogsManager;
 use DaPigGuy\PiggyFactions\players\FactionsPlayer;
-use jojoe77777\FormAPI\SimpleForm;
 use pocketmine\player\Player;
 use pocketmine\utils\TextFormat;
+use Vecnavium\FormsUI\SimpleForm;
 
 class LogsSubCommand extends FactionSubCommand
 {
