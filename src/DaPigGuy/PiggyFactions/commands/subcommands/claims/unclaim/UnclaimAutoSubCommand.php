@@ -15,6 +15,10 @@ class UnclaimAutoSubCommand extends FactionSubCommand
 
     public function onNormalRun(Player $sender, ?Faction $faction, FactionsPlayer $member, string $aliasUsed, array $args): void
     {
+        if (in_array($sender->getWorld()->getFolderName(), $this->plugin->getConfig()->getNested("factions.claims.blacklisted-worlds"))) {
+            $member->sendMessage("commands.unclaim.blacklisted-world");
+            return;
+        }
         $member->setAutoUnclaiming(!$member->isAutoUnclaiming());
         $member->sendMessage("commands.unclaim.auto.toggled" . ($member->isAutoUnclaiming() ? "" : "-off"));
     }
