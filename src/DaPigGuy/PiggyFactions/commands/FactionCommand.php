@@ -53,9 +53,9 @@ use DaPigGuy\PiggyFactions\commands\subcommands\TopSubCommand;
 use DaPigGuy\PiggyFactions\commands\subcommands\VersionSubCommand;
 use DaPigGuy\PiggyFactions\PiggyFactions;
 use DaPigGuy\PiggyFactions\utils\ChatTypes;
-use jojoe77777\FormAPI\SimpleForm;
 use pocketmine\command\CommandSender;
 use pocketmine\player\Player;
+use Vecnavium\FormsUI\SimpleForm;
 
 class FactionCommand extends BaseCommand
 {
@@ -66,7 +66,7 @@ class FactionCommand extends BaseCommand
     {
         if ($this->plugin->areFormsEnabled() && $sender instanceof Player) {
             $subcommands = array_filter($this->getSubCommands(), function (BaseSubCommand $subCommand, string $alias) use ($sender): bool {
-                return $subCommand->getName() === $alias && $sender->hasPermission($subCommand->getPermission());
+                return $subCommand->getName() === $alias && count(array_filter($subCommand->getPermissions(), $sender->hasPermission(...))) > 0;
             }, ARRAY_FILTER_USE_BOTH);
             $form = new SimpleForm(function (Player $player, ?int $data) use ($subcommands): void {
                 if ($data !== null) {

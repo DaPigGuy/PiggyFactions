@@ -19,12 +19,12 @@ jobs:
           wget -O vendor/ScoreHud.phar https://poggit.pmmp.io/r/161570/ScoreHud_dev-71.phar
       - name: Download Virion Dependencies
         run: |
-          wget -O vendor/libasynql.phar https://poggit.pmmp.io/r/204062/libasynql_dev-199.phar
-          wget -O vendor/libFormAPI.phar https://poggit.pmmp.io/r/207248/libFormAPI_dev-4.phar
-          wget -O vendor/libPiggyEconomy.phar https://poggit.pmmp.io/r/177191/libPiggyEconomy_dev-18.phar
+          wget -O vendor/libasynql.phar https://poggit.pmmp.io/r/213142/libasynql_dev-203.phar
+          wget -O vendor/FormsUI.phar https://poggit.pmmp.io/r/209836/FormsUI_dev-20.phar
+          wget -O vendor/libPiggyEconomy.phar https://poggit.pmmp.io/r/212853/libPiggyEconomy_dev-19.phar
           wget -O vendor/libPiggyUpdateChecker.phar https://poggit.pmmp.io/r/163495/libPiggyUpdateChecker_dev-1.phar
-          wget -O vendor/Commando.phar https://poggit.pmmp.io/r/162923/Commando_dev-30.phar
+          wget -O vendor/Commando.phar https://poggit.pmmp.io/r/216831/Commando_dev-34.phar
       - name: Run PHPStan
-        uses: paroxity/pmmp-phpstan-action@4.21.0
+        uses: paroxity/pmmp-phpstan-action@5.3.0
         with:
           phpstan-config: phpstan.neon.dist

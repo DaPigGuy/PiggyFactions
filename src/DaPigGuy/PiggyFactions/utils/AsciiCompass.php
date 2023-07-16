@@ -42,7 +42,7 @@ class AsciiCompass
 
     public static function getDirectionsByDegrees(float $degrees): string
     {
-        $degrees = ($degrees - 157) % 360;
+        $degrees = (int)($degrees - 157) % 360;
         if ($degrees < 0) $degrees += 360;
 
         return array_keys(self::DIRECTIONS)[(int)floor($degrees / 45)];

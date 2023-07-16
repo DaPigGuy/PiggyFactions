@@ -14,9 +14,9 @@ use pocketmine\block\tile\Container;
 use pocketmine\event\block\BlockBreakEvent;
 use pocketmine\event\block\BlockPlaceEvent;
 use pocketmine\event\Listener;
-use pocketmine\event\player\PlayerCommandPreprocessEvent;
 use pocketmine\event\player\PlayerInteractEvent;
 use pocketmine\event\player\PlayerMoveEvent;
+use pocketmine\event\server\CommandEvent;
 use pocketmine\player\Player;
 use pocketmine\world\format\Chunk;
 use pocketmine\world\Position;
@@ -34,25 +34,31 @@ class ClaimsListener implements Listener
 
     public function onPlace(BlockPlaceEvent $event): void
     {
-        if (!$this->canAffectArea($event->getPlayer(), $event->getBlock()->getPosition())) $event->cancel();
+        foreach($event->getTransaction()->getBlocks() as [$x, $y, $z, $block]) {
+            if(!$this->canAffectArea($event->getPlayer(), new Position($x, $y, $z, $event->getPlayer()->getWorld()))) {
+                $event->cancel();
+                return;
+            }
+        }
     }
 
-    public function onCommandPreprocess(PlayerCommandPreprocessEvent $event): void
+    public function onCommand(CommandEvent $event): void
     {
-        $player = $event->getPlayer();
-        $message = $event->getMessage();
+        $player = $event->getSender();
+        if(!$player instanceof Player) {
+            return;
+        }
+        $message = $event->getCommand();
         $member = $this->plugin->getPlayerManager()->getPlayer($player);
         if ($member !== null) {
             $faction = $member->getFaction();
             $claim = $this->manager->getClaimByPosition($player->getPosition());
             if (!$member->isInAdminMode() && $claim !== null && $claim->getFaction() !== $faction) {
                 $relation = $faction === null ? Relations::NONE : $faction->getRelation($claim->getFaction());
-                if (str_starts_with($message, "/")) {
-                    $command = substr(explode(" ", $message)[0], 1);
-                    if (in_array($command, $this->plugin->getConfig()->getNested("factions.claims.denied-commands." . $relation, []))) {
-                        $member->sendMessage("claims.command-denied", ["{COMMAND}" => $command, "{RELATION}" => $relation === "none" ? "neutral" : $relation]);
-                        $event->cancel();
-                    }
+                $command = substr(explode(" ", $message)[0], 1);
+                if (in_array($command, $this->plugin->getConfig()->getNested("factions.claims.denied-commands." . $relation, []))) {
+                    $member->sendMessage("claims.command-denied", ["{COMMAND}" => $command, "{RELATION}" => $relation === "none" ? "neutral" : $relation]);
+                    $event->cancel();
                 }
             }
         }

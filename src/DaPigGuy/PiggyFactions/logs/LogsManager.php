@@ -8,8 +8,8 @@ use DaPigGuy\PiggyFactions\commands\subcommands\management\LogsSubCommand;
 use DaPigGuy\PiggyFactions\factions\Faction;
 use DaPigGuy\PiggyFactions\language\LanguageManager;
 use DaPigGuy\PiggyFactions\PiggyFactions;
-use jojoe77777\FormAPI\SimpleForm;
 use pocketmine\player\Player;
+use Vecnavium\FormsUI\SimpleForm;
 
 class LogsManager
 {

@@ -26,13 +26,13 @@ use DaPigGuy\PiggyFactions\tasks\ShowChunksTask;
 use DaPigGuy\PiggyFactions\tasks\UpdatePowerTask;
 use DaPigGuy\PiggyFactions\utils\PoggitBuildInfo;
 use Exception;
-use jojoe77777\FormAPI\Form;
 use pocketmine\entity\Entity;
 use pocketmine\player\Player;
 use pocketmine\plugin\PluginBase;
 use pocketmine\utils\Config;
 use poggit\libasynql\DataConnector;
 use poggit\libasynql\libasynql;
+use Vecnavium\FormsUI\Form;
 
 class PiggyFactions extends PluginBase
 {
@@ -64,7 +64,7 @@ class PiggyFactions extends PluginBase
         foreach (
             [
                 "Commando" => BaseCommand::class,
-                "libformapi" => Form::class,
+                "FormsUI" => Form::class,
                 "libasynql" => libasynql::class,
                 "libPiggyUpdateChecker" => libPiggyUpdateChecker::class
             ] as $virion => $class
