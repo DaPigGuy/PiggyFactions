@@ -10,7 +10,7 @@ parameters:
     - phar:///source/vendor/HRKChat.phar/src/
     - phar:///source/vendor/ScoreHud.phar/src/
     - phar:///source/vendor/Commando.phar/src/
-    - phar:///source/vendor/libFormAPI.phar/src/
+    - phar:///source/vendor/FormsUI.phar/src/
     - phar:///source/vendor/libasynql.phar/src/
     - phar:///source/vendor/libPiggyEconomy.phar/src/
     - phar:///source/vendor/libPiggyUpdateChecker.phar/src/
