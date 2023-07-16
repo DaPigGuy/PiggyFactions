@@ -14,6 +14,10 @@ class UnclaimSubCommand extends FactionSubCommand
 {
     public function onNormalRun(Player $sender, ?Faction $faction, FactionsPlayer $member, string $aliasUsed, array $args): void
     {
+        if (in_array($sender->getWorld()->getFolderName(), $this->plugin->getConfig()->getNested("factions.claims.blacklisted-worlds"))) {
+            $member->sendMessage("commands.claim.blacklisted-world");
+            return;
+        }
         $claim = $this->plugin->getClaimsManager()->getClaimByPosition($sender->getPosition());
         if ($claim === null) {
             $member->sendMessage("commands.unclaim.not-claimed");
