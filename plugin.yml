@@ -1,7 +1,7 @@
 name: PiggyFactions
 main: DaPigGuy\PiggyFactions\PiggyFactions
 version: 2.1.0
-api: 5.0.0
+api: 5.3.0
 author: DaPigGuy
 softdepend: [EconomyAPI, BedrockEconomy, PiggyCustomEnchants, HRKChat, ScoreHud]
 website: "https://github.com/DaPigGuy/PiggyFactions"
