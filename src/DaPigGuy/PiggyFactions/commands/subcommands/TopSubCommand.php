@@ -32,14 +32,13 @@ class TopSubCommand extends FactionSubCommand
                 return (int)($b->getPower() - $a->getPower());
             }
         ];
-        $type = $args["type"] ?? "power";
-        if (!isset($types[$type])) return;
-
         if ($this->plugin->isFactionBankEnabled()) {
             $types["money"] = function (Faction $a, Faction $b): int {
                 return (int)($b->getMoney() - $a->getMoney());
             };
         }
+        $type = $args["type"] ?? "power";
+        if (!isset($types[$type])) return;
 
         $factions = array_filter($this->plugin->getFactionsManager()->getFactions(), function (Faction $faction): bool {
             return !$faction->getFlag(Flag::SAFEZONE) && !$faction->getFlag(Flag::WARZONE);
