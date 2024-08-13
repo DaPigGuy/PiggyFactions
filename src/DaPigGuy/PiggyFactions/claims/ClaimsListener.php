@@ -34,8 +34,8 @@ class ClaimsListener implements Listener
 
     public function onPlace(BlockPlaceEvent $event): void
     {
-        foreach($event->getTransaction()->getBlocks() as [$x, $y, $z, $block]) {
-            if(!$this->canAffectArea($event->getPlayer(), new Position($x, $y, $z, $event->getPlayer()->getWorld()))) {
+        foreach ($event->getTransaction()->getBlocks() as [$x, $y, $z, $block]) {
+            if (!$this->canAffectArea($event->getPlayer(), new Position($x, $y, $z, $event->getPlayer()->getWorld()))) {
                 $event->cancel();
                 return;
             }
@@ -45,7 +45,7 @@ class ClaimsListener implements Listener
     public function onCommand(CommandEvent $event): void
     {
         $player = $event->getSender();
-        if(!$player instanceof Player) {
+        if (!$player instanceof Player) {
             return;
         }
         $message = $event->getCommand();
@@ -145,11 +145,19 @@ class ClaimsListener implements Listener
         }
     }
 
-    public function canAffectArea(Player $player, Position $position, string $type = FactionPermission::BUILD): bool
+    public function canAffectArea(?Player $player, Position $position, string $type = FactionPermission::BUILD): bool
     {
+        // Check if the player object is null
+        if ($player === null) {
+            $this->plugin->getLogger()->error("Player object is null in canAffectArea method.");
+            return false; // Return false to prevent the action
+        }
+
         $member = $this->plugin->getPlayerManager()->getPlayer($player);
         $claim = $this->manager->getClaimByPosition($position);
-        if ($claim !== null) return $member !== null && $claim->getFaction()->hasPermission($member, $type);
+        if ($claim !== null) {
+            return $member !== null && $claim->getFaction()->hasPermission($member, $type);
+        }
         return true;
     }
 }
