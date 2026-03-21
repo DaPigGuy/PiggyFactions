@@ -55,12 +55,13 @@ use DaPigGuy\PiggyFactions\PiggyFactions;
 use DaPigGuy\PiggyFactions\utils\ChatTypes;
 use pocketmine\command\CommandSender;
 use pocketmine\player\Player;
+use pocketmine\plugin\Plugin;
 use Vecnavium\FormsUI\SimpleForm;
 
 class FactionCommand extends BaseCommand
 {
     /** @var PiggyFactions */
-    protected $plugin;
+    protected Plugin $plugin;
 
     public function onRun(CommandSender $sender, string $aliasUsed, array $args): void
     {
@@ -124,7 +125,7 @@ class FactionCommand extends BaseCommand
             new PromoteSubCommand($this->plugin, "promote", "Promote a faction member"),
             new SeeChunkSubCommand($this->plugin, "seechunk", "Toggle chunk visualizer", ["sc"]),
             new SetHomeSubCommand($this->plugin, "sethome", "Set faction home"),
-            new SetPowerSubCommand($this->plugin, "setpower", "Set player power"),
+            new SetPowerSubCommand($this->plugin, "powerboost", "Set player power"),
             new TopSubCommand($this->plugin, "top", "Display top factions", ["list"]),
             new TruceSubCommand($this->plugin, "truce", "Truce with other factions"),
             new UnallySubCommand($this->plugin, "unally", "End faction alliance"),
