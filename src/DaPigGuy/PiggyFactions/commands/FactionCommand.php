@@ -55,13 +55,17 @@ use DaPigGuy\PiggyFactions\PiggyFactions;
 use DaPigGuy\PiggyFactions\utils\ChatTypes;
 use pocketmine\command\CommandSender;
 use pocketmine\player\Player;
+use pocketmine\plugin\Plugin;
 use Vecnavium\FormsUI\SimpleForm;
 
 class FactionCommand extends BaseCommand
 {
+    /** @var PiggyFactions */
+    protected Plugin $plugin;
+
     public function onRun(CommandSender $sender, string $aliasUsed, array $args): void
     {
-        if ($this->getOwningPlugin()->areFormsEnabled() && $sender instanceof Player) {
+        if ($this->plugin->areFormsEnabled() && $sender instanceof Player) {
             $subcommands = array_filter($this->getSubCommands(), function (BaseSubCommand $subCommand, string $alias) use ($sender): bool {
                 return $subCommand->getName() === $alias && count(array_filter($subCommand->getPermissions(), $sender->hasPermission(...))) > 0;
             }, ARRAY_FILTER_USE_BOTH);
@@ -71,7 +75,7 @@ class FactionCommand extends BaseCommand
                     $subcommand->onRun($player, $subcommand->getName(), []);
                 }
             });
-            $form->setTitle($this->getOwningPlugin()->getLanguageManager()->getMessage($this->getOwningPlugin()->getLanguageManager()->getPlayerLanguage($sender), "forms.title"));
+            $form->setTitle($this->plugin->getLanguageManager()->getMessage($this->plugin->getLanguageManager()->getPlayerLanguage($sender), "forms.title"));
             foreach ($subcommands as $key => $subcommand) {
                 $form->addButton(ucfirst($subcommand->getName()));
             }
@@ -86,64 +90,64 @@ class FactionCommand extends BaseCommand
         $this->setPermission("piggyfactions.command.faction.use");
 
         $commands = [
-            new AddPowerSubCommand($this->getOwningPlugin(), "addpower", "Add player power"),
-            new AdminSubCommand($this->getOwningPlugin(), "admin", "Toggle admin mode"),
-            new ChatSubCommand($this->getOwningPlugin(), ChatTypes::ALLY, "allychat", "Toggle ally chat", ["ac"]),
-            new AllySubCommand($this->getOwningPlugin(), "ally", "Ally with other factions"),
-            new BanSubCommand($this->getOwningPlugin(), "ban", "Ban a member from your faction"),
-            new ChatSubCommand($this->getOwningPlugin(), ChatTypes::FACTION, "chat", "Toggle faction chat", ["c"]),
-            new ClaimSubCommand($this->getOwningPlugin(), "claim", "Claim a chunk"),
-            new CreateSubCommand($this->getOwningPlugin(), "create", "Create a faction"),
-            new DebugSubCommand($this->getOwningPlugin(), "debug", "Dumps information for debugging"),
-            new DemoteSubCommand($this->getOwningPlugin(), "demote", "Demote a faction member"),
-            new DescriptionSubCommand($this->getOwningPlugin(), "description", "Set faction description", ["desc"]),
-            new DisbandSubCommand($this->getOwningPlugin(), "disband", "Disband your faction"),
-            new EnemySubCommand($this->getOwningPlugin(), "enemy", "Mark faction as an enemy"),
-            new FlagSubCommand($this->getOwningPlugin(), "flag", "Manage faction flags"),
-            new FlySubCommand($this->getOwningPlugin(), "fly", "Fly within faction territories"),
-            new HelpSubCommand($this->getOwningPlugin(), $this, "help", "Display command information"),
-            new HomeSubCommand($this->getOwningPlugin(), "home", "Teleport to faction home"),
-            new InfoSubCommand($this->getOwningPlugin(), "info", "Display faction info", ["who"]),
-            new InviteSubCommand($this->getOwningPlugin(), "invite", "Invite a player to your faction"),
-            new JoinSubCommand($this->getOwningPlugin(), "join", "Join a faction"),
-            new KickSubCommand($this->getOwningPlugin(), "kick", "Kick a member from your faction"),
-            new LanguageSubCommand($this->getOwningPlugin(), "language", "Change personal language for PiggyFactions", ["lang"]),
-            new LeaderSubCommand($this->getOwningPlugin(), "leader", "Transfer leadership of your faction"),
-            new LeaveSubCommand($this->getOwningPlugin(), "leave", "Leave your faction"),
-            new LogsSubCommand($this->getOwningPlugin(), "logs", "View your Factions logs", ["log"]),
-            new MapSubCommand($this->getOwningPlugin(), "map", "View map of area"),
-            new MotdSubCommand($this->getOwningPlugin(), "motd", "Set faction MOTD"),
-            new NameSubCommand($this->getOwningPlugin(), "name", "Rename your faction"),
-            new NeutralSubCommand($this->getOwningPlugin(), "neutral", "Reset relation with another faction"),
-            new PermissionSubCommand($this->getOwningPlugin(), "permission", "Set faction role permissions", ["perms"]),
-            new PlayerSubCommand($this->getOwningPlugin(), "player", "Display player info", ["p"]),
-            new PowerBoostSubCommand($this->getOwningPlugin(), "powerboost", "Increases max power"),
-            new PromoteSubCommand($this->getOwningPlugin(), "promote", "Promote a faction member"),
-            new SeeChunkSubCommand($this->getOwningPlugin(), "seechunk", "Toggle chunk visualizer", ["sc"]),
-            new SetHomeSubCommand($this->getOwningPlugin(), "sethome", "Set faction home"),
-            new SetPowerSubCommand($this->getOwningPlugin(), "powerboost", "Set player power"),
-            new TopSubCommand($this->getOwningPlugin(), "top", "Display top factions", ["list"]),
-            new TruceSubCommand($this->getOwningPlugin(), "truce", "Truce with other factions"),
-            new UnallySubCommand($this->getOwningPlugin(), "unally", "End faction alliance"),
-            new UnbanSubCommand($this->getOwningPlugin(), "unban", "Unban a member from your faction"),
-            new UnclaimSubCommand($this->getOwningPlugin(), "unclaim", "Unclaim a chunk"),
-            new UnsetHomeSubCommand($this->getOwningPlugin(), "unsethome", "Unset faction home", ["delhome"]),
-            new VersionSubCommand($this->getOwningPlugin(), "version", "Display version & credits for PiggyFactions", ["v", "ver"]),
+            new AddPowerSubCommand($this->plugin, "addpower", "Add player power"),
+            new AdminSubCommand($this->plugin, "admin", "Toggle admin mode"),
+            new ChatSubCommand($this->plugin, ChatTypes::ALLY, "allychat", "Toggle ally chat", ["ac"]),
+            new AllySubCommand($this->plugin, "ally", "Ally with other factions"),
+            new BanSubCommand($this->plugin, "ban", "Ban a member from your faction"),
+            new ChatSubCommand($this->plugin, ChatTypes::FACTION, "chat", "Toggle faction chat", ["c"]),
+            new ClaimSubCommand($this->plugin, "claim", "Claim a chunk"),
+            new CreateSubCommand($this->plugin, "create", "Create a faction"),
+            new DebugSubCommand($this->plugin, "debug", "Dumps information for debugging"),
+            new DemoteSubCommand($this->plugin, "demote", "Demote a faction member"),
+            new DescriptionSubCommand($this->plugin, "description", "Set faction description", ["desc"]),
+            new DisbandSubCommand($this->plugin, "disband", "Disband your faction"),
+            new EnemySubCommand($this->plugin, "enemy", "Mark faction as an enemy"),
+            new FlagSubCommand($this->plugin, "flag", "Manage faction flags"),
+            new FlySubCommand($this->plugin, "fly", "Fly within faction territories"),
+            new HelpSubCommand($this->plugin, $this, "help", "Display command information"),
+            new HomeSubCommand($this->plugin, "home", "Teleport to faction home"),
+            new InfoSubCommand($this->plugin, "info", "Display faction info", ["who"]),
+            new InviteSubCommand($this->plugin, "invite", "Invite a player to your faction"),
+            new JoinSubCommand($this->plugin, "join", "Join a faction"),
+            new KickSubCommand($this->plugin, "kick", "Kick a member from your faction"),
+            new LanguageSubCommand($this->plugin, "language", "Change personal language for PiggyFactions", ["lang"]),
+            new LeaderSubCommand($this->plugin, "leader", "Transfer leadership of your faction"),
+            new LeaveSubCommand($this->plugin, "leave", "Leave your faction"),
+            new LogsSubCommand($this->plugin, "logs", "View your Factions logs", ["log"]),
+            new MapSubCommand($this->plugin, "map", "View map of area"),
+            new MotdSubCommand($this->plugin, "motd", "Set faction MOTD"),
+            new NameSubCommand($this->plugin, "name", "Rename your faction"),
+            new NeutralSubCommand($this->plugin, "neutral", "Reset relation with another faction"),
+            new PermissionSubCommand($this->plugin, "permission", "Set faction role permissions", ["perms"]),
+            new PlayerSubCommand($this->plugin, "player", "Display player info", ["p"]),
+            new PowerBoostSubCommand($this->plugin, "powerboost", "Increases max power"),
+            new PromoteSubCommand($this->plugin, "promote", "Promote a faction member"),
+            new SeeChunkSubCommand($this->plugin, "seechunk", "Toggle chunk visualizer", ["sc"]),
+            new SetHomeSubCommand($this->plugin, "sethome", "Set faction home"),
+            new SetPowerSubCommand($this->plugin, "powerboost", "Set player power"),
+            new TopSubCommand($this->plugin, "top", "Display top factions", ["list"]),
+            new TruceSubCommand($this->plugin, "truce", "Truce with other factions"),
+            new UnallySubCommand($this->plugin, "unally", "End faction alliance"),
+            new UnbanSubCommand($this->plugin, "unban", "Unban a member from your faction"),
+            new UnclaimSubCommand($this->plugin, "unclaim", "Unclaim a chunk"),
+            new UnsetHomeSubCommand($this->plugin, "unsethome", "Unset faction home", ["delhome"]),
+            new VersionSubCommand($this->plugin, "version", "Display version & credits for PiggyFactions", ["v", "ver"]),
         ];
 
         $bank_commands = [
-            new DepositSubCommand($this->getOwningPlugin(), "deposit", "Deposit money into faction bank"),
-            new MoneySubCommand($this->getOwningPlugin(), "money", "View faction bank balance"),
-            new WithdrawSubCommand($this->getOwningPlugin(), "withdraw", "Withdraw money from faction bank")
+            new DepositSubCommand($this->plugin, "deposit", "Deposit money into faction bank"),
+            new MoneySubCommand($this->plugin, "money", "View faction bank balance"),
+            new WithdrawSubCommand($this->plugin, "withdraw", "Withdraw money from faction bank")
         ];
 
         foreach ($commands as $command) {
-            if (!in_array($command->getName(), $this->getOwningPlugin()->getConfig()->getNested("commands.disabled", []))){
+            if (!in_array($command->getName(), $this->plugin->getConfig()->getNested("commands.disabled", []))){
                 $this->registerSubCommand($command);
             }
         }
 
-        if ($this->getOwningPlugin()->isFactionBankEnabled()) {
+        if ($this->plugin->isFactionBankEnabled()) {
             foreach ($bank_commands as $command) {
                 $this->registerSubCommand($command);
             }
